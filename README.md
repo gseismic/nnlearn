@@ -178,7 +178,15 @@ if __name__ == '__main__':
 ```
 
 ## 参考资料
-- 《深度学习入门自制框架》斋藤康毅 著 郑明智译
+- 《深度学习入门自制框架》
+- PyTorch 官方代码库: https://github.com/pytorch/pytorch
+- Paszke, A. et al. (2019). PyTorch: An Imperative Style, High-Performance Deep Learning Library. *NeurIPS 2019*.
+- Rumelhart, D.E., Hinton, G.E., & Williams, R.J. (1986). Learning representations by back-propagating errors. *Nature*, 323, 533-536.
+- Rumelhart, D.E., Hinton, G.E., & Williams, R.J. (1986). Learning internal representations by error propagation. In *Parallel Distributed Processing*, Vol. 1, 318-362.
+- LeCun, Y., Bengio, Y., & Hinton, G. (2015). Deep learning. *Nature*, 521, 436-444.
+- Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
+- Baydin, A.G., Pearlmutter, B.A., Radul, A.A., & Siskind, J.M. (2018). Automatic differentiation in machine learning: a survey. *JMLR*, 18(153), 1-43.
+- Karpathy, A. *micrograd*. https://github.com/karpathy/micrograd
 
 ## ChangeLog
 - [@2024-08-17] v0.0.1 create project
