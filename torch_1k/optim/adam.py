@@ -18,6 +18,8 @@ class Adam(Optimizer):
         self.t = 0
         self.m = {}
         self.v = {}
+        # 每个参数只按自身实际更新次数做偏差修正；t 保留全局调用次数供旧状态兼容。
+        self.steps = {}
 
     def step(self):
         self.t += 1
@@ -40,6 +42,7 @@ class Adam(Optimizer):
         if key not in self.m:
             self.m[key] = xp.zeros_like(parameter.data)
             self.v[key] = xp.zeros_like(parameter.data)
+            self.steps[key] = 0
 
         lr = group['lr']
         beta1, beta2 = group['betas']
@@ -51,9 +54,10 @@ class Adam(Optimizer):
 
         self.m[key] = beta1 * self.m[key] + (1 - beta1) * grad
         self.v[key] = beta2 * self.v[key] + (1 - beta2) * (grad * grad)
+        self.steps[key] += 1
 
-        m_hat = self.m[key] / (1 - beta1 ** self.t)
-        v_hat = self.v[key] / (1 - beta2 ** self.t)
+        m_hat = self.m[key] / (1 - beta1 ** self.steps[key])
+        v_hat = self.v[key] / (1 - beta2 ** self.steps[key])
         parameter.data = parameter.data - lr * m_hat / (xp.sqrt(v_hat) + eps)
 
     def state_dict(self):
@@ -64,6 +68,7 @@ class Adam(Optimizer):
                 state[indices[key]] = {
                     'm': self._state_tensor(m_value),
                     'v': self._state_tensor(self.v[key]),
+                    'step': self.steps[key],
                 }
         return {
             'state': state,
@@ -76,11 +81,13 @@ class Adam(Optimizer):
         self.t = state_dict.get('t', self.t)
         self.m = {}
         self.v = {}
+        self.steps = {}
         for index, values in state_dict.get('state', {}).items():
             parameter = self.parameters[int(index)]
             key = id(parameter)
             self.m[key] = self._state_array(values['m'], parameter)
             self.v[key] = self._state_array(values['v'], parameter)
+            self.steps[key] = int(values.get('step', self.t))
 
 
 class AdamW(Adam):

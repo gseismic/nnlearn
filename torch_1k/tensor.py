@@ -51,17 +51,17 @@ class Tensor:
         if not self.requires_grad:
             return
 
+        xp = backend.get_array_module(self.data)
+        seed = Tensor(xp.ones_like(self.data), requires_grad=create_graph)
+        with using_config('enable_backprop', create_graph):
+            self.grad = seed if self.grad is None else self.grad + seed
         if self.creator is None:
-            # incaseof: x = Tensor(...); x.backward()
             return
-
-        if self.grad is None:
-            # self.grad = np.ones_like(self.data)
-            xp = backend.get_array_module(self.data)
-            self.grad = Tensor(xp.ones_like(self.data), requires_grad=create_graph)
 
         funcs = []
         set_funcs = set()
+        # 每次反向传播只传递本次新产生的梯度，避免复用保留的旧梯度。
+        current_grads = {id(self): seed}
         def add_func(f):
             if f not in set_funcs:
                 funcs.append(f)
@@ -72,9 +72,13 @@ class Tensor:
         while funcs:
             f = funcs.pop() # pop the item with maximal generation
             if runtime_settings.get('remove_recursive_ref', True):
-                gys = [output().grad for output in f.outputs] # weakref used
+                outputs = [output() for output in f.outputs]
             else:
-                gys = [output.grad for output in f.outputs]
+                outputs = f.outputs
+            gys = [
+                current_grads.get(id(output)) if output is not None else None
+                for output in outputs
+            ]
 
             # create_graph默认False: 默认单次backward后不需要再次反向传播了
             # enable_backprop 为了: `inputs` 仅仅在反向传播时才需要，不反向传播时，不用保留
@@ -89,8 +93,12 @@ class Tensor:
                         continue
                     if not x.requires_grad:
                         continue
+                    key = id(x)
+                    if key in current_grads:
+                        current_grads[key] = current_grads[key] + gx
+                    else:
+                        current_grads[key] = gx
                     if x.grad is None:
-                        # in case of: y = x + x
                         x.grad = gx
                     else:
                         x.grad = x.grad + gx
@@ -99,12 +107,8 @@ class Tensor:
                         add_func(x.creator)
 
             if not retain_grad:
-                # 默认不保留中间导数
-                if runtime_settings.get('remove_recursive_ref', True):
-                    for output in f.outputs:
-                        output().grad = None
-                else:
-                    for output in f.outputs:
+                for output in outputs:
+                    if output is not None:
                         output.grad = None
 
     def reshape(self, *shape):
@@ -258,16 +262,22 @@ class Tensor:
 
     def to(self, *args, device=None, dtype=None):
         target_device, target_dtype = _parse_to_args(args, device, dtype)
-        data = backend.to_device(
-            self.data, target_device, dtype=target_dtype,
-        )
+        target_device = backend.normalize_device(target_device) or self.device
+        target_dtype = np.dtype(target_dtype) if target_dtype is not None else self.dtype
+        if target_device == self.device and target_dtype == self.dtype:
+            return self
         requires_grad = _requires_grad_for_dtype(
             self.requires_grad, target_dtype,
         )
-        out = Tensor(data, name=self.name, log_enabled=self.log_enabled,
-                     requires_grad=requires_grad)
-        if requires_grad and self.grad is not None:
-            out.grad = self.grad.to(device=target_device, dtype=target_dtype)
+        if requires_grad:
+            out = F.copy_to(self, target_device, target_dtype)
+        else:
+            data = backend.to_device(
+                self.data, target_device, dtype=target_dtype,
+            )
+            out = Tensor(data, requires_grad=False)
+        out.name = self.name
+        out.log_enabled = self.log_enabled
         return out
 
     def detach(self):
@@ -298,7 +308,7 @@ class Tensor:
         xp = backend.array_module_for_device(device)
         data = xp.random.randn(*shape)
         if dtype is not None:
-            data = data.astype(dtype)
+            data = xp.asarray(data, dtype=dtype)
         return Tensor(data, requires_grad=requires_grad)
 
     @classmethod
@@ -317,15 +327,17 @@ class Tensor:
 
     @classmethod
     def zeros_like(self, data):
-        xp = backend.get_array_module(data.data if isinstance(data, Tensor) else data)
+        source = data.data if isinstance(data, Tensor) else data
+        xp = backend.get_array_module(source)
         requires_grad = data.requires_grad if isinstance(data, Tensor) else None
-        return Tensor(xp.zeros(data.shape), requires_grad=requires_grad)
+        return Tensor(xp.zeros_like(source), requires_grad=requires_grad)
 
     @classmethod
     def ones_like(self, data):
-        xp = backend.get_array_module(data.data if isinstance(data, Tensor) else data)
+        source = data.data if isinstance(data, Tensor) else data
+        xp = backend.get_array_module(source)
         requires_grad = data.requires_grad if isinstance(data, Tensor) else None
-        return Tensor(xp.ones(data.shape), requires_grad=requires_grad)
+        return Tensor(xp.ones_like(source), requires_grad=requires_grad)
 
     @property
     def T(self):
@@ -492,7 +504,7 @@ def rand(*shape, device=None, dtype=None, requires_grad=False):
     xp = backend.array_module_for_device(device)
     data = xp.random.rand(*shape)
     if dtype is not None:
-        data = data.astype(dtype)
+        data = xp.asarray(data, dtype=dtype)
     return Tensor(data, requires_grad=requires_grad)
 
 def randn(*shape, device=None, dtype=None, requires_grad=False):
@@ -500,7 +512,7 @@ def randn(*shape, device=None, dtype=None, requires_grad=False):
     xp = backend.array_module_for_device(device)
     data = xp.random.randn(*shape)
     if dtype is not None:
-        data = data.astype(dtype)
+        data = xp.asarray(data, dtype=dtype)
     return Tensor(data, requires_grad=requires_grad)
 
 def _normalize_size(size):
@@ -541,7 +553,7 @@ def rand_like(input, device=None, dtype=None, requires_grad=False):
     target_dtype = input.dtype if dtype is None else dtype
     xp = backend.array_module_for_device(target_device)
     return Tensor(
-        xp.random.rand(*input.shape).astype(target_dtype),
+        xp.asarray(xp.random.rand(*input.shape), dtype=target_dtype),
         requires_grad=requires_grad,
     )
 
@@ -551,7 +563,7 @@ def randn_like(input, device=None, dtype=None, requires_grad=False):
     target_dtype = input.dtype if dtype is None else dtype
     xp = backend.array_module_for_device(target_device)
     return Tensor(
-        xp.random.randn(*input.shape).astype(target_dtype),
+        xp.asarray(xp.random.randn(*input.shape), dtype=target_dtype),
         requires_grad=requires_grad,
     )
 

@@ -17,7 +17,7 @@ class Pad(Function):
         # x.shape, index_or_slices, x[index_or_slices] -> y
         self.shape = shape
         self.index_or_slices = index_or_slices
-        self.value = 0
+        self.value = value
 
     def forward(self, x):
         '''
@@ -34,7 +34,7 @@ class Pad(Function):
         '''
         # x.shape 要和self.shape做self.index_or_slices后的大小已知
         xp = backend.get_array_module(x)
-        y = self.value * xp.ones(self.shape)
+        y = xp.full(self.shape, self.value, dtype=x.dtype)
         y[self.index_or_slices] = x
         return y
 

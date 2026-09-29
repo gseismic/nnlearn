@@ -312,8 +312,8 @@ def _expand_einsum_equation(input_templates, output_template, input_shapes):
     ellipsis_labels = _ellipsis_labels(user_labels, ellipsis_ndim)
 
     input_specs = []
-    for (prefix, has_ellipsis, suffix), ellipsis_input_ndim in zip(
-        input_templates, ellipsis_ndims
+    for (prefix, has_ellipsis, suffix), ellipsis_input_ndim, shape in zip(
+        input_templates, ellipsis_ndims, input_shapes
     ):
         labels = ''
         if has_ellipsis and ellipsis_input_ndim:
@@ -608,13 +608,28 @@ class MatMul(Function):
 
     def backward(self, gy):
         x, W = self.inputs
-        gx = matmul(gy, W.transpose(-1, -2))
-        if len(self.W_shape) == 2 and len(self.x_shape) > 2:
-            x2 = reshape(x, (-1, self.x_shape[-1]))
-            gy2 = reshape(gy, (-1, gy.shape[-1]))
-            gW = matmul(x2.T, gy2)
+        x_vector = len(self.x_shape) == 1
+        W_vector = len(self.W_shape) == 1
+        x_matrix = reshape(x, (1, self.x_shape[0])) if x_vector else x
+        W_matrix = reshape(W, (self.W_shape[0], 1)) if W_vector else W
+
+        if x_vector and W_vector:
+            gy_matrix = reshape(gy, (1, 1))
+        elif x_vector:
+            gy_matrix = reshape(gy, gy.shape[:-1] + (1, gy.shape[-1]))
+        elif W_vector:
+            gy_matrix = reshape(gy, gy.shape + (1,))
         else:
-            gW = matmul(x.transpose(-1, -2), gy)
+            gy_matrix = gy
+
+        gx = matmul(gy_matrix, W_matrix.transpose(-1, -2))
+        gW = matmul(x_matrix.transpose(-1, -2), gy_matrix)
+        gx = sum_to(gx, x_matrix.shape)
+        gW = sum_to(gW, W_matrix.shape)
+        if x_vector:
+            gx = reshape(gx, self.x_shape)
+        if W_vector:
+            gW = reshape(gW, self.W_shape)
         return gx, gW
 
 def matmul(x, W):

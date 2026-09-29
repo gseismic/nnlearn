@@ -19,7 +19,6 @@ Implementing PyTorch's core basic functions within 1000 lines of code
 ## Usage
 ### Installation
 ```
-cd torch_1k
 pip install .
 ```
 ### Code Demo

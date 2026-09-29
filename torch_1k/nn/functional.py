@@ -16,7 +16,8 @@ def dropout(input, p=0.5, training=True, inplace=False):
 
     xp = backend.get_array_module(input.data)
     keep_prob = 1.0 - p
-    mask = (xp.random.rand(*input.shape) < keep_prob).astype(input.data.dtype)
+    mask = xp.asarray(xp.random.rand(*input.shape) < keep_prob,
+                      dtype=input.data.dtype)
     mask = mask / keep_prob
     return input * Tensor(mask, requires_grad=False)
 

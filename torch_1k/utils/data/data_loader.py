@@ -17,13 +17,22 @@ def default_collate(batch):
     if isinstance(elem, Number):
         return tensor(batch)
     if isinstance(elem, Mapping):
+        if any(not isinstance(sample, Mapping) or sample.keys() != elem.keys()
+               for sample in batch):
+            raise ValueError('all samples in a batch must have the same keys')
         return {
             key: default_collate([sample[key] for sample in batch])
             for key in elem
         }
     if isinstance(elem, tuple):
+        if any(not isinstance(sample, tuple) or len(sample) != len(elem)
+               for sample in batch):
+            raise ValueError('all tuple samples in a batch must have the same length')
         return tuple(default_collate(samples) for samples in zip(*batch))
     if isinstance(elem, list):
+        if any(not isinstance(sample, list) or len(sample) != len(elem)
+               for sample in batch):
+            raise ValueError('all list samples in a batch must have the same length')
         return [default_collate(samples) for samples in zip(*batch)]
     return batch
 

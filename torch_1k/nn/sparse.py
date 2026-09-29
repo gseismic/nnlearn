@@ -8,6 +8,13 @@ import numpy as np
 
 class EmbeddingFunction(Function):
     def forward(self, indices, weight):
+        if not np.issubdtype(indices.dtype, np.integer):
+            raise TypeError('embedding indices must be integers')
+        xp = backend.get_array_module(indices, weight)
+        if bool(backend.as_numpy(xp.any(
+            (indices < 0) | (indices >= weight.shape[0])
+        )).item()):
+            raise IndexError('embedding index out of range')
         self.indices = indices.astype("int64")
         self.weight_shape = weight.shape
         return weight[self.indices]

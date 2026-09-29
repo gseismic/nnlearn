@@ -1,4 +1,5 @@
 import weakref
+import numpy as np
 from .parameter import Parameter
 from ..tensor import Tensor, _parse_to_args
 from .. import backend
@@ -71,13 +72,19 @@ class Module:
         setattr(self, name, tensor)
         return tensor
 
-    def __call__(self, *inputs):
-        outputs = self.forward(*inputs)
+    def __call__(self, *inputs, **kwargs):
+        outputs = self.forward(*inputs, **kwargs)
         if not isinstance(outputs, tuple):
             outputs = (outputs,)
 
-        self.inputs = [weakref.ref(input) for input in inputs]
-        self.outputs = [weakref.ref(output) for output in outputs]
+        self.inputs = [
+            weakref.ref(value) for value in (*inputs, *kwargs.values())
+            if isinstance(value, Tensor)
+        ]
+        self.outputs = [
+            weakref.ref(output) for output in outputs
+            if isinstance(output, Tensor)
+        ]
         return outputs[0] if len(outputs) == 1 else outputs
 
     def forward(self, x):
@@ -114,24 +121,37 @@ class Module:
             child_prefix = f'{prefix}.{name}' if prefix else name
             yield from module.named_modules(memo, child_prefix)
 
-    def named_parameters(self, prefix=''):
+    def named_parameters(self, prefix='', memo=None):
+        if memo is None:
+            memo = set()
+        if id(self) in memo:
+            return
+        memo.add(id(self))
         for name in self._parameters:
             obj = self.__dict__[name]
-            # support Nested-Module
             if isinstance(obj, Module):
                 child_prefix = f'{prefix}{name}.'
-                yield from obj.named_parameters(child_prefix)
-            else:
+                yield from obj.named_parameters(child_prefix, memo)
+            elif id(obj) not in memo:
+                memo.add(id(obj))
                 yield f'{prefix}{name}', obj
 
-    def named_buffers(self, prefix=''):
+    def named_buffers(self, prefix='', memo=None):
+        if memo is None:
+            memo = set()
+        if id(self) in memo:
+            return
+        memo.add(id(self))
         for name in self._buffers:
-            yield f'{prefix}{name}', self.__dict__[name]
+            obj = self.__dict__[name]
+            if id(obj) not in memo:
+                memo.add(id(obj))
+                yield f'{prefix}{name}', obj
         for name in self._parameters:
             obj = self.__dict__[name]
             if isinstance(obj, Module):
                 child_prefix = f'{prefix}{name}.'
-                yield from obj.named_buffers(child_prefix)
+                yield from obj.named_buffers(child_prefix, memo)
 
     def zero_grad(self, set_to_none=False):
         for parameter in self.parameters():
@@ -140,34 +160,33 @@ class Module:
             else:
                 parameter.grad.data.fill(0)
 
-    def state_dict(self, prefix=''):
-        state = {}
+    def _state_tensors(self, prefix='', ancestors=None):
+        """按注册路径枚举状态，保留共享模块的别名键并阻止循环递归。"""
+        if ancestors is None:
+            ancestors = frozenset()
+        if id(self) in ancestors:
+            return
+        ancestors = ancestors | {id(self)}
         for name in self._parameters:
             obj = self.__dict__[name]
             key = f'{prefix}{name}'
             if isinstance(obj, Module):
-                state.update(obj.state_dict(prefix=f'{key}.'))
+                yield from obj._state_tensors(prefix=f'{key}.',
+                                              ancestors=ancestors)
             else:
-                state[key] = Tensor(obj.data.copy(), requires_grad=False)
+                yield key, obj
         for name in self._buffers:
-            obj = self.__dict__[name]
-            state[f'{prefix}{name}'] = Tensor(obj.data.copy(), requires_grad=False)
-        return state
+            yield f'{prefix}{name}', self.__dict__[name]
+
+    def state_dict(self, prefix=''):
+        return {
+            key: Tensor(tensor.data.copy(), requires_grad=False)
+            for key, tensor in self._state_tensors(prefix)
+        }
 
     def load_state_dict(self, state_dict, strict=True, prefix=''):
-        expected = dict(self.named_parameters(prefix))
-        expected.update(dict(self.named_buffers(prefix)))
-        missing = []
-        for key, tensor in expected.items():
-            if key not in state_dict:
-                missing.append(key)
-                continue
-            value = state_dict[key]
-            if isinstance(value, Tensor):
-                value = value.data
-            data = backend.to_device(value, tensor.device)
-            tensor.data = data.copy()
-
+        expected = dict(self._state_tensors(prefix))
+        missing = [key for key in expected if key not in state_dict]
         unexpected = [
             key for key in state_dict
             if key.startswith(prefix) and key not in expected
@@ -176,4 +195,26 @@ class Module:
             raise KeyError(
                 f'state_dict mismatch: missing={missing}, unexpected={unexpected}'
             )
+
+        pending = []
+        for key, tensor in expected.items():
+            if key not in state_dict:
+                continue
+            value = state_dict[key]
+            if isinstance(value, Tensor):
+                value = value.data
+            data = backend.to_device(value, tensor.device)
+            if data.shape != tensor.shape:
+                raise ValueError(
+                    f'state_dict shape mismatch for {key}: '
+                    f'expected {tensor.shape}, got {data.shape}'
+                )
+            if not np.can_cast(data.dtype, tensor.dtype, casting='same_kind'):
+                raise TypeError(
+                    f'state_dict dtype mismatch for {key}: '
+                    f'cannot convert {data.dtype} to {tensor.dtype}'
+                )
+            pending.append((tensor, data.astype(tensor.dtype, copy=True)))
+        for tensor, data in pending:
+            tensor.data = data
         return missing

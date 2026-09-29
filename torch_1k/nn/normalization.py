@@ -14,6 +14,14 @@ class LayerNormFunction(Function):
         self.eps = eps
 
     def forward(self, x, weight, bias):
+        if (
+            len(self.normalized_shape) > x.ndim
+            or x.shape[-len(self.normalized_shape):] != self.normalized_shape
+        ):
+            raise ValueError(
+                'LayerNorm input trailing dimensions must match '
+                f'normalized_shape={self.normalized_shape}, got {x.shape}'
+            )
         xp = backend.get_array_module(x)
         axes = tuple(range(x.ndim - len(self.normalized_shape), x.ndim))
         self.axes = axes

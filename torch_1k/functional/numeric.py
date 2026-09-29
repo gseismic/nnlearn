@@ -58,6 +58,11 @@ def _ensure_integer_index(index, name):
     return index.astype('int64', copy=False)
 
 
+def _check_index_bounds(index, size, name, xp):
+    if _array_scalar_bool(xp.any((index < 0) | (index >= size))):
+        raise IndexError(f'{name} index is out of bounds for dim')
+
+
 def _array_scalar_bool(value):
     return bool(backend.as_numpy(value).item())
 
@@ -879,6 +884,7 @@ class IndexSelect(Function):
         self.index = index
         self.x_shape = x.shape
         xp = backend.get_array_module(x, index)
+        _check_index_bounds(index, x.shape[axis], 'index_select', xp)
         return xp.take(x, index, axis=axis)
 
     def backward(self, gy):
@@ -919,6 +925,7 @@ class Gather(Function):
         self.index = index
         self.x_shape = x.shape
         xp = backend.get_array_module(x, index)
+        _check_index_bounds(index, x.shape[axis], 'gather', xp)
         return xp.take_along_axis(x, index, axis=axis)
 
     def backward(self, gy):
@@ -1062,9 +1069,7 @@ class Sort(Function):
             raise IndexError('sort dim is out of range')
 
         self.normalized_axis = axis
-        order = xp.argsort(x, axis=axis)
-        if self.descending:
-            order = xp.flip(order, axis=axis)
+        order = _sort_indices(x, axis, self.descending, self.stable, xp)
         values = xp.take_along_axis(x, order, axis=axis)
 
         self.indices = order.astype('int64')
@@ -1091,6 +1096,21 @@ def sort(input, dim=-1, descending=False, stable=False):
     return SortResult(values=values, indices=indices)
 
 
+def _sort_indices(data, axis, descending, stable, xp):
+    if stable:
+        # 先反转输入再稳定升序，最后反转结果，可在降序时保留同值的原始次序。
+        source = xp.flip(data, axis=axis) if descending else data
+        if xp is np:
+            order = xp.argsort(source, axis=axis, kind='stable')
+        else:
+            order = xp.argsort(source, axis=axis)
+        if descending:
+            order = data.shape[axis] - 1 - xp.flip(order, axis=axis)
+        return order
+    order = xp.argsort(data, axis=axis)
+    return xp.flip(order, axis=axis) if descending else order
+
+
 def argsort(input, dim=-1, descending=False, stable=False):
     from torch_1k.tensor import Tensor
 
@@ -1109,9 +1129,7 @@ def argsort(input, dim=-1, descending=False, stable=False):
     if axis < 0 or axis >= data.ndim:
         raise IndexError('argsort dim is out of range')
 
-    indices = xp.argsort(data, axis=axis)
-    if descending:
-        indices = xp.flip(indices, axis=axis)
+    indices = _sort_indices(data, axis, descending, stable, xp)
     return Tensor(indices.astype('int64'), requires_grad=False)
 
 

@@ -38,7 +38,7 @@
 3. **模块调用无法传递关键字参数。** `torch_1k/nn/module.py:74` 只接受 `*inputs`。例如 `MultiheadAttention(x, need_weights=True)` 在其 `forward()` 支持该参数的情况下仍抛出 `TypeError`，导致公开参数无法通过正常模块调用使用。
 4. **叶张量直接反向传播不产生梯度。** `torch_1k/tensor.py:54-56` 在 `creator is None` 时直接返回。`tensor(2., requires_grad=True).backward()` 后 `.grad` 为 `None`，而 PyTorch 为 `1`。
 5. **多输出函数的未使用输出被释放后，反向传播崩溃。** `torch_1k/tensor.py:75` 直接读取弱引用结果的 `.grad`。自定义双输出 `Function` 的 `y = fn(x)[0]; y.backward()` 抛 `AttributeError: 'NoneType' object has no attribute 'grad'`。这使公开的 `Function` 扩展机制无法可靠处理多输出算子。
-6. **保留中间梯度后再次反向传播会重复传递旧梯度。** `torch_1k/tensor.py:93-96` 把新梯度累加到已有中间节点 `.grad`，再用累计值继续传播。令 `x=2, y=x*x`，先 `y.backward(retain_grad=True)`，再 `(y*y).backward()`，得到 `x.grad=40`；两次真实贡献之和应为 `4+16=20`。
+6. **保留中间梯度后再次反向传播会重复传递旧梯度。** `torch_1k/tensor.py:93-96` 把新梯度累加到已有中间节点 `.grad`，再用累计值继续传播。令 `x=2, y=x*x`，先 `y.backward(retain_grad=True)`，再 `(y*y).backward()`，得到 `x.grad=40`；两次真实贡献之和应为 `4+32=36`。此前文档误写为 `20`，本轮已修正。
 
 ### P3
 

@@ -11,7 +11,8 @@ def test_complexfun_self():
     y = x
     y.backward()
     print(x)
-    assert x.grad is None
+    # 叶张量本身求导时，单位梯度应累加到叶节点。
+    assert np.allclose(x.grad.numpy(), 1.0)
 
     x = Tensor(2.0, name="x")
     x = x*x
