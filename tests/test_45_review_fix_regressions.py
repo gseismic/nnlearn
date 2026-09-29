@@ -216,7 +216,7 @@ def test_collate_rejects_inconsistent_sample_structure(samples):
 
 def test_cross_entropy_rejects_float_class_indices():
     """浮点分类标签不能被截断成另一个类别。"""
-    with pytest.raises(TypeError, match='integer'):
+    with pytest.raises(TypeError, match='int64 or uint8'):
         nn.CrossEntropyLoss()(torch.tensor([[2.0, 1.0]]),
                               torch.tensor([0.9]))
 

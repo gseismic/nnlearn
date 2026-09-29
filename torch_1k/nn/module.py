@@ -1,5 +1,4 @@
 import weakref
-import numpy as np
 from .parameter import Parameter
 from ..tensor import Tensor, _parse_to_args
 from .. import backend
@@ -209,12 +208,19 @@ class Module:
                     f'state_dict shape mismatch for {key}: '
                     f'expected {tensor.shape}, got {data.shape}'
                 )
-            if not np.can_cast(data.dtype, tensor.dtype, casting='same_kind'):
+            if data.dtype.kind not in 'biufc' or tensor.dtype.kind not in 'biufc':
                 raise TypeError(
                     f'state_dict dtype mismatch for {key}: '
                     f'cannot convert {data.dtype} to {tensor.dtype}'
                 )
-            pending.append((tensor, data.astype(tensor.dtype, copy=True)))
+            try:
+                converted = data.astype(tensor.dtype, copy=True)
+            except (TypeError, ValueError, OverflowError) as error:
+                raise TypeError(
+                    f'state_dict dtype mismatch for {key}: '
+                    f'cannot convert {data.dtype} to {tensor.dtype}'
+                ) from error
+            pending.append((tensor, converted))
         for tensor, data in pending:
             tensor.data = data
         return missing

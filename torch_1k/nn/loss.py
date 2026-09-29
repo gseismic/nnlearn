@@ -87,8 +87,8 @@ class CrossEntropyLoss(Function):
 
         xp = backend.get_array_module(input)
         num_classes = input.shape[1]
-        if not np.issubdtype(target.dtype, np.integer):
-            raise TypeError('cross_entropy target must contain integer class indices')
+        if target.dtype not in (np.dtype('int64'), np.dtype('uint8')):
+            raise TypeError('cross_entropy target must use int64 or uint8 class indices')
         target = target.astype("int64")
         expected_target_shape = (input.shape[0],) + input.shape[2:]
         if target.shape != expected_target_shape:

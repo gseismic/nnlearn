@@ -6,11 +6,18 @@ from .module import Module
 from .parameter import Parameter
 
 
+def _normalized_shape_tuple(normalized_shape):
+    if isinstance(normalized_shape, int):
+        normalized_shape = (normalized_shape,)
+    shape = tuple(normalized_shape)
+    if not shape:
+        raise ValueError('LayerNorm normalized_shape must not be empty')
+    return shape
+
+
 class LayerNormFunction(Function):
     def __init__(self, normalized_shape, eps=1e-5):
-        if isinstance(normalized_shape, int):
-            normalized_shape = (normalized_shape,)
-        self.normalized_shape = tuple(normalized_shape)
+        self.normalized_shape = _normalized_shape_tuple(normalized_shape)
         self.eps = eps
 
     def forward(self, x, weight, bias):
@@ -55,9 +62,7 @@ class LayerNormFunction(Function):
 class LayerNorm(Module):
     def __init__(self, normalized_shape, eps=1e-5):
         super().__init__()
-        if isinstance(normalized_shape, int):
-            normalized_shape = (normalized_shape,)
-        self.normalized_shape = tuple(normalized_shape)
+        self.normalized_shape = _normalized_shape_tuple(normalized_shape)
         self.eps = eps
         self.weight = Parameter(np.ones(self.normalized_shape), name='W')
         self.bias = Parameter(np.zeros(self.normalized_shape), name='b')
