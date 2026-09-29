@@ -1,187 +1,73 @@
-# torch-1k.py
+# torch_1k：看懂一次训练如何发生
 
-Implementing PyTorch's core basic functions within 1000 lines of code
-(For learning purposes only)
+`torch_1k` 是一个小型、可阅读的 PyTorch 风格教学实现。它把张量运算、动态计算图、反向传播和参数更新放在一套可以运行的代码里，帮助已经会使用 PyTorch 的学习者理解训练过程。
 
-## Core Features
-- [x] Tensor: element-wise add, subtract, multiply, divide
-- [x] Tensor: scalar + Tensor support
-- [x] Tensor: broadcasting across different dimensions
-- [x] Tensor: `requires_grad` semantics
-- [x] Autograd for functions and composite functions
-- [x] Common functions: sin, cos, exp, log, relu, softmax, etc.
-- [x] Neural network `Module`
-- [x] `Linear` operator
-- [x] Dropout training/inference mode difference
-- [x] Optimizer: Adam algorithm
-- [x] Drop-in replacement compatibility: replace `torch` with `torch_1k` and run classification training, evaluation, and checkpoint
+PyTorch 已经适合实际模型开发和训练。本项目的价值在于可以直接阅读和修改自动微分及训练链路的实现，并用 PyTorch 对照前向值、梯度和参数更新。
 
-## Usage
-### Installation
+## 适合谁
+
+- 会写基础 PyTorch 训练代码，想理解 `loss.backward()` 如何算出梯度的人。
+- 想练习实现张量算子、梯度公式和优化器更新的人。
+- 想用小型实现观察深度学习框架内部行为的人。
+
+## 从这里开始
+
+先运行最短的训练机制对照：
+
+```bash
+pip install .
+python examples/example39_training_mechanism_comparison.py
 ```
+
+该例子要求另外安装 PyTorch 作为参考实现。它使用相同的线性模型参数、输入数据和学习率，逐项比较前向结果、损失、权重梯度、偏置梯度和一次 SGD 更新。
+
+接下来可以按这条路径阅读：
+
+1. [训练机制对照教程](docs/tutorial/torch-training-mechanism-20260929.md)
+2. [基础 API 新手教程](examples/example38_beginner_tutorial.py)
+3. [MLP、CNN 与 Transformer 训练基线](examples/example36_pytorch_training_baseline.py)
+4. [核心实现说明](docs/design/torch-1k-20260624-principles.md)
+
+`example36` 默认用 `torch_1k`。安装 PyTorch 后，可运行 `USE_TORCH_1K=0 python examples/example36_pytorch_training_baseline.py`，用相同训练主体切换到 PyTorch。
+
+## 包含什么
+
+- Tensor 运算和反向模式自动微分。
+- `nn.Module`、常见网络层、损失函数和优化器。
+- 数据集、批次加载、模型与优化器状态保存。
+- 基于 NumPy 的 CPU 路径，以及依赖 CuPy 的可选 CUDA 路径。
+- 覆盖 MLP、CNN 和 Transformer 训练流程的示例。
+
+仓库保留了一部分 PyTorch 风格 API，目的是让核心训练例子容易比较和迁移。具体 API 范围以代码和示例为准。
+
+## 支持范围
+
+本项目不实现完整 PyTorch API，不承诺任意 PyTorch 脚本可以直接替换运行，也不提供 PyTorch 的训练性能或内存效率。示例通过只能证明该示例覆盖的路径可运行。
+
+CPU 路径使用 NumPy。CUDA 路径需要安装与本机 CUDA 环境匹配的 CuPy，并需要可用的 CUDA 设备；没有设备实测的结果不应视为已验证。
+
+## 项目目的和开发边界
+
+项目以“读者能看懂训练机制、跑通例子、修改实现并对照结果”为判断标准。新增功能应服务于教学目标、重要训练示例或已承诺链路的正确性；不以追齐 PyTorch API 数量或固定代码行数为目标。
+
+详细说明见[项目目的与范围](docs/design/torch-20260929-project-purpose.md)和[核心路线图](docs/design/torch-3k-20260624-core-cuda-roadmap.md)。
+
+## 安装
+
+```bash
 pip install .
 ```
-### Code Demo
-Example 2:
-| Image 1 | Image 2 |
-|---------|---------|
-| ![torch result](images/torch.png) | ![torch-1k result](images/torch_1k.png) |
 
-Simply replace `torch` with `torch_1k`, all other code stays the same (only a minimal subset of functions is implemented).
-```
-import matplotlib.pyplot as plt
+核心依赖由 `setup.py` 声明。PyTorch 是对照教程的可选依赖，需要按本机环境单独安装：<https://pytorch.org/get-started/locally/>。
 
-############################
-# change test parameters here
-#use_torch_1k = False
-use_torch_1k = True
-############################
-if use_torch_1k:
-    import torch_1k as torch
-    import torch_1k.nn as nn
-    import torch_1k.optim as optim
-    title = 'torch_1k'
-else:
-    import torch
-    import torch.nn as nn
-    import torch.optim as optim
-    title = 'torch'
+## 参考资料
 
-print('#####################################################')
-print(f'### Using {title=} ..')
-print('#####################################################')
-# create dataset
-torch.manual_seed(0)
+- 《深度学习入门：基于 Python 的理论与实现》及相关自制框架实践。
+- PyTorch 自动微分机制说明：<https://docs.pytorch.org/docs/stable/notes/autograd.html>
+- Karpathy 的 [micrograd](https://github.com/karpathy/micrograd)，标量级自动微分教学实现。
 
-# input data (100 samples)
-X = torch.unsqueeze(torch.linspace(-10, 10, 100), dim=1)
+## 更新记录
 
-# labels
-true_w = 3
-true_b = 2
-y = true_w * X + true_b + torch.normal(0, 1, size=X.size())  # add noise
-
-class LinearRegressionModel(nn.Module):
-    def __init__(self):
-        super(LinearRegressionModel, self).__init__()
-        self.linear = nn.Linear(1, 1)
-
-    def forward(self, x):
-        return self.linear(x)
-
-model = LinearRegressionModel()
-# loss and optimizer
-criterion = nn.MSELoss()
-optimizer = optim.SGD(model.parameters(), lr=0.01)
-
-# training
-epochs = 1000
-losses = []
-
-for epoch in range(epochs):
-    model.train()
-
-    # forward
-    y_pred = model(X)
-
-    # loss
-    loss = criterion(y_pred, y)
-    losses.append(loss.item())
-
-    # backward and optimize
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
-
-    if (epoch+1) % 50 == 0:
-        print(f'Epoch [{epoch+1}/{epochs}], Loss: {loss.item()}')
-
-# evaluation
-model.eval()
-with torch.no_grad():
-    predicted = model(X)
-
-# plot
-plt.scatter(X.numpy(), y.numpy(), label='True Data')
-plt.plot(X.numpy(), predicted.numpy(), label='Fitted Line', color='r')
-plt.title(title)
-plt.legend()
-plt.show()
-```
-
-Example 1:
-```
-import time
-import numpy as np
-import torch_1k
-from torch_1k import functional as F
-from torch_1k import Tensor
-import matplotlib.pyplot as plt
-
-
-def run():
-    N = 200
-    x = np.random.rand(N, 1)
-    y_target = 3*x + 1 + 0.3*np.random.rand(N, 1)
-
-    W = Tensor.zeros(1, 1).renamed('W')
-    b = Tensor.zeros(1, 1).renamed('b')
-
-    def model(x):
-        z = F.matmul(x, W).renamed('z')
-        y =  z + b
-        return y
-
-    def mean_squared_error(predict, target):
-        dif = predict - target
-        err = F.sum(dif**2) /dif.shape[0]
-        return err
-
-    lr = 0.1
-    epochs = 1000
-
-    for i in range(epochs):
-        y_pred = model(x)
-        loss = mean_squared_error(y_pred, y_target)
-
-        W.zero_grad()
-        b.zero_grad()
-        loss.backward()
-        W.data -= lr*W.grad.data
-        b.data -= lr*b.grad.data
-        if i % 100 == 0:
-            print(f'{i}: loss={loss.data}, {W.data=}, {b.data=}')
-
-    y_pred = model(x)
-    plt.scatter(x, y_pred.data, color='g')
-    plt.scatter(x, y_target, marker='x')
-    plt.show()
-
-if __name__ == '__main__':
-    run()
-```
-
-## Notes
-### Variable reuse is not allowed
-The following code is incorrect:
-```
-    x = Tensor(2.0, name="x")
-    x = x*x
-    x.backward()
-```
-
-## References
-- 《深度学习入门自制框架》
-- PyTorch official repository: https://github.com/pytorch/pytorch
-- Paszke, A. et al. (2019). PyTorch: An Imperative Style, High-Performance Deep Learning Library. *NeurIPS 2019*.
-- Rumelhart, D.E., Hinton, G.E., & Williams, R.J. (1986). Learning representations by back-propagating errors. *Nature*, 323, 533-536.
-- Rumelhart, D.E., Hinton, G.E., & Williams, R.J. (1986). Learning internal representations by error propagation. In *Parallel Distributed Processing*, Vol. 1, 318-362.
-- LeCun, Y., Bengio, Y., & Hinton, G. (2015). Deep learning. *Nature*, 521, 436-444.
-- Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
-- Baydin, A.G., Pearlmutter, B.A., Radul, A.A., & Siskind, J.M. (2018). Automatic differentiation in machine learning: a survey. *JMLR*, 18(153), 1-43.
-- Karpathy, A. *micrograd*. https://github.com/karpathy/micrograd
-
-## ChangeLog
-- [@2024-08-17] v0.0.1 create project
-- [@2024-08-18] v0.0.2
-- [@2024-08-19] v0.0.3 core features implemented: 1k core code, 1k test code
+- 2024-08：创建项目并实现最初的张量、自动微分和训练示例。
+- 2026-06：扩展到小型训练链路、CPU/CUDA 后端、PyTorch 风格 API 和教程示例。
+- 2026-09：明确项目定位为训练机制教学实现，新增同参数的 PyTorch 数值对照教程。

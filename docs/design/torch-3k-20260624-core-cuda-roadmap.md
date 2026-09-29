@@ -2,13 +2,15 @@
 
 日期：2026-06-24
 
+定位更新：本文记录了 2026-06-24 阶段的设计建议。其“整体保持在 3000 行以内”是当时的规模建议，已由 [2026-09-29 项目目的与范围](torch-20260929-project-purpose.md)取代；当前以教学路径清楚、功能范围受控和数值行为可核对作为维护标准，不再承诺固定行数。
+
 源码基准 Git 记录：`main@701d4072f33d2fbdafbcac8bab49ddf3ae87307d`
 
 ## 1. 新定位
 
-本库的新定位是：用尽量简洁、可读、教学友好的代码实现 PyTorch 核心功能。代码行数不再强制限制在 1000 行以内，但原则上整体保持在 3000 行以内较合适。
+本阶段曾将项目定位为：用尽量简洁、可读、教学友好的代码实现 PyTorch 核心功能。该定位后来进一步收敛为“看懂一次训练如何发生”：让学习者沿着 Tensor、计算图、梯度和优化器实现理解训练链路，并通过 PyTorch 对照结果。最新目的、目标用户和维护边界以[项目目的文档](torch-20260929-project-purpose.md)为准。
 
-这里的“精简”应该体现在功能范围上，而不是体现在稳定性上：
+这里的“精简”应该体现在功能范围上，而不是体现在稳定性上。以下原则仍然适用：
 
 - 减少非核心功能：不追求完整 PyTorch API、分布式、JIT、复杂 dtype 策略、图编译、混合精度等。
 - 保留核心质量：核心训练链路应行为稳定、梯度正确、CPU/CUDA 后端一致、错误边界清晰。
@@ -217,6 +219,8 @@ Tensor 层不应该承担复杂数学逻辑，核心价值是作为动态图节�
 阶段更新：PLAN-037 已补齐 PyTorch 脚本入口兼容层，包括 `torch.device`、`Tensor.to(device=..., dtype=...)`、`Module.to(device=..., dtype=...)`、`Tensor.dim()` / `numel()` / `is_cuda`、模块遍历接口、`nn.ModuleList`、`nn.Identity` 和 `zero_grad(set_to_none=...)`，降低真实脚本启动阶段的迁移阻力。
 
 阶段更新：PLAN-038 已从 torch 新手教程反推基础 API 依赖，新增教程式多场景例子，并补齐 `torch.eye`、`as_tensor`、`from_numpy`、`rand_like`、`randn_like`、可微 `Tensor.clone()`、`tolist()`、`Tensor.matmul()` / `mm()`、PyTorch 风格 `sum` / `mean`、`nn.Tanh` 和 `nn.Sigmoid`，让“张量基础 -> 自动微分 -> 手写回归 -> MLP -> DataLoader”路径更自然。
+
+阶段更新：PLAN-043 明确项目定位为训练机制教学实现，新增固定输入和初始参数的 PyTorch 对照例子，逐项比较线性模型的前向值、损失、权重与偏置梯度及一次 SGD 更新；同步更新 README 和教程，说明有限兼容范围及 CUDA 验证边界。
 
 ## 4. CUDA/CuPy 支持策略
 
