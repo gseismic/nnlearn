@@ -163,6 +163,9 @@ class Tensor:
     def mean(self, axis=None, keepdims=False):
         return Mean(axis=axis, keepdims=keepdims)(self)
 
+    def sigmoid(self):
+        return Sigmoid()(self)
+
     def matmul(self, other):
         return MatMul()(self, other)
 
@@ -296,6 +299,32 @@ class Pow(Function):
         if exponent == 0:
             return np.zeros_like(self.value) * output_grad
         return exponent * self.value ** (exponent - 1) * output_grad
+
+
+class Sigmoid(Function):
+    """数值稳定的 sigmoid 及其反向梯度。"""
+
+    def forward(self, value):
+        output = np.empty_like(
+            value, dtype=np.result_type(value.dtype, np.float32)
+        )
+        if value.ndim == 0:
+            scalar = float(value)
+            if scalar >= 0:
+                output[...] = 1.0 / (1.0 + np.exp(-scalar))
+            else:
+                exp_value = np.exp(scalar)
+                output[...] = exp_value / (1.0 + exp_value)
+        else:
+            positive = value >= 0
+            output[positive] = 1.0 / (1.0 + np.exp(-value[positive]))
+            exp_value = np.exp(value[~positive])
+            output[~positive] = exp_value / (1.0 + exp_value)
+        self.output_data = output
+        return output
+
+    def backward(self, output_grad):
+        return output_grad * self.output_data * (1.0 - self.output_data)
 
 
 class Reshape(Function):
