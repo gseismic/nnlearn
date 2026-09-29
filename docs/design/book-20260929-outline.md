@@ -21,7 +21,7 @@
 | 部分 | 内容 | 对应现有代码入口 |
 | --- | --- | --- |
 | 00 阅读指南 | 本书目标、环境、代码运行方式与项目边界 | 根目录 `README.md`、`docs/tutorial/torch-training-mechanism-20260929.md` |
-| 01 标量自动微分 | 数值、导数、计算图、反向传播、标量 MLP | `torch_1k/function.py`、`tests/test_02_autograd.py`（概念映射；当前实现从 Tensor 开始） |
+| 01 标量自动微分 | 数值、导数、计算图、反向传播、单神经元训练 | `torch_1k/function.py`、`tests/test_02_autograd.py`（概念映射；当前实现从 Tensor 开始） |
 | 02 Tensor 与自动微分 | NumPy 数组、形状、算子、广播、归约、张量反向传播 | `torch_1k/tensor.py`、`torch_1k/functional/`、`examples/example38_beginner_tutorial.py` |
 | 03 神经网络训练 | Parameter、Module、层、损失、优化器、数据加载与训练 | `torch_1k/nn/`、`torch_1k/optim/`、`torch_1k/utils/data/`、`examples/example1_linear_reg_simple.py`、`examples/example7_mnist_dataloader_train_compare.py` |
 | 04 进阶模型与运行时 | CNN、Transformer、CPU/CUDA 后端及 PyTorch 对照 | `torch_1k/nn/conv.py`、`torch_1k/nn/transformer.py`、`torch_1k/backend.py`、`torch_1k/cuda.py`、`examples/example39_training_mechanism_comparison.py` |
