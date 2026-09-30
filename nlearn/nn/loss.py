@@ -1,4 +1,5 @@
 import numpy as np
+from torch_protocol import LossProtocol
 from nlearn.function import Function
 from nlearn.tensor import Tensor
 from nlearn import backend
@@ -38,7 +39,7 @@ def _class_weight_data(weight, input_data, num_classes, dtype):
     return data.astype(dtype)
 
 
-class MSELoss(Function):
+class MSELoss(Function, LossProtocol):
 
     def __init__(self, reduction="mean"):
         super().__init__()
@@ -68,7 +69,7 @@ class MSELoss(Function):
         )
 
 
-class CrossEntropyLoss(Function):
+class CrossEntropyLoss(Function, LossProtocol):
     def __init__(
         self, weight=None, ignore_index=-100, reduction="mean",
         label_smoothing=0.0,

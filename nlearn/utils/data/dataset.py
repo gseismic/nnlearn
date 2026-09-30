@@ -1,5 +1,8 @@
 
-class Dataset(object):
+from torch_protocol import DatasetProtocol
+
+
+class Dataset(DatasetProtocol):
     def __getitem__(self, index):
         raise NotImplementedError
 

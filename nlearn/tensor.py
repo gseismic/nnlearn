@@ -1,4 +1,5 @@
 import numpy as np
+from torch_protocol import TensorProtocol
 from . import backend
 from .log import log_function_call
 from .settings import Config, log_settings, runtime_settings, using_config
@@ -8,7 +9,7 @@ from .functional.get_item import get_item
 #import matplotlib.pyplot as plt
 
 
-class Tensor:
+class Tensor(TensorProtocol):
 
     # 确保优先级高于np.ndarray的运算符
     __array_priority__ = 200

@@ -1,8 +1,9 @@
+from torch_protocol import OptimizerProtocol
 from nlearn import backend
 from nlearn.tensor import Tensor
 
 
-class Optimizer:
+class Optimizer(OptimizerProtocol):
 
     def __init__(self, parameters, defaults=None):
         self.defaults = defaults or {}

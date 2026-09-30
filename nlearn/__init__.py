@@ -19,3 +19,11 @@ register_ops()
 
 # 兼容 `torch.utils.data.DataLoader` 形式的访问。
 from .utils import data
+
+# 暴露与 PyTorch 相同的后端命名空间，并在导入时检查 Torch Protocol v1。
+from . import nn, optim
+from torch_protocol import validate_backend as _validate_backend
+import sys as _sys
+
+_validate_backend(_sys.modules[__name__])
+del _validate_backend, _sys

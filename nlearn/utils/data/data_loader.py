@@ -36,7 +36,10 @@ def default_collate(batch):
         return [default_collate(samples) for samples in zip(*batch)]
     return batch
 
-class DataLoader:
+from torch_protocol import DataLoaderProtocol
+
+
+class DataLoader(DataLoaderProtocol):
     
     def __init__(
         self, dataset, batch_size=1, shuffle=False, drop_last=False,

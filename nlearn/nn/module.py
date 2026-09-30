@@ -1,11 +1,12 @@
 import weakref
+from torch_protocol import ModuleProtocol
 from .parameter import Parameter
 from ..tensor import Tensor, _parse_to_args
 from .. import backend
 from ..settings import train_model, eval_model
 
 
-class Module:
+class Module(ModuleProtocol):
 
     def __init__(self):
         self._parameters = []
