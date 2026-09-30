@@ -8,7 +8,7 @@ import torch as pytorch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import nlearn
+import nnlearn
 
 
 def _to_numpy(x):
@@ -49,7 +49,7 @@ def _max_diff(a, b):
 
 
 if __name__ == "__main__":
-    mini = _run(nlearn)
+    mini = _run(nnlearn)
     ref = _run(pytorch)
 
     for key in mini:

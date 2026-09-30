@@ -10,7 +10,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "examples"))
 
-import nlearn
+import nnlearn
 import example40_torch_protocol as protocol_example
 from torch_protocol import (
     BackendProtocolError,
@@ -75,7 +75,7 @@ def test_protocol_package_import_does_not_import_frameworks():
             "-c",
             (
                 "import sys, torch_protocol; "
-                "assert 'nlearn' not in sys.modules; "
+                "assert 'nnlearn' not in sys.modules; "
                 "assert 'torch' not in sys.modules"
             ),
         ],
@@ -87,19 +87,19 @@ def test_protocol_package_import_does_not_import_frameworks():
     assert result.returncode == 0, result.stderr
 
 
-def test_nlearn_satisfies_torch_protocol_v1():
-    assert validate_backend(nlearn) is nlearn
-    assert isinstance(nlearn, TorchBackendProtocol)
-    _assert_common_object_contract(nlearn)
+def test_nnlearn_satisfies_torch_protocol_v1():
+    assert validate_backend(nnlearn) is nnlearn
+    assert isinstance(nnlearn, TorchBackendProtocol)
+    _assert_common_object_contract(nnlearn)
 
-    value = nlearn.tensor([1.0, 2.0], requires_grad=True)
-    model = nlearn.nn.Linear(1, 1)
-    loss_fn = nlearn.nn.MSELoss()
-    optimizer = nlearn.optim.SGD(model.parameters(), lr=0.1)
-    dataset = nlearn.utils.data.TensorDataset(
-        nlearn.tensor([[1.0]]), nlearn.tensor([[2.0]])
+    value = nnlearn.tensor([1.0, 2.0], requires_grad=True)
+    model = nnlearn.nn.Linear(1, 1)
+    loss_fn = nnlearn.nn.MSELoss()
+    optimizer = nnlearn.optim.SGD(model.parameters(), lr=0.1)
+    dataset = nnlearn.utils.data.TensorDataset(
+        nnlearn.tensor([[1.0]]), nnlearn.tensor([[2.0]])
     )
-    loader = nlearn.utils.data.DataLoader(dataset, batch_size=1)
+    loader = nnlearn.utils.data.DataLoader(dataset, batch_size=1)
 
     assert isinstance(value, TensorProtocol)
     assert isinstance(model, ModuleProtocol)
@@ -116,8 +116,8 @@ def test_invalid_backend_lists_missing_members():
     assert "utils.data.DataLoader" in error.value.missing_members
 
 
-def test_shared_training_program_runs_with_nlearn():
-    result = protocol_example.run_training(nlearn, epochs=80)
+def test_shared_training_program_runs_with_nnlearn():
+    result = protocol_example.run_training(nnlearn, epochs=80)
     assert math.isfinite(result["initial_loss"])
     assert math.isfinite(result["final_loss"])
     assert result["final_loss"] < result["initial_loss"]

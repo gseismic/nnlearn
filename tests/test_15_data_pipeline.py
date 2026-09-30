@@ -5,9 +5,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 import numpy as np
-import nlearn as torch
-from nlearn import allclose
-from nlearn.utils.data import DataLoader, TensorDataset
+import nnlearn as torch
+from nnlearn import allclose
+from nnlearn.utils.data import DataLoader, TensorDataset
 
 
 def test_stack_backward_to_inputs():

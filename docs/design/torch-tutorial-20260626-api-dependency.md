@@ -6,7 +6,7 @@
 
 ## 目标
 
-本设计从“给 torch 新手写一组循序渐进的入门例子”倒推 `nlearn` 最值得补齐的函数和类。目标不是追 PyTorch 全量 API，而是让教程中的核心概念都能用 PyTorch 风格代码表达，并且只替换 import 即可在 PyTorch 与 `nlearn` 间切换。
+本设计从“给 torch 新手写一组循序渐进的入门例子”倒推 `nnlearn` 最值得补齐的函数和类。目标不是追 PyTorch 全量 API，而是让教程中的核心概念都能用 PyTorch 风格代码表达，并且只替换 import 即可在 PyTorch 与 `nnlearn` 间切换。
 
 ## 新手教程场景
 

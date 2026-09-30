@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import config
 import numpy as np
 import pytest
-import nlearn as torch
+import nnlearn as torch
 
 
 def test_global_argmax_returns_flat_index():

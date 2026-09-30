@@ -5,10 +5,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 import numpy as np
-import nlearn as torch
-import nlearn.nn as nn
-from nlearn import Tensor, allclose
-from nlearn.utils.data import DataLoader, TensorDataset
+import nnlearn as torch
+import nnlearn.nn as nn
+from nnlearn import Tensor, allclose
+from nnlearn.utils.data import DataLoader, TensorDataset
 
 
 def test_torch_tensor_defaults_to_no_grad_but_can_request_grad():

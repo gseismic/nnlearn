@@ -1,7 +1,7 @@
 """PyTorch script-entry compatibility example.
 
 The model and training loop use common script setup idioms that often appear
-before the core math runs. Set USE_NLEARN=0 to run the same code with
+before the core math runs. Set USE_NNLEARN=0 to run the same code with
 PyTorch.
 """
 
@@ -13,14 +13,14 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-USE_NLEARN = os.getenv("USE_NLEARN", "1") != "0"
+USE_NNLEARN = os.getenv("USE_NNLEARN", "1") != "0"
 
-if USE_NLEARN:
-    import nlearn as torch
-    import nlearn.nn as nn
-    import nlearn.optim as optim
+if USE_NNLEARN:
+    import nnlearn as torch
+    import nnlearn.nn as nn
+    import nnlearn.optim as optim
 
-    BACKEND_NAME = "nlearn"
+    BACKEND_NAME = "nnlearn"
 else:
     import torch
     import torch.nn as nn

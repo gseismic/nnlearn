@@ -4,12 +4,12 @@ import numpy as np
 import pytest
 import torch as pytorch
 
-import nlearn as torch
-import nlearn.nn as nn
-import nlearn.optim as optim
-from nlearn.function import Function
-from nlearn.functional.pad import pad
-from nlearn.utils.data import default_collate
+import nnlearn as torch
+import nnlearn.nn as nn
+import nnlearn.optim as optim
+from nnlearn.function import Function
+from nnlearn.functional.pad import pad
+from nnlearn.utils.data import default_collate
 
 
 @pytest.mark.parametrize('x_shape,w_shape', [

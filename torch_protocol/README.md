@@ -1,12 +1,12 @@
 # Torch Protocol v1
 
-`torch_protocol` 定义 PyTorch 风格张量训练 API 的共同子集。程序只调用本页列出的接口时，可以将 `nlearn` 或 PyTorch 的 `torch` 模块作为后端，运行同一段代码。
+`torch_protocol` 定义 PyTorch 风格张量训练 API 的共同子集。程序只调用本页列出的接口时，可以将 `nnlearn` 或 PyTorch 的 `torch` 模块作为后端，运行同一段代码。
 
-协议包不导入 PyTorch 或 nlearn。nlearn 显式实现这些 Protocol；PyTorch 无需修改，按 Python 结构化类型满足协议。这里的 `torch` 是 PyTorch 的导入名。协议只保证列出的接口，不表示任意 PyTorch 程序都能在 nlearn 上运行。
+协议包不导入 PyTorch 或 nnlearn。nnlearn 显式实现这些 Protocol；PyTorch 无需修改，按 Python 结构化类型满足协议。这里的 `torch` 是 PyTorch 的导入名。协议只保证列出的接口，不表示任意 PyTorch 程序都能在 nnlearn 上运行。
 
 ## 安装
 
-可从 nlearn 仓库根目录安装独立协议包：
+可从 nnlearn 仓库根目录安装独立协议包：
 
 ```bash
 python -m pip install ./torch_protocol
@@ -18,7 +18,7 @@ python -m pip install ./torch_protocol
 python -m pip install .
 ```
 
-在 nlearn 仓库中，`torch_protocol` 也随 nlearn 一起提供。
+在 nnlearn 仓库中，`torch_protocol` 也随 nnlearn 一起提供。
 
 ## v1 接口
 
@@ -46,10 +46,10 @@ python -m pip install .
 
 ## 训练示例
 
-示例只使用 v1 接口。传入 `nlearn` 或 PyTorch 模块即可切换后端：
+示例只使用 v1 接口。传入 `nnlearn` 或 PyTorch 模块即可切换后端：
 
 ```python
-import nlearn as backend
+import nnlearn as backend
 # 使用 PyTorch 时，改成：
 # import torch as backend
 # import torch.nn
@@ -90,7 +90,7 @@ TORCH_BACKEND=torch python examples/example40_torch_protocol.py
 ## 可移植代码的语义约定
 
 - 创建张量时显式使用 `dtype=backend.float32` 等后端类型。未指定类型时，后端可能采用不同的推断默认值。
-- `device` 和 `dtype` 对象由后端提供。v1 代码不假设 PyTorch 与 nlearn 的设备对象可互换；需要最高可移植性时使用默认 CPU 设备。
+- `device` 和 `dtype` 对象由后端提供。v1 代码不假设 PyTorch 与 nnlearn 的设备对象可互换；需要最高可移植性时使用默认 CPU 设备。
 - `backward()` 用于只有一个元素的损失张量。梯度会累积；更新前调用 `optimizer.zero_grad()`。不依赖清零后 `parameter.grad` 是 `None` 还是零张量。
 - `no_grad()` 暂停上下文中的梯度记录。推理完成后仍可用 `detach().cpu().numpy()` 导出 NumPy 数组。
 - `TensorDataset` 的张量首维长度必须相同；`DataLoader` 将样本按 `batch_size` 组合，支持 `shuffle` 和 `drop_last`。v1 只要求单进程批次迭代。

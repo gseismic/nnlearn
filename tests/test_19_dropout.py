@@ -5,9 +5,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 import numpy as np
-import nlearn as torch
-import nlearn.nn as nn
-from nlearn import allclose
+import nnlearn as torch
+import nnlearn.nn as nn
+from nnlearn import allclose
 
 
 def test_dropout_training_masks_scales_and_backprops():

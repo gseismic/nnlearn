@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import numpy as np
 import pytest
 import torch as pytorch
-import nlearn as torch
+import nnlearn as torch
 
 
 def _assert_amin_matches_pytorch(data, dim=None, keepdim=False):

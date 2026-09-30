@@ -1,7 +1,7 @@
 import math
 
-from nlearn import backend
-from nlearn.tensor import Tensor
+from nnlearn import backend
+from nnlearn.tensor import Tensor
 
 
 def _check_tensor(tensor):
@@ -22,7 +22,7 @@ def _calculate_fan_in_and_fan_out(tensor):
         raise ValueError('fan in and fan out require at least 2 dimensions')
 
     if len(shape) == 2:
-        # 默认按 PyTorch 原始二维权重布局推断；nlearn.Linear 会写入元数据覆盖它。
+        # 默认按 PyTorch 原始二维权重布局推断；nnlearn.Linear 会写入元数据覆盖它。
         return shape[1], shape[0]
 
     receptive_field_size = 1

@@ -7,7 +7,7 @@ import config
 import numpy as np
 import pytest
 import torch as pytorch
-import nlearn as torch
+import nnlearn as torch
 
 
 def _array(shape, offset=0.0):

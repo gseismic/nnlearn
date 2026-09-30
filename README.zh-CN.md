@@ -1,4 +1,4 @@
-# nlearn 使用教程
+# nnlearn 使用教程
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
@@ -7,8 +7,8 @@
 克隆仓库并安装包及其依赖：
 
 ```bash
-git clone https://github.com/pai-studio/nlearn.git
-cd nlearn
+git clone https://github.com/pai-studio/nnlearn.git
+cd nnlearn
 python -m pip install .
 ```
 
@@ -17,7 +17,7 @@ python -m pip install .
 ## 创建张量并进行运算
 
 ```python
-import nlearn as nl
+import nnlearn as nl
 
 x = nl.tensor([[1.0, 2.0], [3.0, 4.0]], dtype=nl.float32)
 y = nl.tensor([[5.0], [6.0]], dtype=nl.float32)
@@ -25,14 +25,14 @@ y = nl.tensor([[5.0], [6.0]], dtype=nl.float32)
 print((x @ y).tolist())
 ```
 
-`nlearn.tensor` 用于创建张量。矩阵乘法等张量运算会生成结果，可继续用于后续计算。
+`nnlearn.tensor` 用于创建张量。矩阵乘法等张量运算会生成结果，可继续用于后续计算。
 
 ## 计算梯度
 
 对需要计算梯度的值设置 `requires_grad=True`，计算标量损失后调用 `backward()`：
 
 ```python
-import nlearn as nl
+import nnlearn as nl
 
 x = nl.tensor([1.0, 2.0, 3.0], requires_grad=True)
 weights = nl.tensor([2.0, -1.0, 0.5])
@@ -47,12 +47,12 @@ print(x.grad.tolist())
 
 ## 训练一个小模型
 
-使用 `nlearn.nn` 定义模型，并使用 `nlearn.optim` 更新模型参数：
+使用 `nnlearn.nn` 定义模型，并使用 `nnlearn.optim` 更新模型参数：
 
 ```python
-import nlearn as nl
-import nlearn.nn as nn
-import nlearn.optim as optim
+import nnlearn as nl
+import nnlearn.nn as nn
+import nnlearn.optim as optim
 
 features = nl.tensor([[0.0], [1.0], [2.0], [3.0]], dtype=nl.float32)
 targets = nl.tensor([[1.0], [3.0], [5.0], [7.0]], dtype=nl.float32)
@@ -82,7 +82,7 @@ print(predictions.tolist())
 将张量放入 `TensorDataset`，再用 `DataLoader` 按批次遍历。示例使用上一节定义的 `features`、`targets`、`model`、`criterion` 和 `optimizer`：
 
 ```python
-from nlearn.utils.data import DataLoader, TensorDataset
+from nnlearn.utils.data import DataLoader, TensorDataset
 
 dataset = TensorDataset(features, targets)
 loader = DataLoader(dataset, batch_size=2, shuffle=True)

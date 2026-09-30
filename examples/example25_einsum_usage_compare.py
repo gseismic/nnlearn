@@ -1,6 +1,6 @@
 """einsum 经典用法对照示例。
 
-本示例同时运行 nlearn 和 PyTorch，逐项比较前向结果与梯度。
+本示例同时运行 nnlearn 和 PyTorch，逐项比较前向结果与梯度。
 覆盖矩阵乘、batch matmul、点积、外积、规约、attention 和广播门控。
 """
 
@@ -12,7 +12,7 @@ import torch as torch_ref
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import nlearn as nlearn
+import nnlearn as nnlearn
 
 
 def _array(shape, offset=0.0):
@@ -31,13 +31,13 @@ def _max_abs_diff(a, b):
 
 
 def compare_case(name, equation, arrays):
-    ours = [nlearn.tensor(array, requires_grad=True) for array in arrays]
+    ours = [nnlearn.tensor(array, requires_grad=True) for array in arrays]
     refs = [
         torch_ref.tensor(array, dtype=torch_ref.float64, requires_grad=True)
         for array in arrays
     ]
 
-    ours_out = nlearn.einsum(equation, *ours)
+    ours_out = nnlearn.einsum(equation, *ours)
     refs_out = torch_ref.einsum(equation, *refs)
     ours_out.sum().backward()
     refs_out.sum().backward()
@@ -61,15 +61,15 @@ def compare_attention_pipeline():
     key = _array((2, 5, 4), 2.0)
     value = _array((2, 5, 6), 3.0)
 
-    ours_q = nlearn.tensor(query, requires_grad=True)
-    ours_k = nlearn.tensor(key, requires_grad=True)
-    ours_v = nlearn.tensor(value, requires_grad=True)
+    ours_q = nnlearn.tensor(query, requires_grad=True)
+    ours_k = nnlearn.tensor(key, requires_grad=True)
+    ours_v = nnlearn.tensor(value, requires_grad=True)
     refs_q = torch_ref.tensor(query, dtype=torch_ref.float64, requires_grad=True)
     refs_k = torch_ref.tensor(key, dtype=torch_ref.float64, requires_grad=True)
     refs_v = torch_ref.tensor(value, dtype=torch_ref.float64, requires_grad=True)
 
-    ours_scores = nlearn.einsum("bqd,bkd->bqk", ours_q, ours_k)
-    ours_context = nlearn.einsum("bqk,bkd->bqd", ours_scores, ours_v)
+    ours_scores = nnlearn.einsum("bqd,bkd->bqk", ours_q, ours_k)
+    ours_context = nnlearn.einsum("bqk,bkd->bqd", ours_scores, ours_v)
     refs_scores = torch_ref.einsum("bqd,bkd->bqk", refs_q, refs_k)
     refs_context = torch_ref.einsum("bqk,bkd->bqd", refs_scores, refs_v)
 

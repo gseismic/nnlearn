@@ -1,4 +1,4 @@
-# nlearn
+# nnlearn
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
@@ -7,8 +7,8 @@
 Clone the repository, then install the package and its dependencies:
 
 ```bash
-git clone https://github.com/pai-studio/nlearn.git
-cd nlearn
+git clone https://github.com/pai-studio/nnlearn.git
+cd nnlearn
 python -m pip install .
 ```
 
@@ -17,7 +17,7 @@ The examples below use the package from this checkout. They do not require PyTor
 ## Create tensors and run operations
 
 ```python
-import nlearn as nl
+import nnlearn as nl
 
 x = nl.tensor([[1.0, 2.0], [3.0, 4.0]], dtype=nl.float32)
 y = nl.tensor([[5.0], [6.0]], dtype=nl.float32)
@@ -25,14 +25,14 @@ y = nl.tensor([[5.0], [6.0]], dtype=nl.float32)
 print((x @ y).tolist())
 ```
 
-`nlearn.tensor` creates a tensor. Tensor operations such as matrix multiplication build a result you can use in later calculations.
+`nnlearn.tensor` creates a tensor. Tensor operations such as matrix multiplication build a result you can use in later calculations.
 
 ## Compute gradients
 
 Set `requires_grad=True` on values you want gradients for, calculate a scalar loss, then call `backward()`:
 
 ```python
-import nlearn as nl
+import nnlearn as nl
 
 x = nl.tensor([1.0, 2.0, 3.0], requires_grad=True)
 weights = nl.tensor([2.0, -1.0, 0.5])
@@ -47,12 +47,12 @@ The gradient is available from `x.grad` after backpropagation.
 
 ## Train a small model
 
-Use `nlearn.nn` to define a model and `nlearn.optim` to update its parameters:
+Use `nnlearn.nn` to define a model and `nnlearn.optim` to update its parameters:
 
 ```python
-import nlearn as nl
-import nlearn.nn as nn
-import nlearn.optim as optim
+import nnlearn as nl
+import nnlearn.nn as nn
+import nnlearn.optim as optim
 
 features = nl.tensor([[0.0], [1.0], [2.0], [3.0]], dtype=nl.float32)
 targets = nl.tensor([[1.0], [3.0], [5.0], [7.0]], dtype=nl.float32)
@@ -82,7 +82,7 @@ print(predictions.tolist())
 Wrap tensors in `TensorDataset` and iterate over them with `DataLoader`. This example uses the `features`, `targets`, `model`, `criterion`, and `optimizer` from the previous section:
 
 ```python
-from nlearn.utils.data import DataLoader, TensorDataset
+from nnlearn.utils.data import DataLoader, TensorDataset
 
 dataset = TensorDataset(features, targets)
 loader = DataLoader(dataset, batch_size=2, shuffle=True)

@@ -1,5 +1,5 @@
 from .optimizer import Optimizer
-from nlearn import backend
+from nnlearn import backend
 
 
 class MomentumSGD(Optimizer):

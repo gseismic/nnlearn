@@ -1,9 +1,9 @@
-from nlearn import backend
-from nlearn.tensor import Tensor
-from nlearn.functional.numeric import (
+from nnlearn import backend
+from nnlearn.tensor import Tensor
+from nnlearn.functional.numeric import (
     ReLU, log_softmax, relu, sigmoid, softmax, tanh,
 )
-from nlearn.nn.loss import CrossEntropyLoss, MSELoss
+from nnlearn.nn.loss import CrossEntropyLoss, MSELoss
 
 
 def dropout(input, p=0.5, training=True, inplace=False):

@@ -1,7 +1,7 @@
 import numpy as np
-from nlearn.function import Function
-from nlearn.tensor import Tensor, ensure_tensor
-from nlearn import backend
+from nnlearn.function import Function
+from nnlearn.tensor import Tensor, ensure_tensor
+from nnlearn import backend
 from .module import Module
 from .parameter import Parameter
 

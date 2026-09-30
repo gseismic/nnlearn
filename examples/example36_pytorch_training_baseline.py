@@ -1,7 +1,7 @@
 """PyTorch-compatible training baseline.
 
-This example keeps the training bodies backend-neutral. Set USE_NLEARN=0 to
-run the same workloads with PyTorch instead of nlearn.
+This example keeps the training bodies backend-neutral. Set USE_NNLEARN=0 to
+run the same workloads with PyTorch instead of nnlearn.
 """
 
 import os
@@ -13,15 +13,15 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-USE_NLEARN = os.getenv("USE_NLEARN", "1") != "0"
+USE_NNLEARN = os.getenv("USE_NNLEARN", "1") != "0"
 
-if USE_NLEARN:
-    import nlearn as torch
-    import nlearn.nn as nn
-    import nlearn.optim as optim
-    from nlearn.utils.data import DataLoader, TensorDataset
+if USE_NNLEARN:
+    import nnlearn as torch
+    import nnlearn.nn as nn
+    import nnlearn.optim as optim
+    from nnlearn.utils.data import DataLoader, TensorDataset
 
-    BACKEND_NAME = "nlearn"
+    BACKEND_NAME = "nnlearn"
 else:
     import torch
     import torch.nn as nn
@@ -151,7 +151,7 @@ def _checkpoint_roundtrip(model_factory, model, sample, device):
         expected = _to_numpy(model(sample))
 
     path = Path(tempfile.gettempdir()) / (
-        f"nlearn_plan36_{BACKEND_NAME}_{os.getpid()}.pkl"
+        f"nnlearn_plan36_{BACKEND_NAME}_{os.getpid()}.pkl"
     )
     torch.save(model.state_dict(), path)
     restored = model_factory().to(device)

@@ -1,10 +1,10 @@
 import builtins
 import string
 
-from nlearn import backend
-from nlearn.function import Function
-from nlearn.tensor import Tensor, ensure_tensor
-from nlearn.utils import np_sum_to
+from nnlearn import backend
+from nnlearn.function import Function
+from nnlearn.tensor import Tensor, ensure_tensor
+from nnlearn.utils import np_sum_to
 
 
 # Reshape

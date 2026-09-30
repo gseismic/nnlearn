@@ -55,4 +55,4 @@ python 'book/代码/04-进阶模型与运行时/19-注意力与Transformer.py'
 
 ## 对应到仓库
 
-仓库的 [`nlearn/nn/transformer.py`](../../nlearn/nn/transformer.py) 包含多头注意力和编码器层；[`nlearn/nn/sparse.py`](../../nlearn/nn/sparse.py) 与 [`nlearn/nn/normalization.py`](../../nlearn/nn/normalization.py) 提供 Embedding 和 LayerNorm。`examples/example6_transformer_train_compare.py` 展示了一个端到端序列分类例子。
+仓库的 [`nnlearn/nn/transformer.py`](../../nnlearn/nn/transformer.py) 包含多头注意力和编码器层；[`nnlearn/nn/sparse.py`](../../nnlearn/nn/sparse.py) 与 [`nnlearn/nn/normalization.py`](../../nnlearn/nn/normalization.py) 提供 Embedding 和 LayerNorm。`examples/example6_transformer_train_compare.py` 展示了一个端到端序列分类例子。

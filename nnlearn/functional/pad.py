@@ -1,5 +1,5 @@
-from nlearn import backend
-from nlearn.function import Function
+from nnlearn import backend
+from nnlearn.function import Function
 
 
 # Pad

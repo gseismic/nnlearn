@@ -6,9 +6,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import config
 import numpy as np
 import pytest
-import nlearn as torch
-import nlearn.nn as nn
-import nlearn.nn.functional as F
+import nnlearn as torch
+import nnlearn.nn as nn
+import nnlearn.nn.functional as F
 
 
 def _cross_entropy_expected(logits, target):

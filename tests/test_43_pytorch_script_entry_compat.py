@@ -9,9 +9,9 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "examples"))
 
-import nlearn as torch
-import nlearn.nn as nn
-import nlearn.optim as optim
+import nnlearn as torch
+import nnlearn.nn as nn
+import nnlearn.optim as optim
 import example37_pytorch_script_entry_compat as entry_compat
 
 
@@ -83,9 +83,9 @@ def test_module_iteration_modulelist_identity_and_zero_grad():
     assert all(parameter.grad is None for parameter in model.parameters())
 
 
-def test_nlearn_script_entry_example_runs():
+def test_nnlearn_script_entry_example_runs():
     result = entry_compat.run()
-    assert result["backend"] == "nlearn"
+    assert result["backend"] == "nnlearn"
     assert result["accuracy"] == 1.0
     assert "layers.0" in result["named_modules"]
 
@@ -94,7 +94,7 @@ def test_pytorch_script_entry_replacement_path_runs():
     pytest.importorskip("torch")
 
     env = os.environ.copy()
-    env["USE_NLEARN"] = "0"
+    env["USE_NNLEARN"] = "0"
     script = Path(__file__).resolve().parents[1] / "examples" / (
         "example37_pytorch_script_entry_compat.py"
     )

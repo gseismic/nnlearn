@@ -1,4 +1,4 @@
-"""同一训练流程通过 Torch Protocol v1 在 nlearn 或 PyTorch 上运行。"""
+"""同一训练流程通过 Torch Protocol v1 在 nnlearn 或 PyTorch 上运行。"""
 
 from __future__ import annotations
 
@@ -57,8 +57,8 @@ def run_training(backend: TorchBackendProtocol, epochs: int = 80):
 
 
 def _load_backend(name: str):
-    if name == "nlearn":
-        import nlearn as backend
+    if name == "nnlearn":
+        import nnlearn as backend
 
         return backend
     if name == "torch":
@@ -72,11 +72,11 @@ def _load_backend(name: str):
                 "The torch backend requires the official PyTorch package."
             ) from error
         return backend
-    raise SystemExit("TORCH_BACKEND must be either 'nlearn' or 'torch'.")
+    raise SystemExit("TORCH_BACKEND must be either 'nnlearn' or 'torch'.")
 
 
 def main():
-    name = os.environ.get("TORCH_BACKEND", "nlearn").strip().lower()
+    name = os.environ.get("TORCH_BACKEND", "nnlearn").strip().lower()
     backend = validate_backend(_load_backend(name))
     result = run_training(backend)
     print(f"backend={name}")

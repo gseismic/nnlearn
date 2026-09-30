@@ -1,8 +1,8 @@
 import numpy as np
 from torch_protocol import LossProtocol
-from nlearn.function import Function
-from nlearn.tensor import Tensor
-from nlearn import backend
+from nnlearn.function import Function
+from nnlearn.tensor import Tensor
+from nnlearn import backend
 
 
 def _check_reduction(reduction):
@@ -16,7 +16,7 @@ def _check_reduction(reduction):
 def _sum_to_input_shape(grad, shape):
     if grad is None or grad.shape == shape:
         return grad
-    from nlearn.functional.matrix import sum_to
+    from nnlearn.functional.matrix import sum_to
 
     return sum_to(grad, shape)
 

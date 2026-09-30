@@ -1,7 +1,7 @@
 import numpy as np
 from collections import namedtuple
 
-from nlearn import backend
+from nnlearn import backend
 from ..function import Function
 from .matrix import sum_to
 
@@ -81,7 +81,7 @@ def _broadcast_index_selector(index_shape, axis, index, xp):
 
 
 def _comparison(x1, x2, op):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     if isinstance(x1, Tensor):
         x1 = x1.data
@@ -175,7 +175,7 @@ class Abs(Function):
         return xp.abs(x)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
@@ -215,7 +215,7 @@ class Clamp(Function):
         return y
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
@@ -423,7 +423,7 @@ class Maximum(Function):
         return xp.maximum(x1, x2)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x1, x2 = self.inputs
         greater1 = x1.data > x2.data
@@ -460,7 +460,7 @@ class Max(Function):
         return xp.max(x, axis=axis, keepdims=self.keepdims)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
@@ -481,7 +481,7 @@ class Max(Function):
         return Tensor(gx)
 
 def _max_indices(x, axis, keepdims=False):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     data = x.data if isinstance(x, Tensor) else backend.ensure_array(x)
     xp = backend.get_array_module(data)
@@ -511,7 +511,7 @@ class Minimum(Function):
         return xp.minimum(x1, x2)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x1, x2 = self.inputs
         less1 = x1.data < x2.data
@@ -549,7 +549,7 @@ class Min(Function):
         return xp.min(x, axis=axis, keepdims=self.keepdims)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
@@ -571,7 +571,7 @@ class Min(Function):
 
 
 def _min_indices(x, axis, keepdims=False):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     data = x.data if isinstance(x, Tensor) else backend.ensure_array(x)
     xp = backend.get_array_module(data)
@@ -584,7 +584,7 @@ def _min_indices(x, axis, keepdims=False):
 
 def min(input, dim=None, keepdim=False, axis=None, keepdims=None):
     if dim is not None and not isinstance(dim, (int, np.integer)):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         if isinstance(dim, Tensor):
             return minimum(input, dim)
@@ -616,7 +616,7 @@ class Amax(Function):
         return xp.max(x, axis=axes, keepdims=self.keepdims)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
@@ -662,7 +662,7 @@ class Amin(Function):
         return xp.min(x, axis=axes, keepdims=self.keepdims)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
@@ -724,7 +724,7 @@ def aminmax(input, dim=None, keepdim=False, axis=None, keepdims=None):
 
 
 def argmax(input, dim=None, keepdim=False, axis=None, keepdims=None):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     axis = dim if dim is not None else axis
     if keepdims is not None:
@@ -779,7 +779,7 @@ class TopK(Function):
         return values
 
     def backward(self, gy_values):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         xp = backend.get_array_module(gy_values.data)
         gx = xp.zeros(self.x_shape, dtype=gy_values.data.dtype)
@@ -788,7 +788,7 @@ class TopK(Function):
         return Tensor(gx)
 
 def topk(input, k, dim=None, largest=True, sorted=True):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     axis = -1 if dim is None else dim
     op = TopK(k, axis=axis, largest=largest, sorted=sorted)
@@ -809,7 +809,7 @@ class Where(Function):
         return xp.where(self.condition, x, other)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         condition = self.condition
         gx = Tensor(gy.data * condition, requires_grad=False)
@@ -821,7 +821,7 @@ class Where(Function):
         )
 
 def where(condition, input=None, other=None):
-    from nlearn.tensor import ensure_tensor
+    from nnlearn.tensor import ensure_tensor
 
     if input is None and other is None:
         condition = ensure_tensor(condition)
@@ -834,7 +834,7 @@ def where(condition, input=None, other=None):
 
 
 def nonzero(input, as_tuple=False):
-    from nlearn.tensor import Tensor, ensure_tensor
+    from nnlearn.tensor import Tensor, ensure_tensor
 
     x = ensure_tensor(input)
     xp = backend.get_array_module(x.data)
@@ -859,7 +859,7 @@ def nonzero(input, as_tuple=False):
 
 
 def masked_fill(input, mask, value):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     return where(mask, Tensor(value, requires_grad=False), input)
 
@@ -888,7 +888,7 @@ class IndexSelect(Function):
         return xp.take(x, index, axis=axis)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         xp = backend.get_array_module(gy.data)
         gx = xp.zeros(self.x_shape, dtype=gy.data.dtype)
@@ -929,7 +929,7 @@ class Gather(Function):
         return xp.take_along_axis(x, index, axis=axis)
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         xp = backend.get_array_module(gy.data)
         gx = xp.zeros(self.x_shape, dtype=gy.data.dtype)
@@ -988,7 +988,7 @@ class Scatter(Function):
         return y
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         xp = backend.get_array_module(gy.data, self.index)
         gx = gy.data.copy()
@@ -1023,7 +1023,7 @@ class ScatterAdd(Function):
         return y
 
     def backward(self, gy):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         xp = backend.get_array_module(gy.data, self.index)
         gsrc = xp.take_along_axis(
@@ -1076,7 +1076,7 @@ class Sort(Function):
         return values
 
     def backward(self, gy_values):
-        from nlearn.tensor import Tensor
+        from nnlearn.tensor import Tensor
 
         if self.normalized_axis is None:
             return gy_values
@@ -1088,7 +1088,7 @@ class Sort(Function):
         return Tensor(gx)
 
 def sort(input, dim=-1, descending=False, stable=False):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     op = Sort(axis=dim, descending=descending, stable=stable)
     values = op(input)
@@ -1112,7 +1112,7 @@ def _sort_indices(data, axis, descending, stable, xp):
 
 
 def argsort(input, dim=-1, descending=False, stable=False):
-    from nlearn.tensor import Tensor
+    from nnlearn.tensor import Tensor
 
     data = input.data if isinstance(input, Tensor) else backend.ensure_array(input)
     if not isinstance(dim, (int, np.integer)):

@@ -1,9 +1,9 @@
 import config
 import time
 import numpy as np
-import nlearn
-from nlearn import functional as F
-from nlearn import Tensor, allclose
+import nnlearn
+from nnlearn import functional as F
+from nnlearn import Tensor, allclose
 
 def test_matrix_basic():
     A = Tensor(np.array([[1.0, 2, 3], [1,2,3]]), "A")
@@ -94,11 +94,11 @@ def test_matrix_npsumto():
     # 2, 3
     a = np.array([[1,2,3], [10, 20, 30]])
     print('a', a, a.shape)
-    y = nlearn.utils.np_sum_to(a, (2, 1))
+    y = nnlearn.utils.np_sum_to(a, (2, 1))
     assert allclose(y, [[6], [60]])
 
     print(y)
-    y = nlearn.utils.np_sum_to(a, (1, 3))
+    y = nnlearn.utils.np_sum_to(a, (1, 3))
     assert allclose(y, [[11, 22, 33]])
     print(y)
 

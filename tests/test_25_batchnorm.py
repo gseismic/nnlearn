@@ -6,8 +6,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import config
 import numpy as np
 import pytest
-import nlearn as torch
-import nlearn.nn as nn
+import nnlearn as torch
+import nnlearn.nn as nn
 
 
 def test_batchnorm1d_training_normalizes_and_backprops_affine():

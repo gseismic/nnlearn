@@ -4,9 +4,9 @@
 
 ## 目标
 
-提供一个独立、可安装的 `torch_protocol` Python 包，明确一组跨后端的 Python 张量与训练接口。使用方只依赖协议列出的公共成员，可以把 PyTorch 的 `torch` 模块或 `nlearn` 模块作为后端传入同一段程序。nlearn 的核心类型显式实现协议；PyTorch 通过 Python 结构化类型满足协议，不需要修改 PyTorch，也不需要让协议包依赖任一后端。
+提供一个独立、可安装的 `torch_protocol` Python 包，明确一组跨后端的 Python 张量与训练接口。使用方只依赖协议列出的公共成员，可以把 PyTorch 的 `torch` 模块或 `nnlearn` 模块作为后端传入同一段程序。nnlearn 的核心类型显式实现协议；PyTorch 通过 Python 结构化类型满足协议，不需要修改 PyTorch，也不需要让协议包依赖任一后端。
 
-这里的“torch”指 PyTorch 的 Python 导入名 `torch`。协议定义共同支持面，不声称任意 PyTorch 程序都能在 nlearn 上运行。
+这里的“torch”指 PyTorch 的 Python 导入名 `torch`。协议定义共同支持面，不声称任意 PyTorch 程序都能在 nnlearn 上运行。
 
 ## 代表性场景
 
@@ -14,7 +14,7 @@
 2. 使用 `nn.Module`、`nn.Linear` 和损失函数定义及训练模型。
 3. 使用 `optim.SGD` 更新参数，并在推理时关闭梯度记录。
 4. 使用 `TensorDataset` 和 `DataLoader` 以小批次读取数据。
-5. 不改动训练主体，仅替换传入的后端模块，在 PyTorch 与 nlearn 上运行。
+5. 不改动训练主体，仅替换传入的后端模块，在 PyTorch 与 nnlearn 上运行。
 
 ## 包与依赖方向
 
@@ -22,13 +22,13 @@
 应用程序 ──依赖接口──> torch_protocol
                          ▲       ▲
                          │       │
-                      nlearn   PyTorch/torch
+                      nnlearn   PyTorch/torch
 ```
 
-- `torch_protocol` 只依赖 Python 标准库 `typing`、`contextlib`，不导入 `nlearn` 或 `torch`。
-- nlearn 的 Tensor、Module、Optimizer 和数据集类型显式继承相应 Protocol，并在包初始化时检查顶层后端入口。
+- `torch_protocol` 只依赖 Python 标准库 `typing`、`contextlib`，不导入 `nnlearn` 或 `torch`。
+- nnlearn 的 Tensor、Module、Optimizer 和数据集类型显式继承相应 Protocol，并在包初始化时检查顶层后端入口。
 - PyTorch 不修改、不 monkey-patch；`torch` 模块及其对象按结构满足协议。`validate_backend()` 用于检查必需成员是否存在，完整语义由共用契约测试验证。
-- 协议包可单独构建和安装。当前 nlearn 仓库作为 monorepo 将它一并纳入 nlearn 发行包，避免依赖未发布到公共索引的包；未来拆分发行时保持 `import torch_protocol` 不变。
+- 协议包可单独构建和安装。当前 nnlearn 仓库作为 monorepo 将它一并纳入 nnlearn 发行包，避免依赖未发布到公共索引的包；未来拆分发行时保持 `import torch_protocol` 不变。
 
 ## v1 后端接口
 
@@ -54,7 +54,7 @@ utils.data.TensorDataset(*tensors)
 utils.data.DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 ```
 
-跨后端训练代码应显式传入 `dtype=backend.float32` 和 `lr`。PyTorch 与 nlearn 的浮点推断默认值、优化器默认参数并不完全相同。
+跨后端训练代码应显式传入 `dtype=backend.float32` 和 `lr`。PyTorch 与 nnlearn 的浮点推断默认值、优化器默认参数并不完全相同。
 
 张量与模块的设备转换使用共同形式 `to(*, device=None, dtype=None)`，传入的 device/dtype 值仍由当前后端提供。跨后端代码应使用关键字传参。
 
@@ -68,7 +68,7 @@ utils.data.DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 ### ModuleProtocol、LossProtocol 和 OptimizerProtocol
 
 - `ModuleProtocol`：`__call__`、`parameters()`、`train(mode=True)`、`eval()`、`to()`、`state_dict()`、`load_state_dict()`。
-- `LossProtocol`：可调用，输入预测与目标并返回可反向传播的 Tensor。nlearn 的损失对象目前不是 `nn.Module` 子类，协议因此不要求损失对象具有模块生命周期方法。
+- `LossProtocol`：可调用，输入预测与目标并返回可反向传播的 Tensor。nnlearn 的损失对象目前不是 `nn.Module` 子类，协议因此不要求损失对象具有模块生命周期方法。
 - `OptimizerProtocol`：`zero_grad()` 和 `step()`。后端可将清零后的梯度保存为 `None` 或零张量；协议代码不能依赖其具体表示。
 - `backward()` 的可移植用法仅针对单元素损失张量，不传入显式梯度。梯度会累积，优化器更新前清零。
 
@@ -82,7 +82,7 @@ utils.data.DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
 ## 兼容规则与范围
 
 - 只有调用 v1 表列出的成员并遵守上述语义的程序，才属于跨后端协议程序。
-- nlearn 现有其他接口可继续使用，但未列入 v1 的接口是后端扩展，不因此获得 PyTorch 兼容承诺。
+- nnlearn 现有其他接口可继续使用，但未列入 v1 的接口是后端扩展，不因此获得 PyTorch 兼容承诺。
 - 协议不承诺参数初始化随机序列一致、浮点逐位一致、设备完全相同或训练性能一致；数值测试使用容差。
 - `validate_backend()` 只验证入口成员存在且可调用，不代替数值与行为测试。
 - 新增兼容成员使用向后兼容方式演进；删除或改变 v1 必需语义需要新主版本协议。

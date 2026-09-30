@@ -2,14 +2,14 @@ import matplotlib.pyplot as plt
 
 ####################
 # 在这里更改参数
-USE_NLEARN = False
-USE_NLEARN = True
+USE_NNLEARN = False
+USE_NNLEARN = True
 ####################
-if USE_NLEARN:
-    import nlearn as torch
-    import nlearn.nn as nn
-    import nlearn.optim as optim
-    title = 'nlearn'
+if USE_NNLEARN:
+    import nnlearn as torch
+    import nnlearn.nn as nn
+    import nnlearn.optim as optim
+    title = 'nnlearn'
 else:
     import torch
     import torch.nn as nn

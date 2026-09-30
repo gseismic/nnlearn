@@ -1,6 +1,6 @@
 from torch_protocol import OptimizerProtocol
-from nlearn import backend
-from nlearn.tensor import Tensor
+from nnlearn import backend
+from nnlearn.tensor import Tensor
 
 
 class Optimizer(OptimizerProtocol):

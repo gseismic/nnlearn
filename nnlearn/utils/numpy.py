@@ -1,4 +1,4 @@
-from nlearn import backend
+from nnlearn import backend
 
 def ensure_ndarray(data):
     return backend.ensure_array(data)

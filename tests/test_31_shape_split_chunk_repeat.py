@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 import numpy as np
-import nlearn as torch
+import nnlearn as torch
 
 
 def test_repeat_forward_and_backward():

@@ -1,10 +1,10 @@
 import config
 import numpy as np
-import nlearn
-from nlearn import Tensor, allclose
-from nlearn import Square, Exp
-nlearn.log_settings['func_log_enabled'] = True
-nlearn.log_settings['tensor_log_enabled'] = True
+import nnlearn
+from nnlearn import Tensor, allclose
+from nnlearn import Square, Exp
+nnlearn.log_settings['func_log_enabled'] = True
+nnlearn.log_settings['tensor_log_enabled'] = True
 
 
 def test_tensor_basic():

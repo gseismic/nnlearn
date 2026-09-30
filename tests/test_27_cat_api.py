@@ -6,8 +6,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import config
 import numpy as np
 import pytest
-import nlearn as torch
-from nlearn import allclose
+import nnlearn as torch
+from nnlearn import allclose
 
 
 def test_cat_dim0_forward_and_backward():

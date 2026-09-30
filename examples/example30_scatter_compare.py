@@ -8,14 +8,14 @@ import torch as pytorch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import nlearn
+import nnlearn
 
 
 def _compare(op_name, input_data, index_data, src_data, dim):
-    ours_input = nlearn.tensor(input_data, requires_grad=True)
-    ours_index = nlearn.tensor(index_data)
-    ours_src = nlearn.tensor(src_data, requires_grad=True)
-    ours_out = getattr(nlearn, op_name)(
+    ours_input = nnlearn.tensor(input_data, requires_grad=True)
+    ours_index = nnlearn.tensor(index_data)
+    ours_src = nnlearn.tensor(src_data, requires_grad=True)
+    ours_out = getattr(nnlearn, op_name)(
         ours_input, dim, ours_index, ours_src,
     )
     (ours_out * ours_out).sum().backward()

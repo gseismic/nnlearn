@@ -8,11 +8,11 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-USE_NLEARN = os.getenv("USE_NLEARN", "1") != "0"
+USE_NNLEARN = os.getenv("USE_NNLEARN", "1") != "0"
 
-if USE_NLEARN:
-    import nlearn as torch
-    import nlearn.optim as optim
+if USE_NNLEARN:
+    import nnlearn as torch
+    import nnlearn.optim as optim
 else:
     import torch
     import torch.optim as optim

@@ -8,9 +8,9 @@ import torch as pytorch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import nlearn
-import nlearn.nn as nlearn_nn
-import nlearn.nn.functional as F_nlearn
+import nnlearn
+import nnlearn.nn as nnlearn_nn
+import nnlearn.nn.functional as F_nnlearn
 
 
 LOGITS_4D = np.array([
@@ -32,12 +32,12 @@ TARGET_3D = np.array([
 CLASS_WEIGHT = np.array([1.0, 2.0, 0.5], dtype=np.float64)
 
 
-def run_nlearn():
-    logits = nlearn.tensor(LOGITS_4D, requires_grad=True)
-    target = nlearn.tensor(TARGET_3D)
-    weight = nlearn.tensor(CLASS_WEIGHT)
+def run_nnlearn():
+    logits = nnlearn.tensor(LOGITS_4D, requires_grad=True)
+    target = nnlearn.tensor(TARGET_3D)
+    weight = nnlearn.tensor(CLASS_WEIGHT)
 
-    loss_none = F_nlearn.cross_entropy(
+    loss_none = F_nnlearn.cross_entropy(
         logits,
         target,
         weight=weight,
@@ -45,7 +45,7 @@ def run_nlearn():
         reduction="none",
         label_smoothing=0.2,
     )
-    loss_sum = F_nlearn.cross_entropy(
+    loss_sum = F_nnlearn.cross_entropy(
         logits,
         target,
         weight=weight,
@@ -53,7 +53,7 @@ def run_nlearn():
         reduction="sum",
         label_smoothing=0.2,
     )
-    loss_mean = nlearn_nn.CrossEntropyLoss(
+    loss_mean = nnlearn_nn.CrossEntropyLoss(
         weight=weight,
         ignore_index=-100,
         reduction="mean",
@@ -108,23 +108,23 @@ def run_pytorch():
 
 
 if __name__ == "__main__":
-    result_nlearn = run_nlearn()
+    result_nnlearn = run_nnlearn()
     result_pt = run_pytorch()
 
     loss_none_diff = np.max(np.abs(
-        result_nlearn["loss_none"] - result_pt["loss_none"],
+        result_nnlearn["loss_none"] - result_pt["loss_none"],
     ))
-    grad_diff = np.max(np.abs(result_nlearn["grad"] - result_pt["grad"]))
+    grad_diff = np.max(np.abs(result_nnlearn["grad"] - result_pt["grad"]))
 
-    print(f"nlearn loss_sum={result_nlearn['loss_sum']:.12f}")
+    print(f"nnlearn loss_sum={result_nnlearn['loss_sum']:.12f}")
     print(f"pytorch  loss_sum={result_pt['loss_sum']:.12f}")
-    print(f"nlearn loss_mean={result_nlearn['loss_mean']:.12f}")
+    print(f"nnlearn loss_mean={result_nnlearn['loss_mean']:.12f}")
     print(f"pytorch  loss_mean={result_pt['loss_mean']:.12f}")
     print(f"max loss_none diff={loss_none_diff:.12e}")
     print(f"max grad diff={grad_diff:.12e}")
 
-    assert result_nlearn["loss_none"].shape == TARGET_3D.shape
-    assert np.allclose(result_nlearn["loss_none"], result_pt["loss_none"])
-    assert np.allclose(result_nlearn["loss_sum"], result_pt["loss_sum"])
-    assert np.allclose(result_nlearn["loss_mean"], result_pt["loss_mean"])
-    assert np.allclose(result_nlearn["grad"], result_pt["grad"])
+    assert result_nnlearn["loss_none"].shape == TARGET_3D.shape
+    assert np.allclose(result_nnlearn["loss_none"], result_pt["loss_none"])
+    assert np.allclose(result_nnlearn["loss_sum"], result_pt["loss_sum"])
+    assert np.allclose(result_nnlearn["loss_mean"], result_pt["loss_mean"])
+    assert np.allclose(result_nnlearn["grad"], result_pt["grad"])

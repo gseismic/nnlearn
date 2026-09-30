@@ -1,5 +1,5 @@
-from nlearn.function import Function
-from nlearn import backend
+from nnlearn.function import Function
+from nnlearn import backend
 
 
 class GetItemGrad(Function):

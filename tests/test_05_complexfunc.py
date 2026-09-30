@@ -1,9 +1,9 @@
 import config
 import time
 import numpy as np
-import nlearn
-from nlearn import Tensor, allclose
-from nlearn import Square, Exp, Add, add, square
+import nnlearn
+from nnlearn import Tensor, allclose
+from nnlearn import Square, Exp, Add, add, square
 
 
 def test_complexfun_self():

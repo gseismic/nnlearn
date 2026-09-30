@@ -1,11 +1,11 @@
 import config
 import time
 import numpy as np
-import nlearn
-from nlearn import functional as F
-from nlearn import Tensor, allclose
-import nlearn.nn as nn
-from nlearn.optim import SGD
+import nnlearn
+from nnlearn import functional as F
+from nnlearn import Tensor, allclose
+import nnlearn.nn as nn
+from nnlearn.optim import SGD
 
 
 def test_nn_basic():
