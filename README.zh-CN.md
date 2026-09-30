@@ -1,10 +1,10 @@
-# nlearn
+# nlearn 使用教程
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-## Install
+## 安装
 
-Clone the repository, then install the package and its dependencies:
+克隆仓库并安装包及其依赖：
 
 ```bash
 git clone https://github.com/pai-studio/nlearn.git
@@ -12,9 +12,9 @@ cd nlearn
 python -m pip install .
 ```
 
-The examples below use the package from this checkout. They do not require PyTorch.
+下面的示例使用当前检出目录中的包，不需要安装 PyTorch。
 
-## Create tensors and run operations
+## 创建张量并进行运算
 
 ```python
 import nlearn as nl
@@ -25,11 +25,11 @@ y = nl.tensor([[5.0], [6.0]], dtype=nl.float32)
 print((x @ y).tolist())
 ```
 
-`nlearn.tensor` creates a tensor. Tensor operations such as matrix multiplication build a result you can use in later calculations.
+`nlearn.tensor` 用于创建张量。矩阵乘法等张量运算会生成结果，可继续用于后续计算。
 
-## Compute gradients
+## 计算梯度
 
-Set `requires_grad=True` on values you want gradients for, calculate a scalar loss, then call `backward()`:
+对需要计算梯度的值设置 `requires_grad=True`，计算标量损失后调用 `backward()`：
 
 ```python
 import nlearn as nl
@@ -43,11 +43,11 @@ loss.backward()
 print(x.grad.tolist())
 ```
 
-The gradient is available from `x.grad` after backpropagation.
+反向传播后，可以从 `x.grad` 读取梯度。
 
-## Train a small model
+## 训练一个小模型
 
-Use `nlearn.nn` to define a model and `nlearn.optim` to update its parameters:
+使用 `nlearn.nn` 定义模型，并使用 `nlearn.optim` 更新模型参数：
 
 ```python
 import nlearn as nl
@@ -77,9 +77,9 @@ with nl.no_grad():
 print(predictions.tolist())
 ```
 
-## Load data in batches
+## 按批次加载数据
 
-Wrap tensors in `TensorDataset` and iterate over them with `DataLoader`. This example uses the `features`, `targets`, `model`, `criterion`, and `optimizer` from the previous section:
+将张量放入 `TensorDataset`，再用 `DataLoader` 按批次遍历。示例使用上一节定义的 `features`、`targets`、`model`、`criterion` 和 `optimizer`：
 
 ```python
 from nlearn.utils.data import DataLoader, TensorDataset
@@ -97,9 +97,9 @@ for _ in range(20):
         optimizer.step()
 ```
 
-## Run the bundled tutorial
+## 运行仓库教程
 
-From the repository root, run:
+在仓库根目录运行：
 
 ```bash
 python examples/example38_beginner_tutorial.py
