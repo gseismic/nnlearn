@@ -9,10 +9,10 @@ Git 基线：`c448c68`
 ## 实施结果
 
 1. 新增顶层函数：
-   - `torch_1k.min(input)`
-   - `torch_1k.min(input, dim, keepdim=False)`
-   - `torch_1k.min(input, other)`
-   - `torch_1k.minimum(input, other)`
+   - `nlearn.min(input)`
+   - `nlearn.min(input, dim, keepdim=False)`
+   - `nlearn.min(input, other)`
+   - `nlearn.minimum(input, other)`
 2. 新增 Tensor 方法：
    - `Tensor.min(dim=None, keepdim=False)`
 3. 新增返回类型：
@@ -49,9 +49,9 @@ Git 基线：`c448c68`
 
 新增 `examples/example35_min_compare.py`：
 
-1. 对二维 score 张量执行 `torch_1k.min(x, dim=1)`。
-2. 对 score 与 cap 张量执行 `torch_1k.minimum(x, cap)`。
-3. 同进程对比 `torch_1k` 与 PyTorch 的 values、indices、elementwise 输出和梯度。
+1. 对二维 score 张量执行 `nlearn.min(x, dim=1)`。
+2. 对 score 与 cap 张量执行 `nlearn.minimum(x, cap)`。
+3. 同进程对比 `nlearn` 与 PyTorch 的 values、indices、elementwise 输出和梯度。
 
 ## 验证结果
 
@@ -62,7 +62,7 @@ pytest -q tests/test_41_min_api.py
 pytest -q tests/test_21_max_api.py tests/test_39_amax_api.py tests/test_40_amin_aminmax_api.py tests/test_41_min_api.py
 python examples/example35_min_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -71,7 +71,7 @@ python -m compileall -q torch_1k examples
 - max/amax/amin/aminmax/min 相关测试：`30 passed`
 - 新增示例：通过，输出和梯度均与 PyTorch 一致
 - 全量测试：`242 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 
@@ -81,4 +81,4 @@ python -m compileall -q torch_1k examples
 
 ## 复核结论
 
-本轮补齐了 `max` 对称的最小值 API。现在用户可以使用 PyTorch 风格的全局 `torch_1k.min(x)`、按维度 `torch_1k.min(x, dim=...)` 和 elementwise `torch_1k.minimum(x, y)`；分类、检索、数值范围检查和裁剪类代码里的常见最小值路径可以直接替换导入名运行。
+本轮补齐了 `max` 对称的最小值 API。现在用户可以使用 PyTorch 风格的全局 `nlearn.min(x)`、按维度 `nlearn.min(x, dim=...)` 和 elementwise `nlearn.minimum(x, y)`；分类、检索、数值范围检查和裁剪类代码里的常见最小值路径可以直接替换导入名运行。

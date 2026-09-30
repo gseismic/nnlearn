@@ -21,11 +21,11 @@ DataLoader(dataset, sampler=SubsetRandomSampler(indices), batch_size=...)
 DataLoader(dataset, batch_sampler=BatchSampler(sampler, batch_size, drop_last))
 ```
 
-4. `torch_1k.utils.data` 当前没有 `SequentialSampler` / `RandomSampler` / `BatchSampler` 等基础类。
+4. `nlearn.utils.data` 当前没有 `SequentialSampler` / `RandomSampler` / `BatchSampler` 等基础类。
 
 ## 实施步骤
 
-1. 新增 `torch_1k/utils/data/sampler.py`：
+1. 新增 `nlearn/utils/data/sampler.py`：
    - `Sampler`
    - `SequentialSampler`
    - `RandomSampler`
@@ -38,7 +38,7 @@ DataLoader(dataset, batch_sampler=BatchSampler(sampler, batch_size, drop_last))
    - `sampler` 与 `shuffle=True` 互斥。
    - `batch_sampler` 与 `batch_size/shuffle/sampler/drop_last` 互斥。
    - `__len__()` 返回 batch_sampler 长度。
-3. 更新 `torch_1k.utils.data.__init__` 导出 sampler 类。
+3. 更新 `nlearn.utils.data.__init__` 导出 sampler 类。
 4. 新增 `examples/example19_dataloader_sampler_compare.py`，覆盖 PyTorch import 切换路径。
 5. 新增 `tests/test_28_dataloader_sampler.py`，覆盖：
    - SequentialSampler 顺序 batch。

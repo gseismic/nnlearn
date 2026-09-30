@@ -7,7 +7,7 @@ import config
 import numpy as np
 import pytest
 import torch as pytorch
-import torch_1k as torch
+import nlearn as torch
 
 
 def test_comparison_ops_create_non_grad_bool_masks():

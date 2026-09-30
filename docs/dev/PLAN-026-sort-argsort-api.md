@@ -17,9 +17,9 @@ PLAN-024 已补齐 `topk`，但结果文档仍记录完整 `torch.sort` / `argso
 
 ## 目标
 
-1. 新增顶层 `torch_1k.sort(input, dim=-1, descending=False, stable=False)`。
+1. 新增顶层 `nlearn.sort(input, dim=-1, descending=False, stable=False)`。
 2. 新增 `Tensor.sort(dim=-1, descending=False, stable=False)`。
-3. 新增顶层 `torch_1k.argsort(input, dim=-1, descending=False, stable=False)`。
+3. 新增顶层 `nlearn.argsort(input, dim=-1, descending=False, stable=False)`。
 4. 新增 `Tensor.argsort(dim=-1, descending=False, stable=False)`。
 5. `sort` 返回 PyTorch 风格结果：
    - `values`
@@ -37,7 +37,7 @@ PLAN-024 已补齐 `topk`，但结果文档仍记录完整 `torch.sort` / `argso
 
 ## 实施步骤
 
-1. 在 `torch_1k/functional/numeric.py` 中实现：
+1. 在 `nlearn/functional/numeric.py` 中实现：
    - `SortResult`
    - `Sort(Function)`
    - `sort(...)`
@@ -55,7 +55,7 @@ PLAN-024 已补齐 `topk`，但结果文档仍记录完整 `torch.sort` / `argso
 4. 新增 PyTorch 兼容示例：
    - 用 `sort` 排序 logits 得到预测排名。
    - 用 `argsort` 复用排序索引。
-   - 对比 `torch_1k` 与 PyTorch 的 values、indices 和梯度。
+   - 对比 `nlearn` 与 PyTorch 的 values、indices 和梯度。
 5. 更新设计文档阶段记录。
 
 ## 非目标
@@ -68,8 +68,8 @@ PLAN-024 已补齐 `topk`，但结果文档仍记录完整 `torch.sort` / `argso
 ## 验收标准
 
 1. 新增 sort / argsort 测试通过。
-2. 新增 sort / argsort 示例在 `torch_1k` 与 PyTorch 两条路径下通过。
+2. 新增 sort / argsort 示例在 `nlearn` 与 PyTorch 两条路径下通过。
 3. PLAN-021 至 PLAN-026 新增测试集合通过。
 4. 全量测试不回归。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

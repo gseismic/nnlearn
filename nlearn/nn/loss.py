@@ -1,7 +1,7 @@
 import numpy as np
-from torch_1k.function import Function
-from torch_1k.tensor import Tensor
-from torch_1k import backend
+from nlearn.function import Function
+from nlearn.tensor import Tensor
+from nlearn import backend
 
 
 def _check_reduction(reduction):
@@ -15,7 +15,7 @@ def _check_reduction(reduction):
 def _sum_to_input_shape(grad, shape):
     if grad is None or grad.shape == shape:
         return grad
-    from torch_1k.functional.matrix import sum_to
+    from nlearn.functional.matrix import sum_to
 
     return sum_to(grad, shape)
 

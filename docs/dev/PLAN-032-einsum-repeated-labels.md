@@ -39,7 +39,7 @@ torch.einsum("ijj->i", x)  # 沿重复标签取对角后规约
 
 ## 实施步骤
 
-1. 改造 `torch_1k/functional/matrix.py`：
+1. 改造 `nlearn/functional/matrix.py`：
    - 解析阶段不再拒绝同一输入内部 repeated labels。
    - expansion 阶段校验同一输入中重复标签轴尺寸一致。
    - 为 backward 构造每个输入的 unique-label spec。
@@ -52,7 +52,7 @@ torch.einsum("ijj->i", x)  # 沿重复标签取对角后规约
    - 覆盖 CUDA 可选路径。
 3. 新增示例：
    - diagonal、trace、带 ellipsis 的 batch trace。
-   - 同进程对比 `torch_1k` 与 PyTorch。
+   - 同进程对比 `nlearn` 与 PyTorch。
 4. 更新 PLAN-023 / PLAN-025 / PLAN-029 结果文档中的过期 TODO。
 5. 更新设计路线图。
 
@@ -69,5 +69,5 @@ torch.einsum("ijj->i", x)  # 沿重复标签取对角后规约
 2. 既有 einsum、ellipsis、mask/scatter/nonzero 测试不回归。
 3. 新增示例与 PyTorch 对比通过。
 4. 全量测试通过。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

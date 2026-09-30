@@ -40,14 +40,14 @@ Git 基线：`a5d4d3b`
 
 每个用法都对比：
 
-- torch_1k 前向输出 vs PyTorch 前向输出。
-- torch_1k 每个输入梯度 vs PyTorch 每个输入梯度。
+- nlearn 前向输出 vs PyTorch 前向输出。
+- nlearn 每个输入梯度 vs PyTorch 每个输入梯度。
 
 ## 新增示例
 
 新增 `examples/example25_einsum_usage_compare.py`：
 
-1. 同时导入 `torch_1k` 和 PyTorch。
+1. 同时导入 `nlearn` 和 PyTorch。
 2. 对每个经典用法输出：
    - 中文名称。
    - equation。
@@ -66,7 +66,7 @@ Git 基线：`a5d4d3b`
 python examples/example25_einsum_usage_compare.py
 pytest -q tests/test_32_einsum_api.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py tests/test_33_topk_api.py
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 pytest -q
 ```
 
@@ -76,7 +76,7 @@ pytest -q
 - einsum 专项测试：`19 passed`
 - PLAN-021 至 PLAN-025 相关测试集合：`38 passed`
 - 全量测试：`168 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

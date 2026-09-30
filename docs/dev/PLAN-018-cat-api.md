@@ -14,7 +14,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 1. PLAN-015 结果中记录仍未实现 `cat`、`split`、`chunk`、`repeat` 等更大的 shape API。
 2. 多分支模型、特征融合、跳连结构中常用 `torch.cat` 拼接张量。
-3. 当前 `torch_1k` 只有 `stack`，但 `stack` 会新增维度，不能替代 `cat`。
+3. 当前 `nlearn` 只有 `stack`，但 `stack` 会新增维度，不能替代 `cat`。
 4. 缺少拼接操作的反向传播切片回填。
 
 ## 实施步骤

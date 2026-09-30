@@ -1,5 +1,5 @@
 from .optimizer import Optimizer
-from torch_1k import backend
+from nlearn import backend
 
 
 class MomentumSGD(Optimizer):

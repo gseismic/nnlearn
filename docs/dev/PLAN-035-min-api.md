@@ -15,10 +15,10 @@ PLAN-012 已补齐 `torch.max` / `Tensor.max` 的常用路径，PLAN-033 和 PLA
 ## 目标
 
 1. 新增顶层函数：
-   - `torch_1k.min(input)`
-   - `torch_1k.min(input, dim, keepdim=False)`
-   - `torch_1k.min(input, other)`
-   - `torch_1k.minimum(input, other)`
+   - `nlearn.min(input)`
+   - `nlearn.min(input, dim, keepdim=False)`
+   - `nlearn.min(input, other)`
+   - `nlearn.minimum(input, other)`
 2. 新增 Tensor 方法：
    - `Tensor.min(dim=None, keepdim=False)`
 3. 支持：
@@ -36,13 +36,13 @@ PLAN-012 已补齐 `torch.max` / `Tensor.max` 的常用路径，PLAN-033 和 PLA
 
 ## 实施步骤
 
-1. 改造 `torch_1k/functional/numeric.py`：
+1. 改造 `nlearn/functional/numeric.py`：
    - 新增 `Minimum(Function)`。
    - 新增 `Min(Function)`。
    - 新增 `_min_indices(...)`。
    - 新增 `minimum(...)` 与 `min(...)`。
    - 新增 `MinResult(values, indices)` 返回类型。
-2. 改造 `torch_1k/tensor.py`：
+2. 改造 `nlearn/tensor.py`：
    - 新增 `Tensor.min(...)` 方法。
 3. 新增测试：
    - 全局 `min` 重复最小值梯度与 PyTorch 对比。
@@ -54,7 +54,7 @@ PLAN-012 已补齐 `torch.max` / `Tensor.max` 的常用路径，PLAN-033 和 PLA
 4. 新增示例：
    - 对 logits / score 张量取每行最小值及索引。
    - 对两个张量做 elementwise min。
-   - 同进程对比 `torch_1k` 与 PyTorch 的输出和梯度。
+   - 同进程对比 `nlearn` 与 PyTorch 的输出和梯度。
 5. 更新 PLAN-034 结果文档和设计路线图。
 
 ## 非目标
@@ -70,5 +70,5 @@ PLAN-012 已补齐 `torch.max` / `Tensor.max` 的常用路径，PLAN-033 和 PLA
 2. 既有 max / amin / amax 相关测试不回归。
 3. 新增示例与 PyTorch 对比通过。
 4. 全量测试通过。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

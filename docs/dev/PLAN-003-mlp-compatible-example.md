@@ -4,7 +4,7 @@
 
 ## 目标
 
-先用 PyTorch 风格写一个 MLP 训练示例，再将导入替换为 `torch_1k`，要求示例无需改训练主体即可直接跑通。
+先用 PyTorch 风格写一个 MLP 训练示例，再将导入替换为 `nlearn`，要求示例无需改训练主体即可直接跑通。
 
 ## 实施步骤
 
@@ -17,12 +17,12 @@
    - `Tensor.mean()`、`Tensor.float()`、`Tensor.long()`、`Tensor.__eq__`
 3. 修正反向传播和创建函数中的后端细节，使 CPU/CUDA 路径保持一致。
 4. 增加回归测试，覆盖 MLP 训练、交叉熵、Sequential/ReLU。
-5. 运行 PyTorch 路径、`torch_1k` 路径和全量测试。
+5. 运行 PyTorch 路径、`nlearn` 路径和全量测试。
 6. 生成结果文档并提交推送。
 
 ## 验收标准
 
-1. `python examples/example4_mlp_train_compare.py` 可直接跑通 `torch_1k` 路径。
-2. `USE_TORCH_1K=0 python examples/example4_mlp_train_compare.py` 可直接跑通 PyTorch 路径。
+1. `python examples/example4_mlp_train_compare.py` 可直接跑通 `nlearn` 路径。
+2. `USE_NLEARN=0 python examples/example4_mlp_train_compare.py` 可直接跑通 PyTorch 路径。
 3. MLP 训练后 XOR 分类准确率达到 1.0。
 4. 全量测试通过。

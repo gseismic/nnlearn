@@ -1,16 +1,16 @@
-# torch_1k 核心原理说明
+# nlearn 核心原理说明
 
 日期：2026-06-24
 
 源码基准 Git 记录：`main@93e9acc0bd7538fdf653db747ff6d66546acb515`
 
-说明：本文档基于上述 Git 记录中的 `torch_1k` 源码阅读生成；文档自身为该工作区后续新增内容。
+说明：本文档基于上述 Git 记录中的 `nlearn` 源码阅读生成；文档自身为该工作区后续新增内容。
 
-历史说明：本文描述的是上述源码快照的结构、目标和当时边界。文中的“约 1000 行”及后续演进建议不代表当前项目规模或承诺；当前项目定位、支持范围和维护标准见[项目目的与范围](torch-20260929-project-purpose.md)。
+历史说明：本文描述的是上述源码快照的结构、目标和当时边界。文中的“约 1000 行”及教学型定位不代表当前项目规模或承诺；当前项目定位、支持范围和维护标准见[项目目的与范围](nlearn-20260930-project-purpose.md)。
 
 ## 1. 项目定位（源码基准版本）
 
-`torch_1k` 的目标是在约 1000 行核心代码内复刻 PyTorch 最核心的一条工作流：
+`nlearn` 的目标是在约 1000 行核心代码内复刻 PyTorch 最核心的一条工作流：
 
 1. 用 `Tensor` 保存数值和梯度。
 2. 用可组合算子执行前向计算。
@@ -24,16 +24,16 @@
 
 本说明基于当前仓库中的以下文件：
 
-- `torch_1k/tensor.py`：`Tensor` 数据结构、反向传播调度、操作符注册。
-- `torch_1k/function.py`：所有可微算子的基类协议。
-- `torch_1k/functional/numeric.py`：逐元素数值算子。
-- `torch_1k/functional/matrix.py`：形状变换、矩阵乘法、广播、求和、线性层底层函数。
-- `torch_1k/functional/get_item.py`、`torch_1k/functional/pad.py`：切片和切片梯度回填。
-- `torch_1k/nn/*.py`：`Module`、`Parameter`、`Linear`、`MSELoss`。
-- `torch_1k/optim/*.py`：优化器基类和 `SGD`。
-- `torch_1k/settings.py`：全局运行开关。
-- `torch_1k/misc.py`、`torch_1k/utils/*.py`：PyTorch-like 辅助 API 和 NumPy 工具。
-- `torch_1k/utils/data/*.py`：最小数据集与数据加载器雏形。
+- `nlearn/tensor.py`：`Tensor` 数据结构、反向传播调度、操作符注册。
+- `nlearn/function.py`：所有可微算子的基类协议。
+- `nlearn/functional/numeric.py`：逐元素数值算子。
+- `nlearn/functional/matrix.py`：形状变换、矩阵乘法、广播、求和、线性层底层函数。
+- `nlearn/functional/get_item.py`、`nlearn/functional/pad.py`：切片和切片梯度回填。
+- `nlearn/nn/*.py`：`Module`、`Parameter`、`Linear`、`MSELoss`。
+- `nlearn/optim/*.py`：优化器基类和 `SGD`。
+- `nlearn/settings.py`：全局运行开关。
+- `nlearn/misc.py`、`nlearn/utils/*.py`：PyTorch-like 辅助 API 和 NumPy 工具。
+- `nlearn/utils/data/*.py`：最小数据集与数据加载器雏形。
 
 ## 3. 总体架构
 
@@ -43,7 +43,7 @@
 用户代码
   |
   v
-Tensor API / torch_1k 顶层 API
+Tensor API / nlearn 顶层 API
   |
   v
 Function 子类：Add、Mul、MatMul、Sum、MSELoss ...
@@ -226,7 +226,7 @@ b.shape == (1, 3)
 y = x + b
 ```
 
-反向传播时，`b` 的梯度不能保持 `(2, 3)`，必须沿被广播的维度求和回 `(1, 3)`。`torch_1k` 用两组函数处理这个问题：
+反向传播时，`b` 的梯度不能保持 `(2, 3)`，必须沿被广播的维度求和回 `(1, 3)`。`nlearn` 用两组函数处理这个问题：
 
 - `broadcast_to(x, shape)`：前向扩展形状，反向调用 `sum_to`。
 - `sum_to(x, shape)`：前向缩减到目标形状，反向调用 `broadcast_to`。
@@ -256,7 +256,7 @@ if self.x1_shape != self.x2_shape:
 这里的 `Linear` 权重形状与 PyTorch 略有不同：
 
 - PyTorch 的 `nn.Linear(in, out)` 通常保存 `weight.shape == (out, in)`，前向使用 `x @ weight.T + bias`。
-- `torch_1k.nn.Linear` 保存 `weight.shape == (in, out)`，前向直接使用 `x @ weight + bias`。
+- `nlearn.nn.Linear` 保存 `weight.shape == (in, out)`，前向直接使用 `x @ weight + bias`。
 
 这种设计少写一次转置，更适合教学实现，但不是完全等价的 PyTorch 参数布局。
 
@@ -291,7 +291,7 @@ y.backward()
 - `Config.enable_backprop`：是否在前向时记录计算图。
 - `Config.train`：是否处于训练模式。
 
-`torch_1k.no_grad()` 是 `using_config('enable_backprop', False)` 的上下文管理器。它和 PyTorch 的语义相似：上下文内的前向计算不会建立反向图。
+`nlearn.no_grad()` 是 `using_config('enable_backprop', False)` 的上下文管理器。它和 PyTorch 的语义相似：上下文内的前向计算不会建立反向图。
 
 `Module.train()` 会设置：
 
@@ -425,21 +425,21 @@ for epoch in range(epochs):
 
 ## 19. 与 PyTorch 核心概念的对应关系
 
-| PyTorch 概念 | torch_1k 对应实现 | 当前覆盖程度 |
+| PyTorch 概念 | nlearn 对应实现 | 当前覆盖程度 |
 | --- | --- | --- |
-| `torch.Tensor` | `torch_1k.tensor.Tensor` | 支持 NumPy 数据、梯度、部分运算符 |
-| `autograd.Function` | `torch_1k.function.Function` | 支持前向、反向、动态图连接 |
+| `torch.Tensor` | `nlearn.tensor.Tensor` | 支持 NumPy 数据、梯度、部分运算符 |
+| `autograd.Function` | `nlearn.function.Function` | 支持前向、反向、动态图连接 |
 | 动态计算图 | `Tensor.creator` + `Function.inputs/outputs` | 支持基础动态图 |
 | `backward()` | `Tensor.backward()` | 支持梯度累加、拓扑顺序、高阶导数 |
-| `torch.no_grad()` | `torch_1k.no_grad()` | 支持关闭建图 |
-| `nn.Module` | `torch_1k.nn.Module` | 支持参数收集和嵌套模块 |
-| `nn.Parameter` | `torch_1k.nn.Parameter` | 继承 Tensor，默认 `requires_grad=True` |
-| `nn.Linear` | `torch_1k.nn.Linear` | 支持线性层，权重布局不同 |
-| `nn.Dropout` | `torch_1k.nn.Dropout` | 支持训练态随机置零和 eval 恒等映射 |
-| `nn.Softmax` / `nn.LogSoftmax` | `torch_1k.nn.Softmax` / `torch_1k.nn.LogSoftmax` | 支持指定 dim 的分类概率和对数概率 |
-| `nn.MSELoss` | `torch_1k.nn.MSELoss` | 支持 input 梯度 |
-| `optim.SGD` | `torch_1k.optim.SGD` | 支持基础 SGD |
-| `DataLoader` | `torch_1k.utils.data.DataLoader` | 支持迭代、batch、shuffle、drop_last 和默认 Tensor collation |
+| `torch.no_grad()` | `nlearn.no_grad()` | 支持关闭建图 |
+| `nn.Module` | `nlearn.nn.Module` | 支持参数收集和嵌套模块 |
+| `nn.Parameter` | `nlearn.nn.Parameter` | 继承 Tensor，默认 `requires_grad=True` |
+| `nn.Linear` | `nlearn.nn.Linear` | 支持线性层，权重布局不同 |
+| `nn.Dropout` | `nlearn.nn.Dropout` | 支持训练态随机置零和 eval 恒等映射 |
+| `nn.Softmax` / `nn.LogSoftmax` | `nlearn.nn.Softmax` / `nlearn.nn.LogSoftmax` | 支持指定 dim 的分类概率和对数概率 |
+| `nn.MSELoss` | `nlearn.nn.MSELoss` | 支持 input 梯度 |
+| `optim.SGD` | `nlearn.optim.SGD` | 支持基础 SGD |
+| `DataLoader` | `nlearn.utils.data.DataLoader` | 支持迭代、batch、shuffle、drop_last 和默认 Tensor collation |
 
 ## 20. 关键设计取舍
 
@@ -488,7 +488,7 @@ for epoch in range(epochs):
 
 ## 23. 总结
 
-`torch_1k` 的核心价值不在于覆盖 PyTorch 的完整 API，而在于用极少代码展示深度学习框架最本质的机制：
+`nlearn` 的核心价值不在于覆盖 PyTorch 的完整 API，而在于用极少代码展示深度学习框架最本质的机制：
 
 - `Tensor` 保存数据、梯度和产生它的算子。
 - `Function` 把前向计算、输出包装和计算图连接统一起来。

@@ -38,7 +38,7 @@ Git 基线：`81ffeb1`
 
 新增 `examples/example29_einsum_ellipsis_compare.py`：
 
-1. 在同一进程中分别运行 `torch_1k` 与 PyTorch。
+1. 在同一进程中分别运行 `nlearn` 与 PyTorch。
 2. 覆盖泛化 batch matmul、ellipsis broadcast、attention score 和 ellipsis 规约。
 3. 对比每个 case 的输出和所有输入梯度。
 
@@ -53,7 +53,7 @@ python examples/example29_einsum_ellipsis_compare.py
 python examples/example25_einsum_usage_compare.py
 python examples/example28_cross_entropy_advanced_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -64,7 +64,7 @@ python -m compileall -q torch_1k examples
 - 经典 einsum 示例：通过，既有用法无回归
 - 高级交叉熵示例：通过，确认上一轮改动仍正常
 - 全量测试：`197 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

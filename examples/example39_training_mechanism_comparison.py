@@ -1,4 +1,4 @@
-"""用相同输入和参数比较 torch_1k 与 PyTorch 的单步训练过程。"""
+"""用相同输入和参数比较 nlearn 与 PyTorch 的单步训练过程。"""
 
 import sys
 from pathlib import Path
@@ -64,10 +64,10 @@ def main():
             "https://pytorch.org/get-started/locally/ 安装 PyTorch。"
         ) from error
 
-    import torch_1k
-    import torch_1k.optim as torch_1k_optim
+    import nlearn
+    import nlearn.optim as nlearn_optim
 
-    small = _run_once(torch_1k, torch_1k_optim)
+    small = _run_once(nlearn, nlearn_optim)
     reference = _run_once(torch, torch_optim)
 
     print("相同初始条件下的一步线性回归训练")
@@ -79,7 +79,7 @@ def main():
         error = float(np.max(np.abs(small[key] - reference[key])))
         max_error = max(max_error, error)
         print(f"{key}:")
-        print(f"  torch_1k = {small[key]}")
+        print(f"  nlearn = {small[key]}")
         print(f"  PyTorch  = {reference[key]}")
         print(f"  最大绝对误差 = {error:.8g}")
 

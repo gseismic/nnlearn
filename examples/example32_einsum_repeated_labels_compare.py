@@ -8,7 +8,7 @@ import torch as pytorch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import torch_1k
+import nlearn
 
 
 def _array(shape, offset=0.0):
@@ -17,13 +17,13 @@ def _array(shape, offset=0.0):
 
 
 def _run_case(equation, arrays):
-    ours = [torch_1k.tensor(array, requires_grad=True) for array in arrays]
+    ours = [nlearn.tensor(array, requires_grad=True) for array in arrays]
     refs = [
         pytorch.tensor(array, dtype=pytorch.float64, requires_grad=True)
         for array in arrays
     ]
 
-    ours_out = torch_1k.einsum(equation, *ours)
+    ours_out = nlearn.einsum(equation, *ours)
     refs_out = pytorch.einsum(equation, *refs)
     ours_out.sum().backward()
     refs_out.sum().backward()

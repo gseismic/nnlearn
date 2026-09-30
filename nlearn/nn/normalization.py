@@ -1,7 +1,7 @@
 import numpy as np
-from torch_1k.function import Function
-from torch_1k.tensor import Tensor, ensure_tensor
-from torch_1k import backend
+from nlearn.function import Function
+from nlearn.tensor import Tensor, ensure_tensor
+from nlearn import backend
 from .module import Module
 from .parameter import Parameter
 

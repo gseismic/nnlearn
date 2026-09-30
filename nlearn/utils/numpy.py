@@ -1,4 +1,4 @@
-from torch_1k import backend
+from nlearn import backend
 
 def ensure_ndarray(data):
     return backend.ensure_array(data)

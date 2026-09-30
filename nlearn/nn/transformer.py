@@ -3,7 +3,7 @@ from .module import Module
 from .linear import Linear
 from .activation import ReLU
 from .normalization import LayerNorm
-from torch_1k import functional as F
+from nlearn import functional as F
 
 
 class MultiheadAttention(Module):

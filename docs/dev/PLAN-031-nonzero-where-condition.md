@@ -26,11 +26,11 @@ torch.nonzero(condition, as_tuple=True)
 
 ## 目标
 
-1. 新增 `torch_1k.nonzero(input, as_tuple=False)`：
+1. 新增 `nlearn.nonzero(input, as_tuple=False)`：
    - 默认返回二维坐标 Tensor，shape 为 `(z, input.ndim)`。
    - `as_tuple=True` 返回每个维度一个 1D index Tensor。
    - 返回 Tensor 均不可微。
-2. 扩展 `torch_1k.where(...)`：
+2. 扩展 `nlearn.where(...)`：
    - 保留三参数 `where(condition, input, other)` 的可微分流语义。
    - 新增单参数 `where(condition)`，返回 `nonzero(condition, as_tuple=True)`。
    - 如果只传 `input` 或只传 `other`，明确报错。
@@ -41,10 +41,10 @@ torch.nonzero(condition, as_tuple=True)
 
 ## 实施步骤
 
-1. 改造 `torch_1k/functional/numeric.py`：
+1. 改造 `nlearn/functional/numeric.py`：
    - 新增 `nonzero(...)` 函数。
    - 扩展 `where(...)` 函数签名。
-2. 改造 `torch_1k/tensor.py`：
+2. 改造 `nlearn/tensor.py`：
    - 增加 `nonzero(...)` 方法。
 3. 新增测试：
    - `nonzero(as_tuple=False)` 与 PyTorch 对比。
@@ -56,7 +56,7 @@ torch.nonzero(condition, as_tuple=True)
 4. 新增示例：
    - 从 mask 取有效坐标。
    - 用 `where(condition)` 得到 tuple index。
-   - 同进程对比 `torch_1k` 与 PyTorch。
+   - 同进程对比 `nlearn` 与 PyTorch。
 5. 更新 PLAN-027 结果文档和设计路线图。
 
 ## 非目标
@@ -71,5 +71,5 @@ torch.nonzero(condition, as_tuple=True)
 2. 既有 mask/index/scatter 测试不回归。
 3. 新增示例与 PyTorch 对比通过。
 4. 全量测试通过。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

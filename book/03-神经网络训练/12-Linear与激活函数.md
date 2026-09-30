@@ -38,4 +38,4 @@ python 'book/代码/03-神经网络训练/12-Linear与激活函数.py'
 
 ## 对应到仓库
 
-仓库的 `torch_1k/nn/linear.py` 和 `torch_1k/nn/activation.py` 提供对应模块；其中算子实现位于 `torch_1k/functional/` 与 `torch_1k/nn/functional.py`。
+仓库的 `nlearn/nn/linear.py` 和 `nlearn/nn/activation.py` 提供对应模块；其中算子实现位于 `nlearn/functional/` 与 `nlearn/nn/functional.py`。

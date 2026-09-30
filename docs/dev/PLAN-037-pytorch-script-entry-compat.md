@@ -6,7 +6,7 @@ Git 基线：`ba43885`
 
 ## 背景
 
-PLAN-036 已建立训练脚本替换兼容基线，证明当前核心训练链路可以用同一训练主体在 `torch_1k` 与 PyTorch 下运行。下一类高价值缺口不是单个数学函数，而是真实 PyTorch 脚本启动阶段常见的入口层写法：
+PLAN-036 已建立训练脚本替换兼容基线，证明当前核心训练链路可以用同一训练主体在 `nlearn` 与 PyTorch 下运行。下一类高价值缺口不是单个数学函数，而是真实 PyTorch 脚本启动阶段常见的入口层写法：
 
 1. `torch.device(...)`。
 2. `tensor.to(device=..., dtype=...)` 和 `model.to(device=..., dtype=...)`。
@@ -19,7 +19,7 @@ PLAN-036 已建立训练脚本替换兼容基线，证明当前核心训练链�
 
 ## 目标
 
-1. 新增 `torch_1k.device`，支持常见 `torch.device("cuda" if ... else "cpu")` 写法。
+1. 新增 `nlearn.device`，支持常见 `torch.device("cuda" if ... else "cpu")` 写法。
 2. 扩展 Tensor / Module 迁移接口：
    - `Tensor.to(device)`
    - `Tensor.to(dtype)`
@@ -46,10 +46,10 @@ PLAN-036 已建立训练脚本替换兼容基线，证明当前核心训练链�
    - 使用 `ModuleList` 和 `Identity` 构建模型。
    - 使用 `children()` / `modules()` 统计模块。
    - 使用 `optimizer.zero_grad(set_to_none=True)`。
-   - 同一文件支持 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一文件支持 `USE_NLEARN=0` 切换到 PyTorch。
 2. 新增 `tests/test_43_pytorch_script_entry_compat.py`：
    - 验证新增入口 API。
-   - 运行默认 `torch_1k` 示例。
+   - 运行默认 `nlearn` 示例。
    - 子进程运行 PyTorch 替换路径；无 PyTorch 时跳过。
 3. 改造实现：
    - `backend.py` 增加 `device` 类型。
@@ -68,10 +68,10 @@ PLAN-036 已建立训练脚本替换兼容基线，证明当前核心训练链�
 
 ## 验收标准
 
-1. 新增入口兼容示例在 `torch_1k` 路径通过。
+1. 新增入口兼容示例在 `nlearn` 路径通过。
 2. 新增入口兼容示例在 PyTorch 路径通过，或未安装 PyTorch 时测试明确跳过。
 3. 新增测试通过。
 4. PLAN-036 训练基线不回归。
 5. 全量测试通过。
-6. `python -m compileall -q torch_1k examples` 通过。
+6. `python -m compileall -q nlearn examples` 通过。
 7. OUTCOME 记录实现范围、验证结果、结果 Git 记录和未完成事项。

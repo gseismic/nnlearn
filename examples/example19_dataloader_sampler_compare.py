@@ -8,11 +8,11 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-USE_TORCH_1K = os.getenv("USE_TORCH_1K", "1") != "0"
+USE_NLEARN = os.getenv("USE_NLEARN", "1") != "0"
 
-if USE_TORCH_1K:
-    import torch_1k as torch
-    from torch_1k.utils.data import (
+if USE_NLEARN:
+    import nlearn as torch
+    from nlearn.utils.data import (
         BatchSampler, DataLoader, SequentialSampler, TensorDataset,
     )
 else:

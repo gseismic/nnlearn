@@ -5,10 +5,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 import numpy as np
-import torch_1k as torch
-import torch_1k.nn as nn
-import torch_1k.optim as optim
-from torch_1k import Tensor
+import nlearn as torch
+import nlearn.nn as nn
+import nlearn.optim as optim
+from nlearn import Tensor
 
 
 def test_common_optimizers_step():

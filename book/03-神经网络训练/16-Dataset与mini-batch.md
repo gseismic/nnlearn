@@ -28,4 +28,4 @@ python 'book/代码/03-神经网络训练/16-Dataset与mini-batch.py'
 
 ## 对应到仓库
 
-仓库的 `torch_1k/utils/data/` 将 Dataset、Sampler、BatchSampler 和 DataLoader 分开。本篇先用 NumPy 索引集中展示核心流程。
+仓库的 `nlearn/utils/data/` 将 Dataset、Sampler、BatchSampler 和 DataLoader 分开。本篇先用 NumPy 索引集中展示核心流程。

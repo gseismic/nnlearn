@@ -6,11 +6,11 @@ Git 基线：`df6f5ca93991914fff15e3abf66c3be9a11a2389`
 
 ## 目标
 
-补齐 PyTorch 常见 `max` API，支持分类推理和普通张量规约代码中的 `x.max()`、`x.max(dim=...)`、`torch.max(x, dim=...)` 和 `torch.max(x, y)`。示例继续保持只通过导入名切换 `torch_1k` 与 PyTorch。
+补齐 PyTorch 常见 `max` API，支持分类推理和普通张量规约代码中的 `x.max()`、`x.max(dim=...)`、`torch.max(x, dim=...)` 和 `torch.max(x, y)`。示例继续保持只通过导入名切换 `nlearn` 与 PyTorch。
 
 ## 当前缺口
 
-1. `torch_1k` 只有 `argmax`，没有 `torch.max`。
+1. `nlearn` 只有 `argmax`，没有 `torch.max`。
 2. `Tensor` 缺少 `x.max()` 和 `x.max(dim=...)` 方法。
 3. `x.max(dim=...)` 需要返回 PyTorch 风格的 `values` 和 `indices`。
 4. 设计文档仍把 `max` 记录为后续规约 API。
@@ -39,7 +39,7 @@ Git 基线：`df6f5ca93991914fff15e3abf66c3be9a11a2389`
 2. `x.max(dim=1)` / `torch.max(x, dim=1)` 返回可解包、带 `.values` / `.indices` 的结果。
 3. `values.sum().backward()` 能把梯度传回最大值位置。
 4. `torch.max(x, y)` 支持 elementwise max 和反向传播。
-5. 新增示例在 `torch_1k` 与 PyTorch 下均通过。
+5. 新增示例在 `nlearn` 与 PyTorch 下均通过。
 6. 全量测试通过。
 
 ## TODO 记录

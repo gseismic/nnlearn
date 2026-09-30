@@ -19,7 +19,7 @@ Git 基线：`a5d4d3b`
 
 ## 目标
 
-1. 新增顶层 `torch_1k.topk(input, k, dim=None, largest=True, sorted=True)`。
+1. 新增顶层 `nlearn.topk(input, k, dim=None, largest=True, sorted=True)`。
 2. 新增 `Tensor.topk(k, dim=None, largest=True, sorted=True)`。
 3. 返回 PyTorch 风格结果：
    - `values`
@@ -36,7 +36,7 @@ Git 基线：`a5d4d3b`
 
 ## 实施步骤
 
-1. 在 `torch_1k/functional/numeric.py` 中实现：
+1. 在 `nlearn/functional/numeric.py` 中实现：
    - `TopKResult`
    - `TopK(Function)`
    - `topk(...)`
@@ -50,7 +50,7 @@ Git 基线：`a5d4d3b`
    - 可选 CUDA。
 4. 新增 PyTorch 兼容示例：
    - 用 top-k 计算分类预测结果。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 5. 更新设计文档阶段记录。
 
 ## 非目标
@@ -63,8 +63,8 @@ Git 基线：`a5d4d3b`
 ## 验收标准
 
 1. 新增 topk 测试通过。
-2. 新增 topk 示例在 `torch_1k` 与 PyTorch 两条路径下通过。
+2. 新增 topk 示例在 `nlearn` 与 PyTorch 两条路径下通过。
 3. PLAN-021 至 PLAN-024 新增测试集合通过。
 4. 全量测试不回归。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

@@ -45,7 +45,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 9. 新增 `examples/example17_optimizer_param_groups_compare.py`：
    - 覆盖不同参数组不同学习率。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 10. 更新设计文档，记录已有优化器已补齐多参数组支持。
 
 ## 新增测试
@@ -67,17 +67,17 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 ```bash
 pytest -q tests/test_26_optimizer_param_groups.py
 python examples/example17_optimizer_param_groups_compare.py
-USE_TORCH_1K=0 python examples/example17_optimizer_param_groups_compare.py
+USE_NLEARN=0 python examples/example17_optimizer_param_groups_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 optimizer param group 测试：`7 passed`
-- optimizer param group 双后端示例：`torch_1k` 与 PyTorch 路径均通过
+- optimizer param group 双后端示例：`nlearn` 与 PyTorch 路径均通过
 - 全量测试：`112 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

@@ -6,7 +6,7 @@ Git 基线：`c239444653d32363c70bcd78ea3f86753d93e5d7`
 
 ## 目标
 
-补齐 PyTorch 风格的 `requires_grad` 语义，让公开创建函数默认不追踪输入数据梯度，只有显式 `requires_grad=True` 或 `nn.Parameter` 才参与反向传播。训练示例应继续只通过导入名切换在 `torch_1k` 与 PyTorch 下运行。
+补齐 PyTorch 风格的 `requires_grad` 语义，让公开创建函数默认不追踪输入数据梯度，只有显式 `requires_grad=True` 或 `nn.Parameter` 才参与反向传播。训练示例应继续只通过导入名切换在 `nlearn` 与 PyTorch 下运行。
 
 ## 当前缺口
 

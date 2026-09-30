@@ -8,7 +8,7 @@ import torch as pytorch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import torch_1k
+import nlearn
 
 
 def run():
@@ -18,10 +18,10 @@ def run():
     ])
     mask_data = scores_data > 0
 
-    ours_scores = torch_1k.tensor(scores_data)
+    ours_scores = nlearn.tensor(scores_data)
     ours_mask = ours_scores > 0
-    ours_coords = torch_1k.nonzero(ours_mask)
-    ours_rows, ours_cols = torch_1k.where(ours_mask)
+    ours_coords = nlearn.nonzero(ours_mask)
+    ours_rows, ours_cols = nlearn.where(ours_mask)
     ours_numeric_coords = ours_scores.nonzero()
 
     ref_scores = pytorch.tensor(scores_data, dtype=pytorch.float64)

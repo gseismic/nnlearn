@@ -8,7 +8,7 @@ import torch as pytorch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import torch_1k
+import nlearn
 
 
 def run():
@@ -23,8 +23,8 @@ def run():
         ],
     ], dtype=np.float64)
 
-    ours = torch_1k.tensor(data, requires_grad=True)
-    ours_out = torch_1k.amax(ours, dim=(2, 3), keepdim=True)
+    ours = nlearn.tensor(data, requires_grad=True)
+    ours_out = nlearn.amax(ours, dim=(2, 3), keepdim=True)
     ours_out.sum().backward()
 
     refs = pytorch.tensor(data, dtype=pytorch.float64, requires_grad=True)

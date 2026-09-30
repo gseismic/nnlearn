@@ -1,9 +1,9 @@
 import config
 import time
 import numpy as np
-import torch_1k
-from torch_1k import functional as F
-from torch_1k import Tensor, allclose
+import nlearn
+from nlearn import functional as F
+from nlearn import Tensor, allclose
 
 def test_highorder_demo():
     def fun(x):

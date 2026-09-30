@@ -1,12 +1,12 @@
 import config
 import time
 import numpy as np
-import torch_1k
-from torch_1k import Tensor, allclose
-from torch_1k import Square, Exp, Add, add, square
+import nlearn
+from nlearn import Tensor, allclose
+from nlearn import Square, Exp, Add, add, square
 
-torch_1k.log_settings['func_log_enabled'] = False
-torch_1k.log_settings['tensor_log_enabled'] = False
+nlearn.log_settings['func_log_enabled'] = False
+nlearn.log_settings['tensor_log_enabled'] = False
 
 
 def test_autograd_samevar():
@@ -56,14 +56,14 @@ def test_autograd_memory():
     # run2
     # t1 - t0 = 1.8910927772521973
     #t3 - t2 = 1.118412971496582
-    torch_1k.runtime_settings['remove_recursive_ref'] = False
+    nlearn.runtime_settings['remove_recursive_ref'] = False
     t0 = time.time()
     fun()
     t1 = time.time()
     print(f'remove_recursive_ref=False: {t1 - t0 = }')
 
     # 更快
-    torch_1k.runtime_settings['remove_recursive_ref'] = True
+    nlearn.runtime_settings['remove_recursive_ref'] = True
     t2 = time.time()
     fun()
     t3 = time.time()
@@ -71,12 +71,12 @@ def test_autograd_memory():
 
     # assert t3 - t2 < t1 - t0
     # restore
-    torch_1k.runtime_settings['remove_recursive_ref'] = True
+    nlearn.runtime_settings['remove_recursive_ref'] = True
     #mem_usage = memory_usage(func)
     #print(f"Memory usage: {mem_usage}")
 
 def test_autograd_no_grad():
-    torch_1k.runtime_settings['remove_recursive_ref'] = True
+    nlearn.runtime_settings['remove_recursive_ref'] = True
     def fun():
         for i in range(3):
             x = Tensor(np.random.randn(100000))
@@ -91,7 +91,7 @@ def test_autograd_no_grad():
     print(f'non-no_grad: {t1 - t0 = }')
 
     t0 = time.time()
-    with torch_1k.no_grad():
+    with nlearn.no_grad():
         fun()
     t1 = time.time()
     print(f'no_grad: {t1 - t0 = }')

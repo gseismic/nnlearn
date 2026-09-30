@@ -1,10 +1,10 @@
 import config
 import numpy as np
-import torch_1k
-from torch_1k import Tensor, allclose
-from torch_1k import Square, Exp
-torch_1k.log_settings['func_log_enabled'] = True
-torch_1k.log_settings['tensor_log_enabled'] = True
+import nlearn
+from nlearn import Tensor, allclose
+from nlearn import Square, Exp
+nlearn.log_settings['func_log_enabled'] = True
+nlearn.log_settings['tensor_log_enabled'] = True
 
 
 def test_tensor_basic():

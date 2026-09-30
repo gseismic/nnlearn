@@ -9,8 +9,8 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "examples"))
 
-import torch_1k as torch
-import torch_1k.nn as nn
+import nlearn as torch
+import nlearn.nn as nn
 import example38_beginner_tutorial as tutorial
 
 
@@ -66,9 +66,9 @@ def test_tanh_sigmoid_modules():
     assert x.grad.shape == x.shape
 
 
-def test_torch_1k_beginner_tutorial_runs():
+def test_nlearn_beginner_tutorial_runs():
     result = tutorial.run_all()
-    assert result["backend"] == "torch_1k"
+    assert result["backend"] == "nlearn"
     assert result["regression_loss"] < 0.03
     assert result["accuracy"] == 1.0
 
@@ -77,7 +77,7 @@ def test_pytorch_beginner_tutorial_replacement_path_runs():
     pytest.importorskip("torch")
 
     env = os.environ.copy()
-    env["USE_TORCH_1K"] = "0"
+    env["USE_NLEARN"] = "0"
     script = Path(__file__).resolve().parents[1] / "examples" / (
         "example38_beginner_tutorial.py"
     )

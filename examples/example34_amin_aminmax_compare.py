@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 import torch as pytorch
-import torch_1k
+import nlearn
 
 
 def main():
@@ -20,10 +20,10 @@ def main():
         ],
     ], dtype=np.float64)
 
-    ours = torch_1k.tensor(data, requires_grad=True)
+    ours = nlearn.tensor(data, requires_grad=True)
     refs = pytorch.tensor(data, dtype=pytorch.float64, requires_grad=True)
 
-    ours_min = torch_1k.amin(ours, dim=(2, 3), keepdim=True)
+    ours_min = nlearn.amin(ours, dim=(2, 3), keepdim=True)
     refs_min = pytorch.amin(refs, dim=(2, 3), keepdim=True)
     ours_min.sum().backward()
     refs_min.sum().backward()
@@ -31,7 +31,7 @@ def main():
     assert np.allclose(ours_min.numpy(), refs_min.detach().numpy())
     assert np.allclose(ours.grad.numpy(), refs.grad.detach().numpy())
 
-    ours_range = torch_1k.aminmax(ours.detach(), dim=1, keepdim=True)
+    ours_range = nlearn.aminmax(ours.detach(), dim=1, keepdim=True)
     refs_range = pytorch.aminmax(refs.detach(), dim=1, keepdim=True)
 
     assert np.allclose(ours_range.min.numpy(), refs_range.min.numpy())

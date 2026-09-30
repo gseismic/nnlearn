@@ -32,7 +32,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - 训练态使用 batch mean/var 并更新 running stats。
    - 推理态使用 running stats。
 3. BatchNorm 前向尽量使用现有 Tensor 算子组合，复用 autograd，而不是手写复杂 backward。
-4. 在 `torch_1k.nn.__init__` 导出 `BatchNorm1d` 和 `BatchNorm2d`。
+4. 在 `nlearn.nn.__init__` 导出 `BatchNorm1d` 和 `BatchNorm2d`。
 5. 新增 `examples/example16_batchnorm_compare.py`，覆盖 train/eval 与 PyTorch import 切换路径。
 6. 新增 `tests/test_25_batchnorm.py`，覆盖：
    - 训练态输出归一化。

@@ -23,7 +23,7 @@ torch.einsum("ij->i", x)
 
 ## 目标
 
-1. 新增顶层 `torch_1k.einsum(equation, *operands)`。
+1. 新增顶层 `nlearn.einsum(equation, *operands)`。
 2. 支持显式输出，例如 `"ij,jk->ik"`。
 3. 支持隐式输出，例如 `"ij,jk"`。
 4. 支持多个输入。
@@ -37,7 +37,7 @@ torch.einsum("ij->i", x)
 
 ## 实施步骤
 
-1. 在 `torch_1k/functional/matrix.py` 中实现：
+1. 在 `nlearn/functional/matrix.py` 中实现：
    - equation 解析和校验。
    - `Einsum(Function)`。
    - `einsum(equation, *operands)` 顶层函数。
@@ -52,7 +52,7 @@ torch.einsum("ij->i", x)
    - 不支持语义的报错。
    - 可选 CUDA。
 4. 增加 PyTorch 兼容示例：
-   - 同一文件通过 `USE_TORCH_1K=0/1` 切换实现。
+   - 同一文件通过 `USE_NLEARN=0/1` 切换实现。
 5. 更新设计文档阶段记录。
 
 ## 非目标
@@ -65,8 +65,8 @@ torch.einsum("ij->i", x)
 ## 验收标准
 
 1. 新增 einsum 测试通过。
-2. 新增 einsum 示例在 `torch_1k` 与 PyTorch 两条路径下通过。
+2. 新增 einsum 示例在 `nlearn` 与 PyTorch 两条路径下通过。
 3. PLAN-021、PLAN-022 新增测试仍通过。
 4. 全量测试不回归。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

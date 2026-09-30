@@ -30,4 +30,4 @@ python 'book/代码/03-神经网络训练/17-训练MLP并保存模型.py'
 
 ## 对应到仓库
 
-仓库的 MLP、MNIST CNN 和 Transformer 示例展示更丰富的训练场景。本篇对应 `torch_1k/nn/`、`torch_1k/optim/`、`torch_1k/utils/data/` 以及模块状态保存接口。
+仓库的 MLP、MNIST CNN 和 Transformer 示例展示更丰富的训练场景。本篇对应 `nlearn/nn/`、`nlearn/optim/`、`nlearn/utils/data/` 以及模块状态保存接口。

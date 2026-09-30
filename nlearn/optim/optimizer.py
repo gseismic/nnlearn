@@ -1,5 +1,5 @@
-from torch_1k import backend
-from torch_1k.tensor import Tensor
+from nlearn import backend
+from nlearn.tensor import Tensor
 
 
 class Optimizer:

@@ -47,4 +47,4 @@ python 'book/代码/02-Tensor与自动微分/06-NumPy数组与Tensor.py'
 
 ## 对应到仓库
 
-仓库中的 [Tensor 定义](../../torch_1k/tensor.py)同样把数据交给后端管理，并提供 `shape`、`ndim`、`dtype` 等信息。本篇先直接使用 NumPy，暂不引入 CPU/CUDA 后端抽象。
+仓库中的 [Tensor 定义](../../nlearn/tensor.py)同样把数据交给后端管理，并提供 `shape`、`ndim`、`dtype` 等信息。本篇先直接使用 NumPy，暂不引入 CPU/CUDA 后端抽象。

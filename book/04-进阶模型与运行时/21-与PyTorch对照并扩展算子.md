@@ -54,4 +54,4 @@ python 'book/代码/04-进阶模型与运行时/21-与PyTorch对照并扩展算�
 
 ## 对应到仓库
 
-仓库中的 [`examples/example39_training_mechanism_comparison.py`](../../examples/example39_training_mechanism_comparison.py) 对照 `torch_1k` 和 PyTorch 的完整一步训练；[`torch_1k/functional/numeric.py`](../../torch_1k/functional/numeric.py) 与本书的 `Function`/`Tensor` 分层可用于比较算子组织方式。
+仓库中的 [`examples/example39_training_mechanism_comparison.py`](../../examples/example39_training_mechanism_comparison.py) 对照 `nlearn` 和 PyTorch 的完整一步训练；[`nlearn/functional/numeric.py`](../../nlearn/functional/numeric.py) 与本书的 `Function`/`Tensor` 分层可用于比较算子组织方式。

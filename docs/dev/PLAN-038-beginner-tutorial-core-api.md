@@ -32,44 +32,44 @@ Git 基线：`6b1c9bb`
    - `nn.Module` MLP 分类。
    - `DataLoader` mini-batch 训练。
 2. 新增/扩展基础 API：
-   - `torch_1k.eye`
-   - `torch_1k.as_tensor`
-   - `torch_1k.from_numpy`
-   - `torch_1k.rand_like`
-   - `torch_1k.randn_like`
+   - `nlearn.eye`
+   - `nlearn.as_tensor`
+   - `nlearn.from_numpy`
+   - `nlearn.rand_like`
+   - `nlearn.randn_like`
    - `Tensor.clone`
    - `Tensor.tolist`
    - `Tensor.matmul`
    - `Tensor.mm`
    - `Tensor.__len__`
-   - `torch_1k.sum(input, dim=None, keepdim=False)`
-   - `torch_1k.mean(input, dim=None, keepdim=False)`
+   - `nlearn.sum(input, dim=None, keepdim=False)`
+   - `nlearn.mean(input, dim=None, keepdim=False)`
    - `Tensor.sum(..., keepdim=...)`
    - `Tensor.mean(..., keepdim=...)`
    - `nn.Tanh`
    - `nn.Sigmoid`
 3. 新增测试：
    - 与 PyTorch 对比基础 wrapper 前向和关键梯度。
-   - 运行教程例子默认 `torch_1k` 路径。
-   - 运行 `USE_TORCH_1K=0` PyTorch 替换路径。
+   - 运行教程例子默认 `nlearn` 路径。
+   - 运行 `USE_NLEARN=0` PyTorch 替换路径。
 4. 更新路线图和结果文档。
 
 ## 实施步骤
 
-1. 改造 `torch_1k/functional/matrix.py`：
+1. 改造 `nlearn/functional/matrix.py`：
    - 新增可微 `clone` Function。
-2. 改造 `torch_1k/tensor.py`：
+2. 改造 `nlearn/tensor.py`：
    - 扩展 `sum` / `mean` 的 `keepdim` 别名。
    - 新增 `clone`、`tolist`、`matmul`、`mm`、`__len__`。
    - 新增 `eye`、`as_tensor`、`from_numpy`、`rand_like`、`randn_like`。
-3. 改造 `torch_1k/misc.py`：
+3. 改造 `nlearn/misc.py`：
    - 新增顶层 `sum` / `mean` PyTorch 风格 wrapper。
    - 为 `linspace` / `normal` 补常见 `dtype` 参数。
-4. 改造 `torch_1k/nn/activation.py` 和导出：
+4. 改造 `nlearn/nn/activation.py` 和导出：
    - 新增 `Tanh`、`Sigmoid`。
 5. 新增 `examples/example38_beginner_tutorial.py`。
 6. 新增 `tests/test_44_beginner_tutorial_core_api.py`。
-7. 更新 `docs/design/torch-3k-20260624-core-cuda-roadmap.md` 和 OUTCOME。
+7. 更新 `docs/design/nlearn-20260624-core-cuda-roadmap.md` 和 OUTCOME。
 
 ## 非目标
 
@@ -82,9 +82,9 @@ Git 基线：`6b1c9bb`
 ## 验收标准
 
 1. 新增基础 API 测试通过。
-2. 新增教程例子在 `torch_1k` 路径通过。
+2. 新增教程例子在 `nlearn` 路径通过。
 3. 新增教程例子在 PyTorch 路径通过，或未安装 PyTorch 时测试明确跳过。
 4. PLAN-036 / PLAN-037 基线不回归。
 5. 全量测试通过。
-6. `python -m compileall -q torch_1k examples` 通过。
+6. `python -m compileall -q nlearn examples` 通过。
 7. OUTCOME 记录实现范围、验证结果、结果 Git 记录和未完成事项。

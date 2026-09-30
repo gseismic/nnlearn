@@ -11,11 +11,11 @@ Git 基线：`a5d4d3b`
 ## 实施结果
 
 1. 新增 `Tensor.repeat(*repeats)`。
-2. 新增顶层 `torch_1k.repeat(input, *repeats)`。
+2. 新增顶层 `nlearn.repeat(input, *repeats)`。
 3. 新增 `Tensor.split(split_size_or_sections, dim=0)`。
-4. 新增顶层 `torch_1k.split(input, split_size_or_sections, dim=0)`。
+4. 新增顶层 `nlearn.split(input, split_size_or_sections, dim=0)`。
 5. 新增 `Tensor.chunk(chunks, dim=0)`。
-6. 新增顶层 `torch_1k.chunk(input, chunks, dim=0)`。
+6. 新增顶层 `nlearn.chunk(input, chunks, dim=0)`。
 7. `repeat` 使用 `Repeat(Function)` 实现：
    - 前向通过后端 `tile` 执行。
    - 反向把梯度 reshape 为“重复维度 + 原维度”后按重复维度求和。
@@ -27,7 +27,7 @@ Git 基线：`a5d4d3b`
    - 支持负维度。
 9. 新增 `examples/example22_shape_split_chunk_repeat_compare.py`：
    - 覆盖 `repeat`、`chunk`、`split` 的组合使用。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 10. 更新设计文档，记录 PLAN-022 已补齐这组 shape API。
 
 ## 新增测试
@@ -48,13 +48,13 @@ Git 基线：`a5d4d3b`
 ```bash
 pytest -q tests/test_31_shape_split_chunk_repeat.py
 python examples/example22_shape_split_chunk_repeat_compare.py
-USE_TORCH_1K=0 python examples/example22_shape_split_chunk_repeat_compare.py
+USE_NLEARN=0 python examples/example22_shape_split_chunk_repeat_compare.py
 ```
 
 结果：
 
 - 新增 shape API 测试：`6 passed`
-- 新增 shape API 示例：`torch_1k` 与 PyTorch 路径均通过
+- 新增 shape API 示例：`nlearn` 与 PyTorch 路径均通过
 
 完整回归将在 PLAN-023 `einsum` 实施完成后一并运行。
 

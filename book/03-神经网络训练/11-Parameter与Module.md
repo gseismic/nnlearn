@@ -35,7 +35,7 @@ python 'book/代码/03-神经网络训练/11-Parameter与Module.py'
 
 如果靠手写列表管理参数，新增一层时容易漏掉它的权重或偏置。模块注册让参数列表由模型结构自动生成，也为梯度清理、优化器更新和保存模型状态提供统一入口。
 
-本篇的 `state_dict` 只保存参数，不支持 buffer、共享参数别名或任意对象状态。后续模型不需要这些高级能力；仓库的 `torch_1k.nn.Module` 还支持 buffer 等更完整的路径。
+本篇的 `state_dict` 只保存参数，不支持 buffer、共享参数别名或任意对象状态。后续模型不需要这些高级能力；仓库的 `nlearn.nn.Module` 还支持 buffer 等更完整的路径。
 
 ## 练习
 
@@ -45,4 +45,4 @@ python 'book/代码/03-神经网络训练/11-Parameter与Module.py'
 
 ## 对应到仓库
 
-参数和模块职责分别对应 `torch_1k/nn/parameter.py` 与 `torch_1k/nn/module.py`。本篇实现保留这两个核心概念，不覆盖完整 PyTorch 模块注册规则。
+参数和模块职责分别对应 `nlearn/nn/parameter.py` 与 `nlearn/nn/module.py`。本篇实现保留这两个核心概念，不覆盖完整 PyTorch 模块注册规则。

@@ -6,7 +6,7 @@
 
 PyTorch 已是成熟的深度学习框架。本项目若持续以“补齐 PyTorch API”为主线，很难解释用户为什么还要使用它。仓库已有反向自动微分实现、CPU/CUDA 后端、训练示例和与 PyTorch 对照的测试，适合明确定位为一套可运行、可阅读、可对照的训练机制教材。
 
-现有公开说明仍称“1000 行实现”，而 2026-06-24 路线图把整体控制在 3000 行作为建议；截至本计划日期，`torch_1k` Python 文件按 `wc -l` 统计为 4716 行。旧说法与当前项目规模不符，也容易让读者把有限 API 误认为通用替代品。
+现有公开说明仍称“1000 行实现”，而 2026-06-24 路线图把整体控制在 3000 行作为建议；截至本计划日期，`nlearn` Python 文件按 `wc -l` 统计为 4716 行。旧说法与当前项目规模不符，也容易让读者把有限 API 误认为通用替代品。
 
 ## 目标
 
@@ -18,12 +18,12 @@ PyTorch 已是成熟的深度学习框架。本项目若持续以“补齐 PyTor
 
 ## 实施范围
 
-1. 新增 `docs/design/torch-20260929-project-purpose.md`：记录项目目标、用户、价值、范围边界和后续判断标准。
-2. 新增 `examples/example39_training_mechanism_comparison.py`：同时调用 `torch_1k` 与 PyTorch，载入完全相同的数据和初始参数，完成一次线性模型前向、MSE、反向传播和 SGD 更新，打印两边的数值与最大绝对误差。
+1. 新增 `docs/design/nlearn-20260930-project-purpose.md`：记录项目目标、用户、价值、范围边界和后续判断标准。
+2. 新增 `examples/example39_training_mechanism_comparison.py`：同时调用 `nlearn` 与 PyTorch，载入完全相同的数据和初始参数，完成一次线性模型前向、MSE、反向传播和 SGD 更新，打印两边的数值与最大绝对误差。
 3. 新增 `docs/tutorial/torch-training-mechanism-20260929.md`：给出运行方法、逐步讲解、代码映射和边界说明。
 4. 重写 `README.md` 为中文项目入口，说明定位、适合人群、核心能力、教程入口、安装和兼容限制。
-5. 更新 `docs/design/torch-3k-20260624-core-cuda-roadmap.md`：标注历史行数目标已经过时，记录新的项目目的和本轮教程。
-6. 在 `docs/design/torch-1k-20260624-principles.md` 标明该文基于历史源码快照，避免旧行数和边界被理解为当前承诺。
+5. 更新 `docs/design/nlearn-20260624-core-cuda-roadmap.md`：标注历史行数目标已经过时，记录新的项目目的和本轮教程。
+6. 在 `docs/design/nlearn-20260624-principles.md` 标明该文基于历史源码快照，避免旧行数和边界被理解为当前承诺。
 7. 新增本计划对应的结果文档；提交说明逐项列出计划与结果文件。
 
 ## 验收标准

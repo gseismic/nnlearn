@@ -7,13 +7,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-USE_TORCH_1K = os.getenv("USE_TORCH_1K", "1") != "0"
+USE_NLEARN = os.getenv("USE_NLEARN", "1") != "0"
 
-if USE_TORCH_1K:
-    import torch_1k as torch
-    import torch_1k.nn as nn
-    import torch_1k.optim as optim
-    from torch_1k.utils.data import DataLoader, TensorDataset
+if USE_NLEARN:
+    import nlearn as torch
+    import nlearn.nn as nn
+    import nlearn.optim as optim
+    from nlearn.utils.data import DataLoader, TensorDataset
 else:
     import torch
     import torch.nn as nn

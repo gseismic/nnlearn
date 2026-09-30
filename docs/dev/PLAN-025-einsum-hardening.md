@@ -13,9 +13,9 @@ Git 基线：`a5d4d3b`
 复现：
 
 ```python
-x = torch_1k.tensor([[1.0], [2.0]], requires_grad=True)
-y = torch_1k.tensor([3.0, 4.0, 5.0], requires_grad=True)
-z = torch_1k.einsum("ij,j->ij", x, y)
+x = nlearn.tensor([[1.0], [2.0]], requires_grad=True)
+y = nlearn.tensor([3.0, 4.0, 5.0], requires_grad=True)
+z = nlearn.einsum("ij,j->ij", x, y)
 z.sum().backward()
 ```
 
@@ -50,7 +50,7 @@ PyTorch 中 `x.grad` 应为 `[[12.0], [12.0]]`，当前实现会尝试把 `(2, 3
 
 ## 实施步骤
 
-1. 在 `torch_1k/functional/matrix.py` 中新增 einsum 梯度对齐辅助函数：
+1. 在 `nlearn/functional/matrix.py` 中新增 einsum 梯度对齐辅助函数：
    - 先按输入 spec 补齐缺失 label 的单例维。
    - 对前向广播维求和还原。
    - 对私有规约维 broadcast 回输入形状。
@@ -58,7 +58,7 @@ PyTorch 中 `x.grad` 应为 `[[12.0], [12.0]]`，当前实现会尝试把 `(2, 3
    - 增加广播反向回归测试。
    - 增加 PyTorch 经典用法参数化对比测试。
 3. 新增 `examples/example25_einsum_usage_compare.py`：
-   - 使用同一代码在 `torch_1k` 和 PyTorch 两条路径运行。
+   - 使用同一代码在 `nlearn` 和 PyTorch 两条路径运行。
    - 覆盖矩阵乘、batch matmul、attention score/context、广播门控、规约。
 4. 更新 PLAN-023 结果文档，记录本轮 hardening 关联。
 5. 更新设计文档阶段记录。
@@ -66,8 +66,8 @@ PyTorch 中 `x.grad` 应为 `[[12.0], [12.0]]`，当前实现会尝试把 `(2, 3
 ## 验收标准
 
 1. 新增 einsum hardening 测试通过。
-2. 新增详细示例在 `torch_1k` 与 PyTorch 两条路径下通过。
+2. 新增详细示例在 `nlearn` 与 PyTorch 两条路径下通过。
 3. PLAN-021 至 PLAN-025 新增测试集合通过。
 4. 全量测试不回归。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录修复点、对比范围和验证结果。

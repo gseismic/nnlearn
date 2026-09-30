@@ -7,9 +7,9 @@ import config
 import numpy as np
 import pytest
 import torch as pytorch
-import torch_1k as torch
-import torch_1k.nn as nn
-import torch_1k.nn.functional as F
+import nlearn as torch
+import nlearn.nn as nn
+import nlearn.nn.functional as F
 
 
 LOGITS_4D = np.array([

@@ -16,13 +16,13 @@ Git 基线：`a5d4d3b`
    - 支持 `"none"`、`"mean"`、`"sum"`。
    - 修正原先 `MSELoss.__init__` 调用基类方式不规范的问题。
    - 反向传播现在同时支持 input 和 target 的梯度，并处理广播形状还原。
-3. `torch_1k.nn.functional` 新增函数式入口：
+3. `nlearn.nn.functional` 新增函数式入口：
    - `cross_entropy(input, target, reduction="mean")`
    - `mse_loss(input, target, reduction="mean")`
 4. 新增 `examples/example21_loss_functional_reduction_compare.py`：
    - 覆盖 `F.cross_entropy`、`nn.CrossEntropyLoss(reduction=...)`。
    - 覆盖 `F.mse_loss`、`nn.MSELoss(reduction=...)`。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 5. 更新设计文档，记录 PLAN-021 已补齐损失函数 reduction 与函数式 API。
 
 ## 新增测试
@@ -44,22 +44,22 @@ Git 基线：`a5d4d3b`
 ```bash
 pytest -q tests/test_30_loss_functional_reduction.py
 python examples/example21_loss_functional_reduction_compare.py
-USE_TORCH_1K=0 python examples/example21_loss_functional_reduction_compare.py
+USE_NLEARN=0 python examples/example21_loss_functional_reduction_compare.py
 pytest -q tests/test_12_mlp.py tests/test_13_cnn_transformer.py tests/test_17_optimizer_state.py
 python examples/example4_mlp_train_compare.py
-USE_TORCH_1K=0 python examples/example4_mlp_train_compare.py
+USE_NLEARN=0 python examples/example4_mlp_train_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增损失函数测试：`6 passed`
-- 新增损失函数示例：`torch_1k` 与 PyTorch 路径均通过
+- 新增损失函数示例：`nlearn` 与 PyTorch 路径均通过
 - 旧训练链路相关测试：`8 passed`
-- XOR MLP 示例：`torch_1k` 与 PyTorch 路径均通过
+- XOR MLP 示例：`nlearn` 与 PyTorch 路径均通过
 - 全量测试：`136 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

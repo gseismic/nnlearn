@@ -10,14 +10,14 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
 
 ## 当前缺口
 
-1. 底层 `torch_1k.softmax` 已存在，但缺少 Tensor 方法形式。
-2. `torch_1k.nn.functional` 缺少 `softmax` 和 `log_softmax`。
-3. `torch_1k.nn` 缺少 `Softmax` 和 `LogSoftmax` 模块。
+1. 底层 `nlearn.softmax` 已存在，但缺少 Tensor 方法形式。
+2. `nlearn.nn.functional` 缺少 `softmax` 和 `log_softmax`。
+3. `nlearn.nn` 缺少 `Softmax` 和 `LogSoftmax` 模块。
 4. 设计文档仍记录 `Softmax` / `LogSoftmax` 暂未独立暴露。
 
 ## 实施步骤
 
-1. 在 `torch_1k.functional.numeric` 中新增稳定 `log_softmax` Function。
+1. 在 `nlearn.functional.numeric` 中新增稳定 `log_softmax` Function。
 2. 给 `Tensor` 增加 `softmax(dim)` 和 `log_softmax(dim)` 方法。
 3. 在 `nn.functional` 中导出 `softmax` 和 `log_softmax`。
 4. 新增 `nn.Softmax(dim=None)` 和 `nn.LogSoftmax(dim=None)` 模块。
@@ -32,5 +32,5 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
 2. `x.log_softmax(dim=1)`、`nn.functional.log_softmax(x, dim=1)` 和 `nn.LogSoftmax(dim=1)` 可运行。
 3. `exp(log_softmax(x))` 与 `softmax(x)` 数值一致。
 4. `log_softmax` 反向传播可把梯度传回输入。
-5. 新增示例在 `torch_1k` 与 PyTorch 下均通过。
+5. 新增示例在 `nlearn` 与 PyTorch 下均通过。
 6. 全量测试通过。

@@ -47,4 +47,4 @@
 
 1. 不实现完整 PyTorch 模块注册、参数组、优化器状态、并行加载或数据变换生态。
 2. 不实现 BatchNorm、Dropout、卷积或 Transformer；这些留在进阶篇。
-3. 不修改现有 `torch_1k` 包。
+3. 不修改现有 `nlearn` 包。

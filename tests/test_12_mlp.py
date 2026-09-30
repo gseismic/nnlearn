@@ -4,9 +4,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
-import torch_1k as torch
-import torch_1k.nn as nn
-import torch_1k.optim as optim
+import nlearn as torch
+import nlearn.nn as nn
+import nlearn.optim as optim
 
 
 class XORMLP(nn.Module):

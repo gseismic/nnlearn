@@ -32,13 +32,13 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - 使用 `running_mean` / `running_var`。
    - 不再使用当前 batch stats。
 6. BatchNorm 前向主要复用现有 Tensor 算子组合，反向传播由 autograd 自动处理。
-7. `torch_1k.nn.__init__` 已导出：
+7. `nlearn.nn.__init__` 已导出：
    - `BatchNorm1d`
    - `BatchNorm2d`
 8. 新增 `examples/example16_batchnorm_compare.py`：
    - 覆盖 `train()` / `eval()` 行为差异。
    - 覆盖 affine 参数梯度。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 9. 更新设计文档：
    - 记录 BatchNorm 已补齐。
    - 记录 `Module` buffer 已支持 checkpoint 和设备迁移。
@@ -64,17 +64,17 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 ```bash
 pytest -q tests/test_25_batchnorm.py
 python examples/example16_batchnorm_compare.py
-USE_TORCH_1K=0 python examples/example16_batchnorm_compare.py
+USE_NLEARN=0 python examples/example16_batchnorm_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 BatchNorm 测试：`8 passed`
-- BatchNorm 双后端示例：`torch_1k` 与 PyTorch 路径均通过
+- BatchNorm 双后端示例：`nlearn` 与 PyTorch 路径均通过
 - 全量测试：`105 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

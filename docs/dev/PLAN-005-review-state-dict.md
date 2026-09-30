@@ -11,7 +11,7 @@
 1. `model.eval()` 当前会关闭 `Config.enable_backprop`，这与 PyTorch 语义不一致。PyTorch 的 `eval()` 只切换训练/推理模式，不关闭 autograd。
 2. `Module.train()` / `eval()` 没有递归设置子模块状态，也不支持 `train(False)`。
 3. `Module` 用 `set` 保存参数和子模块名，遍历顺序不稳定，不利于可重复的参数遍历和状态保存。
-4. `torch_1k.float32`、`torch_1k.float64`、`torch_1k.long` 已在 `tensor.py` 定义但未从顶层导出。
+4. `nlearn.float32`、`nlearn.float64`、`nlearn.long` 已在 `tensor.py` 定义但未从顶层导出。
 
 ## 下一个高价值目标
 
@@ -30,7 +30,7 @@
 2. 让 `Module` 递归维护 `training` 状态，并支持 `train(mode=True)`。
 3. 将模块内部参数名容器改为稳定顺序。
 4. 实现 `named_parameters()`、`state_dict()`、`load_state_dict()`。
-5. 实现顶层 `torch_1k.save()` / `torch_1k.load()`。
+5. 实现顶层 `nlearn.save()` / `nlearn.load()`。
 6. 补充回归测试。
 7. 运行示例、全量测试和编译检查。
 
@@ -39,5 +39,5 @@
 1. `model.eval()` 后仍可正常反向传播。
 2. `model.train(False)` / `model.eval()` 递归设置子模块 `training=False`。
 3. `state_dict/load_state_dict` 可恢复模型参数并得到一致输出。
-4. `torch_1k.save/load` 可保存和加载 state dict。
+4. `nlearn.save/load` 可保存和加载 state dict。
 5. 全量测试通过。

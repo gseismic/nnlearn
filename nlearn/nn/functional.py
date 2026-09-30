@@ -1,9 +1,9 @@
-from torch_1k import backend
-from torch_1k.tensor import Tensor
-from torch_1k.functional.numeric import (
+from nlearn import backend
+from nlearn.tensor import Tensor
+from nlearn.functional.numeric import (
     ReLU, log_softmax, relu, sigmoid, softmax, tanh,
 )
-from torch_1k.nn.loss import CrossEntropyLoss, MSELoss
+from nlearn.nn.loss import CrossEntropyLoss, MSELoss
 
 
 def dropout(input, p=0.5, training=True, inplace=False):

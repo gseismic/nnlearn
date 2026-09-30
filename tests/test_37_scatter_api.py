@@ -7,7 +7,7 @@ import config
 import numpy as np
 import pytest
 import torch as pytorch
-import torch_1k as torch
+import nlearn as torch
 
 
 def _assert_scatter_matches_pytorch(op_name, input_data, index_data, src_data,

@@ -28,7 +28,7 @@ CUDA 路径需要安装与本机 CUDA 版本匹配的 CuPy，并具备可用的 
 
 ## 数据搬运与自动微分
 
-本篇的 `DeviceArray` 只演示数组存储、后端分发、同设备运算和显式 `.to()`，它没有自动微分。若要让设备转换保留计算图，反向传播时必须把梯度送回源设备。仓库中的 [`Tensor.to()`](../../torch_1k/tensor.py) 通过 [`CopyTo`](../../torch_1k/functional/device.py) 记录这条转换边；底层 NumPy/CuPy 选择可见于 [`backend.py`](../../torch_1k/backend.py)。
+本篇的 `DeviceArray` 只演示数组存储、后端分发、同设备运算和显式 `.to()`，它没有自动微分。若要让设备转换保留计算图，反向传播时必须把梯度送回源设备。仓库中的 [`Tensor.to()`](../../nlearn/tensor.py) 通过 [`CopyTo`](../../nlearn/functional/device.py) 记录这条转换边；底层 NumPy/CuPy 选择可见于 [`backend.py`](../../nlearn/backend.py)。
 
 即使底层都使用数组，也要留意数据类型、同步时机和数据传输；支持多 GPU 时还要明确设备索引。CUDA 运算可能异步执行；计时前后需要正确同步，否则测到的可能只是提交任务的时间。
 
@@ -40,4 +40,4 @@ CUDA 路径需要安装与本机 CUDA 版本匹配的 CuPy，并具备可用的 
 
 ## 对应到仓库
 
-仓库的 [`torch_1k/backend.py`](../../torch_1k/backend.py) 负责识别 NumPy/CuPy 数组、设备转换和 CUDA 可用性；[`torch_1k/cuda.py`](../../torch_1k/cuda.py) 提供公开查询入口。本章的封装仅保留最小数据路径，不覆盖完整张量后端。
+仓库的 [`nlearn/backend.py`](../../nlearn/backend.py) 负责识别 NumPy/CuPy 数组、设备转换和 CUDA 可用性；[`nlearn/cuda.py`](../../nlearn/cuda.py) 提供公开查询入口。本章的封装仅保留最小数据路径，不覆盖完整张量后端。

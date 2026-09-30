@@ -2,7 +2,7 @@
 
 日期：2026-09-29
 
-本教程用一个线性模型，逐步比较 `torch_1k` 和 PyTorch 的前向值、损失、梯度与一次 SGD 参数更新。两边使用完全相同的输入、目标、初始权重、初始偏置和学习率。
+本教程用一个线性模型，逐步比较 `nlearn` 和 PyTorch 的前向值、损失、梯度与一次 SGD 参数更新。两边使用完全相同的输入、目标、初始权重、初始偏置和学习率。
 
 ## 适合谁
 
@@ -10,7 +10,7 @@
 
 ## 准备与运行
 
-`torch_1k` 依赖 NumPy 和 Loguru。PyTorch 只用作对照实现，需要单独安装：<https://pytorch.org/get-started/locally/>。
+`nlearn` 依赖 NumPy 和 Loguru。PyTorch 只用作对照实现，需要单独安装：<https://pytorch.org/get-started/locally/>。
 
 在仓库根目录运行：
 
@@ -71,7 +71,7 @@ prediction = inputs @ weight + bias
 loss = ((prediction - targets) ** 2).mean()
 ```
 
-在 `torch_1k` 中，运算会创建 `Function` 节点，并通过输出 Tensor 的 `creator` 指回产生它的节点。`loss.backward()` 从损失开始反向遍历这些节点，逐项应用链式法则，把梯度累加到权重和偏置。可以从 [`tensor.py`](../../torch_1k/tensor.py) 的 `Tensor.backward()` 和 [`function.py`](../../torch_1k/function.py) 的 `Function` 协议继续阅读。
+在 `nlearn` 中，运算会创建 `Function` 节点，并通过输出 Tensor 的 `creator` 指回产生它的节点。`loss.backward()` 从损失开始反向遍历这些节点，逐项应用链式法则，把梯度累加到权重和偏置。可以从 [`tensor.py`](../../nlearn/tensor.py) 的 `Tensor.backward()` 和 [`function.py`](../../nlearn/function.py) 的 `Function` 协议继续阅读。
 
 然后，两边都使用 SGD 做一次更新：
 
@@ -96,4 +96,4 @@ optimizer.step()
 
 ## 项目边界
 
-`torch_1k` 用于学习和检查小型训练机制。它只实现一部分 PyTorch 风格 API，不提供完整兼容性或生产性能保证。项目提供基于 CuPy 的可选 CUDA 路径；CUDA 实际可用性取决于本机的 CuPy、驱动和设备环境。
+`nlearn` 用于学习和检查小型训练机制。它只实现一部分 PyTorch 风格 API，不提供完整兼容性或生产性能保证。项目提供基于 CuPy 的可选 CUDA 路径；CUDA 实际可用性取决于本机的 CuPy、驱动和设备环境。

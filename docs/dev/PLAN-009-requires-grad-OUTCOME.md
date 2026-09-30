@@ -17,7 +17,7 @@ Git 基线：`c239444653d32363c70bcd78ea3f86753d93e5d7`
 7. `backward()` 只给 `requires_grad=True` 的输入累积梯度；`torch.no_grad()` 会阻止显式 requires_grad 输入建图。
 8. `to()`、`detach()`、`float()`、`long()`、`argmax()`、比较、state dict 和 optimizer state 保存路径已按 PyTorch 语义传播或断开 `requires_grad`。
 9. `torch.unsqueeze()` 对 Tensor 输入改为基于 `reshape`，显式需要梯度的输入不会丢计算图。
-10. 新增 `examples/example9_requires_grad_compare.py`，同一代码可在 `torch_1k` 与 PyTorch 下运行。
+10. 新增 `examples/example9_requires_grad_compare.py`，同一代码可在 `nlearn` 与 PyTorch 下运行。
 11. 更新 README 和设计文档，记录 PLAN-009 后的 autograd 建图条件和剩余边界。
 
 ## 测试调整
@@ -47,22 +47,22 @@ Git 基线：`c239444653d32363c70bcd78ea3f86753d93e5d7`
 pytest -q tests/test_18_requires_grad.py
 pytest -q tests/test_11_pytorch_compat.py tests/test_12_mlp.py tests/test_15_data_pipeline.py tests/test_16_functional_api.py
 python examples/example9_requires_grad_compare.py
-USE_TORCH_1K=0 python examples/example9_requires_grad_compare.py
+USE_NLEARN=0 python examples/example9_requires_grad_compare.py
 python examples/example4_mlp_train_compare.py
 python examples/example7_mnist_dataloader_train_compare.py
 python examples/example8_functional_api_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 requires_grad 测试：`6 passed`
 - 受影响梯度测试：`13 passed`
-- requires_grad 示例：`torch_1k` 与 PyTorch 均通过
+- requires_grad 示例：`nlearn` 与 PyTorch 均通过
 - MLP / DataLoader CNN / 函数式示例均通过
 - 全量测试：`63 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## 复核结论
 

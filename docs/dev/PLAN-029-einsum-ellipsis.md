@@ -35,7 +35,7 @@ torch.einsum("...ij->...", x)
 
 ## 实施步骤
 
-1. 改造 `torch_1k/functional/matrix.py`：
+1. 改造 `nlearn/functional/matrix.py`：
    - 将 equation 解析拆成模板解析与按输入 shape 展开。
    - 为 ellipsis 维分配不与用户标签冲突的内部标签。
    - 将 ellipsis equation 展开为 NumPy/CuPy 可执行的普通 `einsum` equation。
@@ -47,7 +47,7 @@ torch.einsum("...ij->...", x)
    - 覆盖 CUDA 可选路径。
 3. 新增示例：
    - 用 ellipsis 写泛化 batch matmul / attention。
-   - 同进程对比 `torch_1k` 与 PyTorch 的前向和梯度。
+   - 同进程对比 `nlearn` 与 PyTorch 的前向和梯度。
 4. 更新 PLAN-023 / PLAN-025 结果文档中的过期 TODO。
 5. 更新设计路线图。
 
@@ -64,5 +64,5 @@ torch.einsum("...ij->...", x)
 2. 既有 `einsum` 测试不回归。
 3. 新增示例与 PyTorch 对比通过。
 4. 全量测试通过。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

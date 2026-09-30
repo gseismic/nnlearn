@@ -24,7 +24,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - 覆盖 Tensor 方法形式。
    - 覆盖顶层函数形式。
    - 覆盖 `keepdim=True`。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 5. 更新设计文档：
    - 将基础算子中的规约条目扩展为“规约与预测索引”。
    - 记录 PLAN-013 已补齐分类推理常用 `argmax` API。
@@ -49,17 +49,17 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 ```bash
 pytest -q tests/test_22_argmax_api.py
 python examples/example13_argmax_api_compare.py
-USE_TORCH_1K=0 python examples/example13_argmax_api_compare.py
+USE_NLEARN=0 python examples/example13_argmax_api_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 argmax API 测试：`7 passed`
-- argmax API 双后端示例：`torch_1k` 与 PyTorch 输出一致
+- argmax API 双后端示例：`nlearn` 与 PyTorch 输出一致
 - 全量测试：`82 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

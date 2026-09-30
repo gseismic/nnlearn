@@ -4,9 +4,9 @@ import numpy as np
 import pytest
 import torch as pytorch
 
-import torch_1k as torch
-import torch_1k.nn as nn
-from torch_1k.nn.normalization import LayerNormFunction
+import nlearn as torch
+import nlearn.nn as nn
+from nlearn.nn.normalization import LayerNormFunction
 
 
 def test_state_load_casts_numeric_buffer_like_pytorch():

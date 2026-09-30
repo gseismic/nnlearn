@@ -6,8 +6,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import config
 import numpy as np
 import pytest
-import torch_1k as torch
-from torch_1k.utils.data import (
+import nlearn as torch
+from nlearn.utils.data import (
     BatchSampler, DataLoader, RandomSampler, SequentialSampler,
     SubsetRandomSampler, TensorDataset,
 )

@@ -9,7 +9,7 @@ Git 基线：`81ffeb1`
 ## 实施结果
 
 1. 新增顶层函数：
-   - `torch_1k.amax(input, dim=None, keepdim=False)`
+   - `nlearn.amax(input, dim=None, keepdim=False)`
 2. 新增 Tensor 方法：
    - `Tensor.amax(dim=None, keepdim=False)`
 3. 支持：
@@ -45,7 +45,7 @@ Git 基线：`81ffeb1`
 
 1. 用 `(N, C, H, W)` 张量做空间维 `(H, W)` 最大值规约。
 2. 保留 `keepdim=True` 的广播友好形状。
-3. 同进程对比 `torch_1k` 与 PyTorch 的输出和梯度。
+3. 同进程对比 `nlearn` 与 PyTorch 的输出和梯度。
 
 ## 验证结果
 
@@ -59,7 +59,7 @@ python examples/example33_amax_tuple_compare.py
 python examples/example32_einsum_repeated_labels_compare.py
 python examples/example31_nonzero_where_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -70,7 +70,7 @@ python -m compileall -q torch_1k examples
 - 新增示例：通过，输出和梯度均与 PyTorch 一致
 - 相邻功能示例：einsum repeated-label 与 nonzero/where 示例均通过
 - 全量测试：`224 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 
@@ -80,4 +80,4 @@ python -m compileall -q torch_1k examples
 
 ## 复核结论
 
-本轮补齐了 values-only 最大值规约路径。现在用户可以用 `torch_1k.amax(x, dim=(...))` 表达多维空间/序列最大值聚合，同时保留 `torch.max(dim=...)` 的 indices 返回语义，两类 PyTorch API 边界更清晰。
+本轮补齐了 values-only 最大值规约路径。现在用户可以用 `nlearn.amax(x, dim=(...))` 表达多维空间/序列最大值聚合，同时保留 `torch.max(dim=...)` 的 indices 返回语义，两类 PyTorch API 边界更清晰。

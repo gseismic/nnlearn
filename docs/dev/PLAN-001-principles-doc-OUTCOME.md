@@ -1,10 +1,10 @@
-# PLAN-001 torch_1k 原理文档结果
+# PLAN-001 nlearn 原理文档结果
 
 日期：2026-06-24
 
 ## 完成内容
 
-已新增 `docs/design/torch-1k-20260624-principles.md`，内容覆盖：
+已新增 `docs/design/nlearn-20260624-principles.md`，内容覆盖：
 
 1. 项目定位和源码阅读范围。
 2. `Tensor` 与 `Function` 的动态图自动微分协议。

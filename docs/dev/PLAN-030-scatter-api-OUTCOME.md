@@ -9,8 +9,8 @@ Git 基线：`81ffeb1`
 ## 实施结果
 
 1. 新增顶层函数：
-   - `torch_1k.scatter(input, dim, index, src)`
-   - `torch_1k.scatter_add(input, dim, index, src)`
+   - `nlearn.scatter(input, dim, index, src)`
+   - `nlearn.scatter_add(input, dim, index, src)`
 2. 新增 Tensor 方法：
    - `Tensor.scatter(dim, index, src)`
    - `Tensor.scatter_add(dim, index, src)`
@@ -44,7 +44,7 @@ Git 基线：`81ffeb1`
 
 1. 用 `scatter` 构造 one-hot。
 2. 用 `scatter_add` 做按 index 累加桶。
-3. 同进程对比 `torch_1k` 与 PyTorch 的输出和梯度。
+3. 同进程对比 `nlearn` 与 PyTorch 的输出和梯度。
 
 ## 验证结果
 
@@ -58,7 +58,7 @@ python examples/example30_scatter_compare.py
 python examples/example29_einsum_ellipsis_compare.py
 python examples/example28_cross_entropy_advanced_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -69,7 +69,7 @@ python -m compileall -q torch_1k examples
 - 新增 scatter 示例：通过，输出和梯度均与 PyTorch 一致
 - 相邻功能示例：einsum ellipsis 与高级交叉熵示例均通过
 - 全量测试：`203 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

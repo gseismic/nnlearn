@@ -21,18 +21,18 @@ Git 基线：`a5d4d3b`
 ## 目标
 
 1. 新增 `Tensor.repeat(*repeats)`。
-2. 新增顶层 `torch_1k.repeat(input, *repeats)`。
+2. 新增顶层 `nlearn.repeat(input, *repeats)`。
 3. 新增 `Tensor.split(split_size_or_sections, dim=0)`。
-4. 新增顶层 `torch_1k.split(input, split_size_or_sections, dim=0)`。
+4. 新增顶层 `nlearn.split(input, split_size_or_sections, dim=0)`。
 5. 新增 `Tensor.chunk(chunks, dim=0)`。
-6. 新增顶层 `torch_1k.chunk(input, chunks, dim=0)`。
+6. 新增顶层 `nlearn.chunk(input, chunks, dim=0)`。
 7. 保持 split/chunk 的反向传播按切片回填。
 8. 保持 repeat 的反向传播按重复维度求和还原到输入形状。
 9. 覆盖可选 CUDA 路径。
 
 ## 实施步骤
 
-1. 在 `torch_1k/functional/matrix.py` 中实现：
+1. 在 `nlearn/functional/matrix.py` 中实现：
    - `Repeat(Function)`
    - `repeat(...)`
    - `split(...)`
@@ -42,7 +42,7 @@ Git 基线：`a5d4d3b`
    - `split`
    - `chunk`
 3. 增加 PyTorch 兼容示例：
-   - 同一文件通过 `USE_TORCH_1K=0/1` 切换实现。
+   - 同一文件通过 `USE_NLEARN=0/1` 切换实现。
 4. 增加测试：
    - 覆盖 repeat 前向和反向。
    - 覆盖 split 按整数大小拆分。
@@ -62,7 +62,7 @@ Git 基线：`a5d4d3b`
 ## 验收标准
 
 1. 新增测试通过。
-2. 新增示例在 `torch_1k` 与 PyTorch 两条路径下通过。
+2. 新增示例在 `nlearn` 与 PyTorch 两条路径下通过。
 3. 现有全量测试不回归。
-4. `python -m compileall -q torch_1k examples` 通过。
+4. `python -m compileall -q nlearn examples` 通过。
 5. 结果文档记录实现范围、验证结果和未完成事项。

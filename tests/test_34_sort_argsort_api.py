@@ -7,7 +7,7 @@ import config
 import numpy as np
 import pytest
 import torch as pytorch
-import torch_1k as torch
+import nlearn as torch
 
 
 def _assert_sort_matches_pytorch(data, dim=-1, descending=False, stable=False):

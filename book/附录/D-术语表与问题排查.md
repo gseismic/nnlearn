@@ -56,4 +56,4 @@ optimizer.step()
 
 ## 本书实现范围提醒
 
-书中 `mini_tensor` 和 `mini_nn` 是为了讲清核心机制的短小实现，支持范围小于 PyTorch，也小于仓库完整的 `torch_1k`。例如本书的基础矩阵乘法限二维、CNN 示例使用合成图像、Transformer 示例没有 mask/位置编码，CUDA 运行还要求真实 GPU 与 CuPy。遇到缺失功能时先查看章节“实现边界”，不要把教学代码的限制理解为一般深度学习框架的限制。
+书中 `mini_tensor` 和 `mini_nn` 是为了讲清核心机制的短小实现，支持范围小于 PyTorch，也小于仓库完整的 `nlearn`。例如本书的基础矩阵乘法限二维、CNN 示例使用合成图像、Transformer 示例没有 mask/位置编码，CUDA 运行还要求真实 GPU 与 CuPy。遇到缺失功能时先查看章节“实现边界”，不要把教学代码的限制理解为一般深度学习框架的限制。

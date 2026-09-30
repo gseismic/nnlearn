@@ -11,7 +11,7 @@
    - 支持 `train(False)`。
    - 递归设置子模块 `training` 状态。
 3. 将 `Module` 内部参数/子模块名容器从 `set` 改为稳定顺序列表，保证参数遍历和状态字典顺序可重复。
-4. 从顶层导出 `torch_1k.float32`、`torch_1k.float64`、`torch_1k.long`。
+4. 从顶层导出 `nlearn.float32`、`nlearn.float64`、`nlearn.long`。
 
 ## 下一个高价值目标实现
 
@@ -20,8 +20,8 @@
 1. `Module.named_parameters()`
 2. `Module.state_dict()`
 3. `Module.load_state_dict()`
-4. `torch_1k.save()`
-5. `torch_1k.load()`
+4. `nlearn.save()`
+5. `nlearn.load()`
 
 `load_state_dict()` 在严格模式下会检查缺失和多余 key；加载参数时复制数组，避免模型参数与传入 state 共享内存。
 
@@ -46,7 +46,7 @@ python examples/example6_transformer_train_compare.py
 python examples/example5_mnist_cnn_train_compare.py
 USE_REAL_MNIST=1 python examples/example5_mnist_cnn_train_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -56,4 +56,4 @@ python -m compileall -q torch_1k examples
 - CNN MNIST-like 示例：`accuracy=1.000000`
 - 真实 MNIST 小子集示例：`accuracy=1.000000`
 - 全量测试：`46 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过

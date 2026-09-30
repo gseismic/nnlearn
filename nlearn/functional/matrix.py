@@ -1,10 +1,10 @@
 import builtins
 import string
 
-from torch_1k import backend
-from torch_1k.function import Function
-from torch_1k.tensor import Tensor, ensure_tensor
-from torch_1k.utils import np_sum_to
+from nlearn import backend
+from nlearn.function import Function
+from nlearn.tensor import Tensor, ensure_tensor
+from nlearn.utils import np_sum_to
 
 
 # Reshape

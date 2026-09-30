@@ -1,7 +1,7 @@
 """PyTorch-compatible MLP classification example.
 
-The training body is shared by PyTorch and torch_1k. Switch implementations
-with USE_TORCH_1K=0 or USE_TORCH_1K=1.
+The training body is shared by PyTorch and nlearn. Switch implementations
+with USE_NLEARN=0 or USE_NLEARN=1.
 """
 
 import os
@@ -10,12 +10,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-USE_TORCH_1K = os.getenv("USE_TORCH_1K", "1") != "0"
+USE_NLEARN = os.getenv("USE_NLEARN", "1") != "0"
 
-if USE_TORCH_1K:
-    import torch_1k as torch
-    import torch_1k.nn as nn
-    import torch_1k.optim as optim
+if USE_NLEARN:
+    import nlearn as torch
+    import nlearn.nn as nn
+    import nlearn.optim as optim
 else:
     import torch
     import torch.nn as nn

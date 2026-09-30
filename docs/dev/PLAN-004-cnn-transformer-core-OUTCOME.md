@@ -31,7 +31,7 @@
 5. 测试：
    - 新增 `tests/test_13_cnn_transformer.py`，覆盖常见 optimizer、CNN 反传、Transformer 反传。
 6. 设计文档：
-   - 更新 `docs/design/torch-3k-20260624-core-cuda-roadmap.md`，记录 PLAN-004 模块状态。
+   - 更新 `docs/design/nlearn-20260624-core-cuda-roadmap.md`，记录 PLAN-004 模块状态。
 
 ## 验证结果
 
@@ -39,27 +39,27 @@
 
 ```bash
 python examples/example5_mnist_cnn_train_compare.py
-USE_TORCH_1K=0 python examples/example5_mnist_cnn_train_compare.py
+USE_NLEARN=0 python examples/example5_mnist_cnn_train_compare.py
 USE_REAL_MNIST=1 python examples/example5_mnist_cnn_train_compare.py
-USE_TORCH_1K=0 USE_REAL_MNIST=1 python examples/example5_mnist_cnn_train_compare.py
+USE_NLEARN=0 USE_REAL_MNIST=1 python examples/example5_mnist_cnn_train_compare.py
 python examples/example6_transformer_train_compare.py
-USE_TORCH_1K=0 python examples/example6_transformer_train_compare.py
+USE_NLEARN=0 python examples/example6_transformer_train_compare.py
 pytest -q tests/test_13_cnn_transformer.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
-- `torch_1k` CNN 示例：`accuracy=1.000000`
+- `nlearn` CNN 示例：`accuracy=1.000000`
 - PyTorch CNN 示例：`accuracy=1.000000`
-- `torch_1k` 真实 MNIST 小子集示例：`accuracy=1.000000`
+- `nlearn` 真实 MNIST 小子集示例：`accuracy=1.000000`
 - PyTorch 真实 MNIST 小子集示例：`accuracy=1.000000`
-- `torch_1k` Transformer 示例：`accuracy=1.000000`
+- `nlearn` Transformer 示例：`accuracy=1.000000`
 - PyTorch Transformer 示例：`accuracy=1.000000`
 - 新增测试：`3 passed`
 - 全量测试：`42 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## 说明
 
@@ -67,4 +67,4 @@ MNIST 示例默认使用本地生成的 28x28 MNIST-like 数据，避免下载�
 
 ## 代码规模
 
-当前 `torch_1k` 核心代码统计约 `1779` 行，仍低于新定位建议的 3000 行以内。
+当前 `nlearn` 核心代码统计约 `1779` 行，仍低于新定位建议的 3000 行以内。

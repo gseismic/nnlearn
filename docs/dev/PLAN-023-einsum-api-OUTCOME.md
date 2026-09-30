@@ -10,7 +10,7 @@ Git 基线：`a5d4d3b`
 
 ## 实施结果
 
-1. 新增顶层 `torch_1k.einsum(equation, *operands)`。
+1. 新增顶层 `nlearn.einsum(equation, *operands)`。
 2. 支持显式输出 equation：
    - 例如 `"ij,jk->ik"`。
    - 例如 `"bqd,bkd->bqk"`。
@@ -29,7 +29,7 @@ Git 基线：`a5d4d3b`
    - 反向梯度也保持同一后端。
 8. 新增 `examples/example23_einsum_compare.py`：
    - 用 `einsum` 表达 attention score 和 context。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 9. 更新设计文档，记录 PLAN-023 已补齐 `einsum` 核心子集。
 
 ## 新增测试
@@ -51,23 +51,23 @@ Git 基线：`a5d4d3b`
 ```bash
 pytest -q tests/test_32_einsum_api.py
 python examples/example23_einsum_compare.py
-USE_TORCH_1K=0 python examples/example23_einsum_compare.py
+USE_NLEARN=0 python examples/example23_einsum_compare.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 pytest -q
 python examples/example21_loss_functional_reduction_compare.py
-USE_TORCH_1K=0 python examples/example21_loss_functional_reduction_compare.py
+USE_NLEARN=0 python examples/example21_loss_functional_reduction_compare.py
 python examples/example22_shape_split_chunk_repeat_compare.py
-USE_TORCH_1K=0 python examples/example22_shape_split_chunk_repeat_compare.py
+USE_NLEARN=0 python examples/example22_shape_split_chunk_repeat_compare.py
 ```
 
 结果：
 
 - 新增 einsum 测试：`7 passed`
 - PLAN-021/022/023 新增测试集合：`19 passed`
-- 新增示例 21、22、23：`torch_1k` 与 PyTorch 路径均通过
+- 新增示例 21、22、23：`nlearn` 与 PyTorch 路径均通过
 - 全量测试：`149 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

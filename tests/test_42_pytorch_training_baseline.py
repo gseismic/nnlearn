@@ -18,9 +18,9 @@ def _assert_baseline_results(results):
     assert results["mlp"]["checkpoint_error"] <= 1e-5
 
 
-def test_torch_1k_training_baseline_runs():
+def test_nlearn_training_baseline_runs():
     results = baseline.run_all()
-    assert results["backend"] == "torch_1k"
+    assert results["backend"] == "nlearn"
     _assert_baseline_results(results)
 
 
@@ -28,7 +28,7 @@ def test_pytorch_import_replacement_path_runs():
     pytest.importorskip("torch")
 
     env = os.environ.copy()
-    env["USE_TORCH_1K"] = "0"
+    env["USE_NLEARN"] = "0"
     script = Path(__file__).resolve().parents[1] / "examples" / (
         "example36_pytorch_training_baseline.py"
     )

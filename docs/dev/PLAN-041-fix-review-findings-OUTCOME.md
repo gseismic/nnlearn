@@ -33,5 +33,5 @@ PLAN-040 结果中重复反向传播例子的正确梯度曾误写成 `20`。对
 - 检查了修改后的梯度形状、dtype、设备转换、状态文件兼容、共享对象与错误输入路径，修正了回归测试中的错误数学期望。
 - `CUDA_VISIBLE_DEVICES='' python -m pytest -q`：**288 passed**。
 - `CUDA_VISIBLE_DEVICES='' python examples/example38_beginner_tutorial.py`：准确率 `1.0`，回归损失约 `0.000013`。
-- `CUDA_VISIBLE_DEVICES='' USE_TORCH_1K=1 python examples/example36_pytorch_training_baseline.py`：MLP、CNN、Transformer 准确率均为 `1.0`，MLP 检查点往返误差 `0`。
-- 当前环境没有 CuPy，无法验证 `torch_1k` 的 CUDA 运行路径；CPU 回归测试和示例均已通过。提交后的独立复审按用户要求继续进行，若有新问题，将先写入文档再修复。
+- `CUDA_VISIBLE_DEVICES='' USE_NLEARN=1 python examples/example36_pytorch_training_baseline.py`：MLP、CNN、Transformer 准确率均为 `1.0`，MLP 检查点往返误差 `0`。
+- 当前环境没有 CuPy，无法验证 `nlearn` 的 CUDA 运行路径；CPU 回归测试和示例均已通过。提交后的独立复审按用户要求继续进行，若有新问题，将先写入文档再修复。

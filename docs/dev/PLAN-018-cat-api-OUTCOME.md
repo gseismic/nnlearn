@@ -22,7 +22,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 3. 新增 `examples/example18_cat_api_compare.py`：
    - 覆盖多分支特征拼接。
    - 覆盖 `cat` / `concat`。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 4. 更新设计文档，记录 `cat` / `concat` 已补齐。
 
 ## 新增测试
@@ -43,17 +43,17 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 ```bash
 pytest -q tests/test_27_cat_api.py
 python examples/example18_cat_api_compare.py
-USE_TORCH_1K=0 python examples/example18_cat_api_compare.py
+USE_NLEARN=0 python examples/example18_cat_api_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 cat API 测试：`6 passed`
-- cat API 双后端示例：`torch_1k` 与 PyTorch 路径均通过
+- cat API 双后端示例：`nlearn` 与 PyTorch 路径均通过
 - 全量测试：`118 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

@@ -10,7 +10,7 @@ Git 基线：`a5d4d3b`
 
 ## 实施结果
 
-1. 新增顶层 `torch_1k.topk(input, k, dim=None, largest=True, sorted=True)`。
+1. 新增顶层 `nlearn.topk(input, k, dim=None, largest=True, sorted=True)`。
 2. 新增 `Tensor.topk(k, dim=None, largest=True, sorted=True)`。
 3. 返回 PyTorch 风格 `TopKResult(values, indices)`。
 4. 支持默认最后一维。
@@ -24,7 +24,7 @@ Git 基线：`a5d4d3b`
    - 已修正为 `TopK(Function)` 只产生可微 values，indices 作为独立 `requires_grad=False` Tensor 返回。
 10. 新增 `examples/example24_topk_compare.py`：
     - 使用 top-k values / indices 计算 top-1 和 top-2 accuracy。
-    - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 11. 更新设计文档，记录 PLAN-024 已补齐 topk API。
 
 ## 新增测试
@@ -46,19 +46,19 @@ Git 基线：`a5d4d3b`
 ```bash
 pytest -q tests/test_33_topk_api.py
 python examples/example24_topk_compare.py
-USE_TORCH_1K=0 python examples/example24_topk_compare.py
+USE_NLEARN=0 python examples/example24_topk_compare.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py tests/test_33_topk_api.py
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 pytest -q
 ```
 
 结果：
 
 - 新增 topk 测试：`7 passed`
-- 新增 topk 示例：`torch_1k` 与 PyTorch 路径均通过
+- 新增 topk 示例：`nlearn` 与 PyTorch 路径均通过
 - PLAN-021 至 PLAN-024 新增测试集合：`26 passed`
 - 全量测试：`156 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

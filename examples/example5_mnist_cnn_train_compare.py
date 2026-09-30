@@ -19,13 +19,13 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-USE_TORCH_1K = os.getenv("USE_TORCH_1K", "1") != "0"
+USE_NLEARN = os.getenv("USE_NLEARN", "1") != "0"
 USE_REAL_MNIST = os.getenv("USE_REAL_MNIST", "0") == "1"
 
-if USE_TORCH_1K:
-    import torch_1k as torch
-    import torch_1k.nn as nn
-    import torch_1k.optim as optim
+if USE_NLEARN:
+    import nlearn as torch
+    import nlearn.nn as nn
+    import nlearn.optim as optim
 else:
     import torch
     import torch.nn as nn

@@ -1,10 +1,10 @@
-# PLAN-001 torch_1k 原理文档
+# PLAN-001 nlearn 原理文档
 
 日期：2026-06-24
 
 ## 目标
 
-阅读当前 `torch_1k` 源码，为项目补充中文原理设计文档，说明其用最小代码实现 PyTorch 核心机制的方式。
+阅读当前 `nlearn` 源码，为项目补充中文原理设计文档，说明其用最小代码实现 PyTorch 核心机制的方式。
 
 ## 范围
 
@@ -16,5 +16,5 @@
 
 ## 产物
 
-- `docs/design/torch-1k-20260624-principles.md`
+- `docs/design/nlearn-20260624-principles.md`
 - `docs/dev/PLAN-001-principles-doc-OUTCOME.md`

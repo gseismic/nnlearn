@@ -16,43 +16,43 @@
    - 从 torch 新手教程场景反推最终模型、依赖函数、底层必须能力和 wrapper 边界。
    - 明确教程路径：张量基础、自动微分、手写线性回归、`nn.Module` MLP、DataLoader mini-batch、CNN/Transformer 方向感。
 2. 新增教程式例子 `examples/example38_beginner_tutorial.py`：
-   - 默认使用 `torch_1k`。
-   - `USE_TORCH_1K=0` 时切换到 PyTorch。
+   - 默认使用 `nlearn`。
+   - `USE_NLEARN=0` 时切换到 PyTorch。
    - 覆盖张量基础、NumPy 转换、自动微分、手写线性回归、MLP 分类和 DataLoader mini-batch。
 3. 新增测试 `tests/test_44_beginner_tutorial_core_api.py`：
    - 与 PyTorch 对比基础 wrapper 的前向和关键梯度。
    - 验证 `nn.Tanh` / `nn.Sigmoid`。
-   - 运行教程例子的 `torch_1k` 和 PyTorch 两条路径。
+   - 运行教程例子的 `nlearn` 和 PyTorch 两条路径。
 4. 补齐底层和基础 wrapper：
-   - `torch_1k.eye`
-   - `torch_1k.as_tensor`
-   - `torch_1k.from_numpy`
-   - `torch_1k.rand_like`
-   - `torch_1k.randn_like`
+   - `nlearn.eye`
+   - `nlearn.as_tensor`
+   - `nlearn.from_numpy`
+   - `nlearn.rand_like`
+   - `nlearn.randn_like`
    - 可微 `Tensor.clone()`
    - `Tensor.tolist()`
    - `Tensor.matmul()` / `Tensor.mm()`
    - `Tensor.__len__`
-   - `torch_1k.sum(input, dim=..., keepdim=...)`
-   - `torch_1k.mean(input, dim=..., keepdim=...)`
+   - `nlearn.sum(input, dim=..., keepdim=...)`
+   - `nlearn.mean(input, dim=..., keepdim=...)`
    - `Tensor.sum(..., keepdim=...)`
    - `Tensor.mean(..., keepdim=...)`
    - `nn.Tanh`
    - `nn.Sigmoid`
 5. 扩展便利创建函数：
-   - `torch_1k.linspace(..., dtype=...)`
-   - `torch_1k.normal(..., dtype=...)`
+   - `nlearn.linspace(..., dtype=...)`
+   - `nlearn.normal(..., dtype=...)`
 6. 更新设计路线图，记录 PLAN-038 阶段更新。
 
 ## 验证结果
 
-1. 默认 `torch_1k` 教程例子：
+1. 默认 `nlearn` 教程例子：
    - 命令：`python examples/example38_beginner_tutorial.py`
    - 结果：通过
    - 手写回归 loss：`0.000013`
    - MLP accuracy：`1.000000`
 2. PyTorch 导入替换路径：
-   - 命令：`USE_TORCH_1K=0 python examples/example38_beginner_tutorial.py`
+   - 命令：`USE_NLEARN=0 python examples/example38_beginner_tutorial.py`
    - 结果：通过
    - 手写回归 loss：`0.000030`
    - MLP accuracy：`1.000000`
@@ -66,7 +66,7 @@
    - 命令：`pytest -q`
    - 结果：`253 passed`
 6. 编译检查：
-   - 命令：`python -m compileall -q torch_1k examples`
+   - 命令：`python -m compileall -q nlearn examples`
    - 结果：通过
 
 ## TODO / 未完成事项

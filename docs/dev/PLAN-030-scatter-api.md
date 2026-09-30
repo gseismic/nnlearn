@@ -20,8 +20,8 @@ PLAN-027 已补齐 `where`、`masked_fill`、`index_select`、`gather` 和常用
 ## 目标
 
 1. 新增顶层函数：
-   - `torch_1k.scatter(input, dim, index, src)`
-   - `torch_1k.scatter_add(input, dim, index, src)`
+   - `nlearn.scatter(input, dim, index, src)`
+   - `nlearn.scatter_add(input, dim, index, src)`
 2. 新增 Tensor 方法：
    - `Tensor.scatter(dim, index, src)`
    - `Tensor.scatter_add(dim, index, src)`
@@ -41,11 +41,11 @@ PLAN-027 已补齐 `where`、`masked_fill`、`index_select`、`gather` 和常用
 
 ## 实施步骤
 
-1. 改造 `torch_1k/functional/numeric.py`：
+1. 改造 `nlearn/functional/numeric.py`：
    - 复用 `_normalize_axis(...)`、`_ensure_integer_index(...)`、`_broadcast_index_selector(...)`。
    - 新增 `Scatter` / `ScatterAdd` Function。
    - 增加 index 形状、src 形状和 index 值范围校验。
-2. 改造 `torch_1k/tensor.py`：
+2. 改造 `nlearn/tensor.py`：
    - 增加 `scatter(...)` 和 `scatter_add(...)` 方法。
 3. 新增测试：
    - `scatter_add` 与 PyTorch 前向/梯度对比，覆盖重复 index。
@@ -56,7 +56,7 @@ PLAN-027 已补齐 `where`、`masked_fill`、`index_select`、`gather` 和常用
 4. 新增示例：
    - 用 `scatter` 构造 one-hot。
    - 用 `scatter_add` 做按 index 累加桶。
-   - 同进程对比 `torch_1k` 与 PyTorch。
+   - 同进程对比 `nlearn` 与 PyTorch。
 5. 更新 PLAN-027 结果文档和设计路线图。
 
 ## 非目标
@@ -73,5 +73,5 @@ PLAN-027 已补齐 `where`、`masked_fill`、`index_select`、`gather` 和常用
 2. 既有 mask/index/gather 测试不回归。
 3. 新增示例与 PyTorch 对比通过。
 4. 全量测试通过。
-5. `python -m compileall -q torch_1k examples` 通过。
+5. `python -m compileall -q nlearn examples` 通过。
 6. 结果文档记录实现范围、验证结果和未完成事项。

@@ -1,8 +1,8 @@
 import time
 import numpy as np
-import torch_1k
-from torch_1k import functional as F
-from torch_1k import Tensor
+import nlearn
+from nlearn import functional as F
+from nlearn import Tensor
 import matplotlib.pyplot as plt
 
 

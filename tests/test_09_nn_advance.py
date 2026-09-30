@@ -1,11 +1,11 @@
 import config
 import time
 import numpy as np
-import torch_1k
-from torch_1k import functional as F
-from torch_1k import Tensor, allclose
-import torch_1k.nn as nn
-from torch_1k.optim import SGD
+import nlearn
+from nlearn import functional as F
+from nlearn import Tensor, allclose
+import nlearn.nn as nn
+from nlearn.optim import SGD
 
 def test_nn_optimizer():
     fc = nn.Linear(3, 2, bias=False)

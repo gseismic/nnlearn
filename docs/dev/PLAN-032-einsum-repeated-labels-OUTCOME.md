@@ -42,7 +42,7 @@ Git 基线：`81ffeb1`
 
 新增 `examples/example32_einsum_repeated_labels_compare.py`：
 
-1. 在同一进程中分别运行 `torch_1k` 与 PyTorch。
+1. 在同一进程中分别运行 `nlearn` 与 PyTorch。
 2. 覆盖 diagonal、trace、重复标签规约、多输入组合和 batch trace。
 3. 对比输出和所有输入梯度。
 
@@ -57,7 +57,7 @@ python examples/example32_einsum_repeated_labels_compare.py
 python examples/example29_einsum_ellipsis_compare.py
 python examples/example31_nonzero_where_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -68,7 +68,7 @@ python -m compileall -q torch_1k examples
 - ellipsis 示例：通过，确认 PLAN-029 路径无回归
 - nonzero/where 示例：通过，确认相邻索引路径无回归
 - 全量测试：`217 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 
@@ -78,4 +78,4 @@ python -m compileall -q torch_1k examples
 
 ## 复核结论
 
-本轮把 `einsum` 的核心语义进一步补全到 repeated-label diagonal / trace 路径。现在 `torch_1k.einsum` 已覆盖矩阵乘、batch matmul、attention、ellipsis 泛化 batch 维、广播反向，以及 diagonal / trace 类写法，仍保持实现结构清晰可读。
+本轮把 `einsum` 的核心语义进一步补全到 repeated-label diagonal / trace 路径。现在 `nlearn.einsum` 已覆盖矩阵乘、batch matmul、attention、ellipsis 泛化 batch 维、广播反向，以及 diagonal / trace 类写法，仍保持实现结构清晰可读。

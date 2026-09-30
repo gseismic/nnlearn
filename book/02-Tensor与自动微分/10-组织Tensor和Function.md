@@ -34,9 +34,9 @@ dL/dweight: [[-1.7], [-1.6]]
 dL/dbias: [-1.1]
 ```
 
-## 与 torch_1k 的关系和限制
+## 与 nlearn 的关系和限制
 
-本篇的 [`mini_tensor.py`](../代码/02-Tensor与自动微分/mini_tensor.py) 是教学实现，使用 NumPy 数组和 Python 对象组成动态图。仓库的 `torch_1k/function.py`、`torch_1k/tensor.py` 与 `torch_1k/functional/` 采用相近的职责划分，但还处理设备、上下文、高阶梯度和更多算子。
+本篇的 [`mini_tensor.py`](../代码/02-Tensor与自动微分/mini_tensor.py) 是教学实现，使用 NumPy 数组和 Python 对象组成动态图。仓库的 `nlearn/function.py`、`nlearn/tensor.py` 与 `nlearn/functional/` 采用相近的职责划分，但还处理设备、上下文、高阶梯度和更多算子。
 
 本篇引擎仅实现单输出算子、稠密实数数组、一次反向模式梯度和二维矩阵乘法。它不实现完整 PyTorch API、CUDA、稀疏张量或高阶导数。
 

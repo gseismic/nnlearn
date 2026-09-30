@@ -5,8 +5,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import config
 import numpy as np
-import torch_1k as torch
-import torch_1k.optim as optim
+import nlearn as torch
+import nlearn.optim as optim
 
 
 def test_sgd_param_groups_use_different_lr():

@@ -1,9 +1,9 @@
 import config
 import time
 import numpy as np
-import torch_1k
-from torch_1k import Tensor, allclose
-from torch_1k import Square, Exp, Add, add, square
+import nlearn
+from nlearn import Tensor, allclose
+from nlearn import Square, Exp, Add, add, square
 
 
 def test_ops_mul():

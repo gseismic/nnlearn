@@ -24,7 +24,7 @@ Git 基线：`df6f5ca93991914fff15e3abf66c3be9a11a2389`
 5. 新增 `examples/example12_max_api_compare.py`：
    - 覆盖 `logits.max(dim=1)` 推理预测。
    - 覆盖 `torch.max(x, y)` elementwise 路径。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 6. 更新设计文档：
    - 将基础规约更新为 `sum`、`mean`、`max`。
    - 将剩余规约/索引 TODO 改为 tuple 规约、复杂索引和 `argmax` 梯度语义。
@@ -46,17 +46,17 @@ Git 基线：`df6f5ca93991914fff15e3abf66c3be9a11a2389`
 ```bash
 pytest -q tests/test_21_max_api.py
 python examples/example12_max_api_compare.py
-USE_TORCH_1K=0 python examples/example12_max_api_compare.py
+USE_NLEARN=0 python examples/example12_max_api_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 max API 测试：`5 passed`
-- max API 双后端示例：`torch_1k` 与 PyTorch 输出一致
+- max API 双后端示例：`nlearn` 与 PyTorch 输出一致
 - 全量测试：`75 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

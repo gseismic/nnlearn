@@ -46,12 +46,12 @@ PLAN-027 已补齐 `gather`、mask 和数值工具，本轮继续把这些能力
 
 ## 实施步骤
 
-1. 改造 `torch_1k/nn/loss.py`：
+1. 改造 `nlearn/nn/loss.py`：
    - 解析高维 logits 为二维 `(M, C)` 工作形态。
    - 保存还原梯度所需的输入形状和 target shape。
    - 实现稳定 `log_softmax`。
    - 实现 `weight` / `ignore_index` / `label_smoothing` 的 loss 和梯度。
-2. 改造 `torch_1k/nn/functional.py`：
+2. 改造 `nlearn/nn/functional.py`：
    - 扩展 `cross_entropy(...)` 签名。
 3. 新增测试：
    - `ignore_index` 三种 reduction。
@@ -62,7 +62,7 @@ PLAN-027 已补齐 `gather`、mask 和数值工具，本轮继续把这些能力
 4. 新增示例：
    - 分割风格 logits `(N, C, H, W)`。
    - 类别权重、ignore_index 和 label_smoothing。
-   - 同进程对比 `torch_1k` 与 PyTorch 的前向和梯度。
+   - 同进程对比 `nlearn` 与 PyTorch 的前向和梯度。
 5. 更新设计文档和 PLAN-021 结果文档中的过期 TODO。
 
 ## 非目标
@@ -77,5 +77,5 @@ PLAN-027 已补齐 `gather`、mask 和数值工具，本轮继续把这些能力
 1. 新增测试通过。
 2. 新增示例与 PyTorch 对比通过。
 3. 既有 loss、训练链路和全量测试不回归。
-4. `python -m compileall -q torch_1k examples` 通过。
+4. `python -m compileall -q nlearn examples` 通过。
 5. 结果文档记录实现范围、验证结果和未完成事项。

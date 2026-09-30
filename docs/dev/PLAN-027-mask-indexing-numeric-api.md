@@ -20,30 +20,30 @@ Git 基线：`9e68cd0`
    - `==`、`!=`、`<`、`<=`、`>`、`>=`
    - 返回 `requires_grad=False` 的 bool Tensor。
 2. 新增条件选择：
-   - `torch_1k.where(condition, input, other)`
+   - `nlearn.where(condition, input, other)`
    - values 对 `input` 和 `other` 可反传，`condition` 不可微。
 3. 新增掩码填充：
    - `Tensor.masked_fill(mask, value)`
-   - `torch_1k.masked_fill(input, mask, value)`
+   - `nlearn.masked_fill(input, mask, value)`
    - 输入梯度在 mask 为 True 的位置为 0。
 4. 新增索引选择：
-   - `torch_1k.index_select(input, dim, index)`
+   - `nlearn.index_select(input, dim, index)`
    - `Tensor.index_select(dim, index)`
    - 支持 1D index，反向 scatter-add 回原输入。
 5. 新增 gather：
-   - `torch_1k.gather(input, dim, index)`
+   - `nlearn.gather(input, dim, index)`
    - `Tensor.gather(dim, index)`
    - 支持 PyTorch 常见的 index 与 input 同 rank 形态，反向 scatter-add。
 6. 新增数值工具：
-   - `torch_1k.abs` / `Tensor.abs`
-   - `torch_1k.sqrt` / `Tensor.sqrt`
-   - `torch_1k.clamp` / `Tensor.clamp`
-   - `torch_1k.clip` / `Tensor.clip`
+   - `nlearn.abs` / `Tensor.abs`
+   - `nlearn.sqrt` / `Tensor.sqrt`
+   - `nlearn.clamp` / `Tensor.clamp`
+   - `nlearn.clip` / `Tensor.clip`
 7. 保持 CPU/CUDA 后端一致，CUDA 不可用时相关测试跳过。
 
 ## 实施步骤
 
-1. 在 `torch_1k/functional/numeric.py` 中实现：
+1. 在 `nlearn/functional/numeric.py` 中实现：
    - 比较 helper。
    - `Abs`、`Sqrt`、`Clamp`。
    - `Where`、`masked_fill`。
@@ -65,7 +65,7 @@ Git 基线：`9e68cd0`
    - 用 `masked_fill` 构造 attention mask。
    - 用 `gather` 按 label 取目标 logits。
    - 用 `clamp/sqrt/abs` 做数值保护。
-   - 同进程对比 `torch_1k` 与 PyTorch。
+   - 同进程对比 `nlearn` 与 PyTorch。
 6. 更新设计文档阶段记录。
 
 ## 非目标
@@ -82,5 +82,5 @@ Git 基线：`9e68cd0`
 1. 新增测试通过。
 2. 新增示例与 PyTorch 对比通过。
 3. 全量测试不回归。
-4. `python -m compileall -q torch_1k examples` 通过。
+4. `python -m compileall -q nlearn examples` 通过。
 5. 结果文档记录实现范围、验证结果和未完成事项。

@@ -1,5 +1,5 @@
-from torch_1k import backend
-from torch_1k.function import Function
+from nlearn import backend
+from nlearn.function import Function
 
 
 class CopyTo(Function):

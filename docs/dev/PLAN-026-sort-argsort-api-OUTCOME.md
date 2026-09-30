@@ -10,9 +10,9 @@ Git 基线：`a5d4d3b`
 
 ## 实施结果
 
-1. 新增顶层 `torch_1k.sort(input, dim=-1, descending=False, stable=False)`。
+1. 新增顶层 `nlearn.sort(input, dim=-1, descending=False, stable=False)`。
 2. 新增 `Tensor.sort(dim=-1, descending=False, stable=False)`。
-3. 新增顶层 `torch_1k.argsort(input, dim=-1, descending=False, stable=False)`。
+3. 新增顶层 `nlearn.argsort(input, dim=-1, descending=False, stable=False)`。
 4. 新增 `Tensor.argsort(dim=-1, descending=False, stable=False)`。
 5. `sort` 返回 PyTorch 风格 `SortResult(values, indices)`。
 6. 支持默认最后一维、显式 `dim`、负维度和 `descending=True`。
@@ -23,7 +23,7 @@ Git 基线：`a5d4d3b`
    - 上游梯度通过 `put_along_axis` scatter 回输入排序前的位置。
 9. indices / argsort 结果不追踪梯度。
 10. 新增 `examples/example26_sort_argsort_compare.py`：
-    - 同进程对比 `torch_1k` 与 PyTorch。
+    - 同进程对比 `nlearn` 与 PyTorch。
     - 输出 ascending values、descending values、indices、argsort ranking 和梯度最大误差。
 11. 更新设计文档，记录 PLAN-026 已补齐排序 API。
 12. 更新早期结果文档中过期的排序 TODO：
@@ -51,7 +51,7 @@ Git 基线：`a5d4d3b`
 pytest -q tests/test_34_sort_argsort_api.py
 python examples/example26_sort_argsort_compare.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py tests/test_33_topk_api.py tests/test_34_sort_argsort_api.py
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 pytest -q
 ```
 
@@ -61,7 +61,7 @@ pytest -q
 - 新增 sort / argsort 示例：与 PyTorch 的 values、indices、argsort 和梯度误差均在浮点舍入范围内
 - PLAN-021 至 PLAN-026 新增测试集合：`45 passed`
 - 全量测试：`175 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

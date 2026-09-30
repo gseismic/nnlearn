@@ -51,14 +51,14 @@ Git 基线：`6290dc357a5588585be2ddba989b3d078a4e4bf8`
 ```bash
 pytest -q tests/test_17_optimizer_state.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增优化器状态测试：`3 passed`
 - 全量测试：`57 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## 复核结论
 

@@ -44,7 +44,7 @@ Git 基线：`81ffeb1`
 
 新增 `examples/example28_cross_entropy_advanced_compare.py`：
 
-1. 在同一进程中分别运行 `torch_1k` 与 PyTorch。
+1. 在同一进程中分别运行 `nlearn` 与 PyTorch。
 2. 使用分割风格 logits `(N, C, H, W)`。
 3. 同时启用类别权重、`ignore_index` 和 `label_smoothing`。
 4. 对比 `loss_none`、`loss_sum`、`loss_mean` 和 logits 梯度。
@@ -58,10 +58,10 @@ pytest -q tests/test_30_loss_functional_reduction.py
 pytest -q tests/test_36_cross_entropy_advanced.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_36_cross_entropy_advanced.py tests/test_12_mlp.py tests/test_13_cnn_transformer.py tests/test_17_optimizer_state.py
 python examples/example21_loss_functional_reduction_compare.py
-USE_TORCH_1K=0 python examples/example21_loss_functional_reduction_compare.py
+USE_NLEARN=0 python examples/example21_loss_functional_reduction_compare.py
 python examples/example28_cross_entropy_advanced_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -69,10 +69,10 @@ python -m compileall -q torch_1k examples
 - 既有损失函数 reduction 测试：`6 passed`
 - 新增高级交叉熵测试：`7 passed`
 - 损失和训练链路相关测试：`21 passed`
-- 既有损失示例：`torch_1k` 与 PyTorch 路径均通过
+- 既有损失示例：`nlearn` 与 PyTorch 路径均通过
 - 新增同进程 PyTorch 对比示例：通过，最大梯度差 `2.775557561563e-17`
 - 全量测试：`190 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

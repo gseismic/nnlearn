@@ -1,14 +1,14 @@
-# torch_3k 新定位与 CUDA 后端设计
+# nlearn 新定位与 CUDA 后端设计
 
 日期：2026-06-24
 
-定位更新：本文记录了 2026-06-24 阶段的设计建议。其“整体保持在 3000 行以内”是当时的规模建议，已由 [2026-09-29 项目目的与范围](torch-20260929-project-purpose.md)取代；当前以教学路径清楚、功能范围受控和数值行为可核对作为维护标准，不再承诺固定行数。
+定位更新：本文记录了 2026-06-24 阶段的设计建议。“整体保持在 3000 行以内”和教学优先定位属于当时的目标，已由 [当前项目目的与范围](nlearn-20260930-project-purpose.md)取代；目前定位为独立、可扩展的张量与自动微分框架，不承诺固定行数。
 
 源码基准 Git 记录：`main@701d4072f33d2fbdafbcac8bab49ddf3ae87307d`
 
 ## 1. 新定位
 
-本阶段曾将项目定位为：用尽量简洁、可读、教学友好的代码实现 PyTorch 核心功能。该定位后来进一步收敛为“看懂一次训练如何发生”：让学习者沿着 Tensor、计算图、梯度和优化器实现理解训练链路，并通过 PyTorch 对照结果。最新目的、目标用户和维护边界以[项目目的文档](torch-20260929-project-purpose.md)为准。
+本阶段曾将项目定位为：用尽量简洁、可读、教学友好的代码实现 PyTorch 核心功能。当前项目已调整为独立、可扩展的张量与自动微分框架，并保留 PyTorch 风格 API。最新目的、目标用户和维护边界以[项目目的文档](nlearn-20260930-project-purpose.md)为准。
 
 这里的“精简”应该体现在功能范围上，而不是体现在稳定性上。以下原则仍然适用：
 
@@ -191,8 +191,8 @@ Tensor 层不应该承担复杂数学逻辑，核心价值是作为动态图节�
 - `Module.named_parameters()`
 - `Module.state_dict()`
 - `Module.load_state_dict()`
-- `torch_1k.save()`
-- `torch_1k.load()`
+- `nlearn.save()`
+- `nlearn.load()`
 - `Optimizer.state_dict()`
 - `Optimizer.load_state_dict()`
 
@@ -263,9 +263,9 @@ Tensor 层不应该承担复杂数学逻辑，核心价值是作为动态图节�
 示例要求：训练主体代码与 PyTorch 保持一致，只允许在顶部切换：
 
 ```python
-import torch_1k as torch
-import torch_1k.nn as nn
-import torch_1k.optim as optim
+import nlearn as torch
+import nlearn.nn as nn
+import nlearn.optim as optim
 ```
 
 或：

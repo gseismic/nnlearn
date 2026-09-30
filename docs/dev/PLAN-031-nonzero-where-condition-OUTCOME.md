@@ -8,11 +8,11 @@ Git 基线：`81ffeb1`
 
 ## 实施结果
 
-1. 新增 `torch_1k.nonzero(input, as_tuple=False)`：
+1. 新增 `nlearn.nonzero(input, as_tuple=False)`：
    - 默认返回二维坐标 Tensor，shape 为 `(z, input.ndim)`。
    - `as_tuple=True` 返回每个维度一个 1D index Tensor。
    - 返回 Tensor 均为 `requires_grad=False`。
-2. 扩展 `torch_1k.where(...)`：
+2. 扩展 `nlearn.where(...)`：
    - 单参数 `where(condition)` 返回 `nonzero(condition, as_tuple=True)`。
    - 三参数 `where(condition, input, other)` 保留原有可微分流语义。
    - 只传两个参数时明确报错。
@@ -41,7 +41,7 @@ Git 基线：`81ffeb1`
 1. 从正值 mask 中取二维坐标。
 2. 用 `where(condition)` 得到 tuple index。
 3. 用 numeric tensor 的 `nonzero()` 取非零坐标。
-4. 同进程对比 `torch_1k` 与 PyTorch。
+4. 同进程对比 `nlearn` 与 PyTorch。
 
 ## 验证结果
 
@@ -55,7 +55,7 @@ python examples/example31_nonzero_where_compare.py
 python examples/example30_scatter_compare.py
 python examples/example29_einsum_ellipsis_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
@@ -66,7 +66,7 @@ python -m compileall -q torch_1k examples
 - 新增示例：通过，坐标和 tuple index 均与 PyTorch 一致
 - 相邻功能示例：scatter 与 einsum ellipsis 示例均通过
 - 全量测试：`210 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

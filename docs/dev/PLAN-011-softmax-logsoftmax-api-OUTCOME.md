@@ -8,13 +8,13 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
 
 ## 实施结果
 
-1. 新增稳定 `torch_1k.log_softmax(x, dim=...)`：
+1. 新增稳定 `nlearn.log_softmax(x, dim=...)`：
    - 前向使用 shifted logits 和 log-sum-exp。
    - 反向使用 `gy - softmax(x) * sum(gy)` 标准公式。
 2. 新增 Tensor 方法：
    - `x.softmax(dim=...)`
    - `x.log_softmax(dim=...)`
-3. 新增 `torch_1k.nn.functional` API：
+3. 新增 `nlearn.nn.functional` API：
    - `nn.functional.softmax(x, dim=...)`
    - `nn.functional.log_softmax(x, dim=...)`
 4. 新增模块：
@@ -22,7 +22,7 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
    - `nn.LogSoftmax(dim=...)`
 5. 新增 `examples/example11_softmax_logsoftmax_compare.py`：
    - 覆盖 Tensor 方法、函数式 API 和模块 API。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 6. 更新设计文档，移除 `Softmax` / `LogSoftmax` 未独立暴露的旧描述。
 
 ## 新增测试
@@ -41,17 +41,17 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
 ```bash
 pytest -q tests/test_20_softmax_logsoftmax.py
 python examples/example11_softmax_logsoftmax_compare.py
-USE_TORCH_1K=0 python examples/example11_softmax_logsoftmax_compare.py
+USE_NLEARN=0 python examples/example11_softmax_logsoftmax_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 Softmax/LogSoftmax 测试：`3 passed`
-- Softmax/LogSoftmax 双后端示例：`torch_1k` 与 PyTorch 均通过
+- Softmax/LogSoftmax 双后端示例：`nlearn` 与 PyTorch 均通过
 - 全量测试：`70 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## 复核结论
 

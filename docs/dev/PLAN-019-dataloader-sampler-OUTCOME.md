@@ -8,7 +8,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ## 实施结果
 
-1. 新增 `torch_1k.utils.data.sampler`：
+1. 新增 `nlearn.utils.data.sampler`：
    - `Sampler`
    - `SequentialSampler`
    - `RandomSampler`
@@ -25,11 +25,11 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `sampler` 与 `shuffle=True` 互斥。
    - `batch_sampler` 与 `batch_size`、`shuffle`、`sampler`、`drop_last` 互斥。
 5. `DataLoader.__len__()` 现在返回 `batch_sampler` 长度。
-6. `torch_1k.utils.data.__init__` 已导出新增 sampler 类。
+6. `nlearn.utils.data.__init__` 已导出新增 sampler 类。
 7. 新增 `examples/example19_dataloader_sampler_compare.py`：
    - 覆盖 `SequentialSampler`。
    - 覆盖 `BatchSampler`。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切换到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 8. 更新设计文档，记录 DataLoader sampler / batch_sampler 已补齐。
 
 ## 新增测试
@@ -51,17 +51,17 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 ```bash
 pytest -q tests/test_28_dataloader_sampler.py
 python examples/example19_dataloader_sampler_compare.py
-USE_TORCH_1K=0 python examples/example19_dataloader_sampler_compare.py
+USE_NLEARN=0 python examples/example19_dataloader_sampler_compare.py
 pytest -q
-python -m compileall -q torch_1k examples
+python -m compileall -q nlearn examples
 ```
 
 结果：
 
 - 新增 DataLoader sampler 测试：`7 passed`
-- DataLoader sampler 双后端示例：`torch_1k` 与 PyTorch 路径均通过
+- DataLoader sampler 双后端示例：`nlearn` 与 PyTorch 路径均通过
 - 全量测试：`125 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## TODO / 未完成事项
 

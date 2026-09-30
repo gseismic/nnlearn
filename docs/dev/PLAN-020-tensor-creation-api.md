@@ -20,7 +20,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ## 实施步骤
 
-1. 在 `torch_1k.tensor` 中新增或修正顶层创建函数：
+1. 在 `nlearn.tensor` 中新增或修正顶层创建函数：
    - `arange(start, end=None, step=1, device=None, dtype=None, requires_grad=False)`
    - `zeros_like(input, device=None, dtype=None, requires_grad=False)`
    - `ones_like(input, device=None, dtype=None, requires_grad=False)`
@@ -28,7 +28,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `full_like(input, fill_value, device=None, dtype=None, requires_grad=False)`
    - `randint(low, high=None, size=None, device=None, dtype=None, requires_grad=False)`
 2. 保留 `Tensor.zeros_like` / `Tensor.ones_like` 可用。
-3. 更新 `torch_1k.__init__` 导出新创建函数。
+3. 更新 `nlearn.__init__` 导出新创建函数。
 4. 新增 `examples/example20_tensor_creation_compare.py`，覆盖 PyTorch import 切换路径。
 5. 新增 `tests/test_29_tensor_creation_api.py`，覆盖：
    - `arange` 单参数/双参数/step。

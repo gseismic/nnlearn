@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 import torch as pytorch
-import torch_1k
+import nlearn
 
 
 def main():
@@ -15,10 +15,10 @@ def main():
     ], dtype=np.float64)
     cap = np.array([0.0, -2.0, -1.2, 1.5], dtype=np.float64)
 
-    ours = torch_1k.tensor(data, requires_grad=True)
-    ours_cap = torch_1k.tensor(cap, requires_grad=True)
-    ours_min = torch_1k.min(ours, dim=1)
-    ours_elementwise = torch_1k.minimum(ours, ours_cap)
+    ours = nlearn.tensor(data, requires_grad=True)
+    ours_cap = nlearn.tensor(cap, requires_grad=True)
+    ours_min = nlearn.min(ours, dim=1)
+    ours_elementwise = nlearn.minimum(ours, ours_cap)
     (ours_min.values.sum() + ours_elementwise.sum()).backward()
 
     refs = pytorch.tensor(data, dtype=pytorch.float64, requires_grad=True)

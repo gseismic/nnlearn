@@ -10,7 +10,7 @@
 
 ## 实现内容
 
-1. 新增 `torch_1k.device`：
+1. 新增 `nlearn.device`：
    - 支持 `torch.device("cpu")`。
    - 支持 `torch.device("cuda")` / `torch.device("cuda:0")` 的常见脚本写法。
    - 当前 CUDA index 仅作为脚本兼容信息保存，底层仍使用现有单 CUDA 后端。
@@ -23,10 +23,10 @@
    - `Tensor.numel()`
    - `Tensor.is_cuda`
 3. 扩展创建函数常见 dtype 参数：
-   - `torch_1k.rand(..., dtype=...)`
-   - `torch_1k.randn(..., dtype=...)`
-   - `torch_1k.zeros(..., dtype=...)`
-   - `torch_1k.ones(..., dtype=...)`
+   - `nlearn.rand(..., dtype=...)`
+   - `nlearn.randn(..., dtype=...)`
+   - `nlearn.zeros(..., dtype=...)`
+   - `nlearn.ones(..., dtype=...)`
 4. 扩展 Module 入口接口：
    - `Module.to(device=..., dtype=...)`
    - `Module.children()` / `named_children()`
@@ -40,21 +40,21 @@
    - `nn.ModuleList`
 7. 新增 `examples/example37_pytorch_script_entry_compat.py`：
    - 覆盖 `torch.device`、`to(device=..., dtype=...)`、`ModuleList`、`Identity`、模块遍历、`zero_grad(set_to_none=True)`。
-   - 默认使用 `torch_1k`，`USE_TORCH_1K=0` 时切换到 PyTorch。
+   - 默认使用 `nlearn`，`USE_NLEARN=0` 时切换到 PyTorch。
 8. 新增 `tests/test_43_pytorch_script_entry_compat.py`：
    - 覆盖新增入口 API 的单元行为。
-   - 运行 `torch_1k` 示例路径。
+   - 运行 `nlearn` 示例路径。
    - 子进程运行 PyTorch 替换路径。
 9. 更新设计路线图，记录 PLAN-037 阶段更新。
 
 ## 验证结果
 
-1. 默认 `torch_1k` 示例：
+1. 默认 `nlearn` 示例：
    - 命令：`python examples/example37_pytorch_script_entry_compat.py`
    - 结果：通过
    - accuracy：`1.000000`
 2. PyTorch 导入替换路径：
-   - 命令：`USE_TORCH_1K=0 python examples/example37_pytorch_script_entry_compat.py`
+   - 命令：`USE_NLEARN=0 python examples/example37_pytorch_script_entry_compat.py`
    - 结果：通过
    - accuracy：`1.000000`
 3. PLAN-036 / PLAN-037 组合测试：
@@ -64,7 +64,7 @@
    - 命令：`pytest -q`
    - 结果：`248 passed`
 5. 编译检查：
-   - 命令：`python -m compileall -q torch_1k examples`
+   - 命令：`python -m compileall -q nlearn examples`
    - 结果：通过
 
 ## TODO / 未完成事项

@@ -9,22 +9,22 @@ Git 基线：`d8c16cd3dfca4b28cbf504705946c8882271b67f`
 ## 实施结果
 
 1. 新增统一函数式算子：
-   - `torch_1k.log(x)`
-   - `torch_1k.relu(x)`
+   - `nlearn.log(x)`
+   - `nlearn.relu(x)`
 2. 新增 Tensor 方法：
    - `x.exp()`
    - `x.log()`
    - `x.relu()`
    - `x.tanh()`
    - `x.sigmoid()`
-3. `torch_1k.nn.functional.relu` 改为复用 `torch_1k.functional.numeric.ReLU`，避免顶层函数和 nn functional 维护两份反向传播实现。
+3. `nlearn.nn.functional.relu` 改为复用 `nlearn.functional.numeric.ReLU`，避免顶层函数和 nn functional 维护两份反向传播实现。
 4. 新增 `examples/example8_functional_api_compare.py`：
    - 覆盖 `torch.relu`、`x.log()` 和 `nn.functional.relu`。
-   - 同一代码可通过 `USE_TORCH_1K=0` 切到 PyTorch。
+   - 同一代码可通过 `USE_NLEARN=0` 切到 PyTorch。
 5. 更新 README 和设计文档：
    - README 将常用函数 `sin/cos/exp/log/relu/softmax` 标记为已完成。
    - 设计文档记录 PLAN-007 的函数式 API 阶段状态。
-   - 清理 `torch-1k` 原理文档中过时的已修复风险列表。
+   - 清理 `nlearn` 原理文档中过时的已修复风险列表。
 
 ## 新增测试
 
@@ -41,17 +41,17 @@ Git 基线：`d8c16cd3dfca4b28cbf504705946c8882271b67f`
 ```bash
 pytest -q tests/test_16_functional_api.py
 python examples/example8_functional_api_compare.py
-USE_TORCH_1K=0 python examples/example8_functional_api_compare.py
-python -m compileall -q torch_1k examples
+USE_NLEARN=0 python examples/example8_functional_api_compare.py
+python -m compileall -q nlearn examples
 pytest -q
 ```
 
 结果：
 
 - 新增函数式 API 测试：`3 passed`
-- 函数式示例：`torch_1k` 与 PyTorch 均输出 `score=0.393919`
+- 函数式示例：`nlearn` 与 PyTorch 均输出 `score=0.393919`
 - 全量测试：`54 passed`
-- 编译检查：`torch_1k` 与 `examples` 通过
+- 编译检查：`nlearn` 与 `examples` 通过
 
 ## 复核结论
 
