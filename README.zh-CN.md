@@ -2,7 +2,11 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-nnlearn 是一个独立的张量与自动微分框架，提供兼容 PyTorch 核心训练接口的子集，让你用熟悉的 API 只需少量代码就能编写和训练小型模型。
+用熟悉的 PyTorch 风格接口，几行代码即可训练模型。
+
+## 关于 nnlearn
+
+`nnlearn` 是一个独立的张量与自动微分框架，提供与 PyTorch 核心训练接口兼容的 API 子集。它包含熟悉的 `tensor`、`nn` 和 `optim` 等接口，让你用少量代码定义模型、执行前向与反向计算并更新参数。项目聚焦于这些核心训练流程，不提供完整的 PyTorch 兼容性。
 
 ## 安装
 
