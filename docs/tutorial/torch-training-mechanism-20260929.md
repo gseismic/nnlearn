@@ -94,6 +94,14 @@ optimizer.step()
 
 这个例子只核对一层线性模型的一次 SGD 更新。它不能证明所有算子、所有模型、所有 PyTorch 脚本都兼容，也没有比较训练速度。需要理解更完整的数据加载与模型结构时，可以继续看 `examples/000_tutorial_beginner_tutorial.py` 和 `examples/700_compat_pytorch_training_baseline.py`。
 
+如果要比较一段完整训练循环的速度和训练结果，可以运行 [`704_compat_training_performance_benchmark.py`](../../examples/704_compat_training_performance_benchmark.py)：
+
+```bash
+python examples/704_compat_training_performance_benchmark.py
+```
+
+示例默认在 CPU 上运行，并用相同的合成数据、MLP 初始参数、批次顺序和 SGD 配置分别训练 `nnlearn` 与 PyTorch。它会跳过预热步数，重复计时并报告中位数耗时、步/秒、样本/秒，以及完整数据集上的 loss 和 accuracy。可用 `--steps`、`--warmup` 和 `--repeats` 调整运行时长；只有两边都能使用 CUDA 时才可指定 `--device cuda`。计时不包含数据准备、模型创建和最终评估，结果仅反映此模型配置与当前环境，不代表所有工作负载的通用性能结论。
+
 ## 项目边界
 
 `nnlearn` 用于学习和检查小型训练机制。它只实现一部分 PyTorch 风格 API，不提供完整兼容性或生产性能保证。项目提供基于 CuPy 的可选 CUDA 路径；CUDA 实际可用性取决于本机的 CuPy、驱动和设备环境。
