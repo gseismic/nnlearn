@@ -2,6 +2,8 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+nnlearn is an independent tensor and autograd framework that provides a subset of core training APIs compatible with PyTorch, so you can build and train small models with just a few lines of familiar code.
+
 ## Install
 
 Clone the repository, then install the package and its dependencies:
