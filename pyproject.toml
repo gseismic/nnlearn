@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nnlearn"
+version = "0.1.0"
+description = "Independent tensor and autograd framework with a PyTorch-style API"
+requires-python = ">=3.8"
+authors = [
+    { name = "Liu Shengli", email = "liushengli203@163.com" },
+]
+dependencies = ["numpy", "loguru"]
+
+[project.urls]
+Homepage = "https://github.com/pai-studio/nnlearn"
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["nnlearn", "nnlearn.*", "torch_protocol"]
+namespaces = false

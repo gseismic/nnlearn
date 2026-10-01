@@ -24,6 +24,6 @@
 ## 完成标准
 
 1. 源码目录、导入、发行元数据、运行时版本、当前项目文档和示例开关均使用 `nnlearn`。
-2. `setup.py` 的发行包名和 `nnlearn.__version__` 均为 `nnlearn` 与 `0.1.0`。
+2. `pyproject.toml` 的发行包名和 `nnlearn.__version__` 均为 `nnlearn` 与 `0.1.0`。
 3. GitHub 仓库、本地检出目录和本地 `origin` 使用 `pai-studio/nnlearn`。
 4. 历史计划与结果文件维持原样；当前源码和文档中的旧导入名不残留。
