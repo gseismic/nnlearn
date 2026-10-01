@@ -29,7 +29,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `randint(low, high=None, size=None, device=None, dtype=None, requires_grad=False)`
 2. 保留 `Tensor.zeros_like` / `Tensor.ones_like` 可用。
 3. 更新 `nlearn.__init__` 导出新创建函数。
-4. 新增 `examples/example20_tensor_creation_compare.py`，覆盖 PyTorch import 切换路径。
+4. 新增 `examples/504_tensorapi_tensor_creation_compare.py`，覆盖 PyTorch import 切换路径。
 5. 新增 `tests/test_29_tensor_creation_api.py`，覆盖：
    - `arange` 单参数/双参数/step。
    - `zeros_like` / `ones_like` 继承 shape/device。

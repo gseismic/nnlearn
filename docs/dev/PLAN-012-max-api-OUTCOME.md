@@ -21,7 +21,7 @@ Git 基线：`df6f5ca93991914fff15e3abf66c3be9a11a2389`
    - 支持广播。
    - 反向传播会按输入原始 shape 还原梯度。
 4. 新增 `Tensor.max()` 方法。
-5. 新增 `examples/example12_max_api_compare.py`：
+5. 新增 `examples/500_tensorapi_max_api_compare.py`：
    - 覆盖 `logits.max(dim=1)` 推理预测。
    - 覆盖 `torch.max(x, y)` elementwise 路径。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
@@ -45,8 +45,8 @@ Git 基线：`df6f5ca93991914fff15e3abf66c3be9a11a2389`
 
 ```bash
 pytest -q tests/test_21_max_api.py
-python examples/example12_max_api_compare.py
-USE_NLEARN=0 python examples/example12_max_api_compare.py
+python examples/500_tensorapi_max_api_compare.py
+USE_NLEARN=0 python examples/500_tensorapi_max_api_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

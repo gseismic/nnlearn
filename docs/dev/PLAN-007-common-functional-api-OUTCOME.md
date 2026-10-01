@@ -18,7 +18,7 @@ Git 基线：`d8c16cd3dfca4b28cbf504705946c8882271b67f`
    - `x.tanh()`
    - `x.sigmoid()`
 3. `nlearn.nn.functional.relu` 改为复用 `nlearn.functional.numeric.ReLU`，避免顶层函数和 nn functional 维护两份反向传播实现。
-4. 新增 `examples/example8_functional_api_compare.py`：
+4. 新增 `examples/400_nnapi_functional_api_compare.py`：
    - 覆盖 `torch.relu`、`x.log()` 和 `nn.functional.relu`。
    - 同一代码可通过 `USE_NLEARN=0` 切到 PyTorch。
 5. 更新 README 和设计文档：
@@ -40,8 +40,8 @@ Git 基线：`d8c16cd3dfca4b28cbf504705946c8882271b67f`
 
 ```bash
 pytest -q tests/test_16_functional_api.py
-python examples/example8_functional_api_compare.py
-USE_NLEARN=0 python examples/example8_functional_api_compare.py
+python examples/400_nnapi_functional_api_compare.py
+USE_NLEARN=0 python examples/400_nnapi_functional_api_compare.py
 python -m compileall -q nlearn examples
 pytest -q
 ```

@@ -10,7 +10,7 @@
 
 ## 实现内容
 
-1. 新增 `examples/example36_pytorch_training_baseline.py`，作为训练脚本替换兼容基线：
+1. 新增 `examples/700_compat_pytorch_training_baseline.py`，作为训练脚本替换兼容基线：
    - 默认使用 `nlearn`。
    - `USE_NLEARN=0` 时切换到 PyTorch。
    - 训练主体覆盖 MLP、CNN、Transformer 三条路径。
@@ -27,12 +27,12 @@
 ## 验证结果
 
 1. 默认 `nlearn` 示例：
-   - 命令：`python examples/example36_pytorch_training_baseline.py`
+   - 命令：`python examples/700_compat_pytorch_training_baseline.py`
    - 结果：通过
    - MLP / CNN / Transformer accuracy 均为 `1.000000`
    - MLP checkpoint error 为 `0.00000000`
 2. PyTorch 导入替换路径：
-   - 命令：`USE_NLEARN=0 python examples/example36_pytorch_training_baseline.py`
+   - 命令：`USE_NLEARN=0 python examples/700_compat_pytorch_training_baseline.py`
    - 结果：通过
    - MLP / CNN / Transformer accuracy 均为 `1.000000`
    - MLP checkpoint error 为 `0.00000000`

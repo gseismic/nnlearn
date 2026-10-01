@@ -25,7 +25,7 @@ Git 基线：`a5d4d3b`
    - 支持整数 split size。
    - 支持 sections 列表。
    - 支持负维度。
-9. 新增 `examples/example22_shape_split_chunk_repeat_compare.py`：
+9. 新增 `examples/505_tensorapi_shape_split_chunk_repeat_compare.py`：
    - 覆盖 `repeat`、`chunk`、`split` 的组合使用。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 10. 更新设计文档，记录 PLAN-022 已补齐这组 shape API。
@@ -47,8 +47,8 @@ Git 基线：`a5d4d3b`
 
 ```bash
 pytest -q tests/test_31_shape_split_chunk_repeat.py
-python examples/example22_shape_split_chunk_repeat_compare.py
-USE_NLEARN=0 python examples/example22_shape_split_chunk_repeat_compare.py
+python examples/505_tensorapi_shape_split_chunk_repeat_compare.py
+USE_NLEARN=0 python examples/505_tensorapi_shape_split_chunk_repeat_compare.py
 ```
 
 结果：

@@ -39,7 +39,7 @@ DataLoader(dataset, batch_sampler=BatchSampler(sampler, batch_size, drop_last))
    - `batch_sampler` 与 `batch_size/shuffle/sampler/drop_last` 互斥。
    - `__len__()` 返回 batch_sampler 长度。
 3. 更新 `nlearn.utils.data.__init__` 导出 sampler 类。
-4. 新增 `examples/example19_dataloader_sampler_compare.py`，覆盖 PyTorch import 切换路径。
+4. 新增 `examples/201_data_dataloader_sampler_compare.py`，覆盖 PyTorch import 切换路径。
 5. 新增 `tests/test_28_dataloader_sampler.py`，覆盖：
    - SequentialSampler 顺序 batch。
    - RandomSampler 覆盖全部样本且受 `manual_seed` 控制。

@@ -29,7 +29,7 @@ Git 基线：`e7881de`
 
 ## 实施步骤
 
-1. 新增 `examples/example36_pytorch_training_baseline.py`：
+1. 新增 `examples/700_compat_pytorch_training_baseline.py`：
    - 使用同一套训练函数跑 MLP、CNN、Transformer。
    - 输出每条链路的 loss / accuracy。
    - 运行 checkpoint roundtrip，并校验恢复后输出一致。

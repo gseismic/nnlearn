@@ -23,7 +23,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 5. 顶层 `torch.squeeze` 和 `torch.flatten` 通过 `functional` 导出可用。
 6. `nn.Flatten.forward` 已改为复用 `x.flatten(...)`。
 7. 删除 `functional.matrix` 中未完成的 `_Unsqueeze` 占位实现。
-8. 新增 `examples/example15_shape_api_compare.py`：
+8. 新增 `examples/502_tensorapi_shape_api_compare.py`：
    - 覆盖 `squeeze`、`unsqueeze`、`flatten`、`view` 和 `nn.Flatten`。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 9. 更新设计文档，记录 PLAN-015 已补齐常用 shape API。
@@ -46,8 +46,8 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ```bash
 pytest -q tests/test_24_shape_api.py
-python examples/example15_shape_api_compare.py
-USE_NLEARN=0 python examples/example15_shape_api_compare.py
+python examples/502_tensorapi_shape_api_compare.py
+USE_NLEARN=0 python examples/502_tensorapi_shape_api_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

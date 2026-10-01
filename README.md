@@ -102,5 +102,5 @@ for _ in range(20):
 From the repository root, run:
 
 ```bash
-python examples/example38_beginner_tutorial.py
+python examples/000_tutorial_beginner_tutorial.py
 ```

@@ -57,7 +57,7 @@ PyTorch 中 `x.grad` 应为 `[[12.0], [12.0]]`，当前实现会尝试把 `(2, 3
 2. 更新 `tests/test_32_einsum_api.py`：
    - 增加广播反向回归测试。
    - 增加 PyTorch 经典用法参数化对比测试。
-3. 新增 `examples/example25_einsum_usage_compare.py`：
+3. 新增 `examples/601_einsum_classic_usage_compare.py`：
    - 使用同一代码在 `nlearn` 和 PyTorch 两条路径运行。
    - 覆盖矩阵乘、batch matmul、attention score/context、广播门控、规约。
 4. 更新 PLAN-023 结果文档，记录本轮 hardening 关联。

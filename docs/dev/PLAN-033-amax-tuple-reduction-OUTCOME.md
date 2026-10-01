@@ -41,7 +41,7 @@ Git 基线：`81ffeb1`
 
 ## 新增示例
 
-新增 `examples/example33_amax_tuple_compare.py`：
+新增 `examples/511_tensorapi_amax_tuple_compare.py`：
 
 1. 用 `(N, C, H, W)` 张量做空间维 `(H, W)` 最大值规约。
 2. 保留 `keepdim=True` 的广播友好形状。
@@ -55,9 +55,9 @@ Git 基线：`81ffeb1`
 pytest -q tests/test_39_amax_api.py
 pytest -q tests/test_21_max_api.py tests/test_39_amax_api.py
 pytest -q tests/test_21_max_api.py tests/test_39_amax_api.py tests/test_32_einsum_api.py tests/test_35_mask_indexing_numeric_api.py tests/test_37_scatter_api.py tests/test_38_nonzero_where_condition.py tests/test_36_cross_entropy_advanced.py
-python examples/example33_amax_tuple_compare.py
-python examples/example32_einsum_repeated_labels_compare.py
-python examples/example31_nonzero_where_compare.py
+python examples/511_tensorapi_amax_tuple_compare.py
+python examples/603_einsum_repeated_labels_compare.py
+python examples/510_tensorapi_nonzero_where_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

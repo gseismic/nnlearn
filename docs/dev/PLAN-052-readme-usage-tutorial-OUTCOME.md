@@ -9,7 +9,7 @@
 ## 验证
 
 - README 中 8 段 Python 示例（中英文各 4 段）均在当前工作区实际执行通过。
-- `python examples/example38_beginner_tutorial.py` 通过，最终分类准确率为 1.0。
+- `python examples/000_tutorial_beginner_tutorial.py` 通过，最终分类准确率为 1.0。
 - 本地 Markdown 链接检查未发现失效链接；`git diff --check` 通过。
 
 ## 提交与推送

@@ -19,7 +19,7 @@ PyTorch 已是成熟的深度学习框架。本项目若持续以“补齐 PyTor
 ## 实施范围
 
 1. 新增 `docs/design/nlearn-20260930-project-purpose.md`：记录项目目标、用户、价值、范围边界和后续判断标准。
-2. 新增 `examples/example39_training_mechanism_comparison.py`：同时调用 `nlearn` 与 PyTorch，载入完全相同的数据和初始参数，完成一次线性模型前向、MSE、反向传播和 SGD 更新，打印两边的数值与最大绝对误差。
+2. 新增 `examples/702_compat_training_mechanism_comparison.py`：同时调用 `nlearn` 与 PyTorch，载入完全相同的数据和初始参数，完成一次线性模型前向、MSE、反向传播和 SGD 更新，打印两边的数值与最大绝对误差。
 3. 新增 `docs/tutorial/torch-training-mechanism-20260929.md`：给出运行方法、逐步讲解、代码映射和边界说明。
 4. 重写 `README.md` 为中文项目入口，说明定位、适合人群、核心能力、教程入口、安装和兼容限制。
 5. 更新 `docs/design/nlearn-20260624-core-cuda-roadmap.md`：标注历史行数目标已经过时，记录新的项目目的和本轮教程。

@@ -24,7 +24,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `torch.randint(low, high, size)`
    - 默认 dtype 为 `int64`。
 5. 更新 `nlearn.__init__`，导出新增创建函数。
-6. 新增 `examples/example20_tensor_creation_compare.py`：
+6. 新增 `examples/504_tensorapi_tensor_creation_compare.py`：
    - 覆盖 `arange`、`randint`、`full`、`zeros_like`、`ones_like`、`full_like`。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 7. 更新设计文档，将常用创建函数纳入基础算子层。
@@ -47,8 +47,8 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ```bash
 pytest -q tests/test_29_tensor_creation_api.py
-python examples/example20_tensor_creation_compare.py
-USE_NLEARN=0 python examples/example20_tensor_creation_compare.py
+python examples/504_tensorapi_tensor_creation_compare.py
+USE_NLEARN=0 python examples/504_tensorapi_tensor_creation_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

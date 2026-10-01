@@ -31,7 +31,7 @@ nn.init.xavier_uniform_(layer.weight)
    - `kaiming_uniform_(mode='fan_in')` 会使用真实前向语义中的 `in_features`。
 6. `Conv2d.weight` 记录 `_fan_in` / `_fan_out`：
    - fan 计算为 `in_channels * kh * kw` 和 `out_channels * kh * kw`。
-7. 新增 `examples/example14_nn_init_compare.py`：
+7. 新增 `examples/403_nnapi_init_compare.py`：
    - 覆盖 `xavier_uniform_`、`kaiming_uniform_`、`zeros_`、`ones_`。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 8. 更新设计文档，记录 `nn.init` 常用子集已补齐。
@@ -55,8 +55,8 @@ nn.init.xavier_uniform_(layer.weight)
 
 ```bash
 pytest -q tests/test_23_nn_init.py
-python examples/example14_nn_init_compare.py
-USE_NLEARN=0 python examples/example14_nn_init_compare.py
+python examples/403_nnapi_init_compare.py
+USE_NLEARN=0 python examples/403_nnapi_init_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

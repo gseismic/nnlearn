@@ -20,7 +20,7 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
 4. 新增模块：
    - `nn.Softmax(dim=...)`
    - `nn.LogSoftmax(dim=...)`
-5. 新增 `examples/example11_softmax_logsoftmax_compare.py`：
+5. 新增 `examples/402_nnapi_softmax_logsoftmax_compare.py`：
    - 覆盖 Tensor 方法、函数式 API 和模块 API。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 6. 更新设计文档，移除 `Softmax` / `LogSoftmax` 未独立暴露的旧描述。
@@ -40,8 +40,8 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
 
 ```bash
 pytest -q tests/test_20_softmax_logsoftmax.py
-python examples/example11_softmax_logsoftmax_compare.py
-USE_NLEARN=0 python examples/example11_softmax_logsoftmax_compare.py
+python examples/402_nnapi_softmax_logsoftmax_compare.py
+USE_NLEARN=0 python examples/402_nnapi_softmax_logsoftmax_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

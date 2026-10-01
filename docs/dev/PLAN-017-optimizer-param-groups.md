@@ -45,7 +45,7 @@ optim.Adam([
    - 每组可配置 `lr` / `betas` / `eps` / decoupled `weight_decay`。
 6. 保留旧属性：
    - 单参数组场景下 `optimizer.lr`、`optimizer.momentum` 等仍反映第一组配置。
-7. 新增 `examples/example17_optimizer_param_groups_compare.py`，覆盖 PyTorch import 切换路径。
+7. 新增 `examples/405_nnapi_optimizer_param_groups_compare.py`，覆盖 PyTorch import 切换路径。
 8. 新增 `tests/test_26_optimizer_param_groups.py`，覆盖：
    - SGD 不同参数组不同 lr。
    - MomentumSGD 不同组 momentum。

@@ -16,7 +16,7 @@
 
 ```bash
 pip install .
-python examples/example39_training_mechanism_comparison.py
+python examples/702_compat_training_mechanism_comparison.py
 ```
 
 脚本会打印两边各步骤的结果和最大绝对误差。输入、权重和梯度使用 `float32`；误差不超过 `1e-6` 时示例报告通过。
@@ -51,7 +51,7 @@ b \leftarrow b - lr\frac{\partial L}{\partial b}
 
 ## 对照程序的关键步骤
 
-[`example39_training_mechanism_comparison.py`](../../examples/example39_training_mechanism_comparison.py) 先用同一份 NumPy 常量分别创建两套张量：
+[`702_compat_training_mechanism_comparison.py`](../../examples/702_compat_training_mechanism_comparison.py) 先用同一份 NumPy 常量分别创建两套张量：
 
 ```python
 inputs = torch_api.tensor(INPUTS, dtype=torch_api.float32)
@@ -92,7 +92,7 @@ optimizer.step()
 - `weight_after_step`、`bias_after_step` 检查优化器更新是否使用了对应梯度和学习率。
 - 每个项目的最大绝对误差展示两种浮点实现之间的数值差异。
 
-这个例子只核对一层线性模型的一次 SGD 更新。它不能证明所有算子、所有模型、所有 PyTorch 脚本都兼容，也没有比较训练速度。需要理解更完整的数据加载与模型结构时，可以继续看 `examples/example38_beginner_tutorial.py` 和 `examples/example36_pytorch_training_baseline.py`。
+这个例子只核对一层线性模型的一次 SGD 更新。它不能证明所有算子、所有模型、所有 PyTorch 脚本都兼容，也没有比较训练速度。需要理解更完整的数据加载与模型结构时，可以继续看 `examples/000_tutorial_beginner_tutorial.py` 和 `examples/700_compat_pytorch_training_baseline.py`。
 
 ## 项目边界
 

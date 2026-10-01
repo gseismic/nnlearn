@@ -39,7 +39,7 @@ Git 基线：`9e68cd0`
    - `nlearn/functional/matrix.py` 中 `split` 原本使用未限定的 `sum(sections)`。
    - 模块内也定义了张量规约 `sum`，比较语义补齐后该路径会错误进入 Tensor 布尔上下文。
    - 已改为 `builtins.sum(sections)`，明确使用 Python 内置求和。
-9. 新增 `examples/example27_mask_indexing_numeric_compare.py`：
+9. 新增 `examples/508_tensorapi_mask_indexing_numeric_compare.py`：
    - 用 `masked_fill` 构造无效位置 mask。
    - 用 `gather` 按 label 取目标分数。
    - 用 `where` 做正值筛选。
@@ -68,7 +68,7 @@ Git 基线：`9e68cd0`
 ```bash
 pytest -q tests/test_35_mask_indexing_numeric_api.py
 pytest -q tests/test_31_shape_split_chunk_repeat.py tests/test_35_mask_indexing_numeric_api.py
-python examples/example27_mask_indexing_numeric_compare.py
+python examples/508_tensorapi_mask_indexing_numeric_compare.py
 python -m compileall -q nlearn examples
 pytest -q
 ```

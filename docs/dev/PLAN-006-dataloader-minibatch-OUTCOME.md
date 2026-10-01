@@ -23,7 +23,7 @@ Git 基线：`80cf9e44bd65861b0f83b35ee9f7a54f7ae748e4`
 4. 补齐 `torch.utils.data` 访问形式：
    - `import nlearn as torch` 后可以使用 `torch.utils.data.TensorDataset` 和 `torch.utils.data.DataLoader`。
 5. 新增 mini-batch CNN 示例：
-   - `examples/example7_mnist_dataloader_train_compare.py`
+   - `examples/200_data_mnist_dataloader_train_compare.py`
    - 使用同一训练循环跑通 `nlearn` 与 PyTorch。
    - 默认使用本地 MNIST-like 数据，也支持 `USE_REAL_MNIST=1` 的真实 MNIST 小子集。
 6. 更新设计文档中 data 层状态，记录 PLAN-006 已补齐默认 Tensor collation。
@@ -44,10 +44,10 @@ Git 基线：`80cf9e44bd65861b0f83b35ee9f7a54f7ae748e4`
 
 ```bash
 pytest -q tests/test_15_data_pipeline.py
-python examples/example7_mnist_dataloader_train_compare.py
-USE_NLEARN=0 python examples/example7_mnist_dataloader_train_compare.py
-USE_REAL_MNIST=1 python examples/example7_mnist_dataloader_train_compare.py
-USE_NLEARN=0 USE_REAL_MNIST=1 python examples/example7_mnist_dataloader_train_compare.py
+python examples/200_data_mnist_dataloader_train_compare.py
+USE_NLEARN=0 python examples/200_data_mnist_dataloader_train_compare.py
+USE_REAL_MNIST=1 python examples/200_data_mnist_dataloader_train_compare.py
+USE_NLEARN=0 USE_REAL_MNIST=1 python examples/200_data_mnist_dataloader_train_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

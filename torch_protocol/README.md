@@ -78,11 +78,11 @@ with backend.no_grad():
     predictions = model(x)
 ```
 
-仓库中的 [`example40_torch_protocol.py`](../examples/example40_torch_protocol.py) 展示了包含 `TensorDataset` 与 `DataLoader` 的完整训练流程。可分别运行：
+仓库中的 [`703_compat_torch_protocol.py`](../examples/703_compat_torch_protocol.py) 展示了包含 `TensorDataset` 与 `DataLoader` 的完整训练流程。可分别运行：
 
 ```bash
-python examples/example40_torch_protocol.py
-TORCH_BACKEND=torch python examples/example40_torch_protocol.py
+python examples/703_compat_torch_protocol.py
+TORCH_BACKEND=torch python examples/703_compat_torch_protocol.py
 ```
 
 使用第二个命令前需要安装 PyTorch。两种后端的随机数序列、参数初值和浮点结果不保证相同。

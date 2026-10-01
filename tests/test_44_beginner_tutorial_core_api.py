@@ -1,3 +1,4 @@
+import importlib
 import os
 import subprocess
 import sys
@@ -11,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "examples"))
 
 import nnlearn as torch
 import nnlearn.nn as nn
-import example38_beginner_tutorial as tutorial
+tutorial = importlib.import_module("000_tutorial_beginner_tutorial")
 
 
 def test_beginner_tensor_wrappers_match_pytorch():
@@ -79,7 +80,7 @@ def test_pytorch_beginner_tutorial_replacement_path_runs():
     env = os.environ.copy()
     env["USE_NNLEARN"] = "0"
     script = Path(__file__).resolve().parents[1] / "examples" / (
-        "example38_beginner_tutorial.py"
+        "000_tutorial_beginner_tutorial.py"
     )
     completed = subprocess.run(
         [sys.executable, str(script)],

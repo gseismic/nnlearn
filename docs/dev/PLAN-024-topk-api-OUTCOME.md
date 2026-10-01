@@ -22,7 +22,7 @@ Git 基线：`a5d4d3b`
 9. indices 不追踪梯度：
    - 代码 review 时发现 indices 如果作为 `Function` 第二输出会被错误标记为可求导。
    - 已修正为 `TopK(Function)` 只产生可微 values，indices 作为独立 `requires_grad=False` Tensor 返回。
-10. 新增 `examples/example24_topk_compare.py`：
+10. 新增 `examples/506_tensorapi_topk_compare.py`：
     - 使用 top-k values / indices 计算 top-1 和 top-2 accuracy。
     - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 11. 更新设计文档，记录 PLAN-024 已补齐 topk API。
@@ -45,8 +45,8 @@ Git 基线：`a5d4d3b`
 
 ```bash
 pytest -q tests/test_33_topk_api.py
-python examples/example24_topk_compare.py
-USE_NLEARN=0 python examples/example24_topk_compare.py
+python examples/506_tensorapi_topk_compare.py
+USE_NLEARN=0 python examples/506_tensorapi_topk_compare.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py tests/test_33_topk_api.py
 python -m compileall -q nlearn examples
 pytest -q

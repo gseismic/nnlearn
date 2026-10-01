@@ -17,7 +17,7 @@ Git 基线：`9f4acc33fc98b2980f081d6b80c6708853ba80ae`
    - 保存 `p` 和 `inplace` 参数。
    - forward 根据模块 `self.training` 调用函数式 dropout。
 3. 从 `nlearn.nn` 导出 `Dropout`。
-4. 新增 `examples/example10_dropout_train_eval_compare.py`：
+4. 新增 `examples/401_nnapi_dropout_train_eval_compare.py`：
    - 验证训练态会产生零值和缩放值。
    - 验证 eval 后输出等于输入。
    - 验证反向梯度等于训练态 mask 缩放值。
@@ -39,8 +39,8 @@ Git 基线：`9f4acc33fc98b2980f081d6b80c6708853ba80ae`
 
 ```bash
 pytest -q tests/test_19_dropout.py
-python examples/example10_dropout_train_eval_compare.py
-USE_NLEARN=0 python examples/example10_dropout_train_eval_compare.py
+python examples/401_nnapi_dropout_train_eval_compare.py
+USE_NLEARN=0 python examples/401_nnapi_dropout_train_eval_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

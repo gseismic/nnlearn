@@ -47,7 +47,7 @@ Git 基线：`c448c68`
 
 ## 新增示例
 
-新增 `examples/example35_min_compare.py`：
+新增 `examples/513_tensorapi_min_compare.py`：
 
 1. 对二维 score 张量执行 `nlearn.min(x, dim=1)`。
 2. 对 score 与 cap 张量执行 `nlearn.minimum(x, cap)`。
@@ -60,7 +60,7 @@ Git 基线：`c448c68`
 ```bash
 pytest -q tests/test_41_min_api.py
 pytest -q tests/test_21_max_api.py tests/test_39_amax_api.py tests/test_40_amin_aminmax_api.py tests/test_41_min_api.py
-python examples/example35_min_compare.py
+python examples/513_tensorapi_min_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

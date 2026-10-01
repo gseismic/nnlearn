@@ -19,7 +19,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `torch.cat(tensors, dim=0)`
    - `torch.concat(tensors, dim=0)`
    - `torch.concatenate(tensors, dim=0)`
-3. 新增 `examples/example18_cat_api_compare.py`：
+3. 新增 `examples/503_tensorapi_cat_api_compare.py`：
    - 覆盖多分支特征拼接。
    - 覆盖 `cat` / `concat`。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
@@ -42,8 +42,8 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ```bash
 pytest -q tests/test_27_cat_api.py
-python examples/example18_cat_api_compare.py
-USE_NLEARN=0 python examples/example18_cat_api_compare.py
+python examples/503_tensorapi_cat_api_compare.py
+USE_NLEARN=0 python examples/503_tensorapi_cat_api_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

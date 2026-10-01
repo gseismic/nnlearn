@@ -15,8 +15,8 @@
 ## 验证结果
 
 - `CUDA_VISIBLE_DEVICES='' python -m pytest -q`：`297 passed`。
-- `python examples/example40_torch_protocol.py`：nlearn 后端训练成功，损失从 `1.902692` 降至 `0.000007`。
-- `CUDA_VISIBLE_DEVICES='' TORCH_BACKEND=torch python examples/example40_torch_protocol.py`：PyTorch 后端训练成功，损失从 `17.111645` 降至 `0.000002`。
+- `python examples/703_compat_torch_protocol.py`：nlearn 后端训练成功，损失从 `1.902692` 降至 `0.000007`。
+- `CUDA_VISIBLE_DEVICES='' TORCH_BACKEND=torch python examples/703_compat_torch_protocol.py`：PyTorch 后端训练成功，损失从 `17.111645` 降至 `0.000002`。
 - `python -m pip wheel --no-deps --no-build-isolation ./torch_protocol ...`：成功生成 `torch_protocol-0.1.0-py3-none-any.whl`。
 - 将该 wheel 安装到全新隔离虚拟环境后，导入和版本检查通过；`torch` 与 `nlearn` 均未进入 `sys.modules`。
 - `python setup.py --name --version` 输出 `nlearn`、`0.1.0`；`find_packages()` 包含 `torch_protocol`。

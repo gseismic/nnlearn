@@ -49,4 +49,4 @@ python 'book/代码/04-进阶模型与运行时/18-卷积池化与CNN.py'
 
 ## 对应到仓库
 
-仓库中的 [`nnlearn/nn/conv.py`](../../nnlearn/nn/conv.py) 和 [`nnlearn/nn/pool.py`](../../nnlearn/nn/pool.py) 实现了相同类别的算子；`examples/example5_mnist_cnn_train_compare.py` 展示了 CNN 训练示例。本章的教学实现不包含仓库中的后端调度。
+仓库中的 [`nnlearn/nn/conv.py`](../../nnlearn/nn/conv.py) 和 [`nnlearn/nn/pool.py`](../../nnlearn/nn/pool.py) 实现了相同类别的算子；`examples/104_training_mnist_cnn_train_compare.py` 展示了 CNN 训练示例。本章的教学实现不包含仓库中的后端调度。

@@ -38,7 +38,7 @@
 6. 新增轻量 nn 容器：
    - `nn.Identity`
    - `nn.ModuleList`
-7. 新增 `examples/example37_pytorch_script_entry_compat.py`：
+7. 新增 `examples/701_compat_pytorch_script_entry.py`：
    - 覆盖 `torch.device`、`to(device=..., dtype=...)`、`ModuleList`、`Identity`、模块遍历、`zero_grad(set_to_none=True)`。
    - 默认使用 `nlearn`，`USE_NLEARN=0` 时切换到 PyTorch。
 8. 新增 `tests/test_43_pytorch_script_entry_compat.py`：
@@ -50,11 +50,11 @@
 ## 验证结果
 
 1. 默认 `nlearn` 示例：
-   - 命令：`python examples/example37_pytorch_script_entry_compat.py`
+   - 命令：`python examples/701_compat_pytorch_script_entry.py`
    - 结果：通过
    - accuracy：`1.000000`
 2. PyTorch 导入替换路径：
-   - 命令：`USE_NLEARN=0 python examples/example37_pytorch_script_entry_compat.py`
+   - 命令：`USE_NLEARN=0 python examples/701_compat_pytorch_script_entry.py`
    - 结果：通过
    - accuracy：`1.000000`
 3. PLAN-036 / PLAN-037 组合测试：

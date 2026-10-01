@@ -20,7 +20,7 @@ Git 基线：`d8c16cd3dfca4b28cbf504705946c8882271b67f`
 1. 在 `nlearn.functional.numeric` 中实现可反向传播的 `log` 和 `relu`。
 2. 让 `nlearn.nn.functional.relu` 复用统一实现。
 3. 给 `Tensor` 增加 `exp()`、`log()`、`relu()`、`tanh()`、`sigmoid()` 方法。
-4. 新增 `examples/example8_functional_api_compare.py`，覆盖顶层函数、Tensor 方法和 `nn.functional`。
+4. 新增 `examples/400_nnapi_functional_api_compare.py`，覆盖顶层函数、Tensor 方法和 `nn.functional`。
 5. 补充测试，验证 `log` 和 `relu` 的前向值与反向梯度。
 6. 更新 README 与设计文档中的常用函数状态。
 7. 运行新增示例双后端、全量测试和编译检查。

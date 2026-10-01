@@ -4,7 +4,7 @@
 
 ## 完成内容
 
-1. 新增 `examples/example4_mlp_train_compare.py`，使用同一份训练主体跑 PyTorch 或 `nlearn`：
+1. 新增 `examples/103_training_mlp_train_compare.py`，使用同一份训练主体跑 PyTorch 或 `nlearn`：
    - 默认 `nlearn` 路径。
    - 设置 `USE_NLEARN=0` 后跑 PyTorch 路径。
 2. 示例实现 XOR 分类 MLP：
@@ -31,8 +31,8 @@
 已运行：
 
 ```bash
-python examples/example4_mlp_train_compare.py
-USE_NLEARN=0 python examples/example4_mlp_train_compare.py
+python examples/103_training_mlp_train_compare.py
+USE_NLEARN=0 python examples/103_training_mlp_train_compare.py
 pytest -q tests/test_12_mlp.py
 pytest -q
 python -m compileall -q nlearn examples

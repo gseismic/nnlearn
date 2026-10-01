@@ -24,7 +24,7 @@ Git 基线：`df6f5ca93991914fff15e3abf66c3be9a11a2389`
    - dim 规约反向传播到 argmax 位置。
 2. 实现 elementwise `torch.max(x, y)`，并处理广播梯度还原。
 3. 给 `Tensor` 增加 `max(dim=None, keepdim=False)` 方法。
-4. 新增 `examples/example12_max_api_compare.py`，覆盖推理预测和可微 max loss。
+4. 新增 `examples/500_tensorapi_max_api_compare.py`，覆盖推理预测和可微 max loss。
 5. 新增测试覆盖：
    - 全局 max 前向和反向。
    - dim max 的 values/indices、keepdim 和反向。

@@ -102,5 +102,5 @@ for _ in range(20):
 在仓库根目录运行：
 
 ```bash
-python examples/example38_beginner_tutorial.py
+python examples/000_tutorial_beginner_tutorial.py
 ```

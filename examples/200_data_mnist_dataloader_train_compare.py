@@ -1,5 +1,6 @@
 """PyTorch-compatible mini-batch CNN training with TensorDataset/DataLoader."""
 
+import importlib
 import os
 import sys
 from pathlib import Path
@@ -20,7 +21,11 @@ else:
     import torch.optim as optim
     from torch.utils.data import DataLoader, TensorDataset
 
-from example5_mnist_cnn_train_compare import SmallCNN, make_dataset
+_cnn_example = importlib.import_module(
+    "104_training_mnist_cnn_train_compare"
+)
+SmallCNN = _cnn_example.SmallCNN
+make_dataset = _cnn_example.make_dataset
 
 
 def run(epochs=100, lr=0.02, batch_size=5):

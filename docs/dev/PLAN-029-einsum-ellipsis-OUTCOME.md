@@ -36,7 +36,7 @@ Git 基线：`81ffeb1`
 
 ## 新增示例
 
-新增 `examples/example29_einsum_ellipsis_compare.py`：
+新增 `examples/602_einsum_ellipsis_compare.py`：
 
 1. 在同一进程中分别运行 `nlearn` 与 PyTorch。
 2. 覆盖泛化 batch matmul、ellipsis broadcast、attention score 和 ellipsis 规约。
@@ -49,9 +49,9 @@ Git 基线：`81ffeb1`
 ```bash
 pytest -q tests/test_32_einsum_api.py
 pytest -q tests/test_32_einsum_api.py tests/test_35_mask_indexing_numeric_api.py tests/test_36_cross_entropy_advanced.py
-python examples/example29_einsum_ellipsis_compare.py
-python examples/example25_einsum_usage_compare.py
-python examples/example28_cross_entropy_advanced_compare.py
+python examples/602_einsum_ellipsis_compare.py
+python examples/601_einsum_classic_usage_compare.py
+python examples/407_nnapi_cross_entropy_advanced_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

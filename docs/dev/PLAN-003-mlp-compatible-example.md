@@ -22,7 +22,7 @@
 
 ## 验收标准
 
-1. `python examples/example4_mlp_train_compare.py` 可直接跑通 `nlearn` 路径。
-2. `USE_NLEARN=0 python examples/example4_mlp_train_compare.py` 可直接跑通 PyTorch 路径。
+1. `python examples/103_training_mlp_train_compare.py` 可直接跑通 `nlearn` 路径。
+2. `USE_NLEARN=0 python examples/103_training_mlp_train_compare.py` 可直接跑通 PyTorch 路径。
 3. MLP 训练后 XOR 分类准确率达到 1.0。
 4. 全量测试通过。

@@ -35,7 +35,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 7. `nlearn.nn.__init__` 已导出：
    - `BatchNorm1d`
    - `BatchNorm2d`
-8. 新增 `examples/example16_batchnorm_compare.py`：
+8. 新增 `examples/404_nnapi_batchnorm_compare.py`：
    - 覆盖 `train()` / `eval()` 行为差异。
    - 覆盖 affine 参数梯度。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
@@ -63,8 +63,8 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ```bash
 pytest -q tests/test_25_batchnorm.py
-python examples/example16_batchnorm_compare.py
-USE_NLEARN=0 python examples/example16_batchnorm_compare.py
+python examples/404_nnapi_batchnorm_compare.py
+USE_NLEARN=0 python examples/404_nnapi_batchnorm_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

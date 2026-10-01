@@ -33,7 +33,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `flatten(start_dim=0, end_dim=-1)`
 4. 将 `misc.unsqueeze` 改为复用 `functional.unsqueeze`，避免重复逻辑。
 5. 将 `nn.Flatten.forward` 改为调用 `x.flatten(...)`。
-6. 新增 `examples/example15_shape_api_compare.py`，覆盖常见 forward reshape 写法。
+6. 新增 `examples/502_tensorapi_shape_api_compare.py`，覆盖常见 forward reshape 写法。
 7. 新增 `tests/test_24_shape_api.py`，覆盖：
    - `view` 与反向传播。
    - `unsqueeze` Tensor 方法与顶层函数。

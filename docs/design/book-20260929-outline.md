@@ -22,9 +22,9 @@
 | --- | --- | --- |
 | 00 阅读指南 | 本书目标、环境、代码运行方式与项目边界 | 根目录 `README.md`、`docs/tutorial/torch-training-mechanism-20260929.md` |
 | 01 标量自动微分 | 数值、导数、计算图、反向传播、单神经元训练 | `nnlearn/function.py`、`tests/test_02_autograd.py`（概念映射；当前实现从 Tensor 开始） |
-| 02 Tensor 与自动微分 | NumPy 数组、形状、算子、广播、归约、张量反向传播 | `nnlearn/tensor.py`、`nnlearn/functional/`、`examples/example38_beginner_tutorial.py` |
-| 03 神经网络训练 | Parameter、Module、层、损失、优化器、数据加载与训练 | `nnlearn/nn/`、`nnlearn/optim/`、`nnlearn/utils/data/`、`examples/example1_linear_reg_simple.py`、`examples/example7_mnist_dataloader_train_compare.py` |
-| 04 进阶模型与运行时 | CNN、Transformer、CPU/CUDA 后端及 PyTorch 对照 | `nnlearn/nn/conv.py`、`nnlearn/nn/transformer.py`、`nnlearn/backend.py`、`nnlearn/cuda.py`、`examples/example39_training_mechanism_comparison.py` |
+| 02 Tensor 与自动微分 | NumPy 数组、形状、算子、广播、归约、张量反向传播 | `nnlearn/tensor.py`、`nnlearn/functional/`、`examples/000_tutorial_beginner_tutorial.py` |
+| 03 神经网络训练 | Parameter、Module、层、损失、优化器、数据加载与训练 | `nnlearn/nn/`、`nnlearn/optim/`、`nnlearn/utils/data/`、`examples/100_training_linear_reg_simple.py`、`examples/200_data_mnist_dataloader_train_compare.py` |
+| 04 进阶模型与运行时 | CNN、Transformer、CPU/CUDA 后端及 PyTorch 对照 | `nnlearn/nn/conv.py`、`nnlearn/nn/transformer.py`、`nnlearn/backend.py`、`nnlearn/cuda.py`、`examples/702_compat_training_mechanism_comparison.py` |
 | 附录 | 源码地图、梯度与形状速查表、术语表和问题排查 | `nnlearn/`、`examples/` |
 
 第一部分的纯 Python 标量程序是为讲清机制准备的教学阶梯。后续章节会转向 NumPy Tensor，再逐步对应仓库实现；不要求仓库现有代码必须沿用标量程序的内部结构。

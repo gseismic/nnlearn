@@ -31,7 +31,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 3. 使用 `backend.get_array_module(tensor.data)` 选择 NumPy 或 CuPy。
 4. 为 `Linear.weight` 和 `Conv2d.weight` 记录 `_fan_in` / `_fan_out` 元数据，使 fan 计算符合本库前向语义。
 5. 在 `nlearn.nn.__init__` 导出 `init` 子模块，支持 `import nlearn.nn as nn; nn.init.zeros_(...)`。
-6. 新增 `examples/example14_nn_init_compare.py`，覆盖常见初始化写法。
+6. 新增 `examples/403_nnapi_init_compare.py`，覆盖常见初始化写法。
 7. 新增 `tests/test_23_nn_init.py`，覆盖：
    - 常量、全零、全一初始化。
    - uniform/normal 就地返回同一 Tensor。

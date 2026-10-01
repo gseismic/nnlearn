@@ -5,7 +5,7 @@
 ## 完成内容
 
 1. 新增 `docs/design/nlearn-20260624-core-cuda-roadmap.md`，记录项目新定位、真实训练核心链路、核心模块分层和 CUDA/CuPy 支持策略。
-2. 新增 PyTorch 兼容示例 `examples/example3_pytorch_compatible_train.py`。训练主体覆盖 `cuda.is_available()`、`.to(device)`、`Module.to(device)`、`train()`、`eval()`、`no_grad()`、`nn.Linear`、`nn.MSELoss`、`optim.SGD`，只需切换顶部导入即可在 PyTorch 与 `nlearn` 间切换。
+2. 新增 PyTorch 兼容示例 `examples/102_training_pytorch_compatible_train.py`。训练主体覆盖 `cuda.is_available()`、`.to(device)`、`Module.to(device)`、`train()`、`eval()`、`no_grad()`、`nn.Linear`、`nn.MSELoss`、`optim.SGD`，只需切换顶部导入即可在 PyTorch 与 `nlearn` 间切换。
 3. 新增 `nlearn/backend.py` 与 `nlearn/cuda.py`，提供 NumPy/CuPy 后端识别、设备迁移、CUDA 可用性检测。
 4. 扩展 `Tensor` 支持 `device`、`to()`、`cpu()`、`cuda()`、`detach()`，并让 CUDA Tensor 的 `numpy()` 自动转回 NumPy。
 5. 扩展顶层兼容接口：`nlearn.tensor`、`zeros`、`ones`、`cuda.is_available()`。
@@ -25,8 +25,8 @@
 已运行：
 
 ```bash
-python examples/example3_pytorch_compatible_train.py
-USE_NLEARN=0 python examples/example3_pytorch_compatible_train.py
+python examples/102_training_pytorch_compatible_train.py
+USE_NLEARN=0 python examples/102_training_pytorch_compatible_train.py
 pytest -q tests/test_11_pytorch_compat.py
 pytest -q
 python -m compileall -q nlearn examples

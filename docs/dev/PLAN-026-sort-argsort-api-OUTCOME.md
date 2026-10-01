@@ -22,7 +22,7 @@ Git 基线：`a5d4d3b`
 8. values 支持反向传播：
    - 上游梯度通过 `put_along_axis` scatter 回输入排序前的位置。
 9. indices / argsort 结果不追踪梯度。
-10. 新增 `examples/example26_sort_argsort_compare.py`：
+10. 新增 `examples/507_tensorapi_sort_argsort_compare.py`：
     - 同进程对比 `nlearn` 与 PyTorch。
     - 输出 ascending values、descending values、indices、argsort ranking 和梯度最大误差。
 11. 更新设计文档，记录 PLAN-026 已补齐排序 API。
@@ -49,7 +49,7 @@ Git 基线：`a5d4d3b`
 
 ```bash
 pytest -q tests/test_34_sort_argsort_api.py
-python examples/example26_sort_argsort_compare.py
+python examples/507_tensorapi_sort_argsort_compare.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py tests/test_33_topk_api.py tests/test_34_sort_argsort_api.py
 python -m compileall -q nlearn examples
 pytest -q

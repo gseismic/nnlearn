@@ -43,10 +43,10 @@
 
 ## 验收标准
 
-1. `python examples/example5_mnist_cnn_train_compare.py` 跑通 `nlearn` 路径。
-2. `USE_NLEARN=0 python examples/example5_mnist_cnn_train_compare.py` 跑通 PyTorch 路径。
-3. `python examples/example6_transformer_train_compare.py` 跑通 `nlearn` 路径。
-4. `USE_NLEARN=0 python examples/example6_transformer_train_compare.py` 跑通 PyTorch 路径。
+1. `python examples/104_training_mnist_cnn_train_compare.py` 跑通 `nlearn` 路径。
+2. `USE_NLEARN=0 python examples/104_training_mnist_cnn_train_compare.py` 跑通 PyTorch 路径。
+3. `python examples/105_training_transformer_train_compare.py` 跑通 `nlearn` 路径。
+4. `USE_NLEARN=0 python examples/105_training_transformer_train_compare.py` 跑通 PyTorch 路径。
 5. 新增测试覆盖 optimizer、CNN 模块、Transformer 模块。
 6. 全量测试通过。
 

@@ -25,7 +25,7 @@ Git 基线：`80cf9e44bd65861b0f83b35ee9f7a54f7ae748e4`
    - 支持 `__len__`。
    - 默认 collate `Tensor`、NumPy 数组、数字、tuple/list 和 dict。
    - 保留 `shuffle` 和 `drop_last`。
-4. 新增 `examples/example7_mnist_dataloader_train_compare.py`，使用 `TensorDataset` 和 `DataLoader` 做 mini-batch CNN 训练。
+4. 新增 `examples/200_data_mnist_dataloader_train_compare.py`，使用 `TensorDataset` 和 `DataLoader` 做 mini-batch CNN 训练。
 5. 补充测试覆盖 `stack` 反向传播、TensorDataset/DataLoader batch 形状、`drop_last` 与重复迭代。
 6. 更新设计文档中的 data 层阶段状态。
 7. 运行新增示例的 `nlearn` 与 PyTorch 双路径、全量测试和编译检查。

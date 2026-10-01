@@ -41,7 +41,7 @@ PLAN-036 已建立训练脚本替换兼容基线，证明当前核心训练链�
 
 ## 实施步骤
 
-1. 新增 `examples/example37_pytorch_script_entry_compat.py`：
+1. 新增 `examples/701_compat_pytorch_script_entry.py`：
    - 使用 `torch.device`、`Tensor.to(device=..., dtype=...)`、`Module.to(...)`。
    - 使用 `ModuleList` 和 `Identity` 构建模型。
    - 使用 `children()` / `modules()` 统计模块。

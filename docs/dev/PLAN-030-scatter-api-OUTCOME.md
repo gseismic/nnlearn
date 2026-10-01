@@ -40,7 +40,7 @@ Git 基线：`81ffeb1`
 
 ## 新增示例
 
-新增 `examples/example30_scatter_compare.py`：
+新增 `examples/509_tensorapi_scatter_compare.py`：
 
 1. 用 `scatter` 构造 one-hot。
 2. 用 `scatter_add` 做按 index 累加桶。
@@ -54,9 +54,9 @@ Git 基线：`81ffeb1`
 pytest -q tests/test_37_scatter_api.py
 pytest -q tests/test_35_mask_indexing_numeric_api.py tests/test_37_scatter_api.py
 pytest -q tests/test_35_mask_indexing_numeric_api.py tests/test_37_scatter_api.py tests/test_32_einsum_api.py tests/test_36_cross_entropy_advanced.py
-python examples/example30_scatter_compare.py
-python examples/example29_einsum_ellipsis_compare.py
-python examples/example28_cross_entropy_advanced_compare.py
+python examples/509_tensorapi_scatter_compare.py
+python examples/602_einsum_ellipsis_compare.py
+python examples/407_nnapi_cross_entropy_advanced_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

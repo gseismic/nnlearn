@@ -15,7 +15,7 @@
 1. 新增设计文档：
    - 从 torch 新手教程场景反推最终模型、依赖函数、底层必须能力和 wrapper 边界。
    - 明确教程路径：张量基础、自动微分、手写线性回归、`nn.Module` MLP、DataLoader mini-batch、CNN/Transformer 方向感。
-2. 新增教程式例子 `examples/example38_beginner_tutorial.py`：
+2. 新增教程式例子 `examples/000_tutorial_beginner_tutorial.py`：
    - 默认使用 `nlearn`。
    - `USE_NLEARN=0` 时切换到 PyTorch。
    - 覆盖张量基础、NumPy 转换、自动微分、手写线性回归、MLP 分类和 DataLoader mini-batch。
@@ -47,12 +47,12 @@
 ## 验证结果
 
 1. 默认 `nlearn` 教程例子：
-   - 命令：`python examples/example38_beginner_tutorial.py`
+   - 命令：`python examples/000_tutorial_beginner_tutorial.py`
    - 结果：通过
    - 手写回归 loss：`0.000013`
    - MLP accuracy：`1.000000`
 2. PyTorch 导入替换路径：
-   - 命令：`USE_NLEARN=0 python examples/example38_beginner_tutorial.py`
+   - 命令：`USE_NLEARN=0 python examples/000_tutorial_beginner_tutorial.py`
    - 结果：通过
    - 手写回归 loss：`0.000030`
    - MLP accuracy：`1.000000`

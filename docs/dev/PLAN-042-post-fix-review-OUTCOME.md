@@ -19,5 +19,5 @@
 ## 验证结果
 
 - `CUDA_VISIBLE_DEVICES='' python -m pytest -q`：**292 passed**。
-- `CUDA_VISIBLE_DEVICES='' USE_NLEARN=1 python examples/example36_pytorch_training_baseline.py`：MLP、CNN、Transformer 准确率均为 `1.0`，MLP 检查点往返误差 `0`。
+- `CUDA_VISIBLE_DEVICES='' USE_NLEARN=1 python examples/700_compat_pytorch_training_baseline.py`：MLP、CNN、Transformer 准确率均为 `1.0`，MLP 检查点往返误差 `0`。
 - 当前环境没有 CuPy，CUDA 运行路径仍无法实测；本轮结论限于 CPU 实测、代码审查及已记录的 PyTorch 对照。

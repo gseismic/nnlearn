@@ -19,7 +19,7 @@ Git 基线：`a5d4d3b`
 3. `nlearn.nn.functional` 新增函数式入口：
    - `cross_entropy(input, target, reduction="mean")`
    - `mse_loss(input, target, reduction="mean")`
-4. 新增 `examples/example21_loss_functional_reduction_compare.py`：
+4. 新增 `examples/406_nnapi_loss_functional_reduction_compare.py`：
    - 覆盖 `F.cross_entropy`、`nn.CrossEntropyLoss(reduction=...)`。
    - 覆盖 `F.mse_loss`、`nn.MSELoss(reduction=...)`。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
@@ -43,11 +43,11 @@ Git 基线：`a5d4d3b`
 
 ```bash
 pytest -q tests/test_30_loss_functional_reduction.py
-python examples/example21_loss_functional_reduction_compare.py
-USE_NLEARN=0 python examples/example21_loss_functional_reduction_compare.py
+python examples/406_nnapi_loss_functional_reduction_compare.py
+USE_NLEARN=0 python examples/406_nnapi_loss_functional_reduction_compare.py
 pytest -q tests/test_12_mlp.py tests/test_13_cnn_transformer.py tests/test_17_optimizer_state.py
-python examples/example4_mlp_train_compare.py
-USE_NLEARN=0 python examples/example4_mlp_train_compare.py
+python examples/103_training_mlp_train_compare.py
+USE_NLEARN=0 python examples/103_training_mlp_train_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

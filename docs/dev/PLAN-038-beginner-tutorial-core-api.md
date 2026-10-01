@@ -67,7 +67,7 @@ Git 基线：`6b1c9bb`
    - 为 `linspace` / `normal` 补常见 `dtype` 参数。
 4. 改造 `nlearn/nn/activation.py` 和导出：
    - 新增 `Tanh`、`Sigmoid`。
-5. 新增 `examples/example38_beginner_tutorial.py`。
+5. 新增 `examples/000_tutorial_beginner_tutorial.py`。
 6. 新增 `tests/test_44_beginner_tutorial_core_api.py`。
 7. 更新 `docs/design/nlearn-20260624-core-cuda-roadmap.md` 和 OUTCOME。
 

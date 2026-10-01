@@ -12,14 +12,14 @@
    - 新增 `nn.Conv2d`。
    - 新增 `nn.MaxPool2d`。
    - 新增 `nn.Flatten`。
-   - 新增 `examples/example5_mnist_cnn_train_compare.py`。
+   - 新增 `examples/104_training_mnist_cnn_train_compare.py`。
    - 默认使用本地 MNIST-like 数据，`USE_REAL_MNIST=1` 时下载并训练真实 MNIST 小子集。
 3. Transformer：
    - 新增 `nn.Embedding`。
    - 新增 `nn.LayerNorm`。
    - 新增 `nn.MultiheadAttention`。
    - 新增 `nn.TransformerEncoderLayer`。
-   - 新增 `examples/example6_transformer_train_compare.py`。
+   - 新增 `examples/105_training_transformer_train_compare.py`。
 4. 基础算子：
    - `softmax`
    - `Tensor.transpose(dim0, dim1)`
@@ -38,12 +38,12 @@
 已运行：
 
 ```bash
-python examples/example5_mnist_cnn_train_compare.py
-USE_NLEARN=0 python examples/example5_mnist_cnn_train_compare.py
-USE_REAL_MNIST=1 python examples/example5_mnist_cnn_train_compare.py
-USE_NLEARN=0 USE_REAL_MNIST=1 python examples/example5_mnist_cnn_train_compare.py
-python examples/example6_transformer_train_compare.py
-USE_NLEARN=0 python examples/example6_transformer_train_compare.py
+python examples/104_training_mnist_cnn_train_compare.py
+USE_NLEARN=0 python examples/104_training_mnist_cnn_train_compare.py
+USE_REAL_MNIST=1 python examples/104_training_mnist_cnn_train_compare.py
+USE_NLEARN=0 USE_REAL_MNIST=1 python examples/104_training_mnist_cnn_train_compare.py
+python examples/105_training_transformer_train_compare.py
+USE_NLEARN=0 python examples/105_training_transformer_train_compare.py
 pytest -q tests/test_13_cnn_transformer.py
 pytest -q
 python -m compileall -q nlearn examples

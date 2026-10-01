@@ -1,3 +1,4 @@
+import importlib
 import os
 import subprocess
 import sys
@@ -8,7 +9,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "examples"))
 
-import example36_pytorch_training_baseline as baseline
+baseline = importlib.import_module("700_compat_pytorch_training_baseline")
 
 
 def _assert_baseline_results(results):
@@ -30,7 +31,7 @@ def test_pytorch_import_replacement_path_runs():
     env = os.environ.copy()
     env["USE_NNLEARN"] = "0"
     script = Path(__file__).resolve().parents[1] / "examples" / (
-        "example36_pytorch_training_baseline.py"
+        "700_compat_pytorch_training_baseline.py"
     )
     completed = subprocess.run(
         [sys.executable, str(script)],

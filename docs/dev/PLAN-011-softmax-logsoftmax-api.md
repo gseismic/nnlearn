@@ -21,7 +21,7 @@ Git 基线：`52e3212823d630e06061ee4b05af23cf32899470`
 2. 给 `Tensor` 增加 `softmax(dim)` 和 `log_softmax(dim)` 方法。
 3. 在 `nn.functional` 中导出 `softmax` 和 `log_softmax`。
 4. 新增 `nn.Softmax(dim=None)` 和 `nn.LogSoftmax(dim=None)` 模块。
-5. 新增 `examples/example11_softmax_logsoftmax_compare.py`，覆盖 Tensor 方法、函数式 API 和模块 API。
+5. 新增 `examples/402_nnapi_softmax_logsoftmax_compare.py`，覆盖 Tensor 方法、函数式 API 和模块 API。
 6. 新增测试覆盖前向归一化、`exp(log_softmax)` 与 softmax 一致、反向传播梯度形状和双后端可运行。
 7. 更新设计文档中 Softmax / LogSoftmax 状态。
 8. 运行新增测试、双后端示例、全量测试和编译检查。

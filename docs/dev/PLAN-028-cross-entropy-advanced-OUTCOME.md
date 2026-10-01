@@ -42,7 +42,7 @@ Git 基线：`81ffeb1`
 
 ## 新增示例
 
-新增 `examples/example28_cross_entropy_advanced_compare.py`：
+新增 `examples/407_nnapi_cross_entropy_advanced_compare.py`：
 
 1. 在同一进程中分别运行 `nlearn` 与 PyTorch。
 2. 使用分割风格 logits `(N, C, H, W)`。
@@ -57,9 +57,9 @@ Git 基线：`81ffeb1`
 pytest -q tests/test_30_loss_functional_reduction.py
 pytest -q tests/test_36_cross_entropy_advanced.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_36_cross_entropy_advanced.py tests/test_12_mlp.py tests/test_13_cnn_transformer.py tests/test_17_optimizer_state.py
-python examples/example21_loss_functional_reduction_compare.py
-USE_NLEARN=0 python examples/example21_loss_functional_reduction_compare.py
-python examples/example28_cross_entropy_advanced_compare.py
+python examples/406_nnapi_loss_functional_reduction_compare.py
+USE_NLEARN=0 python examples/406_nnapi_loss_functional_reduction_compare.py
+python examples/407_nnapi_cross_entropy_advanced_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

@@ -40,7 +40,7 @@ Git 基线：`81ffeb1`
 
 ## 新增示例
 
-新增 `examples/example32_einsum_repeated_labels_compare.py`：
+新增 `examples/603_einsum_repeated_labels_compare.py`：
 
 1. 在同一进程中分别运行 `nlearn` 与 PyTorch。
 2. 覆盖 diagonal、trace、重复标签规约、多输入组合和 batch trace。
@@ -53,9 +53,9 @@ Git 基线：`81ffeb1`
 ```bash
 pytest -q tests/test_32_einsum_api.py
 pytest -q tests/test_32_einsum_api.py tests/test_35_mask_indexing_numeric_api.py tests/test_37_scatter_api.py tests/test_38_nonzero_where_condition.py tests/test_36_cross_entropy_advanced.py
-python examples/example32_einsum_repeated_labels_compare.py
-python examples/example29_einsum_ellipsis_compare.py
-python examples/example31_nonzero_where_compare.py
+python examples/603_einsum_repeated_labels_compare.py
+python examples/602_einsum_ellipsis_compare.py
+python examples/510_tensorapi_nonzero_where_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

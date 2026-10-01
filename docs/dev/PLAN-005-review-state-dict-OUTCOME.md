@@ -42,9 +42,9 @@
 
 ```bash
 pytest -q tests/test_14_review_state.py
-python examples/example6_transformer_train_compare.py
-python examples/example5_mnist_cnn_train_compare.py
-USE_REAL_MNIST=1 python examples/example5_mnist_cnn_train_compare.py
+python examples/105_training_transformer_train_compare.py
+python examples/104_training_mnist_cnn_train_compare.py
+USE_REAL_MNIST=1 python examples/104_training_mnist_cnn_train_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

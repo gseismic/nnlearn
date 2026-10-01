@@ -45,7 +45,7 @@ Git 基线：`a5d4d3b`
 
 ## 新增示例
 
-新增 `examples/example25_einsum_usage_compare.py`：
+新增 `examples/601_einsum_classic_usage_compare.py`：
 
 1. 同时导入 `nlearn` 和 PyTorch。
 2. 对每个经典用法输出：
@@ -63,7 +63,7 @@ Git 基线：`a5d4d3b`
 已运行：
 
 ```bash
-python examples/example25_einsum_usage_compare.py
+python examples/601_einsum_classic_usage_compare.py
 pytest -q tests/test_32_einsum_api.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py tests/test_33_topk_api.py
 python -m compileall -q nlearn examples

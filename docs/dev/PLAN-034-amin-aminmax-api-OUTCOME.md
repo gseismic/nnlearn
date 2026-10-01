@@ -53,7 +53,7 @@ Git 基线：`c125f9d`
 
 ## 新增示例
 
-新增 `examples/example34_amin_aminmax_compare.py`：
+新增 `examples/512_tensorapi_amin_aminmax_compare.py`：
 
 1. 用 `(N, C, H, W)` 张量做空间维 `(H, W)` 最小值规约。
 2. 对比 `nlearn.amin` 与 PyTorch 的输出和梯度。
@@ -67,7 +67,7 @@ Git 基线：`c125f9d`
 ```bash
 pytest -q tests/test_40_amin_aminmax_api.py
 pytest -q tests/test_21_max_api.py tests/test_39_amax_api.py tests/test_40_amin_aminmax_api.py
-python examples/example34_amin_aminmax_compare.py
+python examples/512_tensorapi_amin_aminmax_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

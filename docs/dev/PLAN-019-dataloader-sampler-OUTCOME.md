@@ -26,7 +26,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `batch_sampler` 与 `batch_size`、`shuffle`、`sampler`、`drop_last` 互斥。
 5. `DataLoader.__len__()` 现在返回 `batch_sampler` 长度。
 6. `nlearn.utils.data.__init__` 已导出新增 sampler 类。
-7. 新增 `examples/example19_dataloader_sampler_compare.py`：
+7. 新增 `examples/201_data_dataloader_sampler_compare.py`：
    - 覆盖 `SequentialSampler`。
    - 覆盖 `BatchSampler`。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
@@ -50,8 +50,8 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ```bash
 pytest -q tests/test_28_dataloader_sampler.py
-python examples/example19_dataloader_sampler_compare.py
-USE_NLEARN=0 python examples/example19_dataloader_sampler_compare.py
+python examples/201_data_dataloader_sampler_compare.py
+USE_NLEARN=0 python examples/201_data_dataloader_sampler_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

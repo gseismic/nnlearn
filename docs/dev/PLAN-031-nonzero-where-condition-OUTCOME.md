@@ -36,7 +36,7 @@ Git 基线：`81ffeb1`
 
 ## 新增示例
 
-新增 `examples/example31_nonzero_where_compare.py`：
+新增 `examples/510_tensorapi_nonzero_where_compare.py`：
 
 1. 从正值 mask 中取二维坐标。
 2. 用 `where(condition)` 得到 tuple index。
@@ -51,9 +51,9 @@ Git 基线：`81ffeb1`
 pytest -q tests/test_38_nonzero_where_condition.py
 pytest -q tests/test_35_mask_indexing_numeric_api.py tests/test_37_scatter_api.py tests/test_38_nonzero_where_condition.py
 pytest -q tests/test_35_mask_indexing_numeric_api.py tests/test_37_scatter_api.py tests/test_38_nonzero_where_condition.py tests/test_32_einsum_api.py tests/test_36_cross_entropy_advanced.py
-python examples/example31_nonzero_where_compare.py
-python examples/example30_scatter_compare.py
-python examples/example29_einsum_ellipsis_compare.py
+python examples/510_tensorapi_nonzero_where_compare.py
+python examples/509_tensorapi_scatter_compare.py
+python examples/602_einsum_ellipsis_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

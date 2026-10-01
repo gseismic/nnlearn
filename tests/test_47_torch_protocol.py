@@ -11,7 +11,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "examples"))
 
 import nnlearn
-import example40_torch_protocol as protocol_example
+protocol_example = importlib.import_module("703_compat_torch_protocol")
 from torch_protocol import (
     BackendProtocolError,
     DataLoaderProtocol,

@@ -27,7 +27,7 @@ Git 基线：`a5d4d3b`
 7. CPU/CUDA 后端一致：
    - 前向使用输入所在后端的 `einsum`。
    - 反向梯度也保持同一后端。
-8. 新增 `examples/example23_einsum_compare.py`：
+8. 新增 `examples/600_einsum_basic_compare.py`：
    - 用 `einsum` 表达 attention score 和 context。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 9. 更新设计文档，记录 PLAN-023 已补齐 `einsum` 核心子集。
@@ -50,15 +50,15 @@ Git 基线：`a5d4d3b`
 
 ```bash
 pytest -q tests/test_32_einsum_api.py
-python examples/example23_einsum_compare.py
-USE_NLEARN=0 python examples/example23_einsum_compare.py
+python examples/600_einsum_basic_compare.py
+USE_NLEARN=0 python examples/600_einsum_basic_compare.py
 pytest -q tests/test_30_loss_functional_reduction.py tests/test_31_shape_split_chunk_repeat.py tests/test_32_einsum_api.py
 python -m compileall -q nlearn examples
 pytest -q
-python examples/example21_loss_functional_reduction_compare.py
-USE_NLEARN=0 python examples/example21_loss_functional_reduction_compare.py
-python examples/example22_shape_split_chunk_repeat_compare.py
-USE_NLEARN=0 python examples/example22_shape_split_chunk_repeat_compare.py
+python examples/406_nnapi_loss_functional_reduction_compare.py
+USE_NLEARN=0 python examples/406_nnapi_loss_functional_reduction_compare.py
+python examples/505_tensorapi_shape_split_chunk_repeat_compare.py
+USE_NLEARN=0 python examples/505_tensorapi_shape_split_chunk_repeat_compare.py
 ```
 
 结果：

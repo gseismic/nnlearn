@@ -43,7 +43,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 这些属性反映第一组配置，保持现有单参数组测试和用户代码可用。
 
-9. 新增 `examples/example17_optimizer_param_groups_compare.py`：
+9. 新增 `examples/405_nnapi_optimizer_param_groups_compare.py`：
    - 覆盖不同参数组不同学习率。
    - 同一代码可通过 `USE_NLEARN=0` 切换到 PyTorch。
 10. 更新设计文档，记录已有优化器已补齐多参数组支持。
@@ -66,8 +66,8 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ```bash
 pytest -q tests/test_26_optimizer_param_groups.py
-python examples/example17_optimizer_param_groups_compare.py
-USE_NLEARN=0 python examples/example17_optimizer_param_groups_compare.py
+python examples/405_nnapi_optimizer_param_groups_compare.py
+USE_NLEARN=0 python examples/405_nnapi_optimizer_param_groups_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

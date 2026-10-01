@@ -30,7 +30,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - `torch.cat(tensors, dim=0)`
    - `torch.concat(tensors, dim=0)`
    - `torch.concatenate(tensors, dim=0)`
-3. 新增 `examples/example18_cat_api_compare.py`，覆盖 PyTorch import 切换路径。
+3. 新增 `examples/503_tensorapi_cat_api_compare.py`，覆盖 PyTorch import 切换路径。
 4. 新增 `tests/test_27_cat_api.py`，覆盖：
    - dim=0 拼接与反向传播。
    - dim=1 / 负维度拼接。

@@ -24,7 +24,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - 返回 int64 Tensor，且 `requires_grad=False`。
 2. 将 `misc.argmax` 改为复用同一实现，保持顶层 API 行为一致。
 3. 给 `Tensor` 增加 `argmax(dim=None, keepdim=False, axis=None, keepdims=None)` 方法。
-4. 新增 `examples/example13_argmax_api_compare.py`，验证 Tensor 方法、顶层函数和 `keepdim`。
+4. 新增 `examples/501_tensorapi_argmax_api_compare.py`，验证 Tensor 方法、顶层函数和 `keepdim`。
 5. 新增 `tests/test_22_argmax_api.py`，覆盖：
    - 全局 argmax。
    - dim argmax。

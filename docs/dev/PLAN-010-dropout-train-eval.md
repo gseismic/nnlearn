@@ -24,7 +24,7 @@ Git 基线：`9f4acc33fc98b2980f081d6b80c6708853ba80ae`
    - 训练态按 inverted dropout 生成 mask，并按 `1 / (1 - p)` 缩放。
 2. 实现 `nn.Dropout(p=0.5, inplace=False)`，forward 使用模块 `self.training`。
 3. 从 `nlearn.nn` 导出 `Dropout`。
-4. 新增 `examples/example10_dropout_train_eval_compare.py`，验证 train/eval 行为可在 PyTorch 与 `nlearn` 双路径运行。
+4. 新增 `examples/401_nnapi_dropout_train_eval_compare.py`，验证 train/eval 行为可在 PyTorch 与 `nlearn` 双路径运行。
 5. 新增测试覆盖训练态 mask、反向梯度、eval 恒等映射、函数式 dropout 和非法参数。
 6. 更新设计文档中的 `train/eval` 行为状态。
 7. 运行新增测试、双后端示例、全量测试和编译检查。

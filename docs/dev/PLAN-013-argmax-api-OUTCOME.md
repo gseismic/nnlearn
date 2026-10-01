@@ -20,7 +20,7 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
    - 复用 functional 层实现。
    - 保持 `torch.argmax(x, dim=...)` 兼容。
    - 新增 `keepdim` 兼容。
-4. 新增 `examples/example13_argmax_api_compare.py`：
+4. 新增 `examples/501_tensorapi_argmax_api_compare.py`：
    - 覆盖 Tensor 方法形式。
    - 覆盖顶层函数形式。
    - 覆盖 `keepdim=True`。
@@ -48,8 +48,8 @@ Git 基线：`980956db792e074192b89adba0a48f59f3561820`
 
 ```bash
 pytest -q tests/test_22_argmax_api.py
-python examples/example13_argmax_api_compare.py
-USE_NLEARN=0 python examples/example13_argmax_api_compare.py
+python examples/501_tensorapi_argmax_api_compare.py
+USE_NLEARN=0 python examples/501_tensorapi_argmax_api_compare.py
 pytest -q
 python -m compileall -q nlearn examples
 ```

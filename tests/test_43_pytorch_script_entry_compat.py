@@ -1,3 +1,4 @@
+import importlib
 import os
 import subprocess
 import sys
@@ -12,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "examples"))
 import nnlearn as torch
 import nnlearn.nn as nn
 import nnlearn.optim as optim
-import example37_pytorch_script_entry_compat as entry_compat
+entry_compat = importlib.import_module("701_compat_pytorch_script_entry")
 
 
 def test_device_to_dtype_and_tensor_metadata():
@@ -96,7 +97,7 @@ def test_pytorch_script_entry_replacement_path_runs():
     env = os.environ.copy()
     env["USE_NNLEARN"] = "0"
     script = Path(__file__).resolve().parents[1] / "examples" / (
-        "example37_pytorch_script_entry_compat.py"
+        "701_compat_pytorch_script_entry.py"
     )
     completed = subprocess.run(
         [sys.executable, str(script)],
