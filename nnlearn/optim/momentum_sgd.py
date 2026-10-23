@@ -20,7 +20,9 @@ class MomentumSGD(Optimizer):
             xp = backend.get_array_module(parameter.data)
             self.velocity[key] = xp.zeros_like(parameter.data)
         v = self.velocity[key]
-        v = group['momentum'] * v - group['lr'] * parameter.grad.data
+        momentum = self._scalar_like(group['momentum'], parameter)
+        lr = self._scalar_like(group['lr'], parameter)
+        v = momentum * v - lr * parameter.grad.data
         parameter.data = parameter.data + v
         self.velocity[key] = v
 

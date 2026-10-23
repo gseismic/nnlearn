@@ -15,7 +15,8 @@ class SGD(Optimizer):
         #print(f'{type(parameter.grad.data)=}')
         #print(f'{type(parameter.data)=}')
         # parameter.data -= self.lr * parameter.grad.data
-        parameter.data = parameter.data - group['lr'] * parameter.grad.data
+        lr = self._scalar_like(group['lr'], parameter)
+        parameter.data = parameter.data - lr * parameter.grad.data
         #print(parameter)
 
     def state_dict(self):

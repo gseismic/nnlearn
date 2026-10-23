@@ -13,10 +13,30 @@ TopKResult = namedtuple('TopKResult', ['values', 'indices'])
 SortResult = namedtuple('SortResult', ['values', 'indices'])
 
 
+def _python_scalar_like(value, array):
+    """内部前向常量也遵循浮点上下文，避免依赖后端的零维提升规则。"""
+    if type(value) in (int, float) and np.issubdtype(array.dtype, np.floating):
+        xp = backend.get_array_module(array)
+        return xp.asarray(value, dtype=array.dtype)
+    return value
+
+
 def _adjust_grad_shape(gx, shape):
     if gx.shape != shape:
         return sum_to(gx, shape)
     return gx
+
+
+def _extrema_mask_grad(gy, mask, axes=None):
+    """按极值掩码平分梯度，保留上游依赖并防止半精度计数溢出。"""
+    from nnlearn.tensor import Tensor
+
+    xp = backend.get_array_module(mask)
+    dtype = gy.dtype if np.issubdtype(gy.dtype, np.floating) else np.float64
+    if dtype == np.float16:
+        dtype = np.float32
+    count = xp.sum(mask, axis=axes, keepdims=True, dtype=dtype)
+    return gy * Tensor(mask, requires_grad=False) / Tensor(count, requires_grad=False)
 
 
 def _normalize_axis(axis, ndim, name):
@@ -209,9 +229,9 @@ class Clamp(Function):
         xp = backend.get_array_module(x)
         y = x
         if self.min is not None:
-            y = xp.maximum(y, self.min)
+            y = xp.maximum(y, _python_scalar_like(self.min, x))
         if self.max is not None:
-            y = xp.minimum(y, self.max)
+            y = xp.minimum(y, _python_scalar_like(self.max, x))
         return y
 
     def backward(self, gy):
@@ -237,7 +257,7 @@ def clip(input, min=None, max=None):
 class ReLU(Function):
     def forward(self, x):
         xp = backend.get_array_module(x)
-        return xp.maximum(x, 0.0)
+        return xp.maximum(x, _python_scalar_like(0.0, x))
 
     def backward(self, gy):
         x = self.inputs[0]
@@ -349,7 +369,7 @@ class Pow(Function):
         if not np.isscalar(self.c):
             # 数组指数是常量配置，与输入处于同一设备后再执行广播。
             self.c = backend.to_device(self.c, backend.device_of(x))
-        return x ** self.c
+        return x ** _python_scalar_like(self.c, x)
 
     def backward(self, gy):
         x = self.inputs[0]
@@ -417,7 +437,8 @@ def tanh(x):
 class Sigmoid(Function):
     def forward(self, x):
         xp = backend.get_array_module(x)
-        return 1/(1+xp.exp(-x))
+        one = _python_scalar_like(1, x)
+        return one / (one + xp.exp(-x))
 
     def backward(self, gy):
         y = self.get_outputs()[0]
@@ -440,8 +461,9 @@ class Maximum(Function):
         greater1 = x1.data > x2.data
         greater2 = x2.data > x1.data
         equal = x1.data == x2.data
-        gx1 = Tensor(gy.data * (greater1 + equal * 0.5))
-        gx2 = Tensor(gy.data * (greater2 + equal * 0.5))
+        shared = gy * 0.5 * Tensor(equal, requires_grad=False)
+        gx1 = gy * Tensor(greater1, requires_grad=False) + shared
+        gx2 = gy * Tensor(greater2, requires_grad=False) + shared
         return (
             _adjust_grad_shape(gx1, self.x1_shape),
             _adjust_grad_shape(gx2, self.x2_shape),
@@ -478,18 +500,16 @@ class Max(Function):
         if self.normalized_axis is None:
             y = self.get_outputs()[0].data
             mask = x.data == y
-            count = xp.sum(mask)
-            return Tensor(gy.data * mask / count)
+            return _extrema_mask_grad(gy, mask)
 
         axis = self.normalized_axis
-        gy_data = gy.data
         indices = self.indices
         if not self.keepdims:
-            gy_data = xp.expand_dims(gy_data, axis=axis)
+            gy = gy.unsqueeze(axis)
         indices = xp.expand_dims(indices, axis=axis)
-        gx = xp.zeros_like(x.data)
-        xp.put_along_axis(gx, indices, gy_data, axis=axis)
-        return Tensor(gx)
+        mask = xp.zeros_like(x.data, dtype=bool)
+        xp.put_along_axis(mask, indices, True, axis=axis)
+        return gy * Tensor(mask, requires_grad=False)
 
 def _max_indices(x, axis, keepdims=False):
     from nnlearn.tensor import Tensor
@@ -528,8 +548,9 @@ class Minimum(Function):
         less1 = x1.data < x2.data
         less2 = x2.data < x1.data
         equal = x1.data == x2.data
-        gx1 = Tensor(gy.data * (less1 + equal * 0.5))
-        gx2 = Tensor(gy.data * (less2 + equal * 0.5))
+        shared = gy * 0.5 * Tensor(equal, requires_grad=False)
+        gx1 = gy * Tensor(less1, requires_grad=False) + shared
+        gx2 = gy * Tensor(less2, requires_grad=False) + shared
         return (
             _adjust_grad_shape(gx1, self.x1_shape),
             _adjust_grad_shape(gx2, self.x2_shape),
@@ -567,18 +588,16 @@ class Min(Function):
         if self.normalized_axis is None:
             y = self.get_outputs()[0].data
             mask = x.data == y
-            count = xp.sum(mask)
-            return Tensor(gy.data * mask / count)
+            return _extrema_mask_grad(gy, mask)
 
         axis = self.normalized_axis
-        gy_data = gy.data
         indices = self.indices
         if not self.keepdims:
-            gy_data = xp.expand_dims(gy_data, axis=axis)
+            gy = gy.unsqueeze(axis)
         indices = xp.expand_dims(indices, axis=axis)
-        gx = xp.zeros_like(x.data)
-        xp.put_along_axis(gx, indices, gy_data, axis=axis)
-        return Tensor(gx)
+        mask = xp.zeros_like(x.data, dtype=bool)
+        xp.put_along_axis(mask, indices, True, axis=axis)
+        return gy * Tensor(mask, requires_grad=False)
 
 
 def _min_indices(x, axis, keepdims=False):
@@ -627,26 +646,21 @@ class Amax(Function):
         return xp.max(x, axis=axes, keepdims=self.keepdims)
 
     def backward(self, gy):
-        from nnlearn.tensor import Tensor
-
         x = self.inputs[0]
-        xp = backend.get_array_module(x.data)
         axes = self.normalized_axes
         if axes is None:
             axes = tuple(range(x.ndim))
 
         y = self.get_outputs()[0].data
-        gy_data = gy.data
         if not self.keepdims:
             shape = list(y.shape)
             for axis in sorted(axes):
                 shape.insert(axis, 1)
             y = y.reshape(tuple(shape))
-            gy_data = gy_data.reshape(tuple(shape))
+            gy = gy.reshape(tuple(shape))
 
         mask = x.data == y
-        count = xp.sum(mask, axis=axes, keepdims=True)
-        return Tensor(gy_data * mask / count)
+        return _extrema_mask_grad(gy, mask, axes)
 
 
 def amax(input, dim=None, keepdim=False, axis=None, keepdims=None):
@@ -673,26 +687,21 @@ class Amin(Function):
         return xp.min(x, axis=axes, keepdims=self.keepdims)
 
     def backward(self, gy):
-        from nnlearn.tensor import Tensor
-
         x = self.inputs[0]
-        xp = backend.get_array_module(x.data)
         axes = self.normalized_axes
         if axes is None:
             axes = tuple(range(x.ndim))
 
         y = self.get_outputs()[0].data
-        gy_data = gy.data
         if not self.keepdims:
             shape = list(y.shape)
             for axis in sorted(axes):
                 shape.insert(axis, 1)
             y = y.reshape(tuple(shape))
-            gy_data = gy_data.reshape(tuple(shape))
+            gy = gy.reshape(tuple(shape))
 
         mask = x.data == y
-        count = xp.sum(mask, axis=axes, keepdims=True)
-        return Tensor(gy_data * mask / count)
+        return _extrema_mask_grad(gy, mask, axes)
 
 
 def amin(input, dim=None, keepdim=False, axis=None, keepdims=None):

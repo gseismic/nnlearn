@@ -15,7 +15,26 @@ class Function:
 
     def __call__(self, *inputs):
         from .tensor import Tensor, ensure_tensor
-        inputs = [ensure_tensor(input) for input in inputs]
+        floating_inputs = [
+            input for input in inputs
+            if isinstance(input, Tensor) and np.issubdtype(input.dtype, np.floating)
+        ]
+        scalar_dtype = (
+            np.result_type(*[input.dtype for input in floating_inputs])
+            if floating_inputs else None
+        )
+        scalar_device = (
+            'cuda' if any(input.device == 'cuda' for input in floating_inputs)
+            else 'cpu'
+        )
+        # 仅原生 Python 数字沿用浮点上下文；显式 Tensor、NumPy 类型和 bool 保留自身精度。
+        inputs = [
+            Tensor(input, dtype=scalar_dtype, device=scalar_device,
+                   requires_grad=False)
+            if scalar_dtype is not None and type(input) in (int, float)
+            else ensure_tensor(input)
+            for input in inputs
+        ]
         data_devices = {input.device for input in inputs if input.data.shape != ()}
         if len(data_devices) > 1:
             raise ValueError(f'all non-scalar inputs must be on the same device: {data_devices}')
@@ -42,6 +61,8 @@ class Function:
                 output.set_creator(self)
 
             self.inputs = inputs
+            # linear 可能释放中间 data，回传时仍需要建图时的输入精度。
+            self.input_dtypes = [input.dtype for input in inputs]
             # 解除输出的循环引用
             if runtime_settings.get('remove_recursive_ref', True):
                 self.outputs = [weakref.ref(output) for output in outputs]

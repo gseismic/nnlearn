@@ -86,11 +86,14 @@ class Tensor(TensorProtocol):
                 if not isinstance(gxs, tuple):
                     gxs = (gxs, )
 
-                for x, gx in zip(f.inputs, gxs):
+                for x, gx, dtype in zip(f.inputs, gxs, f.input_dtypes):
                     if gx is None:
                         continue
                     if not x.requires_grad:
                         continue
+                    if np.issubdtype(dtype, np.floating) and gx.dtype != dtype:
+                        # 每条浮点回传边先恢复输入精度；可微转换保留混合精度的高阶依赖。
+                        gx = gx.to(dtype=dtype)
                     key = id(x)
                     if key in current_grads:
                         current_grads[key] = current_grads[key] + gx

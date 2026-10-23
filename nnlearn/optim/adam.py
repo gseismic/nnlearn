@@ -44,20 +44,26 @@ class Adam(Optimizer):
             self.v[key] = xp.zeros_like(parameter.data)
             self.steps[key] = 0
 
-        lr = group['lr']
+        lr = self._scalar_like(group['lr'], parameter)
         beta1, beta2 = group['betas']
-        eps = group['eps']
+        eps = self._scalar_like(group['eps'], parameter)
         weight_decay = group['weight_decay']
         grad = parameter.grad.data
         if weight_decay:
-            grad = grad + weight_decay * parameter.data
+            grad = grad + self._scalar_like(weight_decay, parameter) * parameter.data
 
-        self.m[key] = beta1 * self.m[key] + (1 - beta1) * grad
-        self.v[key] = beta2 * self.v[key] + (1 - beta2) * (grad * grad)
+        self.m[key] = (
+            self._scalar_like(beta1, parameter) * self.m[key]
+            + self._scalar_like(1 - beta1, parameter) * grad
+        )
+        self.v[key] = (
+            self._scalar_like(beta2, parameter) * self.v[key]
+            + self._scalar_like(1 - beta2, parameter) * (grad * grad)
+        )
         self.steps[key] += 1
 
-        m_hat = self.m[key] / (1 - beta1 ** self.steps[key])
-        v_hat = self.v[key] / (1 - beta2 ** self.steps[key])
+        m_hat = self.m[key] / self._scalar_like(1 - beta1 ** self.steps[key], parameter)
+        v_hat = self.v[key] / self._scalar_like(1 - beta2 ** self.steps[key], parameter)
         parameter.data = parameter.data - lr * m_hat / (xp.sqrt(v_hat) + eps)
 
     def state_dict(self):
@@ -105,7 +111,8 @@ class AdamW(Adam):
     def update_one(self, parameter, group):
         weight_decay = group.get('weight_decay', self.decoupled_weight_decay)
         if weight_decay:
-            parameter.data = parameter.data * (1 - group['lr'] * weight_decay)
+            factor = self._scalar_like(1 - group['lr'] * weight_decay, parameter)
+            parameter.data = parameter.data * factor
         adam_group = dict(group)
         adam_group['weight_decay'] = 0.0
         super().update_one(parameter, adam_group)

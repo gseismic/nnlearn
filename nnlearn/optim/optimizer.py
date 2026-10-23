@@ -1,3 +1,5 @@
+import numpy as np
+
 from torch_protocol import OptimizerProtocol
 from nnlearn import backend
 from nnlearn.tensor import Tensor
@@ -106,6 +108,13 @@ class Optimizer(OptimizerProtocol):
         return backend.to_device(
             value, parameter.device, dtype=parameter.dtype,
         ).copy()
+
+    def _scalar_like(self, value, parameter):
+        """按参数设备和精度构造更新系数，保持零维参数及状态的浮点精度。"""
+        if not np.issubdtype(parameter.dtype, np.floating):
+            return value
+        xp = backend.get_array_module(parameter.data)
+        return xp.asarray(value, dtype=parameter.dtype)
 
     def state_dict(self):
         return {

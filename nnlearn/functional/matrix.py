@@ -708,15 +708,33 @@ class Sum(Function):
 def sum(x, axis=None, keepdims=False):
     return Sum(axis=axis, keepdims=keepdims)(x)
 
+
+class Mean(Sum):
+    """直接计算均值并以可微运算归一化梯度，避免半精度先求和溢出。"""
+
+    def forward(self, x):
+        self.x_shape = x.shape
+        xp = backend.get_array_module(x)
+        y = xp.mean(x, axis=self.axis, keepdims=self.keepdims)
+        # 每个输出参与求均值的元素数量，用于反向归一化。
+        if self.axis is None:
+            self.count = x.size
+        else:
+            axes = self.axis if isinstance(self.axis, tuple) else (self.axis,)
+            self.count = 1
+            for axis in axes:
+                self.count *= x.shape[axis]
+        return y
+
+    def backward(self, gy):
+        if gy.dtype == 'float16':
+            # 元素数可能超出半精度范围，归一化后由回传边恢复输入精度。
+            gy = gy.to(dtype='float32')
+        return super().backward(gy / self.count)
+
+
 def mean(x, axis=None, keepdims=False):
-    if axis is None:
-        count = x.data.size
-    else:
-        axes = axis if isinstance(axis, tuple) else (axis,)
-        count = 1
-        for ax in axes:
-            count *= x.shape[ax]
-    return sum(x, axis=axis, keepdims=keepdims) / count
+    return Mean(axis=axis, keepdims=keepdims)(x)
 
 def linear(x, W, b=None):
     t = matmul(x, W)
