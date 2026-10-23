@@ -346,15 +346,24 @@ class Pow(Function):
         self.c = c
 
     def forward(self, x):
+        if not np.isscalar(self.c):
+            # 数组指数是常量配置，与输入处于同一设备后再执行广播。
+            self.c = backend.to_device(self.c, backend.device_of(x))
         return x ** self.c
 
     def backward(self, gy):
         x = self.inputs[0]
         c = self.c
-        if c == 0:
+        if np.isscalar(c) and c == 0:
             return gy * 0
-        gx = c * x **(c-1) * gy
-        return gx
+        if np.isscalar(c):
+            exponent = c - 1
+        else:
+            xp = backend.get_array_module(x.data)
+            # 零指数位置使用 x**0，使零底数处不会先计算 x**(-1)。
+            exponent = xp.where(c == 0, 1, c) - 1
+        gx = c * x ** exponent * gy
+        return _adjust_grad_shape(gx, x.shape)
 
 def pow(x, c):
     return Pow(c)(x)

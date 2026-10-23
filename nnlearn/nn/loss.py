@@ -70,9 +70,13 @@ class _MSELossFunction(Function):
     def backward(self, grad_output):
         input, target = self.inputs
         diff = input - target
+        use_float32 = self.reduction == "mean" and diff.dtype == np.float16
+        if use_float32:
+            # 元素数可能超出半精度范围；可微转换保留高阶求导依赖。
+            diff = diff.to(dtype=np.float32)
         grad_input = diff + diff
         if self.reduction == "mean":
-            # 规约系数沿用输入精度，避免包装 Python 标量时将 float32 梯度提升。
+            # 分母沿用中间计算精度，避免半精度溢出或 float32 被提升为 float64。
             normalizer = Tensor(
                 diff.numel(), device=diff.device, dtype=diff.dtype,
                 requires_grad=False,
@@ -80,10 +84,14 @@ class _MSELossFunction(Function):
             grad_input = grad_input / normalizer
         grad_input = grad_input * grad_output
         grad_target = -grad_input
-        return (
+        grads = (
             _sum_to_input_shape(grad_input, input.shape),
             _sum_to_input_shape(grad_target, target.shape),
         )
+        if use_float32:
+            # 应用上游梯度并还原广播之后再恢复精度，避免提前下溢或舍入。
+            return tuple(grad.to(dtype=np.float16) for grad in grads)
+        return grads
 
 
 class CrossEntropyLoss(Module, LossProtocol):
