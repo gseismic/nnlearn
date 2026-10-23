@@ -2,6 +2,10 @@
 
 日期：2026-10-01
 
+## 2026-10-24 复审更正
+
+本记录的原始基准未显式统一模型 dtype：nnlearn.Linear 的目标参数保留 float64，PyTorch 参数为 float32。因此下方历史耗时及 1.34x 比值包含精度差异，不能作为相同精度的性能比较依据；原 Review 结论遗漏了此项检查。PLAN-060 已将两边模型显式转换为 float32，并补充建模与实际更新后的 dtype 回归测试，复验见 [PLAN-060 实施结果](PLAN-060-review-autograd-api-fixes-OUTCOME.md)。
+
 ## 实施内容
 
 1. 新增 `examples/704_compat_training_performance_benchmark.py`：

@@ -113,7 +113,8 @@ def _make_model(framework, device, initial_state):
         }
 
     model.load_state_dict(state)
-    model.to(device)
+    dtype = torch.float32 if framework == "pytorch" else nnlearn.float32
+    model.to(device=device, dtype=dtype)
     return model
 
 
@@ -291,7 +292,7 @@ def main():
     )
 
     print("nnlearn 与 PyTorch 训练基准")
-    print(f"device={args.device}")
+    print(f"device={args.device}，dtype=float32")
     print(
         f"任务：样本={SAMPLES}，特征={FEATURES}，隐藏单元={HIDDEN}，"
         f"类别={CLASSES}，batch_size={BATCH_SIZE}，学习率={LEARNING_RATE}"

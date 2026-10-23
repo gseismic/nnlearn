@@ -351,6 +351,8 @@ class Pow(Function):
     def backward(self, gy):
         x = self.inputs[0]
         c = self.c
+        if c == 0:
+            return gy * 0
         gx = c * x **(c-1) * gy
         return gx
 
@@ -395,7 +397,7 @@ class Tanh(Function):
 
     def backward(self, gy):
         # 1 - y**2
-        y = self.outputs[0]()
+        y = self.get_outputs()[0]
         gx = gy * (1 - y*y)
         return gx
 
@@ -409,7 +411,7 @@ class Sigmoid(Function):
         return 1/(1+xp.exp(-x))
 
     def backward(self, gy):
-        y = self.outputs[0]()
+        y = self.get_outputs()[0]
         return gy * y * (1 - y)
 
 def sigmoid(x):
@@ -465,7 +467,7 @@ class Max(Function):
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
         if self.normalized_axis is None:
-            y = self.outputs[0]().data
+            y = self.get_outputs()[0].data
             mask = x.data == y
             count = xp.sum(mask)
             return Tensor(gy.data * mask / count)
@@ -554,7 +556,7 @@ class Min(Function):
         x = self.inputs[0]
         xp = backend.get_array_module(x.data)
         if self.normalized_axis is None:
-            y = self.outputs[0]().data
+            y = self.get_outputs()[0].data
             mask = x.data == y
             count = xp.sum(mask)
             return Tensor(gy.data * mask / count)
@@ -624,7 +626,7 @@ class Amax(Function):
         if axes is None:
             axes = tuple(range(x.ndim))
 
-        y = self.outputs[0]().data
+        y = self.get_outputs()[0].data
         gy_data = gy.data
         if not self.keepdims:
             shape = list(y.shape)
@@ -670,7 +672,7 @@ class Amin(Function):
         if axes is None:
             axes = tuple(range(x.ndim))
 
-        y = self.outputs[0]().data
+        y = self.get_outputs()[0].data
         gy_data = gy.data
         if not self.keepdims:
             shape = list(y.shape)
@@ -735,9 +737,12 @@ def argmax(input, dim=None, keepdim=False, axis=None, keepdims=None):
     data = input.data if isinstance(input, Tensor) else backend.ensure_array(input)
     xp = backend.get_array_module(data)
     indices = xp.argmax(data, axis=axis)
-    if axis is not None and keepdim:
-        normalized_axis = axis if axis >= 0 else data.ndim + axis
-        indices = xp.expand_dims(indices, axis=normalized_axis)
+    if keepdim:
+        if axis is None:
+            indices = indices.reshape((1,) * data.ndim)
+        else:
+            normalized_axis = axis if axis >= 0 else data.ndim + axis
+            indices = xp.expand_dims(indices, axis=normalized_axis)
     return Tensor(indices.astype('int64'), requires_grad=False)
 
 
@@ -926,7 +931,8 @@ class Gather(Function):
         self.x_shape = x.shape
         xp = backend.get_array_module(x, index)
         _check_index_bounds(index, x.shape[axis], 'gather', xp)
-        return xp.take_along_axis(x, index, axis=axis)
+        selector = _broadcast_index_selector(index.shape, axis, index, xp)
+        return x[tuple(selector)]
 
     def backward(self, gy):
         from nnlearn.tensor import Tensor
@@ -990,12 +996,9 @@ class Scatter(Function):
     def backward(self, gy):
         from nnlearn.tensor import Tensor
 
-        xp = backend.get_array_module(gy.data, self.index)
         gx = gy.data.copy()
         gx[tuple(self.selector)] = 0
-        gsrc = xp.take_along_axis(
-            gy.data, self.index, axis=self.normalized_axis
-        )
+        gsrc = gy.data[tuple(self.selector)]
         return Tensor(gx), None, Tensor(gsrc)
 
 
@@ -1025,10 +1028,7 @@ class ScatterAdd(Function):
     def backward(self, gy):
         from nnlearn.tensor import Tensor
 
-        xp = backend.get_array_module(gy.data, self.index)
-        gsrc = xp.take_along_axis(
-            gy.data, self.index, axis=self.normalized_axis
-        )
+        gsrc = gy.data[tuple(self.selector)]
         return Tensor(gy.data), None, Tensor(gsrc)
 
 
@@ -1144,7 +1144,7 @@ class Softmax(Function):
         return exp_x / xp.sum(exp_x, axis=self.axis, keepdims=True)
 
     def backward(self, gy):
-        y = self.outputs[0]()
+        y = self.get_outputs()[0]
         return y * (gy - (gy * y).sum(axis=self.axis, keepdims=True))
 
 def softmax(x, axis=-1, dim=None):
@@ -1163,7 +1163,7 @@ class LogSoftmax(Function):
         return shifted - log_sum_exp
 
     def backward(self, gy):
-        y = self.outputs[0]()
+        y = self.get_outputs()[0]
         return gy - exp(y) * gy.sum(axis=self.axis, keepdims=True)
 
 def log_softmax(x, axis=-1, dim=None):

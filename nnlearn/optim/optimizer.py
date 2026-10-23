@@ -103,7 +103,9 @@ class Optimizer(OptimizerProtocol):
     def _state_array(self, value, parameter):
         if isinstance(value, Tensor):
             value = value.data
-        return backend.to_device(value, parameter.device).copy()
+        return backend.to_device(
+            value, parameter.device, dtype=parameter.dtype,
+        ).copy()
 
     def state_dict(self):
         return {

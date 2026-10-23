@@ -50,6 +50,13 @@ class Function:
 
         return outputs[0] if len(outputs) == 1 else outputs
 
+    def get_outputs(self):
+        """按实际存储类型解析输出，避免前后向切换引用配置时读取错误。"""
+        return [
+            output() if isinstance(output, weakref.ReferenceType) else output
+            for output in self.outputs
+        ]
+
     def forward(self, x):
         raise NotImplementedError()
 

@@ -3,6 +3,7 @@ from torch_protocol import LossProtocol
 from nnlearn.function import Function
 from nnlearn.tensor import Tensor
 from nnlearn import backend
+from .module import Module
 
 
 def _check_reduction(reduction):
@@ -39,15 +40,25 @@ def _class_weight_data(weight, input_data, num_classes, dtype):
     return data.astype(dtype)
 
 
-class MSELoss(Function, LossProtocol):
+class MSELoss(Module, LossProtocol):
+    """可复用的均方误差模块，每次调用创建独立节点以隔离计算图。"""
+
+    def __init__(self, reduction="mean"):
+        super().__init__()
+        self.reduction = _check_reduction(reduction)  # 配置规约方式，不保存前向缓存。
+
+    def forward(self, input, target):
+        return _MSELossFunction(self.reduction)(input, target)
+
+
+class _MSELossFunction(Function):
+    """保存单次 MSE 调用的状态，使模块复用不会覆盖待反传的输入。"""
 
     def __init__(self, reduction="mean"):
         super().__init__()
         self.reduction = _check_reduction(reduction)
 
     def forward(self, input, target):
-        self.input = input
-        self.target = target
         xp = backend.get_array_module(input)
         loss = (input - target) ** 2
         if self.reduction == "none":
@@ -57,10 +68,16 @@ class MSELoss(Function, LossProtocol):
         return xp.mean(loss)
 
     def backward(self, grad_output):
-        input, target = self.input, self.target
-        grad_input = Tensor(2.0 * (input - target), requires_grad=False)
+        input, target = self.inputs
+        diff = input - target
+        grad_input = diff + diff
         if self.reduction == "mean":
-            grad_input = grad_input / np.prod((input - target).shape)
+            # 规约系数沿用输入精度，避免包装 Python 标量时将 float32 梯度提升。
+            normalizer = Tensor(
+                diff.numel(), device=diff.device, dtype=diff.dtype,
+                requires_grad=False,
+            )
+            grad_input = grad_input / normalizer
         grad_input = grad_input * grad_output
         grad_target = -grad_input
         return (
@@ -69,7 +86,29 @@ class MSELoss(Function, LossProtocol):
         )
 
 
-class CrossEntropyLoss(Function, LossProtocol):
+class CrossEntropyLoss(Module, LossProtocol):
+    """可复用的交叉熵模块，将概率与标签缓存保留在各次调用的节点中。"""
+
+    def __init__(
+        self, weight=None, ignore_index=-100, reduction="mean",
+        label_smoothing=0.0,
+    ):
+        super().__init__()
+        if label_smoothing < 0.0 or label_smoothing > 1.0:
+            raise ValueError("label_smoothing must be between 0.0 and 1.0")
+        self.weight = weight  # 可选的类别权重，Tensor 权重可随模块迁移。
+        self.ignore_index = ignore_index  # 不参与损失的标签值。
+        self.reduction = _check_reduction(reduction)  # 输出的规约方式。
+        self.label_smoothing = float(label_smoothing)  # 标签平滑系数。
+
+    def forward(self, input, target):
+        return _CrossEntropyLossFunction(
+            self.weight, self.ignore_index, self.reduction, self.label_smoothing,
+        )(input, target)
+
+
+class _CrossEntropyLossFunction(Function):
+    """保存单次交叉熵的前向缓存，避免合并多个损失时丢失梯度。"""
     def __init__(
         self, weight=None, ignore_index=-100, reduction="mean",
         label_smoothing=0.0,

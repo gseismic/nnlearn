@@ -1,4 +1,5 @@
 import weakref
+import numpy as np
 from torch_protocol import ModuleProtocol
 from .parameter import Parameter
 from ..tensor import Tensor, _parse_to_args
@@ -30,19 +31,16 @@ class Module(ModuleProtocol):
 
     def to(self, *args, device=None, dtype=None):
         device, dtype = _parse_to_args(args, device, dtype)
-        for name in self._parameters:
+        for name in self._parameters + self._buffers:
             obj = self.__dict__[name]
             if isinstance(obj, Module):
                 obj.to(device=device, dtype=dtype)
-            elif isinstance(obj, Parameter):
-                obj.data = backend.to_device(obj.data, device, dtype=dtype)
+            elif isinstance(obj, Tensor):
+                # 精度转换仅作用于浮点及复数，索引、计数器和布尔掩码只迁移设备。
+                target_dtype = dtype if np.issubdtype(obj.dtype, np.inexact) else None
+                obj.data = backend.to_device(obj.data, device, dtype=target_dtype)
                 if obj.grad is not None:
-                    obj.grad = obj.grad.to(device=device, dtype=dtype)
-        for name in self._buffers:
-            obj = self.__dict__[name]
-            obj.data = backend.to_device(obj.data, device, dtype=dtype)
-            if obj.grad is not None:
-                obj.grad = obj.grad.to(device=device, dtype=dtype)
+                    obj.grad = obj.grad.to(device=device, dtype=target_dtype)
         return self
 
     def __setattr__(self, name, value):

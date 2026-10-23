@@ -2,7 +2,7 @@ import numpy as np
 from torch_protocol import TensorProtocol
 from . import backend
 from .log import log_function_call
-from .settings import Config, log_settings, runtime_settings, using_config
+from .settings import Config, log_settings, using_config
 from . import functional as F
 from .functional.get_item import get_item
 #import networkx as nx
@@ -72,10 +72,7 @@ class Tensor(TensorProtocol):
         add_func(self.creator)
         while funcs:
             f = funcs.pop() # pop the item with maximal generation
-            if runtime_settings.get('remove_recursive_ref', True):
-                outputs = [output() for output in f.outputs]
-            else:
-                outputs = f.outputs
+            outputs = f.get_outputs()
             gys = [
                 current_grads.get(id(output)) if output is not None else None
                 for output in outputs
@@ -100,7 +97,8 @@ class Tensor(TensorProtocol):
                     else:
                         current_grads[key] = gx
                     if x.grad is None:
-                        x.grad = gx
+                        # 广播梯度可能只读，多个输入也可能共享 gx；克隆同时保留高阶求导依赖。
+                        x.grad = gx.clone()
                     else:
                         x.grad = x.grad + gx
 
@@ -148,12 +146,12 @@ class Tensor(TensorProtocol):
             dims = tuple(dims[0])
         return F.permute(self, dims)
 
-    def sum(self, dim=None, axis=None, keepdim=False, keepdims=None):
+    def sum(self, dim=None, keepdim=False, *, axis=None, keepdims=None):
         axis = dim if dim is not None else axis
         keepdim = keepdim if keepdims is None else keepdims
         return F.sum(self, axis=axis, keepdims=keepdim)
 
-    def mean(self, dim=None, axis=None, keepdim=False, keepdims=None):
+    def mean(self, dim=None, keepdim=False, *, axis=None, keepdims=None):
         axis = dim if dim is not None else axis
         keepdim = keepdim if keepdims is None else keepdims
         return F.mean(self, axis=axis, keepdims=keepdim)
@@ -305,7 +303,7 @@ class Tensor(TensorProtocol):
 
     @classmethod
     def randn(self, *shape, device=None, dtype=None, requires_grad=None):
-        shape = self._get_shape(shape)
+        shape = self._get_shape(*shape)
         xp = backend.array_module_for_device(device)
         data = xp.random.randn(*shape)
         if dtype is not None:
@@ -314,14 +312,14 @@ class Tensor(TensorProtocol):
 
     @classmethod
     def zeros(self, *shape, device=None, dtype=None, requires_grad=None):
-        shape = self._get_shape(shape)
+        shape = self._get_shape(*shape)
         xp = backend.array_module_for_device(device)
         return Tensor(xp.zeros(shape, dtype=dtype),
                       requires_grad=requires_grad)
 
     @classmethod
     def ones(self, *shape, device=None, dtype=None, requires_grad=None):
-        shape = self._get_shape(shape)
+        shape = self._get_shape(*shape)
         xp = backend.array_module_for_device(device)
         return Tensor(xp.ones(shape, dtype=dtype),
                       requires_grad=requires_grad)
@@ -370,14 +368,8 @@ class Tensor(TensorProtocol):
             return self.data.shape[dim]
 
     def item(self):
-        assert len(self.data.shape) == 0
-        #print(type(self.data))
-        #print(self.data.value)
-        data = self.data
-        #print(type(data))
-        #print(type(data.item()))
-        #print(type(self.data), self.data)
-        #print(repr(self.data.item()))
+        if self.numel() != 1:
+            raise ValueError('item requires a tensor with exactly one element')
         return self.data.item()
 
     @property
