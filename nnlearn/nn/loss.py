@@ -3,6 +3,7 @@ from torch_protocol import LossProtocol
 from nnlearn.function import Function
 from nnlearn.tensor import Tensor
 from nnlearn import backend
+from nnlearn.settings import Config
 from .module import Module
 
 
@@ -232,6 +233,8 @@ class _CrossEntropyLossFunction(Function):
         return output.astype(input.dtype) if input.dtype == np.float16 else output
 
     def backward(self, grad_output):
+        if Config.enable_backprop:
+            return self._backward_with_graph(grad_output)
         xp = backend.get_array_module(self.probs)
         batch_index = xp.arange(self.target.shape[0])
 
@@ -278,3 +281,36 @@ class _CrossEntropyLossFunction(Function):
             grad_input = grad.reshape(self.target_shape + (self.num_classes,))
             grad_input = xp.moveaxis(grad_input, -1, 1)
         return Tensor(grad_input), None
+
+    def _backward_with_graph(self, grad_output):
+        """重算可微概率，并用常量标签分布保留 logits 和上游的二阶依赖。"""
+        from nnlearn.functional.numeric import softmax
+
+        x = self.inputs[0]
+        if x.dtype == np.float16:
+            x, grad_output = x.to(dtype=np.float32), grad_output.to(dtype=np.float32)
+        if x.ndim > 2:
+            x = x.permute((0,) + tuple(range(2, x.ndim)) + (1,))
+        probs = softmax(x.reshape(-1, self.num_classes), axis=1)
+        xp = backend.get_array_module(self.probs)
+        distribution = xp.full(self.probs.shape, self.label_smoothing / self.num_classes,
+                               dtype=self.probs.dtype)
+        distribution[xp.arange(self.target.size), self.safe_target] += 1 - self.label_smoothing
+        if self.weight_data is not None:
+            distribution *= self.weight_data.reshape(1, -1)
+        distribution *= self.valid_mask.reshape(-1, 1)
+        target = Tensor(distribution, requires_grad=False)
+        grad = probs * target.sum(axis=1, keepdims=True) - target
+        if self.reduction == 'mean':
+            if self.mean_normalizer_nonzero:
+                grad = grad / Tensor(self.mean_normalizer, requires_grad=False)
+            else:
+                grad = probs * 0
+        if self.reduction == 'none':
+            grad = grad * grad_output.reshape(-1, 1)
+        else:
+            grad = grad * grad_output
+        if len(self.input_shape) == 2:
+            return grad.reshape(self.input_shape), None
+        grad = grad.reshape(self.target_shape + (self.num_classes,))
+        return grad.permute((0, grad.ndim - 1) + tuple(range(1, grad.ndim - 1))), None

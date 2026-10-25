@@ -2,6 +2,7 @@ import numpy as np
 from nnlearn.function import Function
 from nnlearn.tensor import Tensor, ensure_tensor
 from nnlearn import backend
+from nnlearn.settings import Config
 from .module import Module
 from .parameter import Parameter
 
@@ -45,6 +46,8 @@ class LayerNormFunction(Function):
         return output
 
     def backward(self, gy):
+        if Config.enable_backprop:
+            return self._backward_with_graph(gy)
         xp = backend.get_array_module(gy.data)
         _, weight, _ = self.inputs
         gy_data = gy.data.astype(np.result_type(gy.dtype, self.x_hat.dtype), copy=False)
@@ -62,6 +65,22 @@ class LayerNormFunction(Function):
         sum_dxhat_xhat = xp.sum(dxhat * self.x_hat, axis=self.axes, keepdims=True)
         gx = (dxhat * count - sum_dxhat - self.x_hat * sum_dxhat_xhat) / (count * self.std)
         return Tensor(gx), Tensor(gweight), Tensor(gbias)
+
+    def _backward_with_graph(self, gy):
+        """从原输入重建统计量，使二阶梯度包含输入、仿射参数及上游依赖。"""
+        x, weight, _ = self.inputs
+        if x.dtype == np.float16:
+            x, gy = x.to(dtype=np.float32), gy.to(dtype=np.float32)
+        centered = x - x.mean(axis=self.axes, keepdims=True)
+        std = ((centered * centered).mean(axis=self.axes, keepdims=True) + self.eps) ** 0.5
+        x_hat = centered / std
+        dxhat = gy * weight
+        gx = (dxhat - dxhat.mean(axis=self.axes, keepdims=True)
+              - x_hat * (dxhat * x_hat).mean(axis=self.axes, keepdims=True)) / std
+        reduce_axes = tuple(range(gy.ndim - len(self.normalized_shape)))
+        if reduce_axes:
+            return gx, (gy * x_hat).sum(axis=reduce_axes), gy.sum(axis=reduce_axes)
+        return gx, gy * x_hat, gy
 
 
 class LayerNorm(Module):

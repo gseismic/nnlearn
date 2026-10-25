@@ -2,6 +2,7 @@ import numpy as np
 from nnlearn.function import Function
 from nnlearn.tensor import Tensor
 from nnlearn import backend
+from nnlearn.settings import Config
 from .module import Module
 from .parameter import Parameter
 
@@ -45,6 +46,8 @@ class Conv2dFunction(Function):
         return y
 
     def backward(self, gy):
+        if Config.enable_backprop:
+            return self._backward_with_graph(gy)
         xp = backend.get_array_module(gy.data)
         x, weight = self.inputs[:2]
         gy_data = gy.data
@@ -72,6 +75,43 @@ class Conv2dFunction(Function):
         if self.has_bias:
             return Tensor(gx), Tensor(gweight), Tensor(gbias)
         return Tensor(gx), Tensor(gweight)
+
+    def _backward_with_graph(self, gy):
+        """用可微窗口和矩阵乘法表达卷积反向，保留输入/权重的交叉高阶导数。"""
+        from nnlearn.functional.matrix import matmul, stack
+        from nnlearn.functional.pad import pad
+
+        x, weight = self.inputs[:2]
+        n, channels, height, width = self.x_shape
+        outputs, _, kh, kw = self.weight_shape
+        sh, sw = self.stride
+        ph, pw = self.padding
+        padded_shape = (n, channels, height + 2 * ph, width + 2 * pw)
+        inner = (slice(None), slice(None), slice(ph, ph + height), slice(pw, pw + width))
+        padded = pad(x, padded_shape, inner) if ph or pw else x
+        out_h, out_w = gy.shape[2:]
+        windows = []
+        selectors = []
+        for i in range(out_h):
+            for j in range(out_w):
+                selector = (slice(None), slice(None), slice(i * sh, i * sh + kh),
+                            slice(j * sw, j * sw + kw))
+                selectors.append(selector)
+                windows.append(padded[selector].reshape(n, -1))
+        columns = stack(windows, dim=1)
+        grad_matrix = gy.permute(0, 2, 3, 1).reshape(n, -1, outputs)
+        gweight = matmul(grad_matrix.reshape(-1, outputs).T,
+                        columns.reshape(-1, channels * kh * kw)).reshape(self.weight_shape)
+        patches = matmul(grad_matrix, weight.reshape(outputs, -1))
+        gx_padded = None
+        for position, selector in enumerate(selectors):
+            patch = patches[:, position, :].reshape(n, channels, kh, kw)
+            contribution = pad(patch, padded_shape, selector)
+            gx_padded = contribution if gx_padded is None else gx_padded + contribution
+        gx = gx_padded[inner] if ph or pw else gx_padded
+        if self.has_bias:
+            return gx, gweight, gy.sum(axis=(0, 2, 3))
+        return gx, gweight
 
 
 def conv2d(x, weight, bias=None, stride=1, padding=0):
