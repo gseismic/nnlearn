@@ -168,3 +168,35 @@ def test_higher_order_dtype_and_parameter_dependencies(kind, dtype):
             lambda x, weight, bias: torch.nn.functional.conv2d(x, weight, bias),
             dtype,
         )
+
+
+@pytest.mark.parametrize('dtype,scale', [(np.float32, 1e30), (np.float64, 1e40)])
+def test_layernorm_half_input_keeps_high_precision_upstream(dtype, scale):
+    """显式高精度参数的有限上游不可因输入为半精度而被截断或溢出。"""
+    results = []
+    for create_graph in (False, True):
+        x = nl.tensor(np.array([[0., 1.]], dtype=np.float16), requires_grad=True)
+        weight = nl.tensor(np.ones(2, dtype=dtype), requires_grad=True)
+        bias = nl.tensor(np.zeros(2, dtype=dtype), requires_grad=True)
+        with np.errstate(over='raise', invalid='raise'):
+            output = LayerNormFunction(2)(x, weight, bias)
+            (output * nl.tensor(np.full((1, 2), scale, dtype=dtype))).sum().backward(
+                create_graph=create_graph)
+        assert output.dtype == dtype
+        gradients = [value.grad.numpy().copy() for value in (x, weight, bias)]
+        assert all(np.isfinite(value).all() for value in gradients)
+        assert weight.grad.dtype == bias.grad.dtype == dtype
+        results.append(gradients)
+    for actual, expected in zip(results[1], results[0]):
+        np.testing.assert_allclose(actual, expected, rtol=2e-6, atol=0)
+
+
+@pytest.mark.parametrize('stride,padding', [(1, 0), (2, 1)])
+def test_conv2d_empty_batch_preserves_first_and_second_derivatives(stride, padding):
+    """空批次是合法输入，梯度的形状和零值需与 PyTorch 一致。"""
+    _compare_derivatives(
+        [np.zeros((0, 1, 3, 3)), np.ones((1, 1, 2, 2)), np.ones(1)],
+        lambda x, weight, bias: conv2d(x, weight, bias, stride=stride, padding=padding),
+        lambda x, weight, bias: torch.nn.functional.conv2d(
+            x, weight, bias, stride=stride, padding=padding),
+    )

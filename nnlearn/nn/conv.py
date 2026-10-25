@@ -90,6 +90,8 @@ class Conv2dFunction(Function):
         inner = (slice(None), slice(None), slice(ph, ph + height), slice(pw, pw + width))
         padded = pad(x, padded_shape, inner) if ph or pw else x
         out_h, out_w = gy.shape[2:]
+        positions = out_h * out_w
+        window_size = channels * kh * kw
         windows = []
         selectors = []
         for i in range(out_h):
@@ -97,9 +99,10 @@ class Conv2dFunction(Function):
                 selector = (slice(None), slice(None), slice(i * sh, i * sh + kh),
                             slice(j * sw, j * sw + kw))
                 selectors.append(selector)
-                windows.append(padded[selector].reshape(n, -1))
+                windows.append(padded[selector].reshape(n, window_size))
         columns = stack(windows, dim=1)
-        grad_matrix = gy.permute(0, 2, 3, 1).reshape(n, -1, outputs)
+        # 明确空间大小，合法的零批次不能用 -1 推断剩余维度。
+        grad_matrix = gy.permute(0, 2, 3, 1).reshape(n, positions, outputs)
         gweight = matmul(grad_matrix.reshape(-1, outputs).T,
                         columns.reshape(-1, channels * kh * kw)).reshape(self.weight_shape)
         patches = matmul(grad_matrix, weight.reshape(outputs, -1))

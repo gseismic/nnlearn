@@ -70,7 +70,10 @@ class LayerNormFunction(Function):
         """从原输入重建统计量，使二阶梯度包含输入、仿射参数及上游依赖。"""
         x, weight, _ = self.inputs
         if x.dtype == np.float16:
-            x, gy = x.to(dtype=np.float32), gy.to(dtype=np.float32)
+            x = x.to(dtype=np.float32)
+            # 只提升半精度上游；显式高精度仿射参数可能传回 float64 梯度。
+            if gy.dtype == np.float16:
+                gy = gy.to(dtype=np.float32)
         centered = x - x.mean(axis=self.axes, keepdims=True)
         std = ((centered * centered).mean(axis=self.axes, keepdims=True) + self.eps) ** 0.5
         x_hat = centered / std
