@@ -110,3 +110,11 @@ for _ in range(20):
 ```bash
 python examples/000_tutorial_beginner_tutorial.py
 ```
+
+## 扩展与验证
+
+- [高阶导数与支持边界](docs/autograd.md)
+- [变长序列与因果掩码训练](docs/tutorial/transformer-masks-20261025.md)
+- [固定测试环境、持续集成与发行包验收](docs/testing.md)
+- [CUDA 安装与实机验收](docs/cuda.md)
+- [开发计划与结果索引](docs/dev/INDEX.md)

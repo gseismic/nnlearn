@@ -6,8 +6,9 @@ nnlearn 是提供 PyTorch 风格核心训练接口的独立张量与自动微分
 
 | 更新时间（Asia/Shanghai） | 计划 | 结果 | 实施摘要 |
 | --- | --- | --- | --- |
+| 2026-10-25 | [PLAN-067-cuda-validation.md](PLAN-067-cuda-validation.md) | [PLAN-067-cuda-validation-OUTCOME.md](PLAN-067-cuda-validation-OUTCOME.md) | RTX 3060 强制硬件门禁 72 项、全量 947 项通过且无跳过；修复 CuPy 四类反向散射，CUDA 掩码 Transformer 220 步训练通过；CPU 全量 852 项通过、95 项显式跳过。 |
 | 2026-10-25 | [PLAN-065-transformer-masks.md](PLAN-065-transformer-masks.md) | [PLAN-065-transformer-masks-OUTCOME.md](PLAN-065-transformer-masks-OUTCOME.md) | 新增注意力 padding、causal 与二维/三维掩码，相关测试 104 项通过；两端变长序列训练收敛，未来与 padding 扰动误差均为零。 |
-| 2026-10-25 | [PLAN-066-ci-packaging.md](PLAN-066-ci-packaging.md) | [PLAN-066-ci-packaging-OUTCOME.md](PLAN-066-ci-packaging-OUTCOME.md) | 新增固定版本 CPU 持续集成、无 PyTorch 训练及发行包验收；两套 Python 环境与 8 个干净安装通过，远程 Actions 随提交触发并在最终集成时核验。 |
+| 2026-10-25 | [PLAN-066-ci-packaging.md](PLAN-066-ci-packaging.md) | [PLAN-066-ci-packaging-OUTCOME.md](PLAN-066-ci-packaging-OUTCOME.md) | 新增固定版本 CPU 持续集成、无 PyTorch 训练及发行包验收；两套 Python 环境与 8 个干净安装通过，远程五个作业全部成功，后续提交自动触发同套验收。 |
 | 2026-10-25 | [PLAN-064-higher-order-autograd.md](PLAN-064-higher-order-autograd.md) | [PLAN-064-higher-order-autograd-OUTCOME.md](PLAN-064-higher-order-autograd-OUTCOME.md) | 补齐 LayerNorm、交叉熵、Conv2d 高阶反向；独立复查后共 33 项新增回归，覆盖混合精度上游及空批次；高阶与半精度联合 71 项通过。 |
 | 2026-10-25 14:08 | [PLAN-063-half-precision-stability.md](PLAN-063-half-precision-stability.md) | [PLAN-063-half-precision-stability-OUTCOME.md](PLAN-063-half-precision-stability-OUTCOME.md) | 修复 Softmax、交叉熵与归一化半精度中间溢出；新增 38 项通过，NumPy 1.24 无参考框架 20 项通过；CUDA 联合验收见 PLAN-067。 |
 | 2026-10-24 02:53 | [PLAN-062-training-dtype-consistency.md](PLAN-062-training-dtype-consistency.md) | [PLAN-062-training-dtype-consistency-OUTCOME.md](PLAN-062-training-dtype-consistency-OUTCOME.md) | 统一 Python 常量与浮点梯度精度，修复均值、极值、零维激活和优化器状态升精度；新增 292 项，CPU 全量 702 项通过，NumPy 1.24 兼容回归 25 项通过。 |

@@ -33,8 +33,14 @@ def test_pytorch_import_replacement_path_runs():
     script = Path(__file__).resolve().parents[1] / "examples" / (
         "700_compat_pytorch_training_baseline.py"
     )
+    # 固定使用 PyTorch 原生 CUDA 卷积，保持独立 GPU 参考且无需可选 cuDNN。
+    reference_runner = (
+        "import runpy, sys, torch\n"
+        "with torch.backends.cudnn.flags(enabled=False):\n"
+        "    runpy.run_path(sys.argv[1], run_name='__main__')\n"
+    )
     completed = subprocess.run(
-        [sys.executable, str(script)],
+        [sys.executable, "-c", reference_runner, str(script)],
         cwd=Path(__file__).resolve().parents[1],
         env=env,
         text=True,

@@ -73,6 +73,25 @@ def get_array_module(*arrays):
     return np
 
 
+def _put_along_axis(array, indices, values, axis):
+    """写回每个切片中互不重复的索引，兼容没有 put_along_axis 的 CuPy。"""
+    xp = get_array_module(array, indices)
+    if xp is np:
+        return np.put_along_axis(array, indices, values, axis=axis)
+    if axis < 0:
+        axis += array.ndim
+    # 每条非目标轴只创建一维坐标，广播后完成 GPU 高级索引写入。
+    selector = []
+    for dimension, size in enumerate(array.shape):
+        if dimension == axis:
+            selector.append(indices)
+        else:
+            shape = [1] * array.ndim
+            shape[dimension] = size
+            selector.append(xp.arange(size, dtype=xp.int64).reshape(shape))
+    array[tuple(selector)] = values
+
+
 def device_of(data):
     return "cuda" if is_cuda_array(data) else "cpu"
 

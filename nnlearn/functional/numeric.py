@@ -508,7 +508,7 @@ class Max(Function):
             gy = gy.unsqueeze(axis)
         indices = xp.expand_dims(indices, axis=axis)
         mask = xp.zeros_like(x.data, dtype=bool)
-        xp.put_along_axis(mask, indices, True, axis=axis)
+        backend._put_along_axis(mask, indices, True, axis=axis)
         return gy * Tensor(mask, requires_grad=False)
 
 def _max_indices(x, axis, keepdims=False):
@@ -596,7 +596,7 @@ class Min(Function):
             gy = gy.unsqueeze(axis)
         indices = xp.expand_dims(indices, axis=axis)
         mask = xp.zeros_like(x.data, dtype=bool)
-        xp.put_along_axis(mask, indices, True, axis=axis)
+        backend._put_along_axis(mask, indices, True, axis=axis)
         return gy * Tensor(mask, requires_grad=False)
 
 
@@ -806,8 +806,8 @@ class TopK(Function):
 
         xp = backend.get_array_module(gy_values.data)
         gx = xp.zeros(self.x_shape, dtype=gy_values.data.dtype)
-        xp.put_along_axis(gx, self.indices, gy_values.data,
-                          axis=self.normalized_axis)
+        backend._put_along_axis(gx, self.indices, gy_values.data,
+                                axis=self.normalized_axis)
         return Tensor(gx)
 
 def topk(input, k, dim=None, largest=True, sorted=True):
@@ -1101,8 +1101,8 @@ class Sort(Function):
 
         xp = backend.get_array_module(gy_values.data)
         gx = xp.zeros(self.x_shape, dtype=gy_values.data.dtype)
-        xp.put_along_axis(gx, self.indices, gy_values.data,
-                          axis=self.normalized_axis)
+        backend._put_along_axis(gx, self.indices, gy_values.data,
+                                axis=self.normalized_axis)
         return Tensor(gx)
 
 def sort(input, dim=-1, descending=False, stable=False):

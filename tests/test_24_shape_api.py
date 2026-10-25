@@ -94,6 +94,6 @@ def test_cuda_shape_api_if_available():
     y.sum().backward()
 
     assert y.device == "cuda"
-    assert y.shape == (6, 1)
+    assert y.shape == (6,)
     assert x.grad.device == "cuda"
     assert np.allclose(x.grad.cpu().numpy(), np.ones((1, 2, 3)))
