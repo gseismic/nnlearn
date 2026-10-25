@@ -1157,12 +1157,17 @@ class Softmax(Function):
 
     def forward(self, x):
         xp = backend.get_array_module(x)
-        shifted = x - xp.max(x, axis=self.axis, keepdims=True)
+        work = x.astype(np.float32) if x.dtype == np.float16 else x
+        shifted = work - xp.max(work, axis=self.axis, keepdims=True)
         exp_x = xp.exp(shifted)
-        return exp_x / xp.sum(exp_x, axis=self.axis, keepdims=True)
+        output = exp_x / xp.sum(exp_x, axis=self.axis, keepdims=True)
+        return output.astype(x.dtype, copy=False) if x.dtype == np.float16 else output
 
     def backward(self, gy):
         y = self.get_outputs()[0]
+        if y.dtype == np.float16:
+            # 概率乘积和长轴规约均在单精度中完成，转换继续保留高阶依赖。
+            y, gy = y.to(dtype=np.float32), gy.to(dtype=np.float32)
         return y * (gy - (gy * y).sum(axis=self.axis, keepdims=True))
 
 def softmax(x, axis=-1, dim=None):
@@ -1176,12 +1181,16 @@ class LogSoftmax(Function):
 
     def forward(self, x):
         xp = backend.get_array_module(x)
-        shifted = x - xp.max(x, axis=self.axis, keepdims=True)
+        work = x.astype(np.float32) if x.dtype == np.float16 else x
+        shifted = work - xp.max(work, axis=self.axis, keepdims=True)
         log_sum_exp = xp.log(xp.sum(xp.exp(shifted), axis=self.axis, keepdims=True))
-        return shifted - log_sum_exp
+        output = shifted - log_sum_exp
+        return output.astype(x.dtype, copy=False) if x.dtype == np.float16 else output
 
     def backward(self, gy):
         y = self.get_outputs()[0]
+        if y.dtype == np.float16:
+            y, gy = y.to(dtype=np.float32), gy.to(dtype=np.float32)
         return gy - exp(y) * gy.sum(axis=self.axis, keepdims=True)
 
 def log_softmax(x, axis=-1, dim=None):

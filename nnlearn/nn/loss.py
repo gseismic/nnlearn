@@ -165,7 +165,9 @@ class _CrossEntropyLossFunction(Function):
         safe_target = target_flat.copy()
         safe_target = xp.where(valid_mask, safe_target, xp.zeros_like(safe_target))
 
-        shifted = logits - xp.max(logits, axis=1, keepdims=True)
+        # 指数和、损失和及均值分母使用单精度，不能在溢出后才恢复 dtype。
+        work_logits = logits.astype(np.float32) if logits.dtype == np.float16 else logits
+        shifted = work_logits - xp.max(work_logits, axis=1, keepdims=True)
         exp_logits = xp.exp(shifted)
         self.probs = exp_logits / xp.sum(exp_logits, axis=1, keepdims=True)
         log_probs = shifted - xp.log(xp.sum(exp_logits, axis=1, keepdims=True))
@@ -214,9 +216,11 @@ class _CrossEntropyLossFunction(Function):
         self.mean_normalizer_nonzero = True
 
         if self.reduction == "none":
-            return losses.reshape(target.shape)
+            output = losses.reshape(target.shape)
+            return output.astype(input.dtype) if input.dtype == np.float16 else output
         if self.reduction == "sum":
-            return xp.sum(losses)
+            output = xp.sum(losses)
+            return output.astype(input.dtype) if input.dtype == np.float16 else output
 
         if weight_data is None:
             normalizer = xp.sum(valid_mask.astype(log_probs.dtype))
@@ -224,7 +228,8 @@ class _CrossEntropyLossFunction(Function):
             normalizer = xp.sum(sample_weight)
         self.mean_normalizer = normalizer
         self.mean_normalizer_nonzero = _array_scalar_bool(normalizer != 0)
-        return xp.sum(losses) / normalizer
+        output = xp.sum(losses) / normalizer
+        return output.astype(input.dtype) if input.dtype == np.float16 else output
 
     def backward(self, grad_output):
         xp = backend.get_array_module(self.probs)

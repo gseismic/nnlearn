@@ -33,16 +33,21 @@ class LayerNormFunction(Function):
         axes = tuple(range(x.ndim - len(self.normalized_shape), x.ndim))
         self.axes = axes
         self.x_shape = x.shape
-        self.mean = xp.mean(x, axis=axes, keepdims=True)
-        self.var = xp.var(x, axis=axes, keepdims=True)
+        # 半精度平方和可能在最终方差仍有限时溢出，统计量先在单精度中求值。
+        work = x.astype(np.float32) if x.dtype == np.float16 else x
+        self.mean = xp.mean(work, axis=axes, keepdims=True)
+        self.var = xp.var(work, axis=axes, keepdims=True)
         self.std = xp.sqrt(self.var + self.eps)
-        self.x_hat = (x - self.mean) / self.std
-        return self.x_hat * weight + bias
+        self.x_hat = (work - self.mean) / self.std
+        output = self.x_hat * weight + bias
+        if x.dtype == np.float16:
+            output = output.astype(np.result_type(x.dtype, weight.dtype, bias.dtype))
+        return output
 
     def backward(self, gy):
         xp = backend.get_array_module(gy.data)
         _, weight, _ = self.inputs
-        gy_data = gy.data
+        gy_data = gy.data.astype(np.result_type(gy.dtype, self.x_hat.dtype), copy=False)
         reduce_axes = tuple(range(gy_data.ndim - len(self.normalized_shape)))
         if reduce_axes:
             gweight = xp.sum(gy_data * self.x_hat, axis=reduce_axes)
@@ -118,11 +123,11 @@ class _BatchNorm(Module):
         self.running_mean.data = (
             (1 - self.momentum) * self.running_mean.data
             + self.momentum * mean_data
-        )
+        ).astype(self.running_mean.dtype, copy=False)
         self.running_var.data = (
             (1 - self.momentum) * self.running_var.data
             + self.momentum * var_data
-        )
+        ).astype(self.running_var.dtype, copy=False)
 
     def forward(self, x):
         x = ensure_tensor(x)
@@ -131,6 +136,14 @@ class _BatchNorm(Module):
             raise ValueError(
                 f'expected {self.num_features} features, got {x.shape[1]}'
             )
+
+        output_dtype = x.dtype
+        use_float32 = x.dtype == np.float16
+        if use_float32:
+            # 使用可微转换，避免中心化后的平方在求均值前发生半精度溢出。
+            x = x.to(dtype=np.float32)
+            if self.affine:
+                output_dtype = np.result_type(output_dtype, self.weight.dtype, self.bias.dtype)
 
         axes = self._batch_axes(x)
         stat_shape = self._feature_shape(x.ndim)
@@ -148,7 +161,7 @@ class _BatchNorm(Module):
         y = centered / ((var + self.eps) ** 0.5)
         if self.affine:
             y = y * self.weight.reshape(stat_shape) + self.bias.reshape(stat_shape)
-        return y
+        return y.to(dtype=output_dtype) if use_float32 else y
 
 
 class BatchNorm1d(_BatchNorm):
