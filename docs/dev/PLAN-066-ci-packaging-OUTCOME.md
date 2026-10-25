@@ -41,6 +41,12 @@ CPU 参考作业日志明确记录 Python 3.12.12、NumPy 2.2.6、`torch==2.6.0+
 
 本地参考 wheel 下载先出现 30 秒超时，放宽超时后仍出现连接已建立但数分钟无新数据。依据官方索引切换 R2 地址、实取 metadata 并核对 SHA-256 后，本地网络仍停滞；最终明确终止该本地进程，未将其计为通过。相同固定参考环境及安装命令已在上述远程 CI 完成全部验收，无须继续重复本地下载。
 
+### 五项工作的最终集成
+
+核心代码提交 `01cbcce` 的 [CI 40169550170](https://github.com/gseismic/nnlearn/actions/runs/40169550170) 五个作业全部成功。两套无 PyTorch 环境的作业日志均为 **233 passed, 184 skipped**，实际执行无参考后端训练及恢复烟测；PyTorch CPU 全量参考和两套 Python 的四产物安装作业也全部成功。此版本已包含半精度、高阶导数及其复查补修、Transformer 掩码、CUDA 门禁与散射兼容修复。
+
+相同核心代码的本地 CPU 全量为 **852 passed, 95 skipped**；RTX 3060 强制硬件全量为 **947 passed, 0 skipped**，证据见 [PLAN-067 结果](PLAN-067-cuda-validation-OUTCOME.md)。不把 CI 的 GPU 跳过视为实机验收。
+
 ## Review 与边界
 
 已逐项检查发行包导入来源、构建隔离约束、依赖分层、Python 3.8 可用性和测试跳过语义。修复了 `uv run` 改变 PATH 后误选目标 Python 目录下旧 uv 的问题，子进程优先使用 uv 提供的 `UV` 可执行路径；同时核对了所有 CI 命令及 Action 官方提交。

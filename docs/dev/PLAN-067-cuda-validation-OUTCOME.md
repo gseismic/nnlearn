@@ -64,7 +64,8 @@
 - 计划：`docs/dev/PLAN-067-cuda-validation.md`。
 - 结果：`docs/dev/PLAN-067-cuda-validation-OUTCOME.md`。
 - 安装与复现：`docs/cuda.md`；开发索引：`docs/dev/INDEX.md`。
-- 主代理统一提交与推送，并在当前提交触发的远程 CI 中核对两套 Python/NumPy、PyTorch CPU 及八个发行产物的最终集成。
+- 主代理已提交并推送核心代码 `01cbcce`；[最终集成 CI 40169550170](https://github.com/gseismic/nnlearn/actions/runs/40169550170) 五个作业全部成功，覆盖两套 Python/NumPy、PyTorch CPU 及八个发行产物安装。两套无 PyTorch 环境均实际报告 **233 passed, 184 skipped**；参考框架与 CUDA 的跳过均明确显示原因。
+- 中文 README 和索引已关联五份计划及结果；文档入口和所有本地链接已检查有效。最终文档归档提交继续自动触发同套 CI。
 
 ## 验收中修正的问题与测试配置
 
