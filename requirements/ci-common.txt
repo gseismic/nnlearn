@@ -1,0 +1,11 @@
+# 测试工具固定在兼容 Python 3.8 的版本；运行依赖不包含 PyTorch。
+loguru==0.7.3
+pytest==8.3.5
+iniconfig==2.0.0
+packaging==24.2
+pluggy==1.5.0
+exceptiongroup==1.2.2; python_version < "3.11"
+tomli==2.2.1; python_version < "3.11"
+colorama==0.4.6; sys_platform == "win32"
+win32-setctime==1.2.0; sys_platform == "win32"
+ruff==0.11.13

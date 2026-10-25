@@ -102,7 +102,7 @@ def test_invalid_reduction_is_rejected():
 
 def test_cross_entropy_cuda_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     logits = torch.tensor([[2.0, 0.0], [0.0, 2.0]], device="cuda",
                           requires_grad=True)

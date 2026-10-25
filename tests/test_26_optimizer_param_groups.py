@@ -1,3 +1,4 @@
+import pytest
 import sys
 from pathlib import Path
 
@@ -131,7 +132,7 @@ def test_load_state_dict_rejects_different_param_group_count():
 
 def test_cuda_param_groups_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     p1 = torch.tensor([1.0], device="cuda")
     p2 = torch.tensor([1.0], device="cuda")

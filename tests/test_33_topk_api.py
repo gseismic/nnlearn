@@ -1,3 +1,4 @@
+import pytest
 import sys
 from pathlib import Path
 
@@ -75,7 +76,7 @@ def test_topk_allows_k_zero():
 
 def test_topk_cuda_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.tensor([[1.0, 4.0, 2.0], [3.0, 0.0, 5.0]],
                      device="cuda", requires_grad=True)

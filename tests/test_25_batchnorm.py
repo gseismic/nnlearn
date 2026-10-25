@@ -102,7 +102,7 @@ def test_batchnorm_rejects_bad_input_dim():
 
 def test_batchnorm_cuda_buffers_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     bn = nn.BatchNorm2d(2).to("cuda")
     x = torch.tensor(np.random.randn(2, 2, 3, 3).astype("float32"),

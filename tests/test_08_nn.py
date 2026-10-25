@@ -105,7 +105,6 @@ def test_nn_linear_regress():
     else:
         x = np.array([[1], [2], [3]])
     y_target = 3*x + 1 #+ 0.3*np.random.rand(N, 1)
-    import matplotlib.pyplot as plt
 
     W = Tensor.zeros(1, 1).renamed('W')
     # b = Tensor.zeros(1).renamed('b') NOT-ALLOWED
@@ -150,9 +149,8 @@ def test_nn_linear_regress():
             print(f'{i}: loss={loss.data}, {W.data=}, {b.data=}')
 
     y_pred = model(x)
-    plt.scatter(x, y_pred.data, color='g')
-    plt.scatter(x, y_target, marker='x')
-    # plt.show()
+    # 直接验证拟合误差，保证无图形依赖的干净环境也能验收训练结果。
+    assert np.mean((y_pred.numpy() - y_target) ** 2) < 0.05
 
 
 if __name__ == '__main__':

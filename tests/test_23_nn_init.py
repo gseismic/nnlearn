@@ -121,7 +121,7 @@ def test_kaiming_uniform_rejects_bad_mode():
 
 def test_cuda_init_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.zeros(2, 3, device="cuda")
     nn.init.ones_(x)

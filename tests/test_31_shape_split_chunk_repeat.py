@@ -1,3 +1,4 @@
+import pytest
 import sys
 from pathlib import Path
 
@@ -80,7 +81,7 @@ def test_chunk_uses_nearly_even_splits():
 
 def test_split_chunk_repeat_cuda_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.tensor([[1.0, 2.0], [3.0, 4.0]], device="cuda",
                      requires_grad=True)

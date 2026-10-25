@@ -2,7 +2,7 @@
 
 import numpy as np
 import pytest
-import torch as pytorch
+pytorch = pytest.importorskip("torch")
 
 import nnlearn as torch
 import nnlearn.nn as nn

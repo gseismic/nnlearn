@@ -1,8 +1,9 @@
+import pytest
 import config
 import time
 import numpy as np
 import nnlearn
-import torch
+torch = pytest.importorskip("torch")
 from nnlearn import functional as F
 from nnlearn import Tensor, allclose
 import nnlearn.nn as nn

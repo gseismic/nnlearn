@@ -70,7 +70,7 @@ def test_cat_rejects_empty_and_mismatched_shapes():
 
 def test_cat_cuda_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x1 = torch.tensor([[1.0, 2.0]], device="cuda", requires_grad=True)
     x2 = torch.tensor([[3.0, 4.0]], device="cuda", requires_grad=True)

@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 import pytest
-import torch as pytorch
+pytorch = pytest.importorskip("torch")
 import nnlearn as torch
 
 
@@ -122,7 +122,7 @@ def test_min_rejects_tuple_dim_for_reduction():
 
 def test_min_cuda_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.tensor([[1.0, -2.0, -2.0], [3.0, 0.0, -1.0]],
                      device="cuda", requires_grad=True)

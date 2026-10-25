@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_NO_PROGRESS: "1"
+  UV_PYTHON_DOWNLOADS: automatic
+  UV_HTTP_TIMEOUT: "300"
+
+jobs:
+  compatibility:
+    name: 无 PyTorch / Python ${{ matrix.python }} / NumPy ${{ matrix.numpy }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: "3.8.20"
+            numpy: "1.24.4"
+            constraints: requirements/ci-py38.txt
+          - python: "3.12.12"
+            numpy: "2.2.6"
+            constraints: requirements/ci-py312.txt
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6.4.3
+        with:
+          version: "0.9.20"
+      - name: 创建固定版本的无 PyTorch 环境
+        run: |
+          uv venv --managed-python --python '${{ matrix.python }}'
+          uv pip install --constraint '${{ matrix.constraints }}' --build-constraints requirements/ci-build.txt -e '.[test]'
+      - name: 无 PyTorch 训练及恢复烟测
+        run: uv run --no-project --python .venv/bin/python scripts/smoke_installed.py
+      - name: CPU 兼容性回归（报告参考后端及 CUDA 跳过项）
+        run: uv run --no-project --python .venv/bin/python -m pytest tests -q -ra
+
+  pytorch-reference:
+    name: PyTorch 2.6.0 CPU 全量对照
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6.4.3
+        with:
+          version: "0.9.20"
+      - name: 安装固定 PyTorch CPU 参考环境
+        run: |
+          uv venv --managed-python --python 3.12.12
+          uv pip install --constraint requirements/ci-reference.txt --build-constraints requirements/ci-build.txt -e '.[test-reference]'
+      - name: 核对参考后端与 NumPy 版本
+        run: |
+          uv run --no-project --python .venv/bin/python python -c 'import torch, numpy; assert torch.__version__ == "2.6.0+cpu"; assert torch.version.cuda is None; assert numpy.__version__ == "2.2.6"; print(torch.__version__, numpy.__version__)'
+      - name: 全量 CPU 对照回归
+        run: uv run --no-project --python .venv/bin/python -m pytest tests -q -ra
+
+  distributions:
+    name: wheel 与 sdist / Python ${{ matrix.python }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: "3.8.20"
+            constraints: requirements/ci-py38.txt
+          - python: "3.12.12"
+            constraints: requirements/ci-py312.txt
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6.4.3
+        with:
+          version: "0.9.20"
+      - name: 构建两个发行包并在四个干净环境验收
+        run: uv run --no-project --managed-python --python '${{ matrix.python }}' scripts/check_distributions.py --python '${{ matrix.python }}' --constraints '${{ matrix.constraints }}'

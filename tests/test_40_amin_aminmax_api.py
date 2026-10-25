@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 import pytest
-import torch as pytorch
+pytorch = pytest.importorskip("torch")
 import nnlearn as torch
 
 
@@ -117,7 +117,7 @@ def test_aminmax_backward_reports_unimplemented_derivative():
 
 def test_amin_and_aminmax_cuda_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.tensor([
         [[1.0, -3.0], [-3.0, 2.0]],

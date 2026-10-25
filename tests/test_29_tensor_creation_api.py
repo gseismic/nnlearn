@@ -1,3 +1,4 @@
+import pytest
 import sys
 from pathlib import Path
 
@@ -60,7 +61,7 @@ def test_randint_pytorch_signatures_and_dtype():
 
 def test_creation_cuda_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.arange(4, device="cuda")
     zeros = torch.zeros_like(x)

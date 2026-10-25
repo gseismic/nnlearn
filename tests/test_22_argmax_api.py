@@ -65,7 +65,7 @@ def test_argmax_rejects_tuple_dim():
 
 def test_cuda_argmax_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.tensor([[1.0, 3.0], [5.0, 4.0]], device="cuda")
     y = x.argmax(dim=1, keepdim=True)

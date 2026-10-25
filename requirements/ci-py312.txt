@@ -1,0 +1,2 @@
+-c ci-common.txt
+numpy==2.2.6

@@ -1,3 +1,4 @@
+import pytest
 import sys
 from pathlib import Path
 
@@ -31,7 +32,7 @@ def test_broadcast_grad_to_scalar():
 
 def test_cuda_tensor_basic_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.tensor([1.0, 2.0, 3.0], device="cuda", requires_grad=True)
     y = (x * x).sum()

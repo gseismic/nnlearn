@@ -86,7 +86,7 @@ def test_shape_api_rejects_bad_dims():
 
 def test_cuda_shape_api_if_available():
     if not torch.cuda.is_available():
-        return
+        pytest.skip("CUDA 不可用，GPU 路径未验收")
 
     x = torch.tensor(np.arange(6).reshape(1, 2, 3).astype("float32"),
                      device="cuda", requires_grad=True)
