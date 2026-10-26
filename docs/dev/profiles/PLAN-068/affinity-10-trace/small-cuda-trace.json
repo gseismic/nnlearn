@@ -1,0 +1,540 @@
+{
+  "nnlearn": {
+    "activity_scope": "当前被 profile 进程的 CUDA 活动；不包含其他进程，不能代替整卡利用率",
+    "steps": 20,
+    "raw_trace": "/tmp/nnlearn-profile-068-affinity-traces/small-cuda-nnlearn.json",
+    "trace_sha256": "14edf9f310c9c6e9e594b79b30c9bf443c76a10c9789a01a5eaea06981daa38e",
+    "trace_bytes": 2103291,
+    "profiled_window_ms": 73.83470600000001,
+    "kernel_count": 1640,
+    "kernel_sum_ms": 3.27116,
+    "kernel_union_ms": 3.271151123046875,
+    "copy_count": 276,
+    "copy_union_ms": 0.219762451171875,
+    "gpu_active_union_ms": 3.49091357421875,
+    "gpu_active_fraction_of_profiled_window": 0.04728011748592525,
+    "gpu_gap_ms": 70.34379242578126,
+    "kernel_launch_phase_attribution": {
+      "phase/forward": {
+        "count": 100,
+        "total_us": 334.7519999999999
+      },
+      "phase/loss": {
+        "count": 680,
+        "total_us": 1169.1029999999992
+      },
+      "phase/backward": {
+        "count": 620,
+        "total_us": 1386.5339999999994
+      },
+      "phase/optimizer": {
+        "count": 240,
+        "total_us": 380.7709999999999
+      }
+    },
+    "activities": [
+      {
+        "category": "cuda_driver",
+        "name": "cuLaunchKernel",
+        "count": 1420,
+        "total_us": 4848.563999999999,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaMemcpyAsync",
+        "count": 40,
+        "total_us": 10586.097,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaLaunchKernel",
+        "count": 220,
+        "total_us": 1108.8470000000007,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaMemsetAsync",
+        "count": 236,
+        "total_us": 794.8209999999999,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaStreamSynchronize",
+        "count": 41,
+        "total_us": 213.39999999999998,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags",
+        "count": 200,
+        "total_us": 190.4459999999999,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaStreamIsCapturing",
+        "count": 160,
+        "total_us": 104.99700000000007,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaPeekAtLastError",
+        "count": 200,
+        "total_us": 14.535000000000009,
+        "bytes": 0
+      },
+      {
+        "category": "gpu_memcpy",
+        "name": "Memcpy DtoH (Device -> Pageable)",
+        "count": 40,
+        "total_us": 45.729,
+        "bytes": 40
+      },
+      {
+        "category": "gpu_memset",
+        "name": "Memset (Device)",
+        "count": 236,
+        "total_us": 174.0409999999998,
+        "bytes": 252032
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x32_sliced1x4_nt",
+        "count": 40,
+        "total_us": 227.26599999999993,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_prepare_array_indexing",
+        "count": 120,
+        "total_us": 215.751,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_add__float32_float32_float32",
+        "count": 116,
+        "total_us": 212.02999999999997,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_subtract__float32_float32_float32",
+        "count": 120,
+        "total_us": 202.74999999999997,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_copy__float32_float32",
+        "count": 124,
+        "total_us": 197.4399999999999,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_multiply__float32_float32_float32",
+        "count": 100,
+        "total_us": 175.588,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_fill",
+        "count": 120,
+        "total_us": 158.24100000000013,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_copy__bool_bool",
+        "count": 80,
+        "total_us": 127.27,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x32_sliced1x4_tn",
+        "count": 20,
+        "total_us": 114.657,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_true_divide__float32_float32_float32",
+        "count": 60,
+        "total_us": 112.89699999999995,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_sum",
+        "count": 40,
+        "total_us": 110.49900000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_where__bool_float32_float32_float32",
+        "count": 60,
+        "total_us": 108.06600000000006,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x128_nn",
+        "count": 20,
+        "total_us": 107.93599999999999,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x32_sliced1x4_nn",
+        "count": 20,
+        "total_us": 107.48799999999999,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x128_tn",
+        "count": 20,
+        "total_us": 82.33700000000002,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::DeviceReduceSingleTileKernel<cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::detail::reduce::policy_hub<float, unsigned int, cuda::std::__4::plus<void> >::Policy600, float*, float*, unsigned int, cuda::std::__4::plus<void>, float, float, cuda::std::__4::__identity>(float*, float*, unsigned int, cuda::std::__4::plus<void>, float, cuda::std::__4::__identity)",
+        "count": 40,
+        "total_us": 80.60800000000003,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::DeviceSegmentedReduceKernel<cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::detail::reduce::policy_hub<float, int, cuda::std::__4::plus<void> >::Policy600, float*, float*, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, int, cuda::std::__4::plus<void>, float, float>(float*, float*, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, int, cuda::std::__4::plus<void>, float)",
+        "count": 40,
+        "total_us": 77.85499999999999,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_take",
+        "count": 40,
+        "total_us": 77.72700000000002,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_copy__int64_int64",
+        "count": 40,
+        "total_us": 71.10300000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::DeviceSegmentedReduceKernel<cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::detail::reduce::policy_hub<float, int, nan_handling_max<float> >::Policy600, float*, float*, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, int, nan_handling_max<float>, float, float>(float*, float*, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::TransformInputIterator<int, _arange, cub::CUB_200800_SM_350_370_500_520_600_610_700_750_800_860_890_900::CountingInputIterator<int, long>, long>, int, nan_handling_max<float>, float)",
+        "count": 20,
+        "total_us": 55.202,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_arange__int_int_int64",
+        "count": 40,
+        "total_us": 54.49899999999999,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_scatter_update",
+        "count": 20,
+        "total_us": 42.013,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_maximum__float32_float32_float32",
+        "count": 20,
+        "total_us": 39.904,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_cub_any_pass1",
+        "count": 20,
+        "total_us": 38.592000000000006,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_greater__float32_float_bool",
+        "count": 20,
+        "total_us": 35.839,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_cub_any_pass2",
+        "count": 20,
+        "total_us": 35.16800000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_multiply__float32_bool_float32",
+        "count": 20,
+        "total_us": 34.52800000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_not_equal__int64_int_bool",
+        "count": 20,
+        "total_us": 32.129000000000005,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_not_equal__float32_float_bool",
+        "count": 20,
+        "total_us": 31.841000000000008,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_bitwise_and__bool_bool_bool",
+        "count": 20,
+        "total_us": 31.680000000000007,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_less__int64_int_bool",
+        "count": 20,
+        "total_us": 31.58300000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_log__float32_float32",
+        "count": 20,
+        "total_us": 30.72000000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_where__bool_int64_int64_int64",
+        "count": 20,
+        "total_us": 30.497000000000007,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_bitwise_or__bool_bool_bool",
+        "count": 20,
+        "total_us": 30.49600000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_greater_equal__int64_int_bool",
+        "count": 20,
+        "total_us": 30.306000000000008,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_negative__float32_float32",
+        "count": 20,
+        "total_us": 29.85600000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_copy__bool_float32",
+        "count": 20,
+        "total_us": 29.79200000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_exp__float32_float32",
+        "count": 20,
+        "total_us": 29.599000000000007,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "cupy_subtract__float32_float_float32",
+        "count": 20,
+        "total_us": 29.407000000000007,
+        "bytes": 0
+      }
+    ]
+  },
+  "pytorch": {
+    "activity_scope": "当前被 profile 进程的 CUDA 活动；不包含其他进程，不能代替整卡利用率",
+    "steps": 20,
+    "raw_trace": "/tmp/nnlearn-profile-068-affinity-traces/small-cuda-pytorch.json",
+    "trace_sha256": "54499c2efbbe1fabaffb86264c1b4a382a7d1ffd35559b02a483e7a7b93f3f5c",
+    "trace_bytes": 1133757,
+    "profiled_window_ms": 14.587766,
+    "kernel_count": 472,
+    "kernel_sum_ms": 1.298602,
+    "kernel_union_ms": 1.29861474609375,
+    "copy_count": 0,
+    "copy_union_ms": 0.0,
+    "gpu_active_union_ms": 1.29861474609375,
+    "gpu_active_fraction_of_profiled_window": 0.08902081004683994,
+    "gpu_gap_ms": 13.28915125390625,
+    "kernel_launch_phase_attribution": {
+      "phase/forward": {
+        "count": 60,
+        "total_us": 242.081
+      },
+      "phase/loss": {
+        "count": 40,
+        "total_us": 88.70700000000002
+      },
+      "phase/backward": {
+        "count": 276,
+        "total_us": 826.5930000000003
+      },
+      "phase/optimizer": {
+        "count": 20,
+        "total_us": 47.967999999999996
+      },
+      "phase/zero_grad": {
+        "count": 76,
+        "total_us": 93.2529999999999
+      }
+    },
+    "activities": [
+      {
+        "category": "cuda_runtime",
+        "name": "cudaLaunchKernel",
+        "count": 472,
+        "total_us": 1849.656999999999,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaDeviceSynchronize",
+        "count": 1,
+        "total_us": 530.231,
+        "bytes": 0
+      },
+      {
+        "category": "cuda_runtime",
+        "name": "cudaOccupancyMaxActiveBlocksPerMultiprocessor",
+        "count": 20,
+        "total_us": 26.29800000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::reduce_kernel<128, 4, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::native::sum_functor<float, float, float>::operator()(at::TensorIterator&)::{lambda(float, float)#1}>, unsigned int, float, 4> >(at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::native::sum_functor<float, float, float>::operator()(at::TensorIterator&)::{lambda(float, float)#1}>, unsigned int, float, 4>)",
+        "count": 40,
+        "total_us": 268.611,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x32_sliced1x4_nt",
+        "count": 40,
+        "total_us": 209.535,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "count": 116,
+        "total_us": 143.61799999999988,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>)",
+        "count": 76,
+        "total_us": 110.75099999999999,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x128_tn",
+        "count": 20,
+        "total_us": 107.264,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x32_sliced1x4_tn",
+        "count": 20,
+        "total_us": 105.98599999999999,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "ampere_sgemm_32x128_nn",
+        "count": 20,
+        "total_us": 79.167,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::(anonymous namespace)::nll_loss_forward_reduce_cuda_kernel_2d<float, float, long>(float*, float*, float const*, long const*, float const*, bool, long, long, long, long)",
+        "count": 20,
+        "total_us": 54.626,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<2>, at::native::(anonymous namespace)::BinaryOpListAlphaFunctor<float, 2, 2, 0>, std::plus<float>, float>(at::native::(anonymous namespace)::TensorListMetadata<2>, at::native::(anonymous namespace)::BinaryOpListAlphaFunctor<float, 2, 2, 0>, std::plus<float>, float)",
+        "count": 20,
+        "total_us": 47.967999999999996,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::(anonymous namespace)::nll_loss_backward_reduce_cuda_kernel_2d<float, long>(float*, float const*, long const*, float const*, float const*, bool, int, int, long, long)",
+        "count": 20,
+        "total_us": 45.343999999999994,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 2, true, false>(float*, float const*, int, int, int, bool const*, int, bool)",
+        "count": 20,
+        "total_us": 34.08100000000001,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void (anonymous namespace)::softmax_warp_backward<float, float, float, 2, true, false>(float*, float const*, float const*, int, int, int, bool const*)",
+        "count": 20,
+        "total_us": 32.034000000000006,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::(anonymous namespace)::threshold_kernel_impl<float>(at::TensorIteratorBase&, float, float)::{lambda(float, float)#1}>, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::(anonymous namespace)::threshold_kernel_impl<float>(at::TensorIteratorBase&, float, float)::{lambda(float, float)#1}>, std::array<char*, 3ul>)",
+        "count": 20,
+        "total_us": 30.786000000000005,
+        "bytes": 0
+      },
+      {
+        "category": "kernel",
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",
+        "count": 20,
+        "total_us": 28.831000000000007,
+        "bytes": 0
+      }
+    ]
+  }
+}

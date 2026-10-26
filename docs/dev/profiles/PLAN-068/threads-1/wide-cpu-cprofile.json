@@ -1,0 +1,1633 @@
+{
+  "nnlearn": {
+    "steps": 100,
+    "profiled_total_ms": 1110.6142900000004,
+    "total_calls": 232938,
+    "functions": [
+      {
+        "function": "nnlearn/functional/matrix.py:602:forward",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 850.9686780000001,
+        "cumulative_ms": 851.523409
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:283:forward",
+        "calls": 596,
+        "primitive_calls": 596,
+        "self_ms": 38.48746500000001,
+        "cumulative_ms": 38.48746500000001
+      },
+      {
+        "function": "nnlearn/optim/sgd.py:13:update_one",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 35.164494000000005,
+        "cumulative_ms": 37.338467
+      },
+      {
+        "function": "nnlearn/function.py:16:__call__",
+        "calls": 2600,
+        "primitive_calls": 2600,
+        "self_ms": 23.415732000000002,
+        "cumulative_ms": 1017.44797
+      },
+      {
+        "function": "~:0:<method 'copy' of 'numpy.ndarray' objects>",
+        "calls": 704,
+        "primitive_calls": 704,
+        "self_ms": 22.187028,
+        "cumulative_ms": 22.187028
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:330:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 10.933963000000002,
+        "cumulative_ms": 10.933963000000002
+      },
+      {
+        "function": "nnlearn/nn/loss.py:133:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 9.506484,
+        "cumulative_ms": 19.480892
+      },
+      {
+        "function": "~:0:<method 'reduce' of 'numpy.ufunc' objects>",
+        "calls": 800,
+        "primitive_calls": 800,
+        "self_ms": 9.485106,
+        "cumulative_ms": 9.485106
+      },
+      {
+        "function": "~:0:<method 'fill' of 'numpy.ndarray' objects>",
+        "calls": 396,
+        "primitive_calls": 396,
+        "self_ms": 8.927220000000002,
+        "cumulative_ms": 8.927220000000002
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:258:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 6.521514000000001,
+        "cumulative_ms": 7.037944
+      },
+      {
+        "function": "nnlearn/tensor.py:50:backward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 6.403981000000001,
+        "cumulative_ms": 710.390606
+      },
+      {
+        "function": "~:0:<built-in method builtins.isinstance>",
+        "calls": 35999,
+        "primitive_calls": 35999,
+        "self_ms": 5.526743000000001,
+        "cumulative_ms": 13.743544000000002
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/typing.py:1900:__instancecheck__",
+        "calls": 7319,
+        "primitive_calls": 7319,
+        "self_ms": 4.465314,
+        "cumulative_ms": 8.216801
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:262:backward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 4.234108,
+        "cumulative_ms": 18.193739
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/numerictypes.py:471:issubdtype",
+        "calls": 5296,
+        "primitive_calls": 5296,
+        "self_ms": 3.802128,
+        "cumulative_ms": 8.706188000000001
+      },
+      {
+        "function": "nnlearn/nn/loss.py:235:backward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 3.38307,
+        "cumulative_ms": 5.150018
+      },
+      {
+        "function": "nnlearn/backend.py:65:is_cuda_array",
+        "calls": 13592,
+        "primitive_calls": 13592,
+        "self_ms": 2.780367,
+        "cumulative_ms": 4.060726000000001
+      },
+      {
+        "function": "nnlearn/tensor.py:17:__init__",
+        "calls": 2900,
+        "primitive_calls": 2900,
+        "self_ms": 2.7014160000000005,
+        "cumulative_ms": 12.076945
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/numerictypes.py:289:issubclass_",
+        "calls": 10592,
+        "primitive_calls": 10592,
+        "self_ms": 2.6076960000000002,
+        "cumulative_ms": 4.406321999999999
+      },
+      {
+        "function": "examples/704_compat_training_performance_benchmark.py:131:_train_steps",
+        "calls": 1,
+        "primitive_calls": 1,
+        "self_ms": 2.5807810000000004,
+        "cumulative_ms": 1110.595744
+      },
+      {
+        "function": "~:0:<built-in method builtins.issubclass>",
+        "calls": 15888,
+        "primitive_calls": 15888,
+        "self_ms": 2.296364,
+        "cumulative_ms": 2.296364
+      },
+      {
+        "function": "nnlearn/nn/module.py:73:__call__",
+        "calls": 500,
+        "primitive_calls": 200,
+        "self_ms": 2.2192640000000003,
+        "cumulative_ms": 350.080763
+      },
+      {
+        "function": "nnlearn/backend.py:105:ensure_array",
+        "calls": 2900,
+        "primitive_calls": 2900,
+        "self_ms": 2.1929320000000003,
+        "cumulative_ms": 3.825346
+      },
+      {
+        "function": "nnlearn/nn/module.py:46:__setattr__",
+        "calls": 1004,
+        "primitive_calls": 1004,
+        "self_ms": 2.118554,
+        "cumulative_ms": 5.961628
+      },
+      {
+        "function": "nnlearn/tensor.py:382:device",
+        "calls": 7792,
+        "primitive_calls": 7792,
+        "self_ms": 1.991543,
+        "cumulative_ms": 5.92291
+      },
+      {
+        "function": "nnlearn/backend.py:95:device_of",
+        "calls": 7792,
+        "primitive_calls": 7792,
+        "self_ms": 1.724929,
+        "cumulative_ms": 3.931367
+      },
+      {
+        "function": "~:0:<built-in method _abc._abc_instancecheck>",
+        "calls": 7319,
+        "primitive_calls": 7319,
+        "self_ms": 1.6858370000000003,
+        "cumulative_ms": 1.6858370000000003
+      },
+      {
+        "function": "~:0:<built-in method builtins.any>",
+        "calls": 3200,
+        "primitive_calls": 3200,
+        "self_ms": 1.632505,
+        "cumulative_ms": 6.2572730000000005
+      },
+      {
+        "function": "nnlearn/utils/numpy.py:7:np_sum_to",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 1.4491920000000003,
+        "cumulative_ms": 7.852532000000001
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/numeric.py:64:zeros_like",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 1.432041,
+        "cumulative_ms": 1.782869
+      },
+      {
+        "function": "nnlearn/function.py:27:<genexpr>",
+        "calls": 6396,
+        "primitive_calls": 6396,
+        "self_ms": 1.3287160000000002,
+        "cumulative_ms": 4.470697
+      },
+      {
+        "function": "nnlearn/tensor.py:378:dtype",
+        "calls": 10492,
+        "primitive_calls": 10492,
+        "self_ms": 1.31491,
+        "cumulative_ms": 1.31491
+      },
+      {
+        "function": "~:0:<built-in method builtins.getattr>",
+        "calls": 9519,
+        "primitive_calls": 9519,
+        "self_ms": 1.300516,
+        "cumulative_ms": 1.300516
+      },
+      {
+        "function": "~:0:<method 'get' of 'dict' objects>",
+        "calls": 8108,
+        "primitive_calls": 8108,
+        "self_ms": 1.2995720000000002,
+        "cumulative_ms": 1.2995720000000002
+      },
+      {
+        "function": "<frozen abc>:117:__instancecheck__",
+        "calls": 7319,
+        "primitive_calls": 7319,
+        "self_ms": 1.298951,
+        "cumulative_ms": 2.9847880000000004
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:485:transpose",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 1.1479210000000002,
+        "cumulative_ms": 10.027543
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:69:_wrapreduction",
+        "calls": 700,
+        "primitive_calls": 700,
+        "self_ms": 1.102211,
+        "cumulative_ms": 10.116026
+      },
+      {
+        "function": "<frozen importlib._bootstrap>:645:parent",
+        "calls": 2600,
+        "primitive_calls": 2600,
+        "self_ms": 1.003729,
+        "cumulative_ms": 1.7067830000000002
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:635:matmul",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.918124,
+        "cumulative_ms": 869.290611
+      },
+      {
+        "function": "nnlearn/tensor.py:442:ensure_tensor",
+        "calls": 4596,
+        "primitive_calls": 4596,
+        "self_ms": 0.9068820000000001,
+        "cumulative_ms": 2.4580859999999998
+      },
+      {
+        "function": "~:0:<built-in method builtins.len>",
+        "calls": 6500,
+        "primitive_calls": 6500,
+        "self_ms": 0.9046150000000001,
+        "cumulative_ms": 0.9046150000000001
+      },
+      {
+        "function": "nnlearn/function.py:9:__init__",
+        "calls": 2000,
+        "primitive_calls": 2000,
+        "self_ms": 0.8648100000000001,
+        "cumulative_ms": 1.11747
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:305:add",
+        "calls": 596,
+        "primitive_calls": 596,
+        "self_ms": 0.8440030000000001,
+        "cumulative_ms": 54.342844
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:609:backward",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.8210700000000001,
+        "cumulative_ms": 589.78535
+      },
+      {
+        "function": "nnlearn/tensor.py:66:add_func",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.772409,
+        "cumulative_ms": 1.5380950000000002
+      },
+      {
+        "function": "nnlearn/backend.py:69:get_array_module",
+        "calls": 2100,
+        "primitive_calls": 2100,
+        "self_ms": 0.7622070000000001,
+        "cumulative_ms": 1.5090770000000002
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:676:sum_to",
+        "calls": 800,
+        "primitive_calls": 800,
+        "self_ms": 0.719722,
+        "cumulative_ms": 12.407346000000002
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:2338:sum",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.71792,
+        "cumulative_ms": 8.617740000000001
+      },
+      {
+        "function": "~:0:<method 'rpartition' of 'str' objects>",
+        "calls": 2600,
+        "primitive_calls": 2600,
+        "self_ms": 0.7030540000000001,
+        "cumulative_ms": 0.7030540000000001
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:18:clone",
+        "calls": 504,
+        "primitive_calls": 504,
+        "self_ms": 0.6988340000000001,
+        "cumulative_ms": 31.446975000000002
+      },
+      {
+        "function": "~:0:<built-in method numpy.asarray>",
+        "calls": 700,
+        "primitive_calls": 700,
+        "self_ms": 0.6640670000000001,
+        "cumulative_ms": 0.6640670000000001
+      },
+      {
+        "function": "nnlearn/optim/optimizer.py:112:_scalar_like",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.62311,
+        "cumulative_ms": 2.173973
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/contextlib.py:104:__init__",
+        "calls": 700,
+        "primitive_calls": 700,
+        "self_ms": 0.619993,
+        "cumulative_ms": 0.7503910000000001
+      },
+      {
+        "function": "nnlearn/log.py:13:wrapper",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.60998,
+        "cumulative_ms": 711.022815
+      },
+      {
+        "function": "~:0:<built-in method builtins.next>",
+        "calls": 1400,
+        "primitive_calls": 1400,
+        "self_ms": 0.5899350000000001,
+        "cumulative_ms": 1.553365
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:472:forward",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.581889,
+        "cumulative_ms": 1.6852850000000001
+      },
+      {
+        "function": "nnlearn/settings.py:17:using_config",
+        "calls": 1400,
+        "primitive_calls": 1400,
+        "self_ms": 0.542995,
+        "cumulative_ms": 0.96343
+      },
+      {
+        "function": "~:0:<built-in method numpy.arange>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.509024,
+        "cumulative_ms": 0.509024
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/contextlib.py:299:helper",
+        "calls": 700,
+        "primitive_calls": 700,
+        "self_ms": 0.46522900000000006,
+        "cumulative_ms": 1.2156200000000001
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:739:linear",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.44008400000000003,
+        "cumulative_ms": 307.83512500000006
+      },
+      {
+        "function": "~:0:<method 'reshape' of 'numpy.ndarray' objects>",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.433026,
+        "cumulative_ms": 0.433026
+      },
+      {
+        "function": "nnlearn/function.py:54:<genexpr>",
+        "calls": 1300,
+        "primitive_calls": 1300,
+        "self_ms": 0.430877,
+        "cumulative_ms": 0.430877
+      },
+      {
+        "function": "nnlearn/function.py:74:get_outputs",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.42549300000000007,
+        "cumulative_ms": 0.483327
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/contextlib.py:141:__exit__",
+        "calls": 700,
+        "primitive_calls": 700,
+        "self_ms": 0.40377100000000005,
+        "cumulative_ms": 1.178849
+      },
+      {
+        "function": "~:0:<method 'astype' of 'numpy.ndarray' objects>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.39897600000000005,
+        "cumulative_ms": 0.39897600000000005
+      },
+      {
+        "function": "nnlearn/nn/sequential.py:20:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.38346800000000003,
+        "cumulative_ms": 324.047751
+      },
+      {
+        "function": "~:0:<method 'sort' of 'list' objects>",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.346223,
+        "cumulative_ms": 0.471796
+      },
+      {
+        "function": "nnlearn/optim/optimizer.py:24:step",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.333881,
+        "cumulative_ms": 37.672348
+      },
+      {
+        "function": "nnlearn/backend.py:45:normalize_device",
+        "calls": 2900,
+        "primitive_calls": 2900,
+        "self_ms": 0.311987,
+        "cumulative_ms": 0.311987
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/contextlib.py:132:__enter__",
+        "calls": 700,
+        "primitive_calls": 700,
+        "self_ms": 0.305525,
+        "cumulative_ms": 1.083812
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/numeric.py:137:ones",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.298848,
+        "cumulative_ms": 0.410683
+      },
+      {
+        "function": "~:0:<built-in method builtins.setattr>",
+        "calls": 1400,
+        "primitive_calls": 1400,
+        "self_ms": 0.286594,
+        "cumulative_ms": 0.286594
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:89:_wrapreduction_any_all",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.27854100000000004,
+        "cumulative_ms": 0.9108190000000002
+      },
+      {
+        "function": "~:0:<built-in method numpy.zeros>",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.267638,
+        "cumulative_ms": 0.267638
+      },
+      {
+        "function": "~:0:<method 'transpose' of 'numpy.ndarray' objects>",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.265625,
+        "cumulative_ms": 0.265625
+      },
+      {
+        "function": "nnlearn/nn/loss.py:113:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.263193,
+        "cumulative_ms": 23.076597
+      },
+      {
+        "function": "~:0:<built-in method builtins.id>",
+        "calls": 1600,
+        "primitive_calls": 1600,
+        "self_ms": 0.261206,
+        "cumulative_ms": 0.261206
+      },
+      {
+        "function": "nnlearn/tensor.py:352:shape",
+        "calls": 1200,
+        "primitive_calls": 1200,
+        "self_ms": 0.260523,
+        "cumulative_ms": 0.260523
+      },
+      {
+        "function": "~:0:<built-in method builtins.max>",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.25619200000000003,
+        "cumulative_ms": 0.25619200000000003
+      },
+      {
+        "function": "nnlearn/tensor.py:256:clone",
+        "calls": 504,
+        "primitive_calls": 504,
+        "self_ms": 0.25435,
+        "cumulative_ms": 31.701325000000004
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:12:forward",
+        "calls": 504,
+        "primitive_calls": 504,
+        "self_ms": 0.24832500000000005,
+        "cumulative_ms": 22.027023
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/numeric.py:213:ones_like",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.24216200000000002,
+        "cumulative_ms": 0.264929
+      },
+      {
+        "function": "nnlearn/tensor.py:144:transpose",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.239603,
+        "cumulative_ms": 10.267146000000002
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:51:_wrapfunc",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.236373,
+        "cumulative_ms": 0.6036290000000001
+      },
+      {
+        "function": "nnlearn/optim/optimizer.py:16:zero_grad",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.231968,
+        "cumulative_ms": 9.159188
+      },
+      {
+        "function": "nnlearn/nn/loss.py:121:__init__",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.2258,
+        "cumulative_ms": 0.330666
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/multiarray.py:690:result_type",
+        "calls": 2600,
+        "primitive_calls": 2600,
+        "self_ms": 0.22501500000000002,
+        "cumulative_ms": 0.22501500000000002
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:2477:any",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.22332100000000002,
+        "cumulative_ms": 1.1341400000000001
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:340:mul",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.221362,
+        "cumulative_ms": 13.959631
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:630:transpose",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.22132500000000002,
+        "cumulative_ms": 0.8249540000000001
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:290:backward",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.221169,
+        "cumulative_ms": 12.237897
+      },
+      {
+        "function": "nnlearn/nn/linear.py:23:forward",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.21556,
+        "cumulative_ms": 308.05068500000004
+      },
+      {
+        "function": "nnlearn/nn/loss.py:26:_array_scalar_bool",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.202081,
+        "cumulative_ms": 0.676632
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:667:forward",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.182295,
+        "cumulative_ms": 8.034827000000002
+      },
+      {
+        "function": "~:0:<method 'squeeze' of 'numpy.ndarray' objects>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.18121,
+        "cumulative_ms": 0.18121
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:266:relu",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.16614600000000002,
+        "cumulative_ms": 9.780325000000001
+      },
+      {
+        "function": "~:0:<method 'pop' of 'list' objects>",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.162984,
+        "cumulative_ms": 0.162984
+      },
+      {
+        "function": "~:0:<method 'items' of 'dict' objects>",
+        "calls": 800,
+        "primitive_calls": 800,
+        "self_ms": 0.16098700000000002,
+        "cumulative_ms": 0.16098700000000002
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3052:max",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.160311,
+        "cumulative_ms": 2.4387250000000003
+      },
+      {
+        "function": "~:0:<method 'add' of 'set' objects>",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.159178,
+        "cumulative_ms": 0.159178
+      },
+      {
+        "function": "nnlearn/tensor.py:38:set_creator",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.153982,
+        "cumulative_ms": 0.153982
+      },
+      {
+        "function": "nnlearn/functional/numeric.py:16:_python_scalar_like",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.149735,
+        "cumulative_ms": 0.45807400000000004
+      },
+      {
+        "function": "~:0:<method 'values' of 'dict' objects>",
+        "calls": 500,
+        "primitive_calls": 500,
+        "self_ms": 0.143053,
+        "cumulative_ms": 0.143053
+      },
+      {
+        "function": "~:0:<method 'append' of 'list' objects>",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.13471200000000003,
+        "cumulative_ms": 0.13471200000000003
+      },
+      {
+        "function": "nnlearn/tensor.py:70:<lambda>",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.125573,
+        "cumulative_ms": 0.125573
+      },
+      {
+        "function": "nnlearn/tensor.py:356:ndim",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.11976300000000001,
+        "cumulative_ms": 0.11976300000000001
+      },
+      {
+        "function": "nnlearn/backend.py:99:as_numpy",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.118105,
+        "cumulative_ms": 0.38625200000000004
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:1621:squeeze",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.112342,
+        "cumulative_ms": 0.29355200000000004
+      },
+      {
+        "function": "~:0:<built-in method numpy.array>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.101399,
+        "cumulative_ms": 0.101399
+      },
+      {
+        "function": "~:0:<built-in method numpy.empty>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.09809000000000001,
+        "cumulative_ms": 0.09809000000000001
+      },
+      {
+        "function": "nnlearn/nn/activation.py:6:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.097575,
+        "cumulative_ms": 9.8779
+      },
+      {
+        "function": "nnlearn/utils/numpy.py:23:<genexpr>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.094499,
+        "cumulative_ms": 0.094499
+      },
+      {
+        "function": "~:0:<method 'item' of 'numpy.ndarray' objects>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.088299,
+        "cumulative_ms": 0.088299
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:2333:_sum_dispatcher",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.073569,
+        "cumulative_ms": 0.073569
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/multiarray.py:1098:copyto",
+        "calls": 600,
+        "primitive_calls": 600,
+        "self_ms": 0.07252,
+        "cumulative_ms": 0.07252
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:469:__init__",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.056243,
+        "cumulative_ms": 0.056243
+      },
+      {
+        "function": "nnlearn/nn/loss.py:10:_check_reduction",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.050869000000000004,
+        "cumulative_ms": 0.050869000000000004
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/multiarray.py:107:empty_like",
+        "calls": 500,
+        "primitive_calls": 500,
+        "self_ms": 0.047182,
+        "cumulative_ms": 0.047182
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/multiarray.py:383:where",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.04603600000000001,
+        "cumulative_ms": 0.04603600000000001
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:626:_transpose_dispatcher",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.04439200000000001,
+        "cumulative_ms": 0.04439200000000001
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/numeric.py:58:_zeros_like_dispatcher",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.043547,
+        "cumulative_ms": 0.043547
+      },
+      {
+        "function": "nnlearn/functional/matrix.py:664:__init__",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.028637,
+        "cumulative_ms": 0.028637
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:1617:_squeeze_dispatcher",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.025383,
+        "cumulative_ms": 0.025383
+      },
+      {
+        "function": "nnlearn/nn/loss.py:30:_class_weight_data",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.019817,
+        "cumulative_ms": 0.019817
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:2472:_any_dispatcher",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.018336,
+        "cumulative_ms": 0.018336
+      },
+      {
+        "function": "~:0:<method 'disable' of '_lsprof.Profiler' objects>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "self_ms": 0.018256,
+        "cumulative_ms": 0.018256
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3047:_max_dispatcher",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.013934,
+        "cumulative_ms": 0.013934
+      },
+      {
+        "function": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy/_core/numeric.py:207:_ones_like_dispatcher",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.010897,
+        "cumulative_ms": 0.010897
+      },
+      {
+        "function": "nnlearn/nn/module.py:17:train",
+        "calls": 4,
+        "primitive_calls": 1,
+        "self_ms": 0.009382000000000001,
+        "cumulative_ms": 0.059619000000000005
+      },
+      {
+        "function": "nnlearn/settings.py:27:train_model",
+        "calls": 4,
+        "primitive_calls": 4,
+        "self_ms": 0.00183,
+        "cumulative_ms": 0.00183
+      },
+      {
+        "function": "examples/704_compat_training_performance_benchmark.py:121:_synchronize",
+        "calls": 1,
+        "primitive_calls": 1,
+        "self_ms": 0.00029000000000000006,
+        "cumulative_ms": 0.00029000000000000006
+      }
+    ]
+  },
+  "pytorch": {
+    "steps": 100,
+    "profiled_total_ms": 679.6665499999998,
+    "total_calls": 23976,
+    "functions": [
+      {
+        "function": "~:0:<method 'run_backward' of 'torch._C._EngineBase' objects>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 332.79699600000004,
+        "cumulative_ms": 332.79699600000004
+      },
+      {
+        "function": "~:0:<built-in method torch._C._nn.linear>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 278.142993,
+        "cumulative_ms": 278.142993
+      },
+      {
+        "function": "~:0:<method 'add_' of 'torch._C.TensorBase' objects>",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 16.819657000000003,
+        "cumulative_ms": 16.819657000000003
+      },
+      {
+        "function": "~:0:<built-in method torch.relu>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 7.848673000000001,
+        "cumulative_ms": 7.848673000000001
+      },
+      {
+        "function": "~:0:<method 'zero_' of 'torch._C.TensorBase' objects>",
+        "calls": 396,
+        "primitive_calls": 396,
+        "self_ms": 7.031653,
+        "cumulative_ms": 7.031653
+      },
+      {
+        "function": "~:0:<built-in method torch._C._nn.cross_entropy_loss>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 4.069413,
+        "cumulative_ms": 4.069413
+      },
+      {
+        "function": "~:0:<built-in method torch._ops.profiler._record_function_enter_new>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 3.0933900000000003,
+        "cumulative_ms": 3.0933900000000003
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/optimizer.py:473:wrapper",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 1.7323050000000002,
+        "cumulative_ms": 31.748791000000004
+      },
+      {
+        "function": "examples/704_compat_training_performance_benchmark.py:131:_train_steps",
+        "calls": 1,
+        "primitive_calls": 1,
+        "self_ms": 1.534767,
+        "cumulative_ms": 679.6497350000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/__init__.py:88:_make_grads",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 1.2955940000000001,
+        "cumulative_ms": 2.7020990000000005
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py:1743:_call_impl",
+        "calls": 500,
+        "primitive_calls": 200,
+        "self_ms": 1.1931,
+        "cumulative_ms": 294.538422
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/optimizer.py:939:zero_grad",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 1.177006,
+        "cumulative_ms": 12.521302000000002
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_pytree.py:917:tree_iter",
+        "calls": 1400,
+        "primitive_calls": 400,
+        "self_ms": 1.124073,
+        "cumulative_ms": 3.2841690000000003
+      },
+      {
+        "function": "~:0:<built-in method torch._ops.profiler.>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 1.104191,
+        "cumulative_ms": 1.104191
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/optimizer.py:184:<genexpr>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 1.05455,
+        "cumulative_ms": 1.05455
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/optimizer.py:72:_use_grad",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 1.033006,
+        "cumulative_ms": 22.569356000000003
+      },
+      {
+        "function": "~:0:<built-in method torch.ones_like>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.9867330000000001,
+        "cumulative_ms": 0.9867330000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/profiler.py:757:__exit__",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.945588,
+        "cumulative_ms": 6.763942
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py:1735:_wrapped_call_impl",
+        "calls": 500,
+        "primitive_calls": 200,
+        "self_ms": 0.76451,
+        "cumulative_ms": 294.843089
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_pytree.py:681:_is_namedtuple_instance",
+        "calls": 1400,
+        "primitive_calls": 1400,
+        "self_ms": 0.72638,
+        "cumulative_ms": 0.8499660000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/__init__.py:242:backward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.690455,
+        "cumulative_ms": 337.023386
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/container.py:248:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.66527,
+        "cumulative_ms": 289.15366800000004
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/optimizer.py:167:_default_to_fused_or_foreach",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.6293550000000001,
+        "cumulative_ms": 2.042956
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/sgd.py:82:_init_group",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.615307,
+        "cumulative_ms": 0.732553
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/profiler.py:751:__enter__",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.525752,
+        "cumulative_ms": 3.7808650000000004
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/sgd.py:316:_single_tensor_sgd",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.507449,
+        "cumulative_ms": 17.327106
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py:814:_engine_run_backward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.493622,
+        "cumulative_ms": 333.39747200000005
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/typing.py:392:inner",
+        "calls": 300,
+        "primitive_calls": 300,
+        "self_ms": 0.471494,
+        "cumulative_ms": 0.471494
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:738:_fn",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.469296,
+        "cumulative_ms": 13.694695000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_pytree.py:692:_get_node_type",
+        "calls": 1400,
+        "primitive_calls": 1400,
+        "self_ms": 0.420462,
+        "cumulative_ms": 1.2704280000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/profiler.py:740:__init__",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.41989400000000004,
+        "cumulative_ms": 0.745544
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_tensor.py:570:backward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.41880900000000004,
+        "cumulative_ms": 337.460511
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:110:_maybe_set_eval_frame",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.418337,
+        "cumulative_ms": 0.553479
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/sgd.py:103:step",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.37516700000000003,
+        "cumulative_ms": 20.926223
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/linear.py:124:forward",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.37372800000000006,
+        "cumulative_ms": 278.70789700000006
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/sgd.py:246:sgd",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.372951,
+        "cumulative_ms": 19.756371
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_pytree.py:699:_is_leaf",
+        "calls": 800,
+        "primitive_calls": 800,
+        "self_ms": 0.361087,
+        "cumulative_ms": 1.2920850000000002
+      },
+      {
+        "function": "~:0:<built-in method torch._C._get_tracing_state>",
+        "calls": 500,
+        "primitive_calls": 500,
+        "self_ms": 0.35585200000000006,
+        "cumulative_ms": 0.35585200000000006
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py:1915:__getattr__",
+        "calls": 500,
+        "primitive_calls": 500,
+        "self_ms": 0.29353100000000004,
+        "cumulative_ms": 0.29353100000000004
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_pytree.py:466:_dict_flatten",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.289561,
+        "cumulative_ms": 0.390629
+      },
+      {
+        "function": "~:0:<built-in method builtins.isinstance>",
+        "calls": 1224,
+        "primitive_calls": 1216,
+        "self_ms": 0.287596,
+        "cumulative_ms": 0.29874300000000004
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_pytree.py:1224:tree_any",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.28671800000000003,
+        "cumulative_ms": 4.176693
+      },
+      {
+        "function": "~:0:<built-in method builtins.any>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.275636,
+        "cumulative_ms": 3.889975
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/functional.py:3404:cross_entropy",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.255415,
+        "cumulative_ms": 4.416688000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/loss.py:1294:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.249697,
+        "cumulative_ms": 4.76874
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/grad_mode.py:184:__init__",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.249404,
+        "cumulative_ms": 0.51941
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_compile.py:22:inner",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.248337,
+        "cumulative_ms": 13.995601000000002
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_ops.py:1002:<lambda>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.248254,
+        "cumulative_ms": 0.33017
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_ops.py:1000:_must_dispatch_in_python",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.243498,
+        "cumulative_ms": 4.420191
+      },
+      {
+        "function": "~:0:<method 'requires_grad_' of 'torch._C.TensorBase' objects>",
+        "calls": 396,
+        "primitive_calls": 396,
+        "self_ms": 0.23287400000000003,
+        "cumulative_ms": 0.23287400000000003
+      },
+      {
+        "function": "~:0:<built-in method torch._C._set_grad_enabled>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.225364,
+        "cumulative_ms": 0.225364
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_ops.py:946:__call__",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.21807300000000002,
+        "cumulative_ms": 5.7424550000000005
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/functional.py:1693:relu",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.182962,
+        "cumulative_ms": 8.073316
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/activation.py:132:forward",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.173126,
+        "cumulative_ms": 8.246442
+      },
+      {
+        "function": "~:0:<built-in method builtins.len>",
+        "calls": 1600,
+        "primitive_calls": 1600,
+        "self_ms": 0.163721,
+        "cumulative_ms": 0.163721
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_ops.py:1112:__call__",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.161723,
+        "cumulative_ms": 3.255113
+      },
+      {
+        "function": "~:0:<method 'append' of 'list' objects>",
+        "calls": 900,
+        "primitive_calls": 900,
+        "self_ms": 0.159521,
+        "cumulative_ms": 0.159521
+      },
+      {
+        "function": "~:0:<built-in method torch._C._get_privateuse1_backend_name>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.14145,
+        "cumulative_ms": 0.14145
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_pytree.py:438:_tuple_flatten",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.137952,
+        "cumulative_ms": 0.137952
+      },
+      {
+        "function": "~:0:<built-in method builtins.getattr>",
+        "calls": 300,
+        "primitive_calls": 300,
+        "self_ms": 0.11470100000000001,
+        "cumulative_ms": 0.11470100000000001
+      },
+      {
+        "function": "~:0:<built-in method torch._C._dynamo.eval_frame.set_eval_frame>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.11431000000000001,
+        "cumulative_ms": 0.11431000000000001
+      },
+      {
+        "function": "~:0:<method 'values' of 'collections.OrderedDict' objects>",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.110946,
+        "cumulative_ms": 0.110946
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/logging/__init__.py:1776:getEffectiveLevel",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.106854,
+        "cumulative_ms": 0.106854
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_foreach_utils.py:12:_get_fused_kernels_supported_devices",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.10359600000000001,
+        "cumulative_ms": 0.223601
+      },
+      {
+        "function": "~:0:<built-in method torch.is_grad_enabled>",
+        "calls": 300,
+        "primitive_calls": 300,
+        "self_ms": 0.100512,
+        "cumulative_ms": 0.100512
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/container.py:240:__iter__",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.100111,
+        "cumulative_ms": 0.141278
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:152:_callback_from_stance",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.083458,
+        "cumulative_ms": 0.083458
+      },
+      {
+        "function": "~:0:<method 'numel' of 'torch._C.TensorBase' objects>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.080982,
+        "cumulative_ms": 0.080982
+      },
+      {
+        "function": "~:0:<method 'values' of 'dict' objects>",
+        "calls": 300,
+        "primitive_calls": 300,
+        "self_ms": 0.07551200000000001,
+        "cumulative_ms": 0.07551200000000001
+      },
+      {
+        "function": "~:0:<method 'get' of 'dict' objects>",
+        "calls": 212,
+        "primitive_calls": 212,
+        "self_ms": 0.072716,
+        "cumulative_ms": 0.072716
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/autograd/__init__.py:232:_tensor_or_tensors_to_tuple",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.070355,
+        "cumulative_ms": 0.070355
+      },
+      {
+        "function": "~:0:<built-in method torch._C._has_torch_function_unary>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.059997,
+        "cumulative_ms": 0.059997
+      },
+      {
+        "function": "~:0:<built-in method torch._C._are_functorch_transforms_active>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.05980100000000001,
+        "cumulative_ms": 0.05980100000000001
+      },
+      {
+        "function": "~:0:<built-in method builtins.all>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.057134000000000004,
+        "cumulative_ms": 0.9859670000000001
+      },
+      {
+        "function": "~:0:<method '__exit__' of 'torch._C.DisableTorchFunctionSubclass' objects>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.054119,
+        "cumulative_ms": 0.054119
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/utils/_foreach_utils.py:8:_get_foreach_kernels_supported_devices",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.049286,
+        "cumulative_ms": 0.07073100000000002
+      },
+      {
+        "function": "~:0:<built-in method torch._C._has_torch_function_variadic>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.04737,
+        "cumulative_ms": 0.04737
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/_reduction.py:8:get_enum",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.04449,
+        "cumulative_ms": 0.04449
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_jit_internal.py:103:is_scripting",
+        "calls": 400,
+        "primitive_calls": 400,
+        "self_ms": 0.042723000000000004,
+        "cumulative_ms": 0.042723000000000004
+      },
+      {
+        "function": "~:0:<method 'keys' of 'dict' objects>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.041794,
+        "cumulative_ms": 0.041794
+      },
+      {
+        "function": "~:0:<built-in method torch._C._dynamo.eval_frame.set_skip_guard_eval_unsafe>",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.035138,
+        "cumulative_ms": 0.035138
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_dynamo/decorators.py:198:graph_break",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.034847,
+        "cumulative_ms": 0.034847
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py:189:_is_skip_guard_eval_unsafe_stance",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.032022,
+        "cumulative_ms": 0.032022
+      },
+      {
+        "function": "~:0:<built-in method builtins.hasattr>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.031213,
+        "cumulative_ms": 0.031213
+      },
+      {
+        "function": "~:0:<built-in method builtins.iter>",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.024929,
+        "cumulative_ms": 0.024929
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/jit/__init__.py:128:annotate",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.021699,
+        "cumulative_ms": 0.021699
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/_utils_internal.py:174:justknobs_check",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.020832,
+        "cumulative_ms": 0.020832
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/typing.py:2183:cast",
+        "calls": 200,
+        "primitive_calls": 200,
+        "self_ms": 0.018912,
+        "cumulative_ms": 0.018912
+      },
+      {
+        "function": "~:0:<method 'disable' of '_lsprof.Profiler' objects>",
+        "calls": 1,
+        "primitive_calls": 1,
+        "self_ms": 0.016523,
+        "cumulative_ms": 0.016523
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/optim/optimizer.py:459:_optimizer_step_code",
+        "calls": 100,
+        "primitive_calls": 100,
+        "self_ms": 0.014391000000000001,
+        "cumulative_ms": 0.014391000000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py:2824:train",
+        "calls": 4,
+        "primitive_calls": 1,
+        "self_ms": 0.011259,
+        "cumulative_ms": 0.050025
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py:1932:__setattr__",
+        "calls": 4,
+        "primitive_calls": 4,
+        "self_ms": 0.008789,
+        "cumulative_ms": 0.02769
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/parameter.py:10:__instancecheck__",
+        "calls": 4,
+        "primitive_calls": 4,
+        "self_ms": 0.008306,
+        "cumulative_ms": 0.009489000000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py:2728:named_children",
+        "calls": 7,
+        "primitive_calls": 7,
+        "self_ms": 0.005705,
+        "cumulative_ms": 0.007025000000000001
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/modules/module.py:2719:children",
+        "calls": 7,
+        "primitive_calls": 7,
+        "self_ms": 0.003487,
+        "cumulative_ms": 0.010512
+      },
+      {
+        "function": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/nn/parameter.py:216:__instancecheck__",
+        "calls": 4,
+        "primitive_calls": 4,
+        "self_ms": 0.002018,
+        "cumulative_ms": 0.0028510000000000002
+      },
+      {
+        "function": "~:0:<function _ParameterMeta.__instancecheck__ at 0x749f1e5af060>",
+        "calls": 8,
+        "primitive_calls": 8,
+        "self_ms": 0.0008230000000000001,
+        "cumulative_ms": 0.0008230000000000001
+      },
+      {
+        "function": "~:0:<method 'items' of 'dict' objects>",
+        "calls": 4,
+        "primitive_calls": 4,
+        "self_ms": 0.0007480000000000001,
+        "cumulative_ms": 0.0007480000000000001
+      },
+      {
+        "function": "~:0:<method 'add' of 'set' objects>",
+        "calls": 3,
+        "primitive_calls": 3,
+        "self_ms": 0.000572,
+        "cumulative_ms": 0.000572
+      },
+      {
+        "function": "examples/704_compat_training_performance_benchmark.py:121:_synchronize",
+        "calls": 1,
+        "primitive_calls": 1,
+        "self_ms": 0.000292,
+        "cumulative_ms": 0.000292
+      }
+    ]
+  }
+}

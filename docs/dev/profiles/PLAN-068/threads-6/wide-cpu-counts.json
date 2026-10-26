@@ -1,0 +1,24 @@
+{
+  "steps": 100,
+  "tensor_constructions": 2900,
+  "functions": {
+    "MatMul": 600,
+    "Add": 596,
+    "ReLU": 100,
+    "_CrossEntropyLossFunction": 100,
+    "Clone": 504,
+    "SumTo": 200,
+    "Transpose": 400,
+    "Mul": 100
+  },
+  "gpu_host_reads": {},
+  "host_source_asarray_requests": {},
+  "matmul_inputs": {
+    "[((256, 512), False), ((512, 1024), True)]": 100,
+    "[((256, 1024), True), ((1024, 64), True)]": 100,
+    "[((256, 64), False), ((64, 1024), False)]": 100,
+    "[((1024, 256), False), ((256, 64), False)]": 100,
+    "[((256, 1024), False), ((1024, 512), False)]": 100,
+    "[((512, 256), False), ((256, 1024), False)]": 100
+  }
+}

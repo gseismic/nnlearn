@@ -1,0 +1,17 @@
+{
+  "workload": {
+    "SAMPLES": 1024,
+    "FEATURES": 512,
+    "HIDDEN": 1024,
+    "CLASSES": 64,
+    "BATCH_SIZE": 256
+  },
+  "steps": 3,
+  "max_absolute_errors": {
+    "logits": 1.430511474609375e-05,
+    "loss": 9.5367431640625e-07,
+    "gradient": 3.166496753692627e-07,
+    "parameter": 2.9802322387695312e-08
+  },
+  "passed": true
+}

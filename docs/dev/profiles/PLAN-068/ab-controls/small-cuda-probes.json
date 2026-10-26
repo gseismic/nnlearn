@@ -1,0 +1,561 @@
+{
+  "original": {
+    "validation": {
+      "steps": 3,
+      "max_absolute_errors": {
+        "logits": 1.9073486328125e-06,
+        "loss": 1.1920928955078125e-07,
+        "gradient": 1.1920928955078125e-07,
+        "parameter": 5.960464477539063e-08
+      },
+      "passed": true
+    },
+    "counts": {
+      "steps": 30,
+      "tensor_constructions": 870,
+      "functions": {
+        "MatMul": 180,
+        "Add": 176,
+        "ReLU": 30,
+        "_CrossEntropyLossFunction": 30,
+        "Clone": 154,
+        "SumTo": 60,
+        "Transpose": 120,
+        "Mul": 30
+      },
+      "gpu_host_reads": {
+        "nnlearn/nn/loss.py:27:_array_scalar_bool": 60
+      },
+      "host_source_asarray_requests": {
+        "float nnlearn/functional/numeric.py:20:_python_scalar_like": 30,
+        "float nnlearn/optim/optimizer.py:117:_scalar_like": 120
+      },
+      "matmul_inputs": {
+        "[((64, 32), False), ((32, 64), True)]": 30,
+        "[((64, 64), True), ((64, 4), True)]": 30,
+        "[((64, 4), False), ((4, 64), False)]": 30,
+        "[((64, 64), False), ((64, 4), False)]": 30,
+        "[((64, 64), False), ((64, 32), False)]": 30,
+        "[((32, 64), False), ((64, 64), False)]": 30
+      }
+    },
+    "wall_ms_per_step": {
+      "median": 3.182566259977951,
+      "min": 2.923063549969811,
+      "max": 3.4411804399860557,
+      "mean": 3.1806327823696416,
+      "stdev": 0.19235361227736758,
+      "raw": [
+        3.302879346641324,
+        2.923063549969811,
+        3.4411804399860557,
+        3.3499629966778834,
+        3.0423641666614762,
+        3.0224127166729886,
+        3.182566259977951
+      ]
+    },
+    "runs": [
+      {
+        "seconds": 0.9908638039923972,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8769190649909433,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 1.0323541319958167,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 1.004988899003365,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9127092499984428,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9067238150018966,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9547698779933853,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      }
+    ]
+  },
+  "dot_2d": {
+    "validation": {
+      "steps": 3,
+      "max_absolute_errors": {
+        "logits": 1.9073486328125e-06,
+        "loss": 1.1920928955078125e-07,
+        "gradient": 1.1920928955078125e-07,
+        "parameter": 5.960464477539063e-08
+      },
+      "passed": true
+    },
+    "counts": {
+      "steps": 30,
+      "tensor_constructions": 870,
+      "functions": {
+        "MatMul": 180,
+        "Add": 176,
+        "ReLU": 30,
+        "_CrossEntropyLossFunction": 30,
+        "Clone": 154,
+        "SumTo": 60,
+        "Transpose": 120,
+        "Mul": 30
+      },
+      "gpu_host_reads": {
+        "nnlearn/nn/loss.py:27:_array_scalar_bool": 60
+      },
+      "host_source_asarray_requests": {
+        "float nnlearn/functional/numeric.py:20:_python_scalar_like": 30,
+        "float nnlearn/optim/optimizer.py:117:_scalar_like": 120
+      },
+      "matmul_inputs": {
+        "[((64, 32), False), ((32, 64), True)]": 30,
+        "[((64, 64), True), ((64, 4), True)]": 30,
+        "[((64, 4), False), ((4, 64), False)]": 30,
+        "[((64, 64), False), ((64, 4), False)]": 30,
+        "[((64, 64), False), ((64, 32), False)]": 30,
+        "[((32, 64), False), ((64, 64), False)]": 30
+      }
+    },
+    "wall_ms_per_step": {
+      "median": 2.8599970000019916,
+      "min": 2.3283481399994344,
+      "max": 3.1091648400373137,
+      "mean": 2.8334214776224966,
+      "stdev": 0.27140755500091485,
+      "raw": [
+        2.3283481399994344,
+        2.7332568200169285,
+        3.0205708099917197,
+        3.1091648400373137,
+        3.062147633318091,
+        2.7204650999919977,
+        2.8599970000019916
+      ]
+    },
+    "runs": [
+      {
+        "seconds": 0.6985044419998303,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8199770460050786,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.906171242997516,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9327494520111941,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9186442899954272,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8161395299975993,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8579991000005975,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      }
+    ]
+  },
+  "scalar_cache": {
+    "validation": {
+      "steps": 3,
+      "max_absolute_errors": {
+        "logits": 1.9073486328125e-06,
+        "loss": 1.1920928955078125e-07,
+        "gradient": 1.1920928955078125e-07,
+        "parameter": 5.960464477539063e-08
+      },
+      "passed": true
+    },
+    "counts": {
+      "steps": 30,
+      "tensor_constructions": 870,
+      "functions": {
+        "MatMul": 180,
+        "Add": 176,
+        "ReLU": 30,
+        "_CrossEntropyLossFunction": 30,
+        "Clone": 154,
+        "SumTo": 60,
+        "Transpose": 120,
+        "Mul": 30
+      },
+      "gpu_host_reads": {
+        "nnlearn/nn/loss.py:27:_array_scalar_bool": 60
+      },
+      "host_source_asarray_requests": {
+        "float nnlearn/functional/numeric.py:20:_python_scalar_like": 30
+      },
+      "matmul_inputs": {
+        "[((64, 32), False), ((32, 64), True)]": 30,
+        "[((64, 64), True), ((64, 4), True)]": 30,
+        "[((64, 4), False), ((4, 64), False)]": 30,
+        "[((64, 64), False), ((64, 4), False)]": 30,
+        "[((64, 64), False), ((64, 32), False)]": 30,
+        "[((32, 64), False), ((64, 64), False)]": 30
+      }
+    },
+    "wall_ms_per_step": {
+      "median": 3.114102933323011,
+      "min": 2.667998973338399,
+      "max": 3.278508520015748,
+      "mean": 3.025283570958501,
+      "stdev": 0.23253842881315848,
+      "raw": [
+        3.121352916690133,
+        3.278508520015748,
+        2.8395465933620776,
+        2.8833792166551575,
+        3.272095843324981,
+        2.667998973338399,
+        3.114102933323011
+      ]
+    },
+    "runs": [
+      {
+        "seconds": 0.9364058750070399,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9835525560047245,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8518639780086232,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8650137649965473,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9816287529974943,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8003996920015197,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9342308799969032,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      }
+    ]
+  },
+  "combined": {
+    "validation": {
+      "steps": 3,
+      "max_absolute_errors": {
+        "logits": 1.9073486328125e-06,
+        "loss": 1.1920928955078125e-07,
+        "gradient": 1.1920928955078125e-07,
+        "parameter": 5.960464477539063e-08
+      },
+      "passed": true
+    },
+    "counts": {
+      "steps": 30,
+      "tensor_constructions": 870,
+      "functions": {
+        "MatMul": 180,
+        "Add": 176,
+        "ReLU": 30,
+        "_CrossEntropyLossFunction": 30,
+        "Clone": 154,
+        "SumTo": 60,
+        "Transpose": 120,
+        "Mul": 30
+      },
+      "gpu_host_reads": {
+        "nnlearn/nn/loss.py:27:_array_scalar_bool": 60
+      },
+      "host_source_asarray_requests": {
+        "float nnlearn/functional/numeric.py:20:_python_scalar_like": 30
+      },
+      "matmul_inputs": {
+        "[((64, 32), False), ((32, 64), True)]": 30,
+        "[((64, 64), True), ((64, 4), True)]": 30,
+        "[((64, 4), False), ((4, 64), False)]": 30,
+        "[((64, 64), False), ((64, 4), False)]": 30,
+        "[((64, 64), False), ((64, 32), False)]": 30,
+        "[((32, 64), False), ((64, 64), False)]": 30
+      }
+    },
+    "wall_ms_per_step": {
+      "median": 2.75498775333593,
+      "min": 2.4764339233418773,
+      "max": 2.873740426681858,
+      "mean": 2.6834248028726075,
+      "stdev": 0.18046702043243346,
+      "raw": [
+        2.75498775333593,
+        2.4929243600248205,
+        2.873740426681858,
+        2.4764339233418773,
+        2.8208746500119255,
+        2.849896500022927,
+        2.5151160066889133
+      ]
+    },
+    "runs": [
+      {
+        "seconds": 0.8264963260007789,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.7478773080074461,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8621221280045575,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.7429301770025631,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8462623950035777,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.854968950006878,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.754534802006674,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      }
+    ]
+  },
+  "required_grads": {
+    "validation": {
+      "steps": 3,
+      "max_absolute_errors": {
+        "logits": 1.9073486328125e-06,
+        "loss": 1.1920928955078125e-07,
+        "gradient": 1.1920928955078125e-07,
+        "parameter": 5.960464477539063e-08
+      },
+      "passed": true
+    },
+    "counts": {
+      "steps": 30,
+      "tensor_constructions": 810,
+      "functions": {
+        "MatMul": 150,
+        "Add": 176,
+        "ReLU": 30,
+        "_CrossEntropyLossFunction": 30,
+        "Clone": 154,
+        "SumTo": 60,
+        "Transpose": 90,
+        "Mul": 30
+      },
+      "gpu_host_reads": {
+        "nnlearn/nn/loss.py:27:_array_scalar_bool": 60
+      },
+      "host_source_asarray_requests": {
+        "float nnlearn/functional/numeric.py:20:_python_scalar_like": 30,
+        "float nnlearn/optim/optimizer.py:117:_scalar_like": 120
+      },
+      "matmul_inputs": {
+        "[((64, 32), False), ((32, 64), True)]": 30,
+        "[((64, 64), True), ((64, 4), True)]": 30,
+        "[((64, 4), False), ((4, 64), False)]": 30,
+        "[((64, 64), False), ((64, 4), False)]": 30,
+        "[((32, 64), False), ((64, 64), False)]": 30
+      }
+    },
+    "wall_ms_per_step": {
+      "median": 3.259365093351031,
+      "min": 2.9460877566695367,
+      "max": 3.5462768100357303,
+      "mean": 3.261852354293556,
+      "stdev": 0.2001009675941283,
+      "raw": [
+        3.2376164233331415,
+        3.093487769995894,
+        3.324753143339573,
+        3.259365093351031,
+        3.5462768100357303,
+        2.9460877566695367,
+        3.4253794833299858
+      ]
+    },
+    "runs": [
+      {
+        "seconds": 0.9712849269999424,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9280463309987681,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9974259430018719,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.9778095280053094,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 1.0638830430107191,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8838263270008611,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 1.0276138449989958,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      }
+    ]
+  },
+  "all_three": {
+    "validation": {
+      "steps": 3,
+      "max_absolute_errors": {
+        "logits": 1.9073486328125e-06,
+        "loss": 1.1920928955078125e-07,
+        "gradient": 1.1920928955078125e-07,
+        "parameter": 5.960464477539063e-08
+      },
+      "passed": true
+    },
+    "counts": {
+      "steps": 30,
+      "tensor_constructions": 810,
+      "functions": {
+        "MatMul": 150,
+        "Add": 176,
+        "ReLU": 30,
+        "_CrossEntropyLossFunction": 30,
+        "Clone": 154,
+        "SumTo": 60,
+        "Transpose": 90,
+        "Mul": 30
+      },
+      "gpu_host_reads": {
+        "nnlearn/nn/loss.py:27:_array_scalar_bool": 60
+      },
+      "host_source_asarray_requests": {
+        "float nnlearn/functional/numeric.py:20:_python_scalar_like": 30
+      },
+      "matmul_inputs": {
+        "[((64, 32), False), ((32, 64), True)]": 30,
+        "[((64, 64), True), ((64, 4), True)]": 30,
+        "[((64, 4), False), ((4, 64), False)]": 30,
+        "[((64, 64), False), ((64, 4), False)]": 30,
+        "[((32, 64), False), ((64, 64), False)]": 30
+      }
+    },
+    "wall_ms_per_step": {
+      "median": 2.618578173326872,
+      "min": 2.075578919999922,
+      "max": 2.851285626675235,
+      "mean": 2.5781837523806774,
+      "stdev": 0.25117855476575796,
+      "raw": [
+        2.486823749980734,
+        2.710530493350234,
+        2.851285626675235,
+        2.5719835333196293,
+        2.7325057700121156,
+        2.075578919999922,
+        2.618578173326872
+      ]
+    },
+    "runs": [
+      {
+        "seconds": 0.7460471249942202,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8131591480050702,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8553856880025705,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.7715950599958887,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.8197517310036346,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.6226736759999767,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      },
+      {
+        "seconds": 0.7855734519980615,
+        "loss": 0.00019674966461025178,
+        "accuracy": 1.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,686 @@
+{
+  "steps": 300,
+  "repeats": 7,
+  "runs": {
+    "nnlearn": [
+      {
+        "wall_ms_per_step": 11.368718243320473,
+        "process_cpu_ms_per_step": 11.36869012333334,
+        "thread_cpu_ms_per_step": 11.348455293333336,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 478,
+          "ru_nivcsw": 485
+        },
+        "before": {
+          "created_at": "2026-10-26T13:08:49.452377+00:00",
+          "load_average": [
+            5.61376953125,
+            7.13134765625,
+            7.2080078125
+          ],
+          "cpu_pressure": "some avg10=0.14 avg60=0.97 avg300=5.72 total=2865978254\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.08 avg60=0.02 avg300=0.04 total=41065718\nfull avg10=0.08 avg60=0.02 avg300=0.00 total=30618652",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119798878461\nfull avg10=57.87 avg60=59.16 avg300=54.42 total=101865831109",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "59 %, 1395 MHz, 43, 38.47 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:08:52.892992+00:00",
+          "load_average": [
+            5.72509765625,
+            7.12890625,
+            7.20654296875
+          ],
+          "cpu_pressure": "some avg10=0.09 avg60=0.91 avg300=5.64 total=2865994971\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.05 avg60=0.02 avg300=0.04 total=41067152\nfull avg10=0.05 avg60=0.02 avg300=0.00 total=30620082",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119802319009\nfull avg10=57.40 avg60=58.99 avg300=54.45 total=101867785155",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "56 %, 1395 MHz, 43, 39.38 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 11.38682088999,
+        "process_cpu_ms_per_step": 11.386597596666673,
+        "thread_cpu_ms_per_step": 11.366472020000002,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 488,
+          "ru_nivcsw": 498
+        },
+        "before": {
+          "created_at": "2026-10-26T13:08:58.467273+00:00",
+          "load_average": [
+            5.74755859375,
+            7.10986328125,
+            7.19970703125
+          ],
+          "cpu_pressure": "some avg10=0.05 avg60=0.82 avg300=5.52 total=2866024013\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.02 avg60=0.02 avg300=0.04 total=41068459\nfull avg10=0.02 avg60=0.02 avg300=0.00 total=30621389",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119807892991\nfull avg10=57.73 avg60=58.90 avg300=54.53 total=101871047140",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "56 %, 1395 MHz, 43, 36.84 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:01.911429+00:00",
+          "load_average": [
+            5.74755859375,
+            7.10986328125,
+            7.19970703125
+          ],
+          "cpu_pressure": "some avg10=0.04 avg60=0.79 avg300=5.48 total=2866038413\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.02 avg60=0.02 avg300=0.04 total=41068475\nfull avg10=0.02 avg60=0.02 avg300=0.00 total=30621405",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119811337014\nfull avg10=57.60 avg60=58.84 avg300=54.54 total=101873027227",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "59 %, 1395 MHz, 43, 38.65 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 11.570581273311594,
+        "process_cpu_ms_per_step": 11.570425416666659,
+        "thread_cpu_ms_per_step": 11.547816176666666,
+        "resource_delta": {
+          "ru_minflt": 1,
+          "ru_majflt": 0,
+          "ru_nvcsw": 473,
+          "ru_nivcsw": 482
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:02.541227+00:00",
+          "load_average": [
+            5.74755859375,
+            7.10986328125,
+            7.19970703125
+          ],
+          "cpu_pressure": "some avg10=0.03 avg60=0.77 avg300=5.45 total=2866043279\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.01 avg60=0.02 avg300=0.04 total=41068475\nfull avg10=0.01 avg60=0.02 avg300=0.00 total=30621405",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119811966778\nfull avg10=57.49 avg60=58.78 avg300=54.56 total=101873375257",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "65 %, 1395 MHz, 43, 37.68 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:06.041042+00:00",
+          "load_average": [
+            5.92822265625,
+            7.125,
+            7.2041015625
+          ],
+          "cpu_pressure": "some avg10=0.02 avg60=0.74 avg300=5.41 total=2866058996\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.01 avg60=0.02 avg300=0.04 total=41068856\nfull avg10=0.01 avg60=0.02 avg300=0.00 total=30621786",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119815466487\nfull avg10=57.04 avg60=58.65 avg300=54.56 total=101875384482",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "68 %, 1395 MHz, 43, 37.29 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 11.07737971333942,
+        "process_cpu_ms_per_step": 11.076844966666664,
+        "thread_cpu_ms_per_step": 11.055814786666668,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 467,
+          "ru_nivcsw": 475
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:11.770108+00:00",
+          "load_average": [
+            5.7734375,
+            7.07275390625,
+            7.1865234375
+          ],
+          "cpu_pressure": "some avg10=0.01 avg60=0.67 avg300=5.30 total=2866089875\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41070461\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30623339",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119821195225\nfull avg10=57.20 avg60=58.53 avg300=54.62 total=101878706691",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "66 %, 1395 MHz, 44, 38.84 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:15.121324+00:00",
+          "load_average": [
+            5.47119140625,
+            6.98828125,
+            7.158203125
+          ],
+          "cpu_pressure": "some avg10=0.00 avg60=0.63 avg300=5.22 total=2866107868\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41071961\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30624839",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119824546399\nfull avg10=57.82 avg60=58.56 avg300=54.68 total=101880738331",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "68 %, 1395 MHz, 44, 38.24 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 11.395894136658171,
+        "process_cpu_ms_per_step": 11.394816053333324,
+        "thread_cpu_ms_per_step": 11.371531963333345,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 502,
+          "ru_nivcsw": 515
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:15.712623+00:00",
+          "load_average": [
+            5.47119140625,
+            6.98828125,
+            7.158203125
+          ],
+          "cpu_pressure": "some avg10=0.00 avg60=0.63 avg300=5.22 total=2866110725\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41071961\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30624839",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119825137627\nfull avg10=57.82 avg60=58.56 avg300=54.68 total=101881097061",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "55 %, 1395 MHz, 44, 38.11 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:19.160050+00:00",
+          "load_average": [
+            5.19287109375,
+            6.9052734375,
+            7.13037109375
+          ],
+          "cpu_pressure": "some avg10=0.18 avg60=0.62 avg300=5.16 total=2866152675\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41071961\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30624839",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119828585001\nfull avg10=57.81 avg60=58.52 avg300=54.73 total=101882970798",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "67 %, 1395 MHz, 45, 44.72 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 11.406092159983624,
+        "process_cpu_ms_per_step": 11.40546352666668,
+        "thread_cpu_ms_per_step": 11.383792550000015,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 472,
+          "ru_nivcsw": 485
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:25.007525+00:00",
+          "load_average": [
+            5.17724609375,
+            6.87353515625,
+            7.11865234375
+          ],
+          "cpu_pressure": "some avg10=0.10 avg60=0.56 avg300=5.05 total=2866184611\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41075246\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628117",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119834432168\nfull avg10=57.92 avg60=58.44 avg300=54.79 total=101886514936",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "50 %, 1395 MHz, 45, 36.99 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:28.460656+00:00",
+          "load_average": [
+            5.00244140625,
+            6.80908203125,
+            7.09619140625
+          ],
+          "cpu_pressure": "some avg10=0.06 avg60=0.52 avg300=4.98 total=2866199963\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.03 total=41075276\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628143",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119837885287\nfull avg10=58.39 avg60=58.51 avg300=54.85 total=101888572446",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "43 %, 1395 MHz, 45, 36.33 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 11.43902664000052,
+        "process_cpu_ms_per_step": 11.43796556333335,
+        "thread_cpu_ms_per_step": 11.415959143333344,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 473,
+          "ru_nivcsw": 486
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:29.120756+00:00",
+          "load_average": [
+            5.00244140625,
+            6.80908203125,
+            7.09619140625
+          ],
+          "cpu_pressure": "some avg10=0.06 avg60=0.52 avg300=4.98 total=2866203165\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.03 total=41075351\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628219",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119838545274\nfull avg10=58.39 avg60=58.51 avg300=54.85 total=101888984023",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "58 %, 1395 MHz, 45, 37.03 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:32.584189+00:00",
+          "load_average": [
+            5.00244140625,
+            6.80908203125,
+            7.09619140625
+          ],
+          "cpu_pressure": "some avg10=0.04 avg60=0.49 avg300=4.92 total=2866218288\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.03 total=41075617\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628477",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119842008667\nfull avg10=59.43 avg60=58.70 avg300=54.94 total=101891138713",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "50 %, 1395 MHz, 45, 37.11 W",
+          "measurement_pid": 1131756
+        }
+      }
+    ],
+    "pytorch": [
+      {
+        "wall_ms_per_step": 6.85295546335207,
+        "process_cpu_ms_per_step": 6.852433869999999,
+        "thread_cpu_ms_per_step": 6.839128973333336,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 295,
+          "ru_nivcsw": 300
+        },
+        "before": {
+          "created_at": "2026-10-26T13:08:53.272169+00:00",
+          "load_average": [
+            5.72509765625,
+            7.12890625,
+            7.20654296875
+          ],
+          "cpu_pressure": "some avg10=0.09 avg60=0.91 avg300=5.64 total=2865997740\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.05 avg60=0.02 avg300=0.04 total=41067152\nfull avg10=0.05 avg60=0.02 avg300=0.00 total=30620082",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119802698124\nfull avg10=57.40 avg60=58.99 avg300=54.45 total=101867999237",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "56 %, 1395 MHz, 43, 38.42 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:08:55.355950+00:00",
+          "load_average": [
+            5.72509765625,
+            7.12890625,
+            7.20654296875
+          ],
+          "cpu_pressure": "some avg10=0.07 avg60=0.88 avg300=5.60 total=2866006999\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.04 avg60=0.02 avg300=0.04 total=41067152\nfull avg10=0.04 avg60=0.02 avg300=0.00 total=30620082",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119804781815\nfull avg10=57.33 avg60=58.93 avg300=54.47 total=101869214606",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "54 %, 1395 MHz, 43, 38.53 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 7.016470103359704,
+        "process_cpu_ms_per_step": 7.016025050000003,
+        "thread_cpu_ms_per_step": 7.002847429999998,
+        "resource_delta": {
+          "ru_minflt": 3,
+          "ru_majflt": 0,
+          "ru_nvcsw": 308,
+          "ru_nivcsw": 314
+        },
+        "before": {
+          "created_at": "2026-10-26T13:08:55.736415+00:00",
+          "load_average": [
+            5.72509765625,
+            7.12890625,
+            7.20654296875
+          ],
+          "cpu_pressure": "some avg10=0.07 avg60=0.88 avg300=5.60 total=2866008594\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.04 avg60=0.02 avg300=0.04 total=41067152\nfull avg10=0.04 avg60=0.02 avg300=0.00 total=30620082",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119805162242\nfull avg10=57.33 avg60=58.93 avg300=54.47 total=101869437895",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "55 %, 1395 MHz, 43, 38.03 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:08:57.874115+00:00",
+          "load_average": [
+            5.74755859375,
+            7.10986328125,
+            7.19970703125
+          ],
+          "cpu_pressure": "some avg10=0.06 avg60=0.85 avg300=5.56 total=2866021216\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.03 avg60=0.02 avg300=0.04 total=41068459\nfull avg10=0.03 avg60=0.02 avg300=0.00 total=30621389",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119807299871\nfull avg10=57.45 avg60=58.90 avg300=54.50 total=101870702892",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "56 %, 1395 MHz, 43, 35.61 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 7.124838719998176,
+        "process_cpu_ms_per_step": 7.124726123333336,
+        "thread_cpu_ms_per_step": 7.111055496666671,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 290,
+          "ru_nivcsw": 297
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:06.444714+00:00",
+          "load_average": [
+            5.92822265625,
+            7.125,
+            7.2041015625
+          ],
+          "cpu_pressure": "some avg10=0.02 avg60=0.72 avg300=5.37 total=2866061504\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.01 avg60=0.02 avg300=0.04 total=41068856\nfull avg10=0.01 avg60=0.01 avg300=0.00 total=30621786",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119815870077\nfull avg10=57.03 avg60=58.60 avg300=54.58 total=101875603661",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "55 %, 1395 MHz, 43, 38.57 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:08.610968+00:00",
+          "load_average": [
+            5.7734375,
+            7.07275390625,
+            7.1865234375
+          ],
+          "cpu_pressure": "some avg10=0.01 avg60=0.69 avg300=5.33 total=2866072166\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.02 avg300=0.04 total=41068856\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30621786",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119818036284\nfull avg10=57.02 avg60=58.54 avg300=54.60 total=101876857416",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "67 %, 1395 MHz, 43, 37.99 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 7.094777483337869,
+        "process_cpu_ms_per_step": 7.094616456666666,
+        "thread_cpu_ms_per_step": 7.0809694066666635,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 282,
+          "ru_nivcsw": 287
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:09.005434+00:00",
+          "load_average": [
+            5.7734375,
+            7.07275390625,
+            7.1865234375
+          ],
+          "cpu_pressure": "some avg10=0.01 avg60=0.69 avg300=5.33 total=2866075173\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.02 avg300=0.04 total=41068871\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30621789",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119818430701\nfull avg10=57.02 avg60=58.54 avg300=54.60 total=101877083832",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "50 %, 1395 MHz, 43, 36.74 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:11.162301+00:00",
+          "load_average": [
+            5.7734375,
+            7.07275390625,
+            7.1865234375
+          ],
+          "cpu_pressure": "some avg10=0.01 avg60=0.67 avg300=5.30 total=2866084635\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41069112\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30622009",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119820587488\nfull avg10=57.20 avg60=58.53 avg300=54.62 total=101878349889",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "65 %, 1395 MHz, 43, 38.42 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 7.0812337833437295,
+        "process_cpu_ms_per_step": 7.0805215699999975,
+        "thread_cpu_ms_per_step": 7.066793293333333,
+        "resource_delta": {
+          "ru_minflt": 2,
+          "ru_majflt": 0,
+          "ru_nvcsw": 300,
+          "ru_nivcsw": 305
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:19.540866+00:00",
+          "load_average": [
+            5.19287109375,
+            6.9052734375,
+            7.13037109375
+          ],
+          "cpu_pressure": "some avg10=0.18 avg60=0.62 avg300=5.16 total=2866156303\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41073399\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30626272",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119828965757\nfull avg10=57.81 avg60=58.52 avg300=54.73 total=101883222940",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "8 %, 1395 MHz, 43, 39.63 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:21.695081+00:00",
+          "load_average": [
+            5.19287109375,
+            6.9052734375,
+            7.13037109375
+          ],
+          "cpu_pressure": "some avg10=0.15 avg60=0.60 avg300=5.12 total=2866168359\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41075132\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628005",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119831119928\nfull avg10=57.12 avg60=58.37 avg300=54.72 total=101884511009",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "51 %, 1395 MHz, 44, 36.88 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 7.263724669998434,
+        "process_cpu_ms_per_step": 7.263552189999985,
+        "thread_cpu_ms_per_step": 7.2495915599999945,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 300,
+          "ru_nivcsw": 307
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:22.116315+00:00",
+          "load_average": [
+            5.19287109375,
+            6.9052734375,
+            7.13037109375
+          ],
+          "cpu_pressure": "some avg10=0.15 avg60=0.60 avg300=5.12 total=2866170786\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41075132\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628005",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119831541122\nfull avg10=57.12 avg60=58.37 avg300=54.72 total=101884760001",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "55 %, 1395 MHz, 44, 37.79 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:24.327504+00:00",
+          "load_average": [
+            5.17724609375,
+            6.87353515625,
+            7.11865234375
+          ],
+          "cpu_pressure": "some avg10=0.10 avg60=0.56 avg300=5.05 total=2866180362\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.04 total=41075246\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628117",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119833752228\nfull avg10=57.92 avg60=58.44 avg300=54.79 total=101886099649",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "58 %, 1395 MHz, 44, 37.75 W",
+          "measurement_pid": 1131756
+        }
+      },
+      {
+        "wall_ms_per_step": 7.277762486676996,
+        "process_cpu_ms_per_step": 7.277244346666668,
+        "thread_cpu_ms_per_step": 7.26311315999998,
+        "resource_delta": {
+          "ru_minflt": 0,
+          "ru_majflt": 0,
+          "ru_nvcsw": 291,
+          "ru_nivcsw": 298
+        },
+        "before": {
+          "created_at": "2026-10-26T13:09:32.986532+00:00",
+          "load_average": [
+            5.16259765625,
+            6.8125,
+            7.09521484375
+          ],
+          "cpu_pressure": "some avg10=0.04 avg60=0.49 avg300=4.92 total=2866220590\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.03 total=41075617\nfull avg10=0.00 avg60=0.01 avg300=0.00 total=30628477",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119842410943\nfull avg10=59.43 avg60=58.70 avg300=54.94 total=101891381938",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "53 %, 1395 MHz, 46, 37.57 W",
+          "measurement_pid": 1131756
+        },
+        "after": {
+          "created_at": "2026-10-26T13:09:35.201666+00:00",
+          "load_average": [
+            5.16259765625,
+            6.8125,
+            7.09521484375
+          ],
+          "cpu_pressure": "some avg10=0.03 avg60=0.47 avg300=4.88 total=2866232990\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+          "memory_pressure": "some avg10=0.00 avg60=0.01 avg300=0.03 total=41076025\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=30628812",
+          "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119844625977\nfull avg10=59.17 avg60=58.68 avg300=54.96 total=101892660593",
+          "cpu0_governor": "powersave",
+          "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB\n1131756, 474 MiB",
+          "gpu_state": "60 %, 1395 MHz, 46, 37.69 W",
+          "measurement_pid": 1131756
+        }
+      }
+    ]
+  },
+  "statistics": {
+    "nnlearn": {
+      "wall_ms_per_step": {
+        "median": 11.395894136658171,
+        "min": 11.07737971333942,
+        "max": 11.570581273311594,
+        "mean": 11.377787579514829,
+        "stdev": 0.14858071162462522,
+        "raw": [
+          11.368718243320473,
+          11.38682088999,
+          11.570581273311594,
+          11.07737971333942,
+          11.395894136658171,
+          11.406092159983624,
+          11.43902664000052
+        ]
+      },
+      "process_cpu_ms_per_step": {
+        "median": 11.394816053333324,
+        "min": 11.076844966666664,
+        "max": 11.570425416666659,
+        "mean": 11.37725760666667,
+        "stdev": 0.14861108261211425,
+        "raw": [
+          11.36869012333334,
+          11.386597596666673,
+          11.570425416666659,
+          11.076844966666664,
+          11.394816053333324,
+          11.40546352666668,
+          11.43796556333335
+        ]
+      },
+      "thread_cpu_ms_per_step": {
+        "median": 11.371531963333345,
+        "min": 11.055814786666668,
+        "max": 11.547816176666666,
+        "mean": 11.355691704761911,
+        "stdev": 0.14814367744673068,
+        "raw": [
+          11.348455293333336,
+          11.366472020000002,
+          11.547816176666666,
+          11.055814786666668,
+          11.371531963333345,
+          11.383792550000015,
+          11.415959143333344
+        ]
+      }
+    },
+    "pytorch": {
+      "wall_ms_per_step": {
+        "median": 7.094777483337869,
+        "min": 6.85295546335207,
+        "max": 7.277762486676996,
+        "mean": 7.101680387152426,
+        "stdev": 0.1457109911366584,
+        "raw": [
+          6.85295546335207,
+          7.016470103359704,
+          7.124838719998176,
+          7.094777483337869,
+          7.0812337833437295,
+          7.263724669998434,
+          7.277762486676996
+        ]
+      },
+      "process_cpu_ms_per_step": {
+        "median": 7.094616456666666,
+        "min": 6.852433869999999,
+        "max": 7.277244346666668,
+        "mean": 7.1013028009523795,
+        "stdev": 0.14578154326862763,
+        "raw": [
+          6.852433869999999,
+          7.016025050000003,
+          7.124726123333336,
+          7.094616456666666,
+          7.0805215699999975,
+          7.263552189999985,
+          7.277244346666668
+        ]
+      },
+      "thread_cpu_ms_per_step": {
+        "median": 7.0809694066666635,
+        "min": 6.839128973333336,
+        "max": 7.26311315999998,
+        "mean": 7.087642759999997,
+        "stdev": 0.145484257678751,
+        "raw": [
+          6.839128973333336,
+          7.002847429999998,
+          7.111055496666671,
+          7.0809694066666635,
+          7.066793293333333,
+          7.2495915599999945,
+          7.26311315999998
+        ]
+      }
+    }
+  }
+}

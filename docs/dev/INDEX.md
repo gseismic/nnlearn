@@ -6,6 +6,7 @@ nnlearn 是提供 PyTorch 风格核心训练接口的独立张量与自动微分
 
 | 更新时间（Asia/Shanghai） | 计划 | 结果 | 实施摘要 |
 | --- | --- | --- | --- |
+| 2026-10-26 21:30 | [PLAN-068-training-performance-profile.md](PLAN-068-training-performance-profile.md) | [PLAN-068-training-performance-profile-OUTCOME.md](PLAN-068-training-performance-profile-OUTCOME.md) | 完成两种 MLP 的 CPU/CUDA 分阶段、cProfile、CUPTI 与临时对照；74 组三步数值核对和 8 份 trace 审核通过；确认额外梯度、细碎算子及标量读回热点，保留并发负载与离群记录，较大单线程 CPU 按需求反向探针耗时减少约 24%。 |
 | 2026-10-25 | [PLAN-067-cuda-validation.md](PLAN-067-cuda-validation.md) | [PLAN-067-cuda-validation-OUTCOME.md](PLAN-067-cuda-validation-OUTCOME.md) | RTX 3060 强制硬件门禁 72 项、全量 947 项通过且无跳过；修复 CuPy 四类反向散射，CUDA 掩码 Transformer 220 步训练通过；CPU 全量 852 项通过、95 项显式跳过。 |
 | 2026-10-25 | [PLAN-065-transformer-masks.md](PLAN-065-transformer-masks.md) | [PLAN-065-transformer-masks-OUTCOME.md](PLAN-065-transformer-masks-OUTCOME.md) | 新增注意力 padding、causal 与二维/三维掩码，相关测试 104 项通过；两端变长序列训练收敛，未来与 padding 扰动误差均为零。 |
 | 2026-10-25 | [PLAN-066-ci-packaging.md](PLAN-066-ci-packaging.md) | [PLAN-066-ci-packaging-OUTCOME.md](PLAN-066-ci-packaging-OUTCOME.md) | 新增固定版本 CPU 持续集成、无 PyTorch 训练及发行包验收；两套 Python 环境与 8 个干净安装通过，远程五个作业全部成功，后续提交自动触发同套验收。 |

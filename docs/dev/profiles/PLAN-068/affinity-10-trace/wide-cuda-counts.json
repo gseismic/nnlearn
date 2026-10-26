@@ -1,0 +1,29 @@
+{
+  "steps": 30,
+  "tensor_constructions": 870,
+  "functions": {
+    "MatMul": 180,
+    "Add": 176,
+    "ReLU": 30,
+    "_CrossEntropyLossFunction": 30,
+    "Clone": 154,
+    "SumTo": 60,
+    "Transpose": 120,
+    "Mul": 30
+  },
+  "gpu_host_reads": {
+    "nnlearn/nn/loss.py:27:_array_scalar_bool": 60
+  },
+  "host_source_asarray_requests": {
+    "float nnlearn/functional/numeric.py:20:_python_scalar_like": 30,
+    "float nnlearn/optim/optimizer.py:117:_scalar_like": 120
+  },
+  "matmul_inputs": {
+    "[((256, 512), False), ((512, 1024), True)]": 30,
+    "[((256, 1024), True), ((1024, 64), True)]": 30,
+    "[((256, 64), False), ((64, 1024), False)]": 30,
+    "[((1024, 256), False), ((256, 64), False)]": 30,
+    "[((256, 1024), False), ((1024, 512), False)]": 30,
+    "[((512, 256), False), ((256, 1024), False)]": 30
+  }
+}

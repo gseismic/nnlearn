@@ -1,0 +1,16 @@
+{
+  "created_at": "2026-10-26T13:20:53.716612+00:00",
+  "checked_json_files": 77,
+  "checked_summaries": 164,
+  "passed_three_step_validation_records": 74,
+  "max_absolute_errors": {
+    "logits": 1.71661376953125e-05,
+    "loss": 2.86102294921875e-06,
+    "gradient": 3.166496753692627e-07,
+    "parameter": 5.960464477539063e-08
+  },
+  "verified_raw_traces": 8,
+  "interval_union_overlap_check": true,
+  "probe_restore_on_exception": true,
+  "counter_restore_on_exception": true
+}

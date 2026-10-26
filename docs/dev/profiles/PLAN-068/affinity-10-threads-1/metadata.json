@@ -1,0 +1,130 @@
+{
+  "created_at": "2026-10-26T13:08:33.204918+00:00",
+  "source_commit": "a924b1fabf34f9064b0523f858f7b4a87f9b82e5",
+  "working_tree": "?? docs/dev/PLAN-068-training-performance-profile.md\n?? docs/dev/profiles/\n?? scripts/profile_training.py",
+  "script_sha256": "91722634e09de2423fa6b1ee40b8dcc8948d35191682800b996587900f809cf3",
+  "command": [
+    "scripts/profile_training.py",
+    "--modes",
+    "observed",
+    "cprofile",
+    "--profile-clock",
+    "process",
+    "--steps",
+    "300",
+    "--warmup",
+    "50",
+    "--repeats",
+    "7",
+    "--profile-steps",
+    "100",
+    "--threads",
+    "1",
+    "--output-dir",
+    "docs/dev/profiles/PLAN-068/affinity-10-threads-1"
+  ],
+  "arguments": {
+    "devices": [
+      "cpu",
+      "cuda"
+    ],
+    "workloads": [
+      "small",
+      "wide"
+    ],
+    "modes": [
+      "observed",
+      "cprofile"
+    ],
+    "steps": 300,
+    "warmup": 50,
+    "repeats": 7,
+    "profile_steps": 100,
+    "profile_clock": "process",
+    "trace_steps": 10,
+    "threads": 1,
+    "output_dir": "docs/dev/profiles/PLAN-068/affinity-10-threads-1",
+    "trace_dir": "/tmp/nnlearn-training-profile-traces"
+  },
+  "python": "3.12.8 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:31:09) [GCC 11.2.0]",
+  "platform": "Linux-6.8.0-52-generic-x86_64-with-glibc2.35",
+  "numpy": "2.2.6",
+  "pytorch": "2.6.0+cu124",
+  "pytorch_cuda": "12.4",
+  "pytorch_cpu_threads": 1,
+  "cpu_affinity": [
+    10
+  ],
+  "system_snapshot": {
+    "created_at": "2026-10-26T13:08:33.215775+00:00",
+    "load_average": [
+      5.3447265625,
+      7.15673828125,
+      7.21728515625
+    ],
+    "cpu_pressure": "some avg10=0.02 avg60=1.20 avg300=6.03 total=2865829165\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+    "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.04 total=41031994\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=30585720",
+    "io_pressure": "some avg10=99.00 avg60=99.00 avg300=99.00 total=119782645556\nfull avg10=62.16 avg60=59.96 avg300=54.31 total=101856560822",
+    "cpu0_governor": "powersave",
+    "gpu_processes": "7424, 458 MiB\n1115316, 1012 MiB",
+    "gpu_state": "36 %, 1395 MHz, 43, 38.12 W",
+    "measurement_pid": 1131756
+  },
+  "thread_pools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/tmp/nnlearn-cuda-validation-venv/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-56d6093b.so",
+      "version": "0.3.29",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libgomp",
+      "filepath": "/home/lsl/miniconda3/lib/python3.12/site-packages/torch/lib/libgomp-a34b3233.so.1",
+      "version": null
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libscipy_openblas",
+      "filepath": "/home/lsl/miniconda3/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+      "version": "0.3.31.dev",
+      "threading_layer": "pthreads",
+      "architecture": "Haswell"
+    }
+  ],
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "CUPY_TF32": "0",
+    "CUPY_ACCELERATORS": null,
+    "CUDA_VISIBLE_DEVICES": null
+  },
+  "tf32": {
+    "torch_matmul": false,
+    "torch_cudnn": false
+  },
+  "measurement_notes": [
+    "baseline 为未加 profiler 的整段墙钟时间，CUDA 只在整段计时边界同步。",
+    "phases 为独立诊断运行；host 时间包含调用内部同步，stream event 时间包含等待主机提交的空隙。",
+    "cProfile 和 CUPTI trace 都会增加开销，其时间不能用于性能倍数。",
+    "trace 的 GPU active 为 kernel/拷贝区间的并集；GPU 空隙不等于可以完全消除的开销。",
+    "临时 probes 仅用于验证候选原因，进入和退出时恢复库实现；不等于已交付优化。"
+  ],
+  "cuda": {
+    "cupy": "13.6.0",
+    "cupy_runtime": 11080,
+    "driver_version": 12040,
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "gpu_details": "NVIDIA GeForce RTX 3060, 550.144.03, 12288 MiB",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2021 NVIDIA Corporation\nBuilt on Thu_Nov_18_09:45:30_PST_2021\nCuda compilation tools, release 11.5, V11.5.119\nBuild cuda_11.5.r11.5/compiler.30672275_0"
+  }
+}
